@@ -5,13 +5,14 @@
  */
 package projeto.com.dao;
 
+import tela.Menu;
+
 /**
  *
  * @author ruiwa
  */
 public class main {
     public static void main(String[] args) {
-        System.out.println("TESTE 2");
-        ///teste03
+       new Menu().setVisible(true); 
     }
 }

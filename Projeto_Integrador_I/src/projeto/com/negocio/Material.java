@@ -5,6 +5,8 @@ package projeto.com.negocio;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -41,10 +43,10 @@ public class Material  implements java.io.Serializable {
        this.altura = altura;
     }
    
-     @Id 
-
-    
+    @Id
     @Column(name="id", unique=true, nullable=false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     public int getId() {
         return this.id;
     }
