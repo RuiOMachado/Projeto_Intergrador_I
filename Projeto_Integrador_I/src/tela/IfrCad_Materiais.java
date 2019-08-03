@@ -10,9 +10,11 @@ import config.HibernateUtil;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.annotations.reflection.XMLContext;
 import projeto.com.negocio.Material;
 
 /**
@@ -20,12 +22,38 @@ import projeto.com.negocio.Material;
  * @author ruiwa
  */
 public class IfrCad_Materiais extends javax.swing.JInternalFrame {
-
+    
+    int codigoTabela = 0;
+    int idUpdate = 0;
+    int buscas = 0;
     /**
      * Creates new form IfrCad_Materiais
      */
     public IfrCad_Materiais() {
         initComponents();
+        
+//        List resultado = null;
+//        
+//        DefaultTableModel modelo = (DefaultTableModel)jTabela.getModel();
+//        modelo.setNumRows(0);
+//        
+//        try {
+//            Session sessao = HibernateUtil.getSessionFactory().openSession();
+//            sessao.beginTransaction();
+//
+//            org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%"+cDescricao.getText()+"%') Order by id");
+//            resultado = q.list();
+//
+//            for (Object o : resultado) {
+//                Material mat = (Material) o;
+//                modelo.addRow(new Object[]{
+//                mat.getId(),mat.getDescricao(),mat.getQuantidade(),mat.getLargura(),mat.getComprimento(),mat.getAltura()
+//                });
+//            }
+//
+//        } catch (HibernateException he) {
+//            he.printStackTrace();
+//        }
     }
 
     /**
@@ -37,7 +65,7 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cDescricao = new javax.swing.JTextField();
@@ -51,12 +79,22 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jBPesquisa = new javax.swing.JButton();
+        cPesquisa = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTabela = new javax.swing.JTable();
         jBExcluir = new javax.swing.JButton();
         jBEditar = new javax.swing.JButton();
-        jBSalvar1 = new javax.swing.JButton();
+        jBSalvar = new javax.swing.JButton();
         jBSair = new javax.swing.JButton();
 
         setTitle("Cadastro de Materiais");
+
+        jTabbedPane2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTabbedPane2FocusLost(evt);
+            }
+        });
 
         jLabel1.setText("<html> <font>Descrição </font> <font color=RED>*</font> <font>:</font> </html>");
 
@@ -123,35 +161,100 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Cadastro", jPanel1);
+        jTabbedPane2.addTab("Cadastro", jPanel1);
+
+        jBPesquisa.setText("Busca");
+        jBPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPesquisaActionPerformed(evt);
+            }
+        });
+
+        jTabela.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Descrição", "Quantidade", "Comprimento", "Altura"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Long.class, java.lang.Long.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTabela);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cPesquisa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBPesquisa)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 328, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBPesquisa)
+                    .addComponent(cPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Consulta", jPanel2);
+        jTabbedPane2.addTab("Consulta", jPanel2);
 
         jBExcluir.setText("Excluir");
         jBExcluir.setEnabled(false);
+        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirActionPerformed(evt);
+            }
+        });
 
         jBEditar.setText("Editar");
         jBEditar.setEnabled(false);
-
-        jBSalvar1.setText("Salvar");
-        jBSalvar1.addActionListener(new java.awt.event.ActionListener() {
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalvar1ActionPerformed(evt);
+                jBEditarActionPerformed(evt);
+            }
+        });
+
+        jBSalvar.setText("Salvar");
+        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalvarActionPerformed(evt);
             }
         });
 
         jBSair.setText("Sair");
+        jBSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,24 +266,24 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEditar)
                     .addComponent(jBSair)
-                    .addComponent(jBSalvar1)
+                    .addComponent(jBSalvar)
                     .addComponent(jBExcluir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -190,8 +293,12 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvar1ActionPerformed
+    private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         Session sessao = null;
+        List resultado = null;
+        
+        DefaultTableModel modelo = (DefaultTableModel)jTabela.getModel();
+        modelo.setNumRows(0);
 
         try {
             sessao = HibernateUtil.getSessionFactory().openSession();
@@ -199,13 +306,19 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
 
             Material mat = new Material();
             if(cDescricao.getText().length() > 0 && cQuantidade.getText().length() > 0 && cLargura.getText().length() > 0 && cComprimento.getText().length() > 0 && cAltura.getText().length() > 0){
+                
                 mat.setDescricao(cDescricao.getText());
                 mat.setQuantidade(Integer.valueOf(cQuantidade.getText()));
                 mat.setLargura(BigDecimal.valueOf(Double.valueOf(cLargura.getText())));
                 mat.setComprimento(BigDecimal.valueOf(Double.valueOf(cComprimento.getText())));
                 mat.setAltura(BigDecimal.valueOf(Double.valueOf(cAltura.getText())));
-
-                sessao.save(mat);
+                
+                if(codigoTabela == 0){
+                    sessao.save(mat);
+                }else{
+                    mat.setId(idUpdate);
+                    sessao.update(mat);  
+                }
                 t.commit();
                 
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
@@ -214,8 +327,22 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
                 cLargura.setText("");
                 cComprimento.setText("");
                 cAltura.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "Todos os campos são obrigatórios!");
+                jTabbedPane2.setSelectedIndex(1);
+                
+                jBEditar.setEnabled(true);
+                jBExcluir.setEnabled(true);
+                jBSalvar.setEnabled(false);
+                
+                sessao.beginTransaction();
+                org.hibernate.Query q = sessao.createQuery("from Material");
+                resultado = q.list();
+
+                for (Object o : resultado) {
+                    Material mat1 = (Material) o;
+                    modelo.addRow(new Object[]{
+                    mat1.getId(),mat1.getDescricao(),mat1.getQuantidade(),mat1.getLargura(),mat1.getComprimento(),mat1.getAltura()
+                    });
+                }
             }
         } catch (HibernateException he) {
             he.printStackTrace();
@@ -223,7 +350,121 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
             sessao.close();
         }
 
-    }//GEN-LAST:event_jBSalvar1ActionPerformed
+    }//GEN-LAST:event_jBSalvarActionPerformed
+
+    private void jBPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisaActionPerformed
+        List resultado = null;
+        
+        DefaultTableModel modelo = (DefaultTableModel)jTabela.getModel();
+        modelo.setNumRows(0);
+        
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+            
+            org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%"+cPesquisa.getText()+"%') Order by id");
+            resultado = q.list();
+            if(buscas == 0){
+                for (Object o : resultado) {
+                    Material mat = (Material) o;
+                    modelo.addRow(new Object[]{
+                    mat.getId(),mat.getDescricao(),mat.getQuantidade(),mat.getLargura(),mat.getComprimento(),mat.getAltura()
+                    });
+                    buscas = 1;
+                }
+            }else{
+               modelo.setNumRows(0);
+               for (Object o : resultado) {
+                    Material mat = (Material) o;
+                    modelo.addRow(new Object[]{
+                    mat.getId(),mat.getDescricao(),mat.getQuantidade(),mat.getLargura(),mat.getComprimento(),mat.getAltura()
+                    });
+                }
+            }
+            
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+    }//GEN-LAST:event_jBPesquisaActionPerformed
+
+    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
+        List resultado = null;
+        String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
+        codigoTabela = Integer.parseInt(idString);
+                
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Material where id = " + codigoTabela);
+            resultado = q.list();
+
+            for (Object o : resultado) {
+                Material mat = (Material) o;
+                
+                idUpdate = mat.getId();
+                cDescricao.setText(mat.getDescricao());
+                cQuantidade.setText(String.valueOf(mat.getQuantidade()));
+                cLargura.setText(String.valueOf(mat.getLargura()));
+                cComprimento.setText(String.valueOf(mat.getComprimento()));
+                cAltura.setText(String.valueOf(mat.getAltura()));
+  
+            }
+
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+
+        jTabbedPane2.setSelectedIndex(0);
+        cDescricao.requestFocus();
+        jBExcluir.setEnabled(false);
+        jBEditar.setEnabled(false);
+        jBSalvar.setEnabled(true);
+    }//GEN-LAST:event_jBEditarActionPerformed
+
+    private void jTabbedPane2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusLost
+        if (jTabbedPane2.getSelectedIndex() == 1) {
+            jBEditar.setEnabled(true);
+            jBExcluir.setEnabled(true);
+            jBSalvar.setEnabled(false);
+            jBPesquisa.requestFocus();
+        } else {
+            jBEditar.setEnabled(false);
+            jBExcluir.setEnabled(false);
+            jBSalvar.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTabbedPane2FocusLost
+
+    private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBSairActionPerformed
+
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+        List resultado = null;
+        Session ses = null;
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
+            
+            String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
+            
+            try {
+                ses = HibernateUtil.getSessionFactory().openSession();
+                Transaction t = ses.beginTransaction();
+
+                org.hibernate.Query q = ses.createQuery("from Material where id = " + idString);
+                resultado = q.list();
+
+                for (Object o : resultado) {
+                    Material mat = (Material) o;
+                    
+                    ses.delete(mat);
+                    t.commit(); 
+                }
+                jBPesquisaActionPerformed(evt);
+            } catch (HibernateException he) {
+                he.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jBExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -231,11 +472,13 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
     private javax.swing.JTextField cComprimento;
     private javax.swing.JTextField cDescricao;
     private javax.swing.JTextField cLargura;
+    private javax.swing.JTextField cPesquisa;
     private javax.swing.JTextField cQuantidade;
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBExcluir;
+    private javax.swing.JButton jBPesquisa;
     private javax.swing.JButton jBSair;
-    private javax.swing.JButton jBSalvar1;
+    private javax.swing.JButton jBSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -244,6 +487,8 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTabela;
     // End of variables declaration//GEN-END:variables
 }
