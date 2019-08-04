@@ -45,7 +45,7 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Projeto_Integrador_1</property>
     <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">postgre</property>
+    <property name="hibernate.connection.password">postgres</property>
     <mapping class="projeto.com.negocio.Material"/>
     <mapping class="projeto.com.negocio.Login"/>
   </session-factory>

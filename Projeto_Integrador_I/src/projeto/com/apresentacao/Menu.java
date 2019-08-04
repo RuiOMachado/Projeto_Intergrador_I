@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tela;
+package projeto.com.apresentacao;
 
 /**
  *
@@ -38,6 +38,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jmiSair = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jCad_Usuario = new javax.swing.JMenuItem();
         jCad_Material = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
@@ -79,6 +80,14 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu6.setText("Cadastro");
+
+        jCad_Usuario.setText("Usuário");
+        jCad_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCad_UsuarioActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jCad_Usuario);
 
         jCad_Material.setText("Materiais");
         jCad_Material.addActionListener(new java.awt.event.ActionListener() {
@@ -122,9 +131,16 @@ public class Menu extends javax.swing.JFrame {
         cadMateriais.setVisible(true);
     }//GEN-LAST:event_jCad_MaterialActionPerformed
 
+    private void jCad_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCad_UsuarioActionPerformed
+        IfrCad_Usuarios cadUsuarios = new IfrCad_Usuarios();
+        jDesk.add(cadUsuarios);
+        cadUsuarios.setVisible(true);
+    }//GEN-LAST:event_jCad_UsuarioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jCad_Material;
+    private javax.swing.JMenuItem jCad_Usuario;
     private javax.swing.JDesktopPane jDesk;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

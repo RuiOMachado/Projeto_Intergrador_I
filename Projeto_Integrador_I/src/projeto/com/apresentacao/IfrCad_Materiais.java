@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tela;
+package projeto.com.apresentacao;
 
 
-import config.HibernateUtil;
+import projeto.com.config.HibernateUtil;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
