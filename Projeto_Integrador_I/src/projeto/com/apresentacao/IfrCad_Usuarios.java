@@ -1,9 +1,6 @@
 package projeto.com.apresentacao;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
@@ -298,7 +295,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
                 
                 log.setNome(cNome.getText());
                 log.setSenha(DaoEncryption.encryptionString(cSenha.getText()));
-                log.setEstado("I");
+                log.setEstado("A");
                 
                 if(codigoTabela == 0){
                     sessao.save(log);

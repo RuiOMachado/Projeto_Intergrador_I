@@ -45,6 +45,7 @@ public class DaoGeneric<T extends EntidadeBase> {
             manager.getTransaction().rollback();
         }
     }
+    
 
-  
+    
 }

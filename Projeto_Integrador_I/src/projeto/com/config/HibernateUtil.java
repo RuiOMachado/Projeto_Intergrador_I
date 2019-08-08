@@ -5,6 +5,7 @@
  */
 package projeto.com.config;
 
+import org.hibernate.Session;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
@@ -17,6 +18,7 @@ import org.hibernate.SessionFactory;
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory;
+    private Session session;
     
     static {
         try {
@@ -32,5 +34,9 @@ public class HibernateUtil {
     
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public Session getSession() {
+        return session;
     }
 }

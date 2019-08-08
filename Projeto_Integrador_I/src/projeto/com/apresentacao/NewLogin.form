@@ -59,9 +59,9 @@
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tfdSenha" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdSenha" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnOk" min="-2" pref="59" max="-2" attributes="0"/>
@@ -72,12 +72,18 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JPasswordField" name="tfdSenha">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Digite sua senha"/>
+      </Properties>
       <Events>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfdSenhaKeyPressed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfdSenhaKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdUsuario">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Digite seu Usu&#xe1;rio"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

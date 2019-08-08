@@ -4,6 +4,7 @@ package projeto.com.apresentacao;
 import java.awt.Color;
 import java.awt.Event;
 import javax.swing.JOptionPane;
+import projeto.com.dao.DaoLogin;
 
 /**
  *
@@ -36,6 +37,7 @@ public class NewLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        tfdSenha.setToolTipText("Digite sua senha");
         tfdSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfdSenhaKeyPressed(evt);
@@ -44,6 +46,8 @@ public class NewLogin extends javax.swing.JFrame {
                 tfdSenhaKeyReleased(evt);
             }
         });
+
+        tfdUsuario.setToolTipText("Digite seu Usuário");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("LOGIN");
@@ -94,9 +98,9 @@ public class NewLogin extends javax.swing.JFrame {
                     .addComponent(tfdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(tfdSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -115,11 +119,14 @@ public class NewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_tfdSenhaKeyPressed
 
     private void tfdSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyReleased
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == Event.ENTER) {
+            autenticar();
+        }
     }//GEN-LAST:event_tfdSenhaKeyReleased
 
     public void autenticar(){
         if ("admin".equals(tfdUsuario.getText()) && "admin".equals(tfdSenha.getText())) {
+        //if(!DaoLogin.findUser()){
             Menu janela = new Menu();
             janela.setVisible(true);
             this.disable();
