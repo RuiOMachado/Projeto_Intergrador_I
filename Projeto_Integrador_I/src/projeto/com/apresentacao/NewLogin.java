@@ -4,7 +4,9 @@ package projeto.com.apresentacao;
 import java.awt.Color;
 import java.awt.Event;
 import javax.swing.JOptionPane;
-import projeto.com.dao.DaoLogin;
+import projeto.com.dao.DaoGenerico;
+import projeto.com.negocio.Log;
+import projeto.com.negocio.Login;
 
 /**
  *
@@ -15,6 +17,8 @@ public class NewLogin extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    Login usuario = new Login();
+    
     public NewLogin() {
         initComponents();
     }
@@ -111,7 +115,9 @@ public class NewLogin extends javax.swing.JFrame {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
 
-            autenticar();    
+            autenticar();
+            usuario.setNome(tfdUsuario.getText());
+            DaoGenerico.saveOrUpdate(new Log(usuario.getNome(),"Usuario logou no Sistema!"),0);
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void tfdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyPressed

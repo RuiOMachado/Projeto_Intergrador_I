@@ -5,17 +5,19 @@
  */
 package projeto.com.apresentacao;
 
+import projeto.com.dao.DaoGenerico;
+import projeto.com.negocio.Log;
+import projeto.com.negocio.Login;
+
 /**
  *
  * @author ruiwa
  */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
     public Menu() {
         initComponents();
+        
     }
 
     /**
@@ -123,6 +125,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jmiSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairActionPerformed
         this.dispose();
+        //DaoGenerico.saveOrUpdate(new Log(,"Usuário saiu do sistema!"),0);
     }//GEN-LAST:event_jmiSairActionPerformed
 
     private void jCad_MaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCad_MaterialActionPerformed

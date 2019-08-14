@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import projeto.com.config.HibernateUtil;
 import projeto.com.dao.DaoEncryption;
+import projeto.com.dao.DaoGenerico;
+import projeto.com.negocio.Log;
 import projeto.com.negocio.Login;
 
 /**
@@ -15,7 +17,7 @@ import projeto.com.negocio.Login;
  * @author Douglas
  */
 public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
-    
+
     int codigoTabela = 0;
     int idUpdate = 0;
     int buscas = 0;
@@ -39,7 +41,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
         jBPesquisa = new javax.swing.JButton();
         cPesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTabela = new javax.swing.JTable();
+        jTableUser = new javax.swing.JTable();
         jBExcluir = new javax.swing.JButton();
         jBEditar = new javax.swing.JButton();
         jBSalvar = new javax.swing.JButton();
@@ -101,7 +103,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jTabela.setModel(new javax.swing.table.DefaultTableModel(
+        jTableUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -127,7 +129,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTabela);
+        jScrollPane1.setViewportView(jTableUser);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -230,29 +232,29 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
     private void jBPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisaActionPerformed
         List resultado = null;
 
-        DefaultTableModel modelo = (DefaultTableModel)jTabela.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTableUser.getModel();
         modelo.setNumRows(0);
 
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Login where upper(nome) LIKE upper('%"+cPesquisa.getText()+"%') Order by id");
+            org.hibernate.Query q = sessao.createQuery("from Login where upper(nome) LIKE upper('%" + cPesquisa.getText() + "%') Order by id");
             resultado = q.list();
-            if(buscas == 0){
+            if (buscas == 0) {
                 for (Object o : resultado) {
                     Login log = (Login) o;
                     modelo.addRow(new Object[]{
-                        log.getId(),log.getNome(),log.getEstado()
+                        log.getId(), log.getNome(), log.getEstado()
                     });
                     buscas = 1;
                 }
-            }else{
+            } else {
                 modelo.setNumRows(0);
                 for (Object o : resultado) {
                     Login log = (Login) o;
                     modelo.addRow(new Object[]{
-                        log.getId(),log.getNome(),log.getEstado()
+                        log.getId(), log.getNome(), log.getEstado()
                     });
                 }
             }
@@ -280,65 +282,42 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSairActionPerformed
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-        Session sessao = null;
-        List resultado = null;
-        
-        DefaultTableModel modelo = (DefaultTableModel)jTabela.getModel();
-        modelo.setNumRows(0);
-
         try {
-            sessao = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = sessao.beginTransaction();
-
             Login log = new Login();
-            if(cNome.getText().length() > 0 && cSenha.getText().length() > 0){
-                
+            if (cNome.getText().length() > 0 && cSenha.getText().length() > 0) {
+
                 log.setNome(cNome.getText());
                 log.setSenha(DaoEncryption.encryptionString(cSenha.getText()));
                 log.setEstado("A");
-                
-                if(codigoTabela == 0){
-                    sessao.save(log);
-                }else{
+
+                if (codigoTabela == 0) {
+                    DaoGenerico.saveOrUpdate(log, codigoTabela);
+                    DaoGenerico.saveOrUpdate(new Log("Admin","Registro salvo com sucesso!"),0);
+                } else {
                     log.setId(idUpdate);
-                    sessao.update(log);  
+                    DaoGenerico.saveOrUpdate(log, codigoTabela);
+                    DaoGenerico.saveOrUpdate(new Log("Admin","Registro editado com sucesso!"),0);
                 }
-                t.commit();
-                
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
-                cNome.setText("");
-                cSenha.setText("");
-                jTabbedPane2.setSelectedIndex(1);
                 
+                }
+                cNome.setText(""); cSenha.setText("");
+                jTabbedPane2.setSelectedIndex(1);
+                DaoGenerico.listarLogin(jTableUser);
                 jBEditar.setEnabled(true);
                 jBExcluir.setEnabled(true);
                 jBSalvar.setEnabled(false);
                 
-                sessao.beginTransaction();
-                org.hibernate.Query q = sessao.createQuery("from Login");
-                resultado = q.list();
-
-                for (Object o : resultado) {
-                    Login log1 = (Login) o;
-                    modelo.addRow(new Object[]{
-                    log1.getId(),log1.getNome(),log1.getEstado()
-                    });
-                }
-            }
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        } catch (Exception ex) {
-            System.out.println("Erro"+ ex);
-        } finally {
-            sessao.close();
+            } catch (Exception ex) {
+            System.out.println(""+ex);;
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
         List resultado = null;
-        String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
+        String idString = String.valueOf(jTableUser.getValueAt(jTableUser.getSelectedRow(), 0));
         codigoTabela = Integer.parseInt(idString);
-                
+
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
@@ -348,11 +327,11 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
 
             for (Object o : resultado) {
                 Login log = (Login) o;
-                
+
                 idUpdate = log.getId();
                 cNome.setText(log.getNome());
                 cSenha.setText(log.getSenha());
-  
+
             }
 
         } catch (HibernateException he) {
@@ -370,9 +349,9 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
         List resultado = null;
         Session ses = null;
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
-            
-            String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
-            
+
+            String idString = String.valueOf(jTableUser.getValueAt(jTableUser.getSelectedRow(), 0));
+
             try {
                 ses = HibernateUtil.getSessionFactory().openSession();
                 Transaction t = ses.beginTransaction();
@@ -382,9 +361,9 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
 
                 for (Object o : resultado) {
                     Login log = (Login) o;
-                    
+
                     ses.delete(log);
-                    t.commit(); 
+                    t.commit();
                 }
                 jBPesquisaActionPerformed(evt);
             } catch (HibernateException he) {
@@ -410,6 +389,6 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTabela;
+    private javax.swing.JTable jTableUser;
     // End of variables declaration//GEN-END:variables
 }

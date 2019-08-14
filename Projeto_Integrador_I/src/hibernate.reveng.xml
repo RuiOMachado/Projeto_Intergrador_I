@@ -41,6 +41,8 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="Projeto_Integrador_1" match-schema="public"/>
+  <table-filter match-name="auditoria"/>
+  <table-filter match-name="log"/>
   <table-filter match-name="login"/>
   <table-filter match-name="material"/>
 </hibernate-reverse-engineering>

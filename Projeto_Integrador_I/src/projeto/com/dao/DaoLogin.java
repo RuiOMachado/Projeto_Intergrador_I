@@ -1,5 +1,4 @@
 package projeto.com.dao;
-import javax.persistence.TypedQuery;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import projeto.com.config.HibernateUtil;
@@ -25,4 +24,5 @@ public class DaoLogin {
             return true;
         }
     }
+    
 }

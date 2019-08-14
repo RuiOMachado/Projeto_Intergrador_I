@@ -48,5 +48,6 @@ Contributor(s):
     <property name="hibernate.connection.password">postgres</property>
     <mapping class="projeto.com.negocio.Material"/>
     <mapping class="projeto.com.negocio.Login"/>
+    <mapping class="projeto.com.negocio.Log"/>
   </session-factory>
 </hibernate-configuration>
