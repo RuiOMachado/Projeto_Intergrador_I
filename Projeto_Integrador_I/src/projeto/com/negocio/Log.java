@@ -37,10 +37,19 @@ public class Log implements java.io.Serializable {
     @Column(name = "descricao")
     private String descricao;
 
+    public Log() {
+    }
+    
     public Log(String usuario, String descricao) {
         this.dataEntrada = new Date();
         this.usuario     = usuario;
         this.descricao   = descricao;
+    }
+    public Log(int id, String usuario, Date dataEntrada, String descricao) {
+       this.id = id;
+       this.usuario = usuario;
+       this.dataEntrada = dataEntrada;
+       this.descricao = descricao;
     }
 
     public Log(Integer id) {

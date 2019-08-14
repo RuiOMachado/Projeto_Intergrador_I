@@ -104,10 +104,10 @@ public class Material  implements java.io.Serializable {
     public void setAltura(BigDecimal altura) {
         this.altura = altura;
     }
-
-
-
-
+    
+    public String subString() {
+        return "%"+descricao+"%"+quantidade+"%"+largura+"%"+comprimento+"%"+altura+"%";
+    } 
 }
 
 

@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import projeto.com.config.HibernateUtil;
 import projeto.com.dao.DaoEncryption;
 import projeto.com.dao.DaoGenerico;
+import projeto.com.negocio.Auditoria;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Login;
 
@@ -282,6 +283,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSairActionPerformed
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
+        
         try {
             Login log = new Login();
             if (cNome.getText().length() > 0 && cSenha.getText().length() > 0) {
@@ -289,14 +291,18 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
                 log.setNome(cNome.getText());
                 log.setSenha(DaoEncryption.encryptionString(cSenha.getText()));
                 log.setEstado("A");
-
+                Auditoria aud = new Auditoria(NewLogin.usuarioLogado.getNome(),"INCLUIR",log.subString());
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(log, codigoTabela);
-                    DaoGenerico.saveOrUpdate(new Log("Admin","Registro salvo com sucesso!"),0);
+                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Usuário salvo com sucesso!"),0);
+                    DaoGenerico.saveOrUpdate(aud,0);//insere dado na auditoria campo antigo e atual iguais
                 } else {
                     log.setId(idUpdate);
-                    DaoGenerico.saveOrUpdate(log, codigoTabela);
-                    DaoGenerico.saveOrUpdate(new Log("Admin","Registro editado com sucesso!"),0);
+                    DaoGenerico.saveOrUpdate(log, idUpdate);
+                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Usuário editado com sucesso!"),0);
+                    aud.setContent(log.subString());
+                    aud.setTipo("EDITAR");
+                    DaoGenerico.saveOrUpdate(aud,0); //insere dado atualizado na auditoria
                 }
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
                 
@@ -309,7 +315,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
                 jBSalvar.setEnabled(false);
                 
             } catch (Exception ex) {
-            System.out.println(""+ex);;
+            System.out.println(""+ex);
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
@@ -363,6 +369,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
                     Login log = (Login) o;
 
                     ses.delete(log);
+                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Usuário excluído com sucesso!"),0);
                     t.commit();
                 }
                 jBPesquisaActionPerformed(evt);

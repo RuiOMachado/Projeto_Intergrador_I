@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import projeto.com.dao.DaoGenerico;
+import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
 
 /**
@@ -293,16 +295,8 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-        Session sessao = null;
-        List resultado = null;
-        
-        DefaultTableModel modelo = (DefaultTableModel)jTabela.getModel();
-        modelo.setNumRows(0);
-
         try {
-            sessao = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = sessao.beginTransaction();
-
+            
             Material mat = new Material();
             if(cDescricao.getText().length() > 0 && cQuantidade.getText().length() > 0 && cLargura.getText().length() > 0 && cComprimento.getText().length() > 0 && cAltura.getText().length() > 0){
                 
@@ -313,13 +307,14 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
                 mat.setAltura(BigDecimal.valueOf(Double.valueOf(cAltura.getText())));
                 
                 if(codigoTabela == 0){
-                    sessao.save(mat);
+                    DaoGenerico.saveOrUpdate(mat, codigoTabela);
+                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Material salvo com sucesso!"),0);
                 }else{
                     mat.setId(idUpdate);
-                    sessao.update(mat);  
+                    DaoGenerico.saveOrUpdate(mat,codigoTabela);
+                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Material editado com sucesso!"),0);  
                 }
-                t.commit();
-                
+               
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
                 cDescricao.setText("");
                 cQuantidade.setText("");
@@ -327,27 +322,16 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
                 cComprimento.setText("");
                 cAltura.setText("");
                 jTabbedPane2.setSelectedIndex(1);
-                
+                DaoGenerico.listarMaterial(jTabela);  //metodo atualiza tabela
                 jBEditar.setEnabled(true);
                 jBExcluir.setEnabled(true);
                 jBSalvar.setEnabled(false);
                 
-                sessao.beginTransaction();
-                org.hibernate.Query q = sessao.createQuery("from Material");
-                resultado = q.list();
-
-                for (Object o : resultado) {
-                    Material mat1 = (Material) o;
-                    modelo.addRow(new Object[]{
-                    mat1.getId(),mat1.getDescricao(),mat1.getQuantidade(),mat1.getLargura(),mat1.getComprimento(),mat1.getAltura()
-                    });
-                }
+                
             }
-        } catch (HibernateException he) {
-            he.printStackTrace();
-        } finally {
-            sessao.close();
-        }
+        } catch (Exception ex) {
+            System.out.println(""+ex);;
+        } 
 
     }//GEN-LAST:event_jBSalvarActionPerformed
 
@@ -456,6 +440,7 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
                     Material mat = (Material) o;
                     
                     ses.delete(mat);
+                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Material excluído com sucesso!"),0);
                     t.commit(); 
                 }
                 jBPesquisaActionPerformed(evt);

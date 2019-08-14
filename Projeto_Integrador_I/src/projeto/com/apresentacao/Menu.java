@@ -7,7 +7,7 @@ package projeto.com.apresentacao;
 
 import projeto.com.dao.DaoGenerico;
 import projeto.com.negocio.Log;
-import projeto.com.negocio.Login;
+
 
 /**
  *
@@ -15,9 +15,9 @@ import projeto.com.negocio.Login;
  */
 public class Menu extends javax.swing.JFrame {
 
+    
     public Menu() {
-        initComponents();
-        
+        initComponents();  
     }
 
     /**
@@ -38,10 +38,13 @@ public class Menu extends javax.swing.JFrame {
         jDesk = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
+        jmiLogs = new javax.swing.JMenuItem();
+        jmiAuditoria = new javax.swing.JMenuItem();
         jmiSair = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jCad_Usuario = new javax.swing.JMenuItem();
         jCad_Material = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -69,6 +72,22 @@ public class Menu extends javax.swing.JFrame {
         );
 
         jMenu2.setText("Arquivo");
+
+        jmiLogs.setText("Consulta de registros Logs");
+        jmiLogs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiLogsActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiLogs);
+
+        jmiAuditoria.setText("Consulta de registros Auditoria");
+        jmiAuditoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAuditoriaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiAuditoria);
 
         jmiSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jmiSair.setText("Sair");
@@ -101,6 +120,9 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
+        jMenu7.setText("Relatórios");
+        jMenuBar1.add(jMenu7);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -125,7 +147,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jmiSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairActionPerformed
         this.dispose();
-        //DaoGenerico.saveOrUpdate(new Log(,"Usuário saiu do sistema!"),0);
+        DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Usuário saiu do sistema!"),0);
+        System.exit(0);
     }//GEN-LAST:event_jmiSairActionPerformed
 
     private void jCad_MaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCad_MaterialActionPerformed
@@ -140,6 +163,18 @@ public class Menu extends javax.swing.JFrame {
         cadUsuarios.setVisible(true);
     }//GEN-LAST:event_jCad_UsuarioActionPerformed
 
+    private void jmiAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAuditoriaActionPerformed
+        IfrConsul_Auditoria audit = new IfrConsul_Auditoria();
+        jDesk.add(audit);
+        audit.setVisible(true);
+    }//GEN-LAST:event_jmiAuditoriaActionPerformed
+
+    private void jmiLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiLogsActionPerformed
+        IfrConsul_Logs logs = new IfrConsul_Logs();
+        jDesk.add(logs);
+        logs.setVisible(true);
+    }//GEN-LAST:event_jmiLogsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jCad_Material;
@@ -151,9 +186,12 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jmiAuditoria;
+    private javax.swing.JMenuItem jmiLogs;
     private javax.swing.JMenuItem jmiSair;
     // End of variables declaration//GEN-END:variables
 }

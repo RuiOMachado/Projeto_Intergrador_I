@@ -1,6 +1,5 @@
 
 package projeto.com.apresentacao;
-
 import java.awt.Color;
 import java.awt.Event;
 import javax.swing.JOptionPane;
@@ -17,10 +16,11 @@ public class NewLogin extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    Login usuario = new Login();
+    public static Login usuarioLogado = null;
     
     public NewLogin() {
         initComponents();
+        usuarioLogado = new Login();
     }
 
     /**
@@ -114,10 +114,8 @@ public class NewLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-
-            autenticar();
-            usuario.setNome(tfdUsuario.getText());
-            DaoGenerico.saveOrUpdate(new Log(usuario.getNome(),"Usuario logou no Sistema!"),0);
+           autenticar();
+           DaoGenerico.saveOrUpdate(new Log(usuarioLogado.getNome(),"Usuario logou no Sistema!"),0);
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void tfdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyPressed
@@ -127,12 +125,13 @@ public class NewLogin extends javax.swing.JFrame {
     private void tfdSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyReleased
         if (evt.getKeyCode() == Event.ENTER) {
             autenticar();
+            DaoGenerico.saveOrUpdate(new Log(usuarioLogado.getNome(),"Usuario logou no Sistema!"),0);
         }
     }//GEN-LAST:event_tfdSenhaKeyReleased
 
     public void autenticar(){
         if ("admin".equals(tfdUsuario.getText()) && "admin".equals(tfdSenha.getText())) {
-        //if(!DaoLogin.findUser()){
+            usuarioLogado.setNome(tfdUsuario.getText());
             Menu janela = new Menu();
             janela.setVisible(true);
             this.disable();

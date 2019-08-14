@@ -5,7 +5,6 @@
  */
 package projeto.com.negocio;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,33 +12,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Douglas
  */
 @Entity
-@Table(name = "auditoria")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Auditoria.findAll", query = "SELECT a FROM Auditoria a")
-    , @NamedQuery(name = "Auditoria.findById", query = "SELECT a FROM Auditoria a WHERE a.id = :id")
-    , @NamedQuery(name = "Auditoria.findByUsuario", query = "SELECT a FROM Auditoria a WHERE a.usuario = :usuario")
-    , @NamedQuery(name = "Auditoria.findByDataEntrada", query = "SELECT a FROM Auditoria a WHERE a.dataEntrada = :dataEntrada")
-    , @NamedQuery(name = "Auditoria.findByTipo", query = "SELECT a FROM Auditoria a WHERE a.tipo = :tipo")
-    , @NamedQuery(name = "Auditoria.findByContentOld", query = "SELECT a FROM Auditoria a WHERE a.contentOld = :contentOld")
-    , @NamedQuery(name = "Auditoria.findByContent", query = "SELECT a FROM Auditoria a WHERE a.content = :content")
-    , @NamedQuery(name = "Auditoria.findByEstado", query = "SELECT a FROM Auditoria a WHERE a.estado = :estado")})
+@Table(name="auditoria"
+    ,schema="public"
+)
 
-public class Auditoria implements Serializable {
+public class Auditoria implements java.io.Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -58,6 +45,14 @@ public class Auditoria implements Serializable {
     private String content;
     @Column(name = "estado")
     private String estado;
+
+    public Auditoria(String usuario, String tipo, String content) {
+        this.usuario     = usuario;
+        this.dataEntrada = new Date();
+        this.tipo        = tipo;
+        this.content     = content;
+        this.contentOld  = content;
+    }
 
     public Auditoria() {
     }
@@ -121,30 +116,5 @@ public class Auditoria implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Auditoria)) {
-            return false;
-        }
-        Auditoria other = (Auditoria) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "projeto.com.negocio.Auditoria[ id=" + id + " ]";
-    }
-    
+     
 }

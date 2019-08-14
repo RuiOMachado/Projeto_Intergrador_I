@@ -69,8 +69,7 @@ public class Login  implements java.io.Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    
+  
     @Column(name="estado", length=10)
     public String getEstado() {
         return this.estado;
@@ -79,9 +78,10 @@ public class Login  implements java.io.Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
-
-
+    
+    public String subString() {
+        return "%"+nome+"%"+senha+"%";
+    } 
 
 }
 
