@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projeto.com.apresentacao;
 
 
@@ -308,11 +303,9 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
                 
                 if(codigoTabela == 0){
                     DaoGenerico.saveOrUpdate(mat, codigoTabela);
-                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Material salvo com sucesso!"),0);
                 }else{
                     mat.setId(idUpdate);
-                    DaoGenerico.saveOrUpdate(mat,codigoTabela);
-                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Material editado com sucesso!"),0);  
+                    DaoGenerico.saveOrUpdate(mat,idUpdate);
                 }
                
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");

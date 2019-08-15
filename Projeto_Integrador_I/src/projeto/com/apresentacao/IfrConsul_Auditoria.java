@@ -2,6 +2,7 @@ package projeto.com.apresentacao;
 
 import javax.swing.JOptionPane;
 import projeto.com.dao.DaoGenerico;
+import projeto.com.negocio.Auditoria;
 
 /**
  *
@@ -244,9 +245,14 @@ public class IfrConsul_Auditoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bntSairActionPerformed
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
+        Auditoria aud = new Auditoria(NewLogin.usuarioLogado.getNome(),"CONFIG");
         if (rda.isSelected()) {
+            aud.setEstado("A");
+            DaoGenerico.saveOrUpdate(aud,0);
             JOptionPane.showMessageDialog(null, "Auditoria ativada!");
         } else if (rdd.isSelected()) {
+            aud.setEstado("I");
+            DaoGenerico.saveOrUpdate(aud,0);
             JOptionPane.showMessageDialog(null, "Auditoria Desativada!");
         }else{
             JOptionPane.showMessageDialog(null, "Escolha uma opcão!");

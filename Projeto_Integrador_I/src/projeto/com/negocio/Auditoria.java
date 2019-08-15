@@ -26,7 +26,9 @@ import javax.persistence.TemporalType;
 )
 
 public class Auditoria implements java.io.Serializable {
-
+    
+    public static String STATE = null;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -52,6 +54,24 @@ public class Auditoria implements java.io.Serializable {
         this.tipo        = tipo;
         this.content     = content;
         this.contentOld  = content;
+        if(!"I".equals(this.estado)){
+            this.estado = "A";
+        }else{
+            this.estado = "I";
+        }  
+    }
+    
+    public Auditoria(String usuario, String tipo) {
+        this.usuario     = usuario;
+        this.dataEntrada = new Date();
+        this.tipo        = tipo;
+        this.content     = null;
+        this.contentOld  = null;
+        if(!"I".equals(this.estado)){
+            this.estado = "A";
+        }else{
+            this.estado = "I";
+        } 
     }
 
     public Auditoria() {
@@ -115,6 +135,11 @@ public class Auditoria implements java.io.Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+        STATE = estado;
+    }
+    
+    public static String obterStatus(){
+        return STATE;
     }
      
 }
