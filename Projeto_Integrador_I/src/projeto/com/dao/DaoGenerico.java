@@ -53,7 +53,7 @@ public class DaoGenerico {
     public static boolean saveAuditoria(String dadoNovo, int id) {
         boolean retorno = true;
         Session sessao = null;
-           
+        Auditoria aud = new Auditoria(NewLogin.usuarioLogado.getNome(),"INCLUIR",dadoNovo);  
         //Rui
         //if(Fazer aqui um metodo para verificar se o ultimo registro (estado) da tabela (auditoria) é "I")
         //se caso consulta for I = inativo, não entra no try catch
@@ -61,27 +61,24 @@ public class DaoGenerico {
         ///essa seria a mudança de estado. AUDITORIA ON OU OFF
         //a auditoria já está sendo ativada e desativado na tela da auditoria - está ok, funcionando
         try {
-            Auditoria aud = new Auditoria(NewLogin.usuarioLogado.getNome(),"INCLUIR",dadoNovo);
             
             sessao = HibernateUtil.getSessionFactory().openSession();
             Transaction t = sessao.beginTransaction();
 
             if (id == 0) {
-                sessao.save(aud);
-                System.out.println("salvou");
-                System.out.println("id sav"+aud.getId());
+                sessao.save(aud); //ok
             } else {
                 aud.setId(id);
                 aud.setTipo("EDITAR");
                 aud.setContent(dadoNovo);
-                sessao.update(aud);
+                sessao.merge(aud);
                 System.out.println("editou");
                 System.out.println("id up"+aud.getId());
             }
             t.commit();
 
         } catch (Exception ex) {
-            sessao.getTransaction().rollback();
+            System.out.println("Erro "+ex);
             retorno = false;
         } finally {
             sessao.close();

@@ -297,7 +297,6 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
                     login.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(login, idUpdate);
                     DaoGenerico.saveAuditoria(login.subString(), idUpdate);
-                    System.out.println("id tab user"+idUpdate);
                 }
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
                 
