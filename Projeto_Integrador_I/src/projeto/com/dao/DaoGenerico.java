@@ -56,13 +56,12 @@ public class DaoGenerico {
         try {
             ses = HibernateUtil.getSessionFactory().openSession();
             Transaction t = ses.beginTransaction();
-            
+
             deleteLog(new Log(NewLogin.usuarioLogado.getNome(), "Registro " + obj.getClass() + " excluído com sucesso!"));
-            
+
             System.out.println(obj.getClass());
             ses.delete(obj);
-            
-            
+
             t.commit();
 
         } catch (Exception e) {
@@ -162,23 +161,24 @@ public class DaoGenerico {
 
             for (Object o : resultado) {
                 Auditoria aud = (Auditoria) o;
+                rest = aud.getEstado();
                 idDado = String.valueOf(aud.getId());
             }
 
             Auditoria aud = new Auditoria();
-            
-            aud.setUsuario(NewLogin.usuarioLogado.getNome());
-            aud.setClasse(classe);
-            aud.setidDado(String.valueOf(id));
-            aud.setDataEntrada(new Date());
-            aud.setTipo("DELETAR");
-            aud.setContent(dadoNovo);
-            aud.setContentOld(dadoOld);
-            aud.setEstado("A");
-            
-            sessao.merge(aud);
-            t.commit();
-            
+            if (rest.equals("A")) {
+                aud.setUsuario(NewLogin.usuarioLogado.getNome());
+                aud.setClasse(classe);
+                aud.setidDado(String.valueOf(id));
+                aud.setDataEntrada(new Date());
+                aud.setTipo("DELETAR");
+                aud.setContent(dadoNovo);
+                aud.setContentOld(dadoOld);
+                aud.setEstado("A");
+
+                sessao.merge(aud);
+                t.commit();
+            }
         } catch (Exception ex) {
             System.out.println("Erro " + ex);
             retorno = false;
@@ -209,7 +209,7 @@ public class DaoGenerico {
             sessao.close();
         }
     }
-    
+
     private static void deleteLog(Object obj) {
         Session sessao = null;
 
