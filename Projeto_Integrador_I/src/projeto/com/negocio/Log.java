@@ -46,10 +46,10 @@ public class Log implements java.io.Serializable {
         this.descricao   = descricao;
     }
     public Log(int id, String usuario, Date dataEntrada, String descricao) {
-       this.id = id;
-       this.usuario = usuario;
+       this.id          = id;
+       this.usuario     = usuario;
        this.dataEntrada = dataEntrada;
-       this.descricao = descricao;
+       this.descricao   = descricao;
     }
 
     public Log(Integer id) {

@@ -36,6 +36,10 @@ public class Auditoria implements java.io.Serializable {
     private Integer id;
     @Column(name = "usuario")
     private String usuario;
+    @Column(name = "classe")
+    private String classe;
+    @Column(name = "idDado")
+    private String idDado;    
     @Column(name = "data_entrada")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEntrada;
@@ -48,12 +52,29 @@ public class Auditoria implements java.io.Serializable {
     @Column(name = "estado")
     private String estado;
 
-    public Auditoria(String usuario, String tipo, String content) {
+    public Auditoria(String classe, String idDado, String usuario, String tipo, String content) {
         this.usuario     = usuario;
+        this.classe      = classe;
+        this.idDado      = idDado;
         this.dataEntrada = new Date();
         this.tipo        = tipo;
         this.content     = content;
         this.contentOld  = content;
+        if(!"I".equals(this.estado)){
+            this.estado = "A";
+        }else{
+            this.estado = "I";
+        }  
+    }
+    
+    public Auditoria(String classe, String idDado, String usuario, String tipo, String content, String contentOld) {
+        this.usuario     = usuario;
+        this.classe      = classe;
+        this.idDado      = idDado;
+        this.dataEntrada = new Date();
+        this.tipo        = tipo;
+        this.content     = content;
+        this.contentOld  = contentOld;
         if(!"I".equals(this.estado)){
             this.estado = "A";
         }else{
@@ -95,6 +116,22 @@ public class Auditoria implements java.io.Serializable {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+    
+     public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
+    }
+    
+     public String getidDado() {
+        return idDado;
+    }
+
+    public void setidDado(String idDado) {
+        this.idDado = idDado;
     }
 
     public Date getDataEntrada() {

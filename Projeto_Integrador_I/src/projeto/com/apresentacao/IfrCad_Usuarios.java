@@ -1,6 +1,9 @@
 package projeto.com.apresentacao;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
@@ -21,6 +24,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
     int codigoTabela = 0;
     int idUpdate = 0;
     int buscas = 0;
+    String Dados_OLD = "";
 
     public IfrCad_Usuarios() {
         initComponents();
@@ -282,6 +286,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSairActionPerformed
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
+
         try {
             Login login = new Login();
             if (cNome.getText().length() > 0 && cSenha.getText().length() > 0) {
@@ -289,27 +294,28 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
                 login.setNome(cNome.getText());
                 login.setSenha(DaoEncryption.encryptionString(cSenha.getText()));
                 login.setEstado("A");
-                
+
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(login, codigoTabela);
-                    DaoGenerico.saveAuditoria(login.subString(), codigoTabela);
+                    DaoGenerico.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela);
                 } else {
                     login.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(login, idUpdate);
-                    DaoGenerico.saveAuditoria(login.subString(), idUpdate);
+                    DaoGenerico.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela);
                 }
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
-                
-                }
-                cNome.setText(""); cSenha.setText("");
-                jTabbedPane2.setSelectedIndex(1);
-                DaoGenerico.listarLogin(jTableUser);
-                jBEditar.setEnabled(true);
-                jBExcluir.setEnabled(true);
-                jBSalvar.setEnabled(false);
-                
-            } catch (Exception ex) {
-            System.out.println(""+ex);
+
+            }
+            cNome.setText("");
+            cSenha.setText("");
+            jTabbedPane2.setSelectedIndex(1);
+            DaoGenerico.listarLogin(jTableUser);
+            jBEditar.setEnabled(true);
+            jBExcluir.setEnabled(true);
+            jBSalvar.setEnabled(false);
+
+        } catch (Exception ex) {
+            System.out.println("" + ex);
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
@@ -331,7 +337,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
                 idUpdate = log.getId();
                 cNome.setText(log.getNome());
                 cSenha.setText(log.getSenha());
-
+                Dados_OLD = "%" + log.getNome() + "%" + log.getSenha() + "%";
             }
 
         } catch (HibernateException he) {
@@ -346,26 +352,32 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBEditarActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+        Login login = new Login();
         List resultado = null;
-        Session ses = null;
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
 
             String idString = String.valueOf(jTableUser.getValueAt(jTableUser.getSelectedRow(), 0));
 
             try {
-                ses = HibernateUtil.getSessionFactory().openSession();
-                Transaction t = ses.beginTransaction();
 
-                org.hibernate.Query q = ses.createQuery("from Login where id = " + idString);
+                Session sessao = HibernateUtil.getSessionFactory().openSession();
+                sessao.beginTransaction();
+
+                org.hibernate.Query q = sessao.createQuery("from Login where id = " + idString);
                 resultado = q.list();
 
                 for (Object o : resultado) {
-                    Login log = (Login) o;
-
-                    ses.delete(log);
-                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Usuário excluído com sucesso!"),0);
-                    t.commit();
+                    login = (Login) o;
+//                    log.setNome(cNome.getText());
+//                    log.setSenha(DaoEncryption.encryptionString(cSenha.getText()));
+//                    log.setEstado("A");
                 }
+                System.out.println(login.getNome() + "  " + login.getSenha());
+
+                DaoGenerico.delete(login);
+                DaoGenerico.deleteAuditoria("Usuario", login.subString(), Dados_OLD, Integer.valueOf(idString));
+                JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
+
                 jBPesquisaActionPerformed(evt);
             } catch (HibernateException he) {
                 he.printStackTrace();

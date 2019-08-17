@@ -1,5 +1,6 @@
 package projeto.com.dao;
 
+import java.util.Date;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -19,41 +20,82 @@ import projeto.com.negocio.Material;
  */
 public class DaoGenerico {
 
-    
     //metodo salvar ou editar generico para tds as classe
     //Em toda chamada do metodo o log e gravado automaticamente no banco de dados
     public static boolean saveOrUpdate(Object obj, int id) {
         boolean retorno = true;
         Session sessao = null;
-        
+
         try {
             sessao = HibernateUtil.getSessionFactory().openSession();
             Transaction t = sessao.beginTransaction();
 
             if (id == 0) {
                 sessao.save(obj);
-                saveLog(new Log(NewLogin.usuarioLogado.getNome(),"Registro "+obj.getClass()+" salvo com sucesso!"),0);
+                saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Registro " + obj.getClass() + " salvo com sucesso!"), 0);
             } else {
                 sessao.update(obj);
-                saveLog(new Log(NewLogin.usuarioLogado.getNome(),"Registro "+obj.getClass()+" editado com sucesso!"),0);
+                saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Registro " + obj.getClass() + " editado com sucesso!"), 0);
             }
             t.commit();
 
         } catch (Exception ex) {
             sessao.getTransaction().rollback();
             System.out.println("erro" + ex);
-            saveLog(new Log(NewLogin.usuarioLogado.getNome(),"Erro "+ex+" no objeto "+obj.getClass()+"!"),0);
+            saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro " + ex + " no objeto " + obj.getClass() + "!"), 0);
             retorno = false;
         } finally {
             sessao.close();
         }
         return retorno;
     }
-    
-    public static boolean saveAuditoria(String dadoNovo, int id) {
+
+    public static boolean delete(Object obj) {
+        boolean retorno = true;
+        Session ses = null;
+        try {
+            ses = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = ses.beginTransaction();
+            
+            deleteLog(new Log(NewLogin.usuarioLogado.getNome(), "Registro " + obj.getClass() + " excluído com sucesso!"));
+            
+            System.out.println(obj.getClass());
+            ses.delete(obj);
+            
+            
+            t.commit();
+
+        } catch (Exception e) {
+            ses.getTransaction().rollback();
+            System.out.println("Erro " + e);
+            deleteLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro " + e + " no objeto " + obj.getClass() + "!"));
+            retorno = false;
+        } finally {
+            ses.close();
+        }
+        return retorno;
+    }
+
+    public static boolean saveAuditoria(String classe, String dadoNovo, String dadoOld, int id) {
         boolean retorno = true;
         Session sessao = null;
-        Auditoria aud = new Auditoria(NewLogin.usuarioLogado.getNome(),"INCLUIR",dadoNovo);  
+        List resultado = null;
+        String rest = "";
+        String idDado = "";
+
+        //int idAudi = resultado do maior registro da tabela Auditoria;
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        Transaction t1 = sessao.beginTransaction();
+
+        org.hibernate.Query q1 = sessao.createQuery("from Login");
+        resultado = q1.list();
+
+        for (Object o : resultado) {
+            Login log = (Login) o;
+            idDado = String.valueOf(log.getId());
+        }
+
+        Auditoria aud = new Auditoria(classe, String.valueOf(idDado), NewLogin.usuarioLogado.getNome(), "INCLUIR", dadoNovo);
         //Rui
         //if(Fazer aqui um metodo para verificar se o ultimo registro (estado) da tabela (auditoria) é "I")
         //se caso consulta for I = inativo, não entra no try catch
@@ -61,34 +103,94 @@ public class DaoGenerico {
         ///essa seria a mudança de estado. AUDITORIA ON OU OFF
         //a auditoria já está sendo ativada e desativado na tela da auditoria - está ok, funcionando
         try {
-            
+
             sessao = HibernateUtil.getSessionFactory().openSession();
             Transaction t = sessao.beginTransaction();
 
-            if (id == 0) {
-                sessao.save(aud); //ok
-            } else {
-                aud.setId(id);
-                aud.setTipo("EDITAR");
-                aud.setContent(dadoNovo);
-                sessao.merge(aud);
-                System.out.println("editou");
-                System.out.println("id up"+aud.getId());
-            }
-            t.commit();
+            org.hibernate.Query q = sessao.createQuery("from Auditoria");
+            resultado = q.list();
 
+            for (Object o : resultado) {
+                Auditoria aud2 = (Auditoria) o;
+                rest = aud2.getEstado();
+                idDado = String.valueOf(aud2.getId());
+                System.out.println(rest + " " + idDado);
+            }
+            System.out.println("Saiu = " + rest);
+            if (rest.equals("A")) {
+                if (id == 0) {
+                    sessao.save(aud); //ok
+                } else {
+                    //aud.setId(idAudi);
+                    //System.out.println("ESTOU AQUI");
+                    aud.setClasse(classe);
+                    aud.setidDado(String.valueOf(id));
+                    aud.setTipo("EDITAR");
+                    aud.setContent(dadoOld);
+                    aud.setContentOld(dadoNovo);
+
+                    sessao.merge(aud);
+                    System.out.println("editou");
+                    System.out.println("id up" + aud.getId());
+                }
+                t.commit();
+            }
         } catch (Exception ex) {
-            System.out.println("Erro "+ex);
+            System.out.println("Erro " + ex);
             retorno = false;
         } finally {
             sessao.close();
         }
         return retorno;
     }
-    
+
+    public static boolean deleteAuditoria(String classe, String dadoNovo, String dadoOld, int id) {
+        boolean retorno = true;
+        Session sessao = null;
+        List resultado = null;
+        String rest = "";
+        String idDado = "";
+
+        try {
+
+            //int idAudi = resultado do maior registro da tabela Auditoria;
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Auditoria");
+            resultado = q.list();
+
+            for (Object o : resultado) {
+                Auditoria aud = (Auditoria) o;
+                idDado = String.valueOf(aud.getId());
+            }
+
+            Auditoria aud = new Auditoria();
+            
+            aud.setUsuario(NewLogin.usuarioLogado.getNome());
+            aud.setClasse(classe);
+            aud.setidDado(String.valueOf(id));
+            aud.setDataEntrada(new Date());
+            aud.setTipo("DELETAR");
+            aud.setContent(dadoNovo);
+            aud.setContentOld(dadoOld);
+            aud.setEstado("A");
+            
+            sessao.merge(aud);
+            t.commit();
+            
+        } catch (Exception ex) {
+            System.out.println("Erro " + ex);
+            retorno = false;
+        } finally {
+            sessao.close();
+        }
+        return retorno;
+    }
+
     private static void saveLog(Object obj, int id) {
         Session sessao = null;
-        
+
         try {
             sessao = HibernateUtil.getSessionFactory().openSession();
             Transaction t = sessao.beginTransaction();
@@ -108,6 +210,23 @@ public class DaoGenerico {
         }
     }
     
+    private static void deleteLog(Object obj) {
+        Session sessao = null;
+
+        try {
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = sessao.beginTransaction();
+
+            sessao.save(obj);
+            t.commit();
+
+        } catch (Exception ex) {
+            sessao.getTransaction().rollback();
+            System.out.println("erro" + ex);
+        } finally {
+            sessao.close();
+        }
+    }
 
     public static void listarLogin(JTable jTabela) {
         List resultado = null;
@@ -183,7 +302,7 @@ public class DaoGenerico {
             System.out.println("" + ex);
         }
     }
-    
+
     public static void listarAuditoria(JTable jTabela) {
         List resultado = null;
 
@@ -200,7 +319,7 @@ public class DaoGenerico {
             for (Object o : resultado) {
                 Auditoria aud = (Auditoria) o;
                 modelo.addRow(new Object[]{
-                    aud.getId(), aud.getUsuario(), aud.getDataEntrada(), aud.getTipo(), aud.getContentOld(), aud.getContent()
+                    aud.getId(), aud.getUsuario(), aud.getClasse(), aud.getidDado(), aud.getDataEntrada(), aud.getTipo(), aud.getContentOld(), aud.getContent()
                 });
             }
 
@@ -208,4 +327,5 @@ public class DaoGenerico {
             System.out.println("" + ex);
         }
     }
+
 }

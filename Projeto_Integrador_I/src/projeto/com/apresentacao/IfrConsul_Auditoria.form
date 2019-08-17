@@ -232,9 +232,11 @@
         <Component class="javax.swing.JTable" name="jTableAuditoria">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
+              <Table columnCount="8" rowCount="4">
                 <Column editable="false" title="#" type="java.lang.Object"/>
                 <Column editable="false" title="Usu&#xe1;rio" type="java.lang.Object"/>
+                <Column editable="false" title="Classe" type="java.lang.Object"/>
+                <Column editable="false" title="Dado alterado" type="java.lang.Object"/>
                 <Column editable="false" title="Data_Hor&#xe1;rio" type="java.lang.Object"/>
                 <Column editable="false" title="Tipo" type="java.lang.Object"/>
                 <Column editable="false" title="Dado" type="java.lang.Object"/>

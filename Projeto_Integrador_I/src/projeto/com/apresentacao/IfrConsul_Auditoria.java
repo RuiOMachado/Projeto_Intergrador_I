@@ -127,17 +127,17 @@ public class IfrConsul_Auditoria extends javax.swing.JInternalFrame {
 
         jTableAuditoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "#", "Usuário", "Data_Horário", "Tipo", "Dado", "Dado_Antigo"
+                "#", "Usuário", "Classe", "Dado alterado", "Data_Horário", "Tipo", "Dado", "Dado_Antigo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
