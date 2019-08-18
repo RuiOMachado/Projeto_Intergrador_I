@@ -143,15 +143,12 @@ public class NewLogin extends javax.swing.JFrame {
         String rn = "";
         String rs = "";
         try {
-            System.out.println("Senha digitada pelo o usuario = " + tfdSenha.getText());
             senha = DaoEncryption.encryptionString(tfdSenha.getText());
         } catch (NoSuchAlgorithmException ex) {
-            //Logger.getLogger(NewLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         try{
         Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-            System.out.println("Senha que foi digitada = " + senha);
             org.hibernate.Query q = sessao.createQuery("from Login where nome = '" + tfdUsuario.getText() + "' AND senha = '"+ senha +"'");
             resultado = q.list();
 
@@ -165,10 +162,6 @@ public class NewLogin extends javax.swing.JFrame {
         } catch (HibernateException he) {
             he.printStackTrace();
         }
-        System.out.println("Senha que foi digitada = " + tfdUsuario.getText());
-        System.out.println("Senha que foi digitada = " + senha);
-        System.out.println("Senha que veio do banco = " + rn);
-        System.out.println("Senha que veio do banco = " + rs);
         if (rn.equals(tfdUsuario.getText()) && rs.equals(senha)) {
             usuarioLogado.setNome(tfdUsuario.getText());
             Menu janela = new Menu();
