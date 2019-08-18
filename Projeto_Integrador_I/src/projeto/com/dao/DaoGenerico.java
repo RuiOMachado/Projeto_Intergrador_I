@@ -80,20 +80,10 @@ public class DaoGenerico {
         Session sessao = null;
         List resultado = null;
         String rest = "";
-        String idDado = "";
-
+        String idDado = idDados(classe);
+        
+        
         //int idAudi = resultado do maior registro da tabela Auditoria;
-        sessao = HibernateUtil.getSessionFactory().openSession();
-        Transaction t1 = sessao.beginTransaction();
-
-        org.hibernate.Query q1 = sessao.createQuery("from Login");
-        resultado = q1.list();
-
-        for (Object o : resultado) {
-            Login log = (Login) o;
-            idDado = String.valueOf(log.getId());
-        }
-
         Auditoria aud = new Auditoria(classe, String.valueOf(idDado), NewLogin.usuarioLogado.getNome(), "INCLUIR", dadoNovo);
         //Rui
         //if(Fazer aqui um metodo para verificar se o ultimo registro (estado) da tabela (auditoria) é "I")
@@ -328,4 +318,30 @@ public class DaoGenerico {
         }
     }
 
+    public static String idDados(String classe) {
+        Session sessao = null;
+        List resultado = null;
+        String retorno = "";
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        Transaction t1 = sessao.beginTransaction();
+
+        if (classe == "Login") {
+            org.hibernate.Query q1 = sessao.createQuery("from Login");
+            resultado = q1.list();
+
+            for (Object o : resultado) {
+                Login log = (Login) o;
+                retorno = String.valueOf(log.getId());
+            }
+        } else if(classe == "Material"){
+            org.hibernate.Query q1 = sessao.createQuery("from Material");
+            resultado = q1.list();
+
+            for (Object o : resultado) {
+                Material mat = (Material) o;
+                retorno = String.valueOf(mat.getId());
+            }
+        }
+        return retorno;
+    }
 }

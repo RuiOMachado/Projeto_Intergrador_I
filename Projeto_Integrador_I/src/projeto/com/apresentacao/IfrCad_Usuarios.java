@@ -368,12 +368,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
 
                 for (Object o : resultado) {
                     login = (Login) o;
-//                    log.setNome(cNome.getText());
-//                    log.setSenha(DaoEncryption.encryptionString(cSenha.getText()));
-//                    log.setEstado("A");
                 }
-                System.out.println(login.getNome() + "  " + login.getSenha());
-
                 DaoGenerico.delete(login);
                 DaoGenerico.deleteAuditoria("Usuario", login.subString(), Dados_OLD, Integer.valueOf(idString));
                 JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");

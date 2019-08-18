@@ -1,6 +1,7 @@
 package projeto.com.apresentacao;
 
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import projeto.com.config.HibernateUtil;
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,34 +23,12 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
     int codigoTabela = 0;
     int idUpdate = 0;
     int buscas = 0;
+    String Dados_OLD = "";
     /**
      * Creates new form IfrCad_Materiais
      */
     public IfrCad_Materiais() {
         initComponents();
-        
-//        List resultado = null;
-//        
-//        DefaultTableModel modelo = (DefaultTableModel)jTabela.getModel();
-//        modelo.setNumRows(0);
-//        
-//        try {
-//            Session sessao = HibernateUtil.getSessionFactory().openSession();
-//            sessao.beginTransaction();
-//
-//            org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%"+cDescricao.getText()+"%') Order by id");
-//            resultado = q.list();
-//
-//            for (Object o : resultado) {
-//                Material mat = (Material) o;
-//                modelo.addRow(new Object[]{
-//                mat.getId(),mat.getDescricao(),mat.getQuantidade(),mat.getLargura(),mat.getComprimento(),mat.getAltura()
-//                });
-//            }
-//
-//        } catch (HibernateException he) {
-//            he.printStackTrace();
-//        }
     }
 
     /**
@@ -291,24 +270,26 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         try {
-            
             Material mat = new Material();
             if(cDescricao.getText().length() > 0 && cQuantidade.getText().length() > 0 && cLargura.getText().length() > 0 && cComprimento.getText().length() > 0 && cAltura.getText().length() > 0){
-                
+
                 mat.setDescricao(cDescricao.getText());
                 mat.setQuantidade(Integer.valueOf(cQuantidade.getText()));
                 mat.setLargura(BigDecimal.valueOf(Double.valueOf(cLargura.getText())));
                 mat.setComprimento(BigDecimal.valueOf(Double.valueOf(cComprimento.getText())));
                 mat.setAltura(BigDecimal.valueOf(Double.valueOf(cAltura.getText())));
-                
-                if(codigoTabela == 0){
+
+                if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(mat, codigoTabela);
-                }else{
+                    DaoGenerico.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela);
+                } else {
                     mat.setId(idUpdate);
-                    DaoGenerico.saveOrUpdate(mat,idUpdate);
+                    DaoGenerico.saveOrUpdate(mat, idUpdate);
+                    DaoGenerico.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela);
                 }
-               
-                JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
+
+            }
+            JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
                 cDescricao.setText("");
                 cQuantidade.setText("");
                 cLargura.setText("");
@@ -319,13 +300,10 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
                 jBEditar.setEnabled(true);
                 jBExcluir.setEnabled(true);
                 jBSalvar.setEnabled(false);
-                
-                
-            }
-        } catch (Exception ex) {
-            System.out.println(""+ex);;
-        } 
 
+        } catch (Exception ex) {
+            System.out.println("" + ex);
+        }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
     private void jBPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisaActionPerformed
@@ -384,7 +362,7 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
                 cLargura.setText(String.valueOf(mat.getLargura()));
                 cComprimento.setText(String.valueOf(mat.getComprimento()));
                 cAltura.setText(String.valueOf(mat.getAltura()));
-  
+                Dados_OLD = "%"+mat.getDescricao()+"%"+mat.getQuantidade()+"%"+mat.getLargura()+"%"+mat.getLargura()+"%"+mat.getAltura()+"%";
             }
 
         } catch (HibernateException he) {
@@ -416,26 +394,28 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSairActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+        Material mat = new Material();
         List resultado = null;
-        Session ses = null;
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
-            
-            String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
-            
-            try {
-                ses = HibernateUtil.getSessionFactory().openSession();
-                Transaction t = ses.beginTransaction();
 
-                org.hibernate.Query q = ses.createQuery("from Material where id = " + idString);
+            String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
+
+            try {
+
+                Session sessao = HibernateUtil.getSessionFactory().openSession();
+                sessao.beginTransaction();
+
+                org.hibernate.Query q = sessao.createQuery("from Material where id = " + idString);
                 resultado = q.list();
 
                 for (Object o : resultado) {
-                    Material mat = (Material) o;
-                    
-                    ses.delete(mat);
-                    DaoGenerico.saveOrUpdate(new Log(NewLogin.usuarioLogado.getNome(),"Registro Material excluído com sucesso!"),0);
-                    t.commit(); 
+                    mat = (Material) o;
                 }
+
+                DaoGenerico.delete(mat);
+                DaoGenerico.deleteAuditoria("Material", mat.subString(), Dados_OLD, Integer.valueOf(idString));
+                JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
+
                 jBPesquisaActionPerformed(evt);
             } catch (HibernateException he) {
                 he.printStackTrace();

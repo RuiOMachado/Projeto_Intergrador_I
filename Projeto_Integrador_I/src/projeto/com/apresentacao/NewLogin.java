@@ -2,7 +2,15 @@
 package projeto.com.apresentacao;
 import java.awt.Color;
 import java.awt.Event;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import projeto.com.config.HibernateUtil;
+import projeto.com.dao.DaoEncryption;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Login;
@@ -130,11 +138,42 @@ public class NewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_tfdSenhaKeyReleased
 
     public void autenticar(){
-        if ("admin".equals(tfdUsuario.getText()) && "admin".equals(tfdSenha.getText())) {
+        List resultado = null;
+        String senha = "";
+        String rn = "";
+        String rs = "";
+        try {
+            System.out.println("Senha digitada pelo o usuario = " + tfdSenha.getText());
+            senha = DaoEncryption.encryptionString(tfdSenha.getText());
+        } catch (NoSuchAlgorithmException ex) {
+            //Logger.getLogger(NewLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try{
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+            System.out.println("Senha que foi digitada = " + senha);
+            org.hibernate.Query q = sessao.createQuery("from Login where nome = '" + tfdUsuario.getText() + "' AND senha = '"+ senha +"'");
+            resultado = q.list();
+
+            for (Object o : resultado) {
+                Login log = (Login) o;
+
+                rn = log.getNome();
+                rs = log.getSenha();
+            }
+
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        System.out.println("Senha que foi digitada = " + tfdUsuario.getText());
+        System.out.println("Senha que foi digitada = " + senha);
+        System.out.println("Senha que veio do banco = " + rn);
+        System.out.println("Senha que veio do banco = " + rs);
+        if (rn.equals(tfdUsuario.getText()) && rs.equals(senha)) {
             usuarioLogado.setNome(tfdUsuario.getText());
             Menu janela = new Menu();
             janela.setVisible(true);
-            this.disable();
+            this.setVisible(false);
 
         } else {
             tfdSenha.setBackground(Color.red);
