@@ -16,6 +16,12 @@ public class IfrConsul_Auditoria extends javax.swing.JInternalFrame {
     public IfrConsul_Auditoria() {        
         initComponents();
         DaoGenerico.listarAuditoria(jTableAuditoria);
+        String status = DaoGenerico.statusAuditoria();
+        if(status.equals("A")){
+            rda.setSelected(true);
+        }else{
+            rdd.setSelected(true);
+        }
     }
 
     /**
@@ -250,10 +256,12 @@ public class IfrConsul_Auditoria extends javax.swing.JInternalFrame {
             aud.setEstado("A");
             DaoGenerico.saveOrUpdate(aud,0);
             JOptionPane.showMessageDialog(null, "Auditoria ativada!");
+            DaoGenerico.listarAuditoria(jTableAuditoria);
         } else if (rdd.isSelected()) {
             aud.setEstado("I");
             DaoGenerico.saveOrUpdate(aud,0);
             JOptionPane.showMessageDialog(null, "Auditoria Desativada!");
+            DaoGenerico.listarAuditoria(jTableAuditoria);
         }else{
             JOptionPane.showMessageDialog(null, "Escolha uma opcão!");
         }

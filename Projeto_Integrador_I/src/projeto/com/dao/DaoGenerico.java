@@ -81,16 +81,8 @@ public class DaoGenerico {
         List resultado = null;
         String rest = "";
         String idDado = idDados(classe);
-        
-        
-        //int idAudi = resultado do maior registro da tabela Auditoria;
+
         Auditoria aud = new Auditoria(classe, String.valueOf(idDado), NewLogin.usuarioLogado.getNome(), "INCLUIR", dadoNovo);
-        //Rui
-        //if(Fazer aqui um metodo para verificar se o ultimo registro (estado) da tabela (auditoria) é "I")
-        //se caso consulta for I = inativo, não entra no try catch
-        ///se o ultimo registro for A = ativo, deixar entrar no try catch, continuando assim gravando as informações na table auditoria
-        ///essa seria a mudança de estado. AUDITORIA ON OU OFF
-        //a auditoria já está sendo ativada e desativado na tela da auditoria - está ok, funcionando
         try {
 
             sessao = HibernateUtil.getSessionFactory().openSession();
@@ -103,15 +95,11 @@ public class DaoGenerico {
                 Auditoria aud2 = (Auditoria) o;
                 rest = aud2.getEstado();
                 idDado = String.valueOf(aud2.getId());
-                System.out.println(rest + " " + idDado);
             }
-            System.out.println("Saiu = " + rest);
             if (rest.equals("A")) {
                 if (id == 0) {
                     sessao.save(aud); //ok
                 } else {
-                    //aud.setId(idAudi);
-                    //System.out.println("ESTOU AQUI");
                     aud.setClasse(classe);
                     aud.setidDado(String.valueOf(id));
                     aud.setTipo("EDITAR");
@@ -119,8 +107,6 @@ public class DaoGenerico {
                     aud.setContentOld(dadoNovo);
 
                     sessao.merge(aud);
-                    System.out.println("editou");
-                    System.out.println("id up" + aud.getId());
                 }
                 t.commit();
             }
@@ -142,7 +128,6 @@ public class DaoGenerico {
 
         try {
 
-            //int idAudi = resultado do maior registro da tabela Auditoria;
             sessao = HibernateUtil.getSessionFactory().openSession();
             Transaction t = sessao.beginTransaction();
 
@@ -325,7 +310,7 @@ public class DaoGenerico {
         sessao = HibernateUtil.getSessionFactory().openSession();
         Transaction t1 = sessao.beginTransaction();
 
-        if (classe == "Login") {
+        if (classe.equals("Usuario")) {
             org.hibernate.Query q1 = sessao.createQuery("from Login");
             resultado = q1.list();
 
@@ -333,7 +318,7 @@ public class DaoGenerico {
                 Login log = (Login) o;
                 retorno = String.valueOf(log.getId());
             }
-        } else if(classe == "Material"){
+        } else if (classe.equals("Material")) {
             org.hibernate.Query q1 = sessao.createQuery("from Material");
             resultado = q1.list();
 
@@ -343,5 +328,23 @@ public class DaoGenerico {
             }
         }
         return retorno;
+    }
+
+    public static String statusAuditoria() {
+        Session sessao = null;
+        List resultado = null;
+        String rest = "";
+        
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = sessao.beginTransaction();
+
+        org.hibernate.Query q = sessao.createQuery("from Auditoria");
+        resultado = q.list();
+
+        for (Object o : resultado) {
+            Auditoria aud2 = (Auditoria) o;
+            rest = aud2.getEstado();
+        }
+        return rest;
     }
 }
