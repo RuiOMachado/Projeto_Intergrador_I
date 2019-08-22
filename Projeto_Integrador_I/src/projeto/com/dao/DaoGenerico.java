@@ -2,6 +2,7 @@ package projeto.com.dao;
 
 import java.util.Date;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
@@ -303,6 +304,33 @@ public class DaoGenerico {
         }
     }
 
+    public static void listarAuditoria(JTable jTabela, String usuario, String classe, String idDado){//, String dataIni, String dataFim) {
+        List resultado = null;
+        System.out.println("ENTROUU AQUI");
+        DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
+        modelo.setNumRows(0);
+
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Auditoria where upper(usuario) LIKE upper('%" +usuario+ "%') AND upper(classe) LIKE upper('%" +classe+"%') AND upper(iddado) = upper('" +idDado+ "')");
+                   // + "AND data_entrada >= timestamp '"+dataIni+" 00:00:00'"
+                    //+ "  and data_entrada < timestamp '"+dataFim+" 00:00:00'");
+            resultado = q.list();
+            modelo.setNumRows(0);
+            for (Object o : resultado) {
+                Auditoria aud = (Auditoria) o;
+                modelo.addRow(new Object[]{
+                    aud.getId(), aud.getUsuario(), aud.getClasse(), aud.getidDado(), aud.getDataEntrada(), aud.getTipo(), aud.getContentOld(), aud.getContent()
+                });
+            }
+
+        } catch (Exception ex) {
+            System.out.println("" + ex);
+        }
+    }
+
     public static String idDados(String classe) {
         Session sessao = null;
         List resultado = null;
@@ -334,7 +362,7 @@ public class DaoGenerico {
         Session sessao = null;
         List resultado = null;
         String rest = "";
-        
+
         sessao = HibernateUtil.getSessionFactory().openSession();
         Transaction t = sessao.beginTransaction();
 
@@ -346,5 +374,12 @@ public class DaoGenerico {
             rest = aud2.getEstado();
         }
         return rest;
+    }
+
+    public static void popularCombo(JComboBox combo) {
+
+        combo.removeAllItems();
+        combo.addItem("Usuario");
+        combo.addItem("Material");
     }
 }
