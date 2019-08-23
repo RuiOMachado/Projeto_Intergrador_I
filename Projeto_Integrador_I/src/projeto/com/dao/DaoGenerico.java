@@ -69,93 +69,93 @@ public class DaoGenerico{
         return retorno;
     }
 
-    public static boolean saveAuditoria(String classe, String dadoNovo, String dadoOld, int id) {
-        boolean retorno = true;
-        Session sessao = null;
-        List resultado = null;
-        String rest = "";
-        String idDado = idDados(classe);
-
-        Auditoria aud = new Auditoria(classe, String.valueOf(idDado), NewLogin.usuarioLogado.getNome(), "INCLUIR", dadoNovo);
-        try {
-
-            sessao = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = sessao.beginTransaction();
-
-            org.hibernate.Query q = sessao.createQuery("from Auditoria");
-            resultado = q.list();
-
-            for (Object o : resultado) {
-                Auditoria aud2 = (Auditoria) o;
-                rest = aud2.getEstado();
-                idDado = String.valueOf(aud2.getId());
-            }
-            if (rest.equals("A")) {
-                if (id == 0) {
-                    sessao.save(aud); //ok
-                } else {
-                    aud.setClasse(classe);
-                    aud.setidDado(String.valueOf(id));
-                    aud.setTipo("EDITAR");
-                    aud.setContent(dadoOld);
-                    aud.setContentOld(dadoNovo);
-
-                    sessao.merge(aud);
-                }
-                t.commit();
-            }
-        } catch (Exception ex) {
-            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
-            retorno = false;
-        } finally {
-            sessao.close();
-        }
-        return retorno;
-    }
-
-    public static boolean deleteAuditoria(String classe, String dadoNovo, String dadoOld, int id) {
-        boolean retorno = true;
-        Session sessao = null;
-        List resultado = null;
-        String rest = "";
-        String idDado = "";
-
-        try {
-
-            sessao = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = sessao.beginTransaction();
-
-            org.hibernate.Query q = sessao.createQuery("from Auditoria");
-            resultado = q.list();
-
-            for (Object o : resultado) {
-                Auditoria aud = (Auditoria) o;
-                rest = aud.getEstado();
-                idDado = String.valueOf(aud.getId());
-            }
-
-            Auditoria aud = new Auditoria();
-            if (rest.equals("A")) {
-                aud.setUsuario(NewLogin.usuarioLogado.getNome());
-                aud.setClasse(classe);
-                aud.setidDado(String.valueOf(id));
-                aud.setDataEntrada(new Date());
-                aud.setTipo("DELETAR");
-                aud.setContent(dadoNovo);
-                aud.setContentOld(dadoOld);
-                aud.setEstado("A");
-
-                sessao.merge(aud);
-                t.commit();
-            }
-        } catch (Exception ex) {
-            System.out.println("Erro " + ex);
-            retorno = false;
-        } finally {
-            sessao.close();
-        }
-        return retorno;
-    }
+//    public static boolean saveAuditoria(String classe, String dadoNovo, String dadoOld, int id) {
+//        boolean retorno = true;
+//        Session sessao = null;
+//        List resultado = null;
+//        String rest = "";
+//        String idDado = idDados(classe);
+//
+//        Auditoria aud = new Auditoria(classe, String.valueOf(idDado), NewLogin.usuarioLogado.getNome(), "INCLUIR", dadoNovo);
+//        try {
+//
+//            sessao = HibernateUtil.getSessionFactory().openSession();
+//            Transaction t = sessao.beginTransaction();
+//
+//            org.hibernate.Query q = sessao.createQuery("from Auditoria");
+//            resultado = q.list();
+//
+//            for (Object o : resultado) {
+//                Auditoria aud2 = (Auditoria) o;
+//                rest = aud2.getEstado();
+//                idDado = String.valueOf(aud2.getId());
+//            }
+//            if (rest.equals("A")) {
+//                if (id == 0) {
+//                    sessao.save(aud); //ok
+//                } else {
+//                    aud.setClasse(classe);
+//                    aud.setidDado(String.valueOf(id));
+//                    aud.setTipo("EDITAR");
+//                    aud.setContent(dadoOld);
+//                    aud.setContentOld(dadoNovo);
+//
+//                    sessao.merge(aud);
+//                }
+//                t.commit();
+//            }
+//        } catch (Exception ex) {
+//            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+//            retorno = false;
+//        } finally {
+//            sessao.close();
+//        }
+//        return retorno;
+//    }
+//
+//    public static boolean deleteAuditoria(String classe, String dadoNovo, String dadoOld, int id) {
+//        boolean retorno = true;
+//        Session sessao = null;
+//        List resultado = null;
+//        String rest = "";
+//        String idDado = "";
+//
+//        try {
+//
+//            sessao = HibernateUtil.getSessionFactory().openSession();
+//            Transaction t = sessao.beginTransaction();
+//
+//            org.hibernate.Query q = sessao.createQuery("from Auditoria");
+//            resultado = q.list();
+//
+//            for (Object o : resultado) {
+//                Auditoria aud = (Auditoria) o;
+//                rest = aud.getEstado();
+//                idDado = String.valueOf(aud.getId());
+//            }
+//
+//            Auditoria aud = new Auditoria();
+//            if (rest.equals("A")) {
+//                aud.setUsuario(NewLogin.usuarioLogado.getNome());
+//                aud.setClasse(classe);
+//                aud.setidDado(String.valueOf(id));
+//                aud.setDataEntrada(new Date());
+//                aud.setTipo("DELETAR");
+//                aud.setContent(dadoNovo);
+//                aud.setContentOld(dadoOld);
+//                aud.setEstado("A");
+//
+//                sessao.merge(aud);
+//                t.commit();
+//            }
+//        } catch (Exception ex) {
+//            System.out.println("Erro " + ex);
+//            retorno = false;
+//        } finally {
+//            sessao.close();
+//        }
+//        return retorno;
+//    }
 
     private static void saveLog(Object obj, int id) {
         Session sessao = null;
@@ -333,22 +333,22 @@ public class DaoGenerico{
         return retorno;
     }
 
-    public static String statusAuditoria() {
-        Session sessao = null;
-        List resultado = null;
-        String rest = "";
-
-        sessao = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = sessao.beginTransaction();
-
-        org.hibernate.Query q = sessao.createQuery("from Auditoria");
-        resultado = q.list();
-
-        for (Object o : resultado) {
-            Auditoria aud2 = (Auditoria) o;
-            rest = aud2.getEstado();
-        }
-        return rest;
-    }
+//    public static String statusAuditoria() {
+//        Session sessao = null;
+//        List resultado = null;
+//        String rest = "";
+//
+//        sessao = HibernateUtil.getSessionFactory().openSession();
+//        Transaction t = sessao.beginTransaction();
+//
+//        org.hibernate.Query q = sessao.createQuery("from Auditoria");
+//        resultado = q.list();
+//
+//        for (Object o : resultado) {
+//            Auditoria aud2 = (Auditoria) o;
+//            rest = aud2.getEstado();
+//        }
+//        return rest;
+//    }
     
 }

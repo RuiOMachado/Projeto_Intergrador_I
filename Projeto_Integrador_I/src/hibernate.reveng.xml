@@ -45,4 +45,5 @@ Contributor(s):
   <table-filter match-name="log"/>
   <table-filter match-name="login"/>
   <table-filter match-name="material"/>
+  <table-filter match-name="parametro"/>
 </hibernate-reverse-engineering>

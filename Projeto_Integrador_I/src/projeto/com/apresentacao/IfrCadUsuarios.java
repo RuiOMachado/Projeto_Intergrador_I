@@ -6,8 +6,10 @@ import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import projeto.com.config.HibernateUtil;
+import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoEncryption;
 import projeto.com.dao.DaoGenerico;
+import projeto.com.dao.DaoLogin;
 import projeto.com.negocio.Login;
 
 /**
@@ -18,7 +20,6 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
     int codigoTabela = 0;
     int idUpdate = 0;
-    int buscas = 0;
     String Dados_OLD = "";
 
     public IfrCadUsuarios() {
@@ -233,33 +234,15 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
         DefaultTableModel modelo = (DefaultTableModel) jTableUser.getModel();
         modelo.setNumRows(0);
+        
+        resultado = DaoLogin.pesquisaLogin(cPesquisa.getText());
+        
+        for (Object o : resultado) {
+            Login log = (Login) o;
+            modelo.addRow(new Object[]{
+                log.getId(), log.getNome(), log.getEstado()
+            });
 
-        try {
-            Session sessao = HibernateUtil.getSessionFactory().openSession();
-            sessao.beginTransaction();
-
-            org.hibernate.Query q = sessao.createQuery("from Login where upper(nome) LIKE upper('%" + cPesquisa.getText() + "%') Order by id");
-            resultado = q.list();
-            if (buscas == 0) {
-                for (Object o : resultado) {
-                    Login log = (Login) o;
-                    modelo.addRow(new Object[]{
-                        log.getId(), log.getNome(), log.getEstado()
-                    });
-                    buscas = 1;
-                }
-            } else {
-                modelo.setNumRows(0);
-                for (Object o : resultado) {
-                    Login log = (Login) o;
-                    modelo.addRow(new Object[]{
-                        log.getId(), log.getNome(), log.getEstado()
-                    });
-                }
-            }
-
-        } catch (HibernateException he) {
-            he.printStackTrace();
         }
     }//GEN-LAST:event_jBPesquisaActionPerformed
 
@@ -292,11 +275,11 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(login, codigoTabela);
-                    DaoGenerico.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela);
+                    DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "INCLUIR");
                 } else {
                     login.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(login, idUpdate);
-                    DaoGenerico.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela);
+                    DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "EDITAR");
                 }
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
 
@@ -319,24 +302,15 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         String idString = String.valueOf(jTableUser.getValueAt(jTableUser.getSelectedRow(), 0));
         codigoTabela = Integer.parseInt(idString);
 
-        try {
-            Session sessao = HibernateUtil.getSessionFactory().openSession();
-            sessao.beginTransaction();
+        resultado = DaoLogin.buscaIdLogin(codigoTabela);
 
-            org.hibernate.Query q = sessao.createQuery("from Login where id = " + codigoTabela);
-            resultado = q.list();
+        for (Object o : resultado) {
+            Login log = (Login) o;
 
-            for (Object o : resultado) {
-                Login log = (Login) o;
-
-                idUpdate = log.getId();
-                cNome.setText(log.getNome());
-                cSenha.setText(log.getSenha());
-                Dados_OLD = "%" + log.getNome() + "%" + log.getSenha() + "%";
-            }
-
-        } catch (HibernateException he) {
-            he.printStackTrace();
+            idUpdate = log.getId();
+            cNome.setText(log.getNome());
+            cSenha.setText(log.getSenha());
+            Dados_OLD = "%" + log.getNome() + "%" + log.getSenha() + "%";
         }
 
         jTabbedPane2.setSelectedIndex(0);
@@ -353,25 +327,18 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
             String idString = String.valueOf(jTableUser.getValueAt(jTableUser.getSelectedRow(), 0));
 
-            try {
+            resultado = DaoLogin.buscaIdLogin(Integer.valueOf(idString));
 
-                Session sessao = HibernateUtil.getSessionFactory().openSession();
-                sessao.beginTransaction();
-
-                org.hibernate.Query q = sessao.createQuery("from Login where id = " + idString);
-                resultado = q.list();
-
-                for (Object o : resultado) {
-                    login = (Login) o;
-                }
-                DaoGenerico.delete(login);
-                DaoGenerico.deleteAuditoria("Usuario", login.subString(), Dados_OLD, Integer.valueOf(idString));
-                JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
-
-                jBPesquisaActionPerformed(evt);
-            } catch (HibernateException he) {
-                he.printStackTrace();
+            for (Object o : resultado) {
+                login = (Login) o;
             }
+
+            DaoGenerico.delete(login);
+            DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, Integer.valueOf(idString), "DELETAR");
+            JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
+
+            jBPesquisaActionPerformed(evt);
+
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 

@@ -7,7 +7,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoGenerico;
+import projeto.com.dao.DaoMaterial;
 import projeto.com.negocio.Material;
 
 /**
@@ -15,11 +17,11 @@ import projeto.com.negocio.Material;
  * @author ruiwa
  */
 public class IfrCadMateriais extends javax.swing.JInternalFrame {
-    
+
     int codigoTabela = 0;
     int idUpdate = 0;
-    int buscas = 0;
     String Dados_OLD = "";
+
     /**
      * Creates new form IfrCad_Materiais
      */
@@ -267,7 +269,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         try {
             Material mat = new Material();
-            if(cDescricao.getText().length() > 0 && cQuantidade.getText().length() > 0 && cLargura.getText().length() > 0 && cComprimento.getText().length() > 0 && cAltura.getText().length() > 0){
+            if (cDescricao.getText().length() > 0 && cQuantidade.getText().length() > 0 && cLargura.getText().length() > 0 && cComprimento.getText().length() > 0 && cAltura.getText().length() > 0) {
 
                 mat.setDescricao(cDescricao.getText());
                 mat.setQuantidade(Integer.valueOf(cQuantidade.getText()));
@@ -277,25 +279,25 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(mat, codigoTabela);
-                    DaoGenerico.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela);
+                    DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "INCLUIR");
                 } else {
                     mat.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(mat, idUpdate);
-                    DaoGenerico.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela);
+                    DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
                 }
 
             }
             JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
-                cDescricao.setText("");
-                cQuantidade.setText("");
-                cLargura.setText("");
-                cComprimento.setText("");
-                cAltura.setText("");
-                jTabbedPane2.setSelectedIndex(1);
-                DaoGenerico.listarMaterial(jTabela);  //metodo atualiza tabela
-                jBEditar.setEnabled(true);
-                jBExcluir.setEnabled(true);
-                jBSalvar.setEnabled(false);
+            cDescricao.setText("");
+            cQuantidade.setText("");
+            cLargura.setText("");
+            cComprimento.setText("");
+            cAltura.setText("");
+            jTabbedPane2.setSelectedIndex(1);
+            DaoGenerico.listarMaterial(jTabela);  //metodo atualiza tabela
+            jBEditar.setEnabled(true);
+            jBExcluir.setEnabled(true);
+            jBSalvar.setEnabled(false);
 
         } catch (Exception ex) {
             System.out.println("" + ex);
@@ -304,36 +306,17 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
     private void jBPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisaActionPerformed
         List resultado = null;
-        
-        DefaultTableModel modelo = (DefaultTableModel)jTabela.getModel();
+
+        DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
         modelo.setNumRows(0);
-        
-        try {
-            Session sessao = HibernateUtil.getSessionFactory().openSession();
-            sessao.beginTransaction();
-            
-            org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%"+cPesquisa.getText()+"%') Order by id");
-            resultado = q.list();
-            if(buscas == 0){
-                for (Object o : resultado) {
-                    Material mat = (Material) o;
-                    modelo.addRow(new Object[]{
-                    mat.getId(),mat.getDescricao(),mat.getQuantidade(),mat.getLargura(),mat.getComprimento(),mat.getAltura()
-                    });
-                    buscas = 1;
-                }
-            }else{
-               modelo.setNumRows(0);
-               for (Object o : resultado) {
-                    Material mat = (Material) o;
-                    modelo.addRow(new Object[]{
-                    mat.getId(),mat.getDescricao(),mat.getQuantidade(),mat.getLargura(),mat.getComprimento(),mat.getAltura()
-                    });
-                }
-            }
-            
-        } catch (HibernateException he) {
-            he.printStackTrace();
+
+        resultado = DaoMaterial.pesquisaMaterial(cPesquisa.getText());
+
+        for (Object o : resultado) {
+            Material mat = (Material) o;
+            modelo.addRow(new Object[]{
+                mat.getId(), mat.getDescricao(), mat.getQuantidade(), mat.getLargura(), mat.getComprimento(), mat.getAltura()
+            });
         }
     }//GEN-LAST:event_jBPesquisaActionPerformed
 
@@ -341,28 +324,19 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         List resultado = null;
         String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
         codigoTabela = Integer.parseInt(idString);
-                
-        try {
-            Session sessao = HibernateUtil.getSessionFactory().openSession();
-            sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Material where id = " + codigoTabela);
-            resultado = q.list();
+        resultado = DaoMaterial.buscaIdMaterial(codigoTabela);
 
-            for (Object o : resultado) {
-                Material mat = (Material) o;
-                
-                idUpdate = mat.getId();
-                cDescricao.setText(mat.getDescricao());
-                cQuantidade.setText(String.valueOf(mat.getQuantidade()));
-                cLargura.setText(String.valueOf(mat.getLargura()));
-                cComprimento.setText(String.valueOf(mat.getComprimento()));
-                cAltura.setText(String.valueOf(mat.getAltura()));
-                Dados_OLD = "%"+mat.getDescricao()+"%"+mat.getQuantidade()+"%"+mat.getLargura()+"%"+mat.getLargura()+"%"+mat.getAltura()+"%";
-            }
+        for (Object o : resultado) {
+            Material mat = (Material) o;
 
-        } catch (HibernateException he) {
-            he.printStackTrace();
+            idUpdate = mat.getId();
+            cDescricao.setText(mat.getDescricao());
+            cQuantidade.setText(String.valueOf(mat.getQuantidade()));
+            cLargura.setText(String.valueOf(mat.getLargura()));
+            cComprimento.setText(String.valueOf(mat.getComprimento()));
+            cAltura.setText(String.valueOf(mat.getAltura()));
+            Dados_OLD = "%" + mat.getDescricao() + "%" + mat.getQuantidade() + "%" + mat.getLargura() + "%" + mat.getLargura() + "%" + mat.getAltura() + "%";
         }
 
         jTabbedPane2.setSelectedIndex(0);
@@ -396,26 +370,18 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
             String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
 
-            try {
+            resultado = DaoMaterial.buscaIdMaterial(Integer.parseInt(idString));
 
-                Session sessao = HibernateUtil.getSessionFactory().openSession();
-                sessao.beginTransaction();
-
-                org.hibernate.Query q = sessao.createQuery("from Material where id = " + idString);
-                resultado = q.list();
-
-                for (Object o : resultado) {
-                    mat = (Material) o;
-                }
-
-                DaoGenerico.delete(mat);
-                DaoGenerico.deleteAuditoria("Material", mat.subString(), Dados_OLD, Integer.valueOf(idString));
-                JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
-
-                jBPesquisaActionPerformed(evt);
-            } catch (HibernateException he) {
-                he.printStackTrace();
+            for (Object o : resultado) {
+                mat = (Material) o;
             }
+
+            DaoGenerico.delete(mat);
+            DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, Integer.valueOf(idString), "DELETAR");
+            JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
+
+            jBPesquisaActionPerformed(evt);
+
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 

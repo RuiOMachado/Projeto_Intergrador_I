@@ -27,7 +27,6 @@ import javax.persistence.TemporalType;
 
 public class Auditoria implements java.io.Serializable {
     
-    public static String STATE = null;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +39,7 @@ public class Auditoria implements java.io.Serializable {
     private String classe;
     @Column(name = "idDado")
     private String idDado;    
-    @Column(name = "data_entrada")
+    @Column(name = "dataEntrada")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEntrada;
     @Column(name = "tipo")
@@ -49,8 +48,6 @@ public class Auditoria implements java.io.Serializable {
     private String contentOld;
     @Column(name = "content")
     private String content;
-    @Column(name = "estado")
-    private String estado;
 
     public Auditoria(String classe, String idDado, String usuario, String tipo, String content) {
         this.usuario     = usuario;
@@ -60,11 +57,6 @@ public class Auditoria implements java.io.Serializable {
         this.tipo        = tipo;
         this.content     = content;
         this.contentOld  = content;
-        if(!"I".equals(this.estado)){
-            this.estado = "A";
-        }else{
-            this.estado = "I";
-        }  
     }
     
     public Auditoria(String classe, String idDado, String usuario, String tipo, String content, String contentOld) {
@@ -75,24 +67,14 @@ public class Auditoria implements java.io.Serializable {
         this.tipo        = tipo;
         this.content     = content;
         this.contentOld  = contentOld;
-        if(!"I".equals(this.estado)){
-            this.estado = "A";
-        }else{
-            this.estado = "I";
-        }  
     }
     
-    public Auditoria(String usuario, String tipo) {
+    public Auditoria(String usuario, String tipo, String content , String contentOld) {
         this.usuario     = usuario;
         this.dataEntrada = new Date();
         this.tipo        = tipo;
-        this.content     = null;
-        this.contentOld  = null;
-        if(!"I".equals(this.estado)){
-            this.estado = "A";
-        }else{
-            this.estado = "I";
-        } 
+        this.content     = content;
+        this.contentOld  = contentOld;
     }
 
     public Auditoria() {
@@ -164,19 +146,6 @@ public class Auditoria implements java.io.Serializable {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-        STATE = estado;
-    }
-    
-    public static String obterStatus(){
-        return STATE;
     }
      
 }

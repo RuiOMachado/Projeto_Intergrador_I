@@ -2,6 +2,7 @@ package projeto.com.apresentacao;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.negocio.Auditoria;
 
@@ -18,9 +19,9 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
         initComponents();
         jCClasse.removeAllItems();
         popularCombo(jCClasse);
-        DaoGenerico.listarAuditoria(jTableAuditoria);
-        String status = DaoGenerico.statusAuditoria();
-        if (status.equals("A")) {
+        DaoAuditoria.listarAuditoria(jTableAuditoria);
+        boolean status = DaoAuditoria.buscaStatus();
+        if (status == true) {
             rda.setSelected(true);
         } else {
             rdd.setSelected(true);
@@ -281,17 +282,23 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bntSairActionPerformed
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
-        Auditoria aud = new Auditoria(NewLogin.usuarioLogado.getNome(), "CONFIG");
+        Auditoria aud ;
         if (rda.isSelected()) {
-            aud.setEstado("A");
+            //aud.setEstado("A");
+            System.out.println("ENTROU NO ATIVO");
+            aud = new Auditoria(NewLogin.usuarioLogado.getNome(), "CONFIG", "DESLIGADO", "LIGADO");
             DaoGenerico.saveOrUpdate(aud, 0);
+            DaoAuditoria.atualizaStatus(true);
             JOptionPane.showMessageDialog(null, "Auditoria ativada!");
-            DaoGenerico.listarAuditoria(jTableAuditoria);
+            DaoAuditoria.listarAuditoria(jTableAuditoria);
         } else if (rdd.isSelected()) {
-            aud.setEstado("I");
+            //aud.setEstado("I");
+            System.out.println("ENTROU NO DESABILITADO");
+            aud = new Auditoria(NewLogin.usuarioLogado.getNome(), "CONFIG", "LIGADO", "DESLIGADO");
             DaoGenerico.saveOrUpdate(aud, 0);
+            DaoAuditoria.atualizaStatus(false);
             JOptionPane.showMessageDialog(null, "Auditoria Desativada!");
-            DaoGenerico.listarAuditoria(jTableAuditoria);
+            DaoAuditoria.listarAuditoria(jTableAuditoria);
         } else {
             JOptionPane.showMessageDialog(null, "Escolha uma opcão!");
         }

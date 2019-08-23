@@ -15,7 +15,7 @@ import projeto.com.negocio.Material;
  * @author Douglas
  */
 public class DaoMaterial {
-    
+
     public static void listarMaterial(JTable jTabela) {
         List resultado = null;
 
@@ -39,5 +39,34 @@ public class DaoMaterial {
         } catch (HibernateException he) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
+    }
+
+    public static List buscaIdMaterial(int id) {
+        List resultado = null;
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Material where id = " + id);
+            resultado = q.list();
+
+        } catch (Exception e) {
+        }
+        return resultado;
+    }
+
+    public static List pesquisaMaterial(String material) {
+        List resultado = null;
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%" + material + "%') Order by id");
+            resultado = q.list();
+            
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        return resultado;
     }
 }

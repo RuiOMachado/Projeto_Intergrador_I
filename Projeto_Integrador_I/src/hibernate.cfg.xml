@@ -50,5 +50,6 @@ Contributor(s):
     <mapping class="projeto.com.negocio.Login"/>
     <mapping class="projeto.com.negocio.Log"/>
     <mapping class="projeto.com.negocio.Auditoria"/>
+    <mapping class="projeto.com.negocio.Parametro"/>
   </session-factory>
 </hibernate-configuration>
