@@ -1,22 +1,22 @@
 package projeto.com.dao;
+
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
 import projeto.com.negocio.Log;
-import projeto.com.negocio.Login;
+import projeto.com.negocio.Material;
 
 /**
  *
  * @author Douglas
  */
-public class DaoLogin {
-
-     public static void listarLogin(JTable jTabela) {
+public class DaoMaterial {
+    
+    public static void listarMaterial(JTable jTabela) {
         List resultado = null;
 
         DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
@@ -26,13 +26,13 @@ public class DaoLogin {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Login order by id");
+            org.hibernate.Query q = sessao.createQuery("from Material order by id");
             resultado = q.list();
-            modelo.setNumRows(0);
+
             for (Object o : resultado) {
-                Login log = (Login) o;
+                Material mat1 = (Material) o;
                 modelo.addRow(new Object[]{
-                    log.getId(), log.getNome(), log.getEstado()
+                    mat1.getId(), mat1.getDescricao(), mat1.getQuantidade(), mat1.getLargura(), mat1.getComprimento(), mat1.getAltura()
                 });
             }
 
@@ -40,7 +40,4 @@ public class DaoLogin {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
     }
-     
-     
-    
 }

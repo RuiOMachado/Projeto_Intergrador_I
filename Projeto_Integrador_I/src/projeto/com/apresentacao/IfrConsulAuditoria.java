@@ -1,8 +1,6 @@
 package projeto.com.apresentacao;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.negocio.Auditoria;
@@ -11,15 +9,15 @@ import projeto.com.negocio.Auditoria;
  *
  * @author Douglas
  */
-public class IfrConsul_Auditoria extends javax.swing.JInternalFrame {
+public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form IfrConsul_Auditoria
      */
-    public IfrConsul_Auditoria() {
+    public IfrConsulAuditoria() {
         initComponents();
         jCClasse.removeAllItems();
-        DaoGenerico.popularCombo(jCClasse);
+        popularCombo(jCClasse);
         DaoGenerico.listarAuditoria(jTableAuditoria);
         String status = DaoGenerico.statusAuditoria();
         if (status.equals("A")) {
@@ -317,6 +315,12 @@ public class IfrConsul_Auditoria extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBFiltrarActionPerformed
 
+    private static void popularCombo(JComboBox combo) {
+
+        combo.removeAllItems();
+        combo.addItem("Usuario");
+        combo.addItem("Material");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntSair;

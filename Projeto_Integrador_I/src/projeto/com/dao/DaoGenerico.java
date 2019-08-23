@@ -2,7 +2,6 @@ package projeto.com.dao;
 
 import java.util.Date;
 import java.util.List;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
@@ -19,7 +18,7 @@ import projeto.com.negocio.Material;
  *
  * @author Douglas
  */
-public class DaoGenerico {
+public class DaoGenerico{
 
     //metodo salvar ou editar generico para tds as classe
     //Em toda chamada do metodo o log e gravado automaticamente no banco de dados
@@ -42,7 +41,6 @@ public class DaoGenerico {
 
         } catch (Exception ex) {
             sessao.getTransaction().rollback();
-            System.out.println("erro" + ex);
             saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro " + ex + " no objeto " + obj.getClass() + "!"), 0);
             retorno = false;
         } finally {
@@ -57,18 +55,13 @@ public class DaoGenerico {
         try {
             ses = HibernateUtil.getSessionFactory().openSession();
             Transaction t = ses.beginTransaction();
-
-            deleteLog(new Log(NewLogin.usuarioLogado.getNome(), "Registro " + obj.getClass() + " excluído com sucesso!"));
-
-            System.out.println(obj.getClass());
             ses.delete(obj);
 
             t.commit();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
             ses.getTransaction().rollback();
-            System.out.println("Erro " + e);
-            deleteLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro " + e + " no objeto " + obj.getClass() + "!"));
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
             retorno = false;
         } finally {
             ses.close();
@@ -112,7 +105,7 @@ public class DaoGenerico {
                 t.commit();
             }
         } catch (Exception ex) {
-            System.out.println("Erro " + ex);
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
             retorno = false;
         } finally {
             sessao.close();
@@ -176,24 +169,6 @@ public class DaoGenerico {
             } else {
                 sessao.update(obj);
             }
-            t.commit();
-
-        } catch (Exception ex) {
-            sessao.getTransaction().rollback();
-            System.out.println("erro" + ex);
-        } finally {
-            sessao.close();
-        }
-    }
-
-    private static void deleteLog(Object obj) {
-        Session sessao = null;
-
-        try {
-            sessao = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = sessao.beginTransaction();
-
-            sessao.save(obj);
             t.commit();
 
         } catch (Exception ex) {
@@ -375,11 +350,5 @@ public class DaoGenerico {
         }
         return rest;
     }
-
-    public static void popularCombo(JComboBox combo) {
-
-        combo.removeAllItems();
-        combo.addItem("Usuario");
-        combo.addItem("Material");
-    }
+    
 }

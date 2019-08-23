@@ -1,11 +1,9 @@
-
 package projeto.com.apresentacao;
+
 import java.awt.Color;
 import java.awt.Event;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -25,7 +23,7 @@ public class NewLogin extends javax.swing.JFrame {
      * Creates new form Login
      */
     public static Login usuarioLogado = null;
-    
+
     public NewLogin() {
         initComponents();
         usuarioLogado = new Login();
@@ -122,8 +120,8 @@ public class NewLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-           autenticar();
-           DaoGenerico.saveOrUpdate(new Log(usuarioLogado.getNome(),"Usuario logou no Sistema!"),0);
+        autenticar();
+        DaoGenerico.saveOrUpdate(new Log(usuarioLogado.getNome(), "Usuario logou no Sistema!"), 0);
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void tfdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyPressed
@@ -133,11 +131,11 @@ public class NewLogin extends javax.swing.JFrame {
     private void tfdSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyReleased
         if (evt.getKeyCode() == Event.ENTER) {
             autenticar();
-            DaoGenerico.saveOrUpdate(new Log(usuarioLogado.getNome(),"Usuario logou no Sistema!"),0);
+            DaoGenerico.saveOrUpdate(new Log(usuarioLogado.getNome(), "Usuario logou no Sistema!"), 0);
         }
     }//GEN-LAST:event_tfdSenhaKeyReleased
 
-    public void autenticar(){
+    public void autenticar() {
         List resultado = null;
         String senha = "";
         String rn = "";
@@ -146,10 +144,10 @@ public class NewLogin extends javax.swing.JFrame {
             senha = DaoEncryption.encryptionString(tfdSenha.getText());
         } catch (NoSuchAlgorithmException ex) {
         }
-        try{
-        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-            org.hibernate.Query q = sessao.createQuery("from Login where nome = '" + tfdUsuario.getText() + "' AND senha = '"+ senha +"'");
+            org.hibernate.Query q = sessao.createQuery("from Login where nome = '" + tfdUsuario.getText() + "' AND senha = '" + senha + "'");
             resultado = q.list();
 
             for (Object o : resultado) {

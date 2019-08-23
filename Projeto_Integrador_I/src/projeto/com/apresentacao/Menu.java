@@ -155,25 +155,25 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiSairActionPerformed
 
     private void jCad_MaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCad_MaterialActionPerformed
-        IfrCad_Materiais cadMateriais = new IfrCad_Materiais();
+        IfrCadMateriais cadMateriais = new IfrCadMateriais();
         jDesk.add(cadMateriais);
         cadMateriais.setVisible(true);
     }//GEN-LAST:event_jCad_MaterialActionPerformed
 
     private void jCad_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCad_UsuarioActionPerformed
-        IfrCad_Usuarios cadUsuarios = new IfrCad_Usuarios();
+        IfrCadUsuarios cadUsuarios = new IfrCadUsuarios();
         jDesk.add(cadUsuarios);
         cadUsuarios.setVisible(true);
     }//GEN-LAST:event_jCad_UsuarioActionPerformed
 
     private void jmiAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAuditoriaActionPerformed
-        IfrConsul_Auditoria audit = new IfrConsul_Auditoria();
+        IfrConsulAuditoria audit = new IfrConsulAuditoria();
         jDesk.add(audit);
         audit.setVisible(true);
     }//GEN-LAST:event_jmiAuditoriaActionPerformed
 
     private void jmiLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiLogsActionPerformed
-        IfrConsul_Logs logs = new IfrConsul_Logs();
+        IfrConsulLogs logs = new IfrConsulLogs();
         jDesk.add(logs);
         logs.setVisible(true);
     }//GEN-LAST:event_jmiLogsActionPerformed

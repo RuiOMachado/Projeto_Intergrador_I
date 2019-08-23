@@ -6,12 +6,12 @@ import projeto.com.dao.DaoGenerico;
  *
  * @author Douglas
  */
-public class IfrConsul_Logs extends javax.swing.JInternalFrame {
+public class IfrConsulLogs extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form IfrConsul
      */
-    public IfrConsul_Logs() {
+    public IfrConsulLogs() {
         initComponents();
         DaoGenerico.listarLogs(jTableLogs);
     }

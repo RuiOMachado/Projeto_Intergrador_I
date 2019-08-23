@@ -1,7 +1,5 @@
 package projeto.com.apresentacao;
 
-
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import projeto.com.config.HibernateUtil;
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,16 +7,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import projeto.com.dao.DaoGenerico;
-import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
 
 /**
  *
  * @author ruiwa
  */
-public class IfrCad_Materiais extends javax.swing.JInternalFrame {
+public class IfrCadMateriais extends javax.swing.JInternalFrame {
     
     int codigoTabela = 0;
     int idUpdate = 0;
@@ -27,7 +23,7 @@ public class IfrCad_Materiais extends javax.swing.JInternalFrame {
     /**
      * Creates new form IfrCad_Materiais
      */
-    public IfrCad_Materiais() {
+    public IfrCadMateriais() {
         initComponents();
     }
 

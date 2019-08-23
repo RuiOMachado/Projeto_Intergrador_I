@@ -1,32 +1,27 @@
 package projeto.com.apresentacao;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import projeto.com.config.HibernateUtil;
 import projeto.com.dao.DaoEncryption;
 import projeto.com.dao.DaoGenerico;
-import projeto.com.negocio.Log;
 import projeto.com.negocio.Login;
 
 /**
  *
  * @author Douglas
  */
-public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
+public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
     int codigoTabela = 0;
     int idUpdate = 0;
     int buscas = 0;
     String Dados_OLD = "";
 
-    public IfrCad_Usuarios() {
+    public IfrCadUsuarios() {
         initComponents();
     }
 
@@ -95,7 +90,7 @@ public class IfrCad_Usuarios extends javax.swing.JInternalFrame {
                 .addComponent(cSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
                 .addComponent(jLabel8)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Cadastro", jPanel1);
