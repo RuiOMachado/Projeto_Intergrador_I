@@ -26,6 +26,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPane2" min="-2" pref="564" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jBExcluir" min="-2" pref="75" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -34,19 +39,14 @@
               <Component id="jBSalvar" min="-2" pref="75" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jBSair" min="-2" pref="75" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane2" min="-2" pref="564" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPane2" min="-2" pref="354" max="-2" attributes="0"/>
+              <Component id="jTabbedPane2" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBEditar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -54,7 +54,7 @@
                   <Component id="jBSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,26 +79,32 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="cAltura" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="cComprimento" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="cLargura" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="cQuantidade" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="cDescricao" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="218" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="cDescricao" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jCCor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cResistencia" alignment="0" pref="210" max="32767" attributes="0"/>
+                              <Component id="cCalor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cDensidade" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cEspessura" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cCondutividade" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="215" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -109,25 +115,33 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cDescricao" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cQuantidade" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCCor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cLargura" min="-2" max="-2" attributes="0"/>
+                      <Component id="cCondutividade" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cComprimento" min="-2" max="-2" attributes="0"/>
+                      <Component id="cEspessura" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cAltura" min="-2" max="-2" attributes="0"/>
+                      <Component id="cDensidade" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cCalor" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cResistencia" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -140,32 +154,25 @@
             </Component>
             <Component class="javax.swing.JTextField" name="cDescricao">
             </Component>
-            <Component class="javax.swing.JTextField" name="cQuantidade">
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Quantidade &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="cLargura">
+            <Component class="javax.swing.JTextField" name="cCondutividade">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Largura &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Condutividade T&#xe9;rmica (W/mK )&lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cComprimento">
+            <Component class="javax.swing.JTextField" name="cEspessura">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Comprimento &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Espessura Equivalente ( cm )&lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cAltura">
+            <Component class="javax.swing.JTextField" name="cDensidade">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Altura &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Densidade Equivalente (Kg/m&#xb3;) &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
@@ -178,6 +185,40 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="*Todos os campos s&#xe3;o obrigat&#xf3;rios"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Cor &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jCCor">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Selecione"/>
+                    <StringItem index="1" value="Escura"/>
+                    <StringItem index="2" value="M&#xe9;dia"/>
+                    <StringItem index="3" value="Clara"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel7">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt; Calor Espec&#xed;fico (kJ/kg K) &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="cCalor">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel9">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt; Resist&#xea;ncia Termica (m&#xb2;  K/W) &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="cResistencia">
             </Component>
           </SubComponents>
         </Container>
@@ -217,7 +258,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="263" max="-2" attributes="0"/>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace pref="101" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -243,16 +284,28 @@
                 <Component class="javax.swing.JTable" name="jTabela">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="4">
+                      <Table columnCount="7" rowCount="4">
                         <Column editable="false" title="ID" type="java.lang.Integer"/>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
-                        <Column editable="false" title="Quantidade" type="java.lang.Integer"/>
-                        <Column editable="true" title="Comprimento" type="java.lang.Long"/>
-                        <Column editable="false" title="Altura" type="java.lang.Long"/>
+                        <Column editable="false" title="Cor" type="java.lang.String"/>
+                        <Column editable="false" title="Espessura" type="java.lang.Long"/>
+                        <Column editable="false" title="Densidade" type="java.lang.Long"/>
+                        <Column editable="false" title="Calor" type="java.lang.Long"/>
+                        <Column editable="true" title="Resist&#xea;ncia" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>

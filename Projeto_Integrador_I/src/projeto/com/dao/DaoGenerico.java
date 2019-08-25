@@ -1,6 +1,5 @@
 package projeto.com.dao;
 
-import java.util.Date;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -32,16 +31,13 @@ public class DaoGenerico{
 
             if (id == 0) {
                 sessao.save(obj);
-                saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Registro " + obj.getClass() + " salvo com sucesso!"), 0);
             } else {
                 sessao.update(obj);
-                saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Registro " + obj.getClass() + " editado com sucesso!"), 0);
             }
             t.commit();
 
         } catch (Exception ex) {
-            sessao.getTransaction().rollback();
-            saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro " + ex + " no objeto " + obj.getClass() + "!"), 0);
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro " + ex + " no objeto " + obj.getClass() + "!"), 0);
             retorno = false;
         } finally {
             sessao.close();
@@ -60,123 +56,12 @@ public class DaoGenerico{
             t.commit();
 
         } catch (Exception ex) {
-            ses.getTransaction().rollback();
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
             retorno = false;
         } finally {
             ses.close();
         }
         return retorno;
-    }
-
-//    public static boolean saveAuditoria(String classe, String dadoNovo, String dadoOld, int id) {
-//        boolean retorno = true;
-//        Session sessao = null;
-//        List resultado = null;
-//        String rest = "";
-//        String idDado = idDados(classe);
-//
-//        Auditoria aud = new Auditoria(classe, String.valueOf(idDado), NewLogin.usuarioLogado.getNome(), "INCLUIR", dadoNovo);
-//        try {
-//
-//            sessao = HibernateUtil.getSessionFactory().openSession();
-//            Transaction t = sessao.beginTransaction();
-//
-//            org.hibernate.Query q = sessao.createQuery("from Auditoria");
-//            resultado = q.list();
-//
-//            for (Object o : resultado) {
-//                Auditoria aud2 = (Auditoria) o;
-//                rest = aud2.getEstado();
-//                idDado = String.valueOf(aud2.getId());
-//            }
-//            if (rest.equals("A")) {
-//                if (id == 0) {
-//                    sessao.save(aud); //ok
-//                } else {
-//                    aud.setClasse(classe);
-//                    aud.setidDado(String.valueOf(id));
-//                    aud.setTipo("EDITAR");
-//                    aud.setContent(dadoOld);
-//                    aud.setContentOld(dadoNovo);
-//
-//                    sessao.merge(aud);
-//                }
-//                t.commit();
-//            }
-//        } catch (Exception ex) {
-//            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
-//            retorno = false;
-//        } finally {
-//            sessao.close();
-//        }
-//        return retorno;
-//    }
-//
-//    public static boolean deleteAuditoria(String classe, String dadoNovo, String dadoOld, int id) {
-//        boolean retorno = true;
-//        Session sessao = null;
-//        List resultado = null;
-//        String rest = "";
-//        String idDado = "";
-//
-//        try {
-//
-//            sessao = HibernateUtil.getSessionFactory().openSession();
-//            Transaction t = sessao.beginTransaction();
-//
-//            org.hibernate.Query q = sessao.createQuery("from Auditoria");
-//            resultado = q.list();
-//
-//            for (Object o : resultado) {
-//                Auditoria aud = (Auditoria) o;
-//                rest = aud.getEstado();
-//                idDado = String.valueOf(aud.getId());
-//            }
-//
-//            Auditoria aud = new Auditoria();
-//            if (rest.equals("A")) {
-//                aud.setUsuario(NewLogin.usuarioLogado.getNome());
-//                aud.setClasse(classe);
-//                aud.setidDado(String.valueOf(id));
-//                aud.setDataEntrada(new Date());
-//                aud.setTipo("DELETAR");
-//                aud.setContent(dadoNovo);
-//                aud.setContentOld(dadoOld);
-//                aud.setEstado("A");
-//
-//                sessao.merge(aud);
-//                t.commit();
-//            }
-//        } catch (Exception ex) {
-//            System.out.println("Erro " + ex);
-//            retorno = false;
-//        } finally {
-//            sessao.close();
-//        }
-//        return retorno;
-//    }
-
-    private static void saveLog(Object obj, int id) {
-        Session sessao = null;
-
-        try {
-            sessao = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = sessao.beginTransaction();
-
-            if (id == 0) {
-                sessao.save(obj);
-            } else {
-                sessao.update(obj);
-            }
-            t.commit();
-
-        } catch (Exception ex) {
-            sessao.getTransaction().rollback();
-            System.out.println("erro" + ex);
-        } finally {
-            sessao.close();
-        }
     }
 
     public static void listarLogin(JTable jTabela) {
@@ -200,32 +85,7 @@ public class DaoGenerico{
             }
 
         } catch (HibernateException he) {
-            he.printStackTrace();
-        }
-    }
-
-    public static void listarMaterial(JTable jTabela) {
-        List resultado = null;
-
-        DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
-        modelo.setNumRows(0);
-
-        try {
-            Session sessao = HibernateUtil.getSessionFactory().openSession();
-            sessao.beginTransaction();
-
-            org.hibernate.Query q = sessao.createQuery("from Material order by id");
-            resultado = q.list();
-
-            for (Object o : resultado) {
-                Material mat1 = (Material) o;
-                modelo.addRow(new Object[]{
-                    mat1.getId(), mat1.getDescricao(), mat1.getQuantidade(), mat1.getLargura(), mat1.getComprimento(), mat1.getAltura()
-                });
-            }
-
-        } catch (HibernateException he) {
-            he.printStackTrace();
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
     }
 
@@ -333,22 +193,4 @@ public class DaoGenerico{
         return retorno;
     }
 
-//    public static String statusAuditoria() {
-//        Session sessao = null;
-//        List resultado = null;
-//        String rest = "";
-//
-//        sessao = HibernateUtil.getSessionFactory().openSession();
-//        Transaction t = sessao.beginTransaction();
-//
-//        org.hibernate.Query q = sessao.createQuery("from Auditoria");
-//        resultado = q.list();
-//
-//        for (Object o : resultado) {
-//            Auditoria aud2 = (Auditoria) o;
-//            rest = aud2.getEstado();
-//        }
-//        return rest;
-//    }
-    
 }

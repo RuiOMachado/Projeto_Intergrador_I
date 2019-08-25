@@ -32,7 +32,7 @@ public class DaoMaterial {
             for (Object o : resultado) {
                 Material mat1 = (Material) o;
                 modelo.addRow(new Object[]{
-                    mat1.getId(), mat1.getDescricao(), mat1.getQuantidade(), mat1.getLargura(), mat1.getComprimento(), mat1.getAltura()
+                    mat1.getId(), mat1.getDescricao(), mat1.getCor(), mat1.getCondutividade(), mat1.getEspessura(), mat1.getDencidade(), mat1.getCalor(), mat1.getResistencia()
                 });
             }
 
@@ -50,7 +50,8 @@ public class DaoMaterial {
             org.hibernate.Query q = sessao.createQuery("from Material where id = " + id);
             resultado = q.list();
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
         return resultado;
     }
@@ -65,7 +66,7 @@ public class DaoMaterial {
             resultado = q.list();
             
         } catch (HibernateException he) {
-            he.printStackTrace();
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
         return resultado;
     }

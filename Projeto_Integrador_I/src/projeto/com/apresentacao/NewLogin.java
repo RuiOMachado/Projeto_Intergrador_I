@@ -9,7 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import projeto.com.config.HibernateUtil;
 import projeto.com.dao.DaoEncryption;
-import projeto.com.dao.DaoGenerico;
+import projeto.com.dao.DaoLog;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Login;
 
@@ -121,7 +121,6 @@ public class NewLogin extends javax.swing.JFrame {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         autenticar();
-        DaoGenerico.saveOrUpdate(new Log(usuarioLogado.getNome(), "Usuario logou no Sistema!"), 0);
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void tfdSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyPressed
@@ -131,7 +130,6 @@ public class NewLogin extends javax.swing.JFrame {
     private void tfdSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdSenhaKeyReleased
         if (evt.getKeyCode() == Event.ENTER) {
             autenticar();
-            DaoGenerico.saveOrUpdate(new Log(usuarioLogado.getNome(), "Usuario logou no Sistema!"), 0);
         }
     }//GEN-LAST:event_tfdSenhaKeyReleased
 
@@ -158,7 +156,7 @@ public class NewLogin extends javax.swing.JFrame {
             }
 
         } catch (HibernateException he) {
-            he.printStackTrace();
+             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
         if (rn.equals(tfdUsuario.getText()) && rs.equals(senha)) {
             usuarioLogado.setNome(tfdUsuario.getText());

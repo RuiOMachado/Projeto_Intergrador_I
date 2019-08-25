@@ -5,6 +5,7 @@
     <class>projeto.com.negocio.Auditoria</class>
     <class>projeto.com.negocio.Log</class>
     <class>projeto.com.negocio.Parametro</class>
+    <class>projeto.com.negocio.Material</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Projeto_Integrador_1"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

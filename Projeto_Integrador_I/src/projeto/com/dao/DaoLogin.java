@@ -5,7 +5,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
 import projeto.com.negocio.Log;
@@ -53,7 +52,7 @@ public class DaoLogin {
             org.hibernate.Query q = sessao.createQuery("from Login where id = " + id);
             resultado = q.list();
         } catch (HibernateException he) {
-            he.printStackTrace();
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
         return resultado;
     }
@@ -69,7 +68,7 @@ public class DaoLogin {
             
             
         } catch (HibernateException he) {
-            he.printStackTrace();
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
          return resultado;
     }

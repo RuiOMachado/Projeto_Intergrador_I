@@ -1,15 +1,14 @@
 package projeto.com.apresentacao;
 
-import projeto.com.config.HibernateUtil;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoGenerico;
+import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
+import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
 
 /**
@@ -42,15 +41,19 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cDescricao = new javax.swing.JTextField();
-        cQuantidade = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        cLargura = new javax.swing.JTextField();
+        cCondutividade = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cComprimento = new javax.swing.JTextField();
+        cEspessura = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cAltura = new javax.swing.JTextField();
+        cDensidade = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jCCor = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        cCalor = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        cResistencia = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jBPesquisa = new javax.swing.JButton();
         cPesquisa = new javax.swing.JTextField();
@@ -71,40 +74,51 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
         jLabel1.setText("<html> <font>Descrição </font> <font color=RED>*</font> <font>:</font> </html>");
 
-        jLabel2.setText("<html> <font>Quantidade </font> <font color=RED>*</font> <font>:</font> </html>");
+        jLabel3.setText("<html> <font>Condutividade Térmica (W/mK )</font> <font color=RED>*</font> <font>:</font> </html>");
 
-        jLabel3.setText("<html> <font>Largura </font> <font color=RED>*</font> <font>:</font> </html>");
+        jLabel4.setText("<html> <font>Espessura Equivalente ( cm )</font> <font color=RED>*</font> <font>:</font> </html>");
 
-        jLabel4.setText("<html> <font>Comprimento </font> <font color=RED>*</font> <font>:</font> </html>");
-
-        jLabel5.setText("<html> <font>Altura </font> <font color=RED>*</font> <font>:</font> </html>");
+        jLabel5.setText("<html> <font>Densidade Equivalente (Kg/m³) </font> <font color=RED>*</font> <font>:</font> </html>");
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("*Todos os campos são obrigatórios");
 
+        jLabel6.setText("<html> <font>Cor </font> <font color=RED>*</font> <font>:</font> </html>");
+
+        jCCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Escura", "Média", "Clara" }));
+
+        jLabel7.setText("<html> <font> Calor Específico (kJ/kg K) </font> <font color=RED>*</font> <font>:</font> </html>");
+
+        jLabel9.setText("<html> <font> Resistência Termica (m²  K/W) </font> <font color=RED>*</font> <font>:</font> </html>");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cComprimento, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cLargura, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(218, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jCCor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cResistencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                        .addComponent(cCalor, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cDensidade, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cEspessura, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(cCondutividade, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,25 +127,33 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cLargura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cCondutividade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cComprimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cEspessura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cDensidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cCalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cResistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jLabel8)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Cadastro", jPanel1);
@@ -145,20 +167,20 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
         jTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Descrição", "Quantidade", "Comprimento", "Altura"
+                "ID", "Descrição", "Cor", "Espessura", "Densidade", "Calor", "Resistência"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Long.class, java.lang.Long.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Long.class, java.lang.Long.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -194,7 +216,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                     .addComponent(cPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Consulta", jPanel2);
@@ -234,6 +256,10 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -242,23 +268,19 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                 .addComponent(jBSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBEditar)
                     .addComponent(jBSair)
                     .addComponent(jBSalvar)
                     .addComponent(jBExcluir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -269,13 +291,15 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         try {
             Material mat = new Material();
-            if (cDescricao.getText().length() > 0 && cQuantidade.getText().length() > 0 && cLargura.getText().length() > 0 && cComprimento.getText().length() > 0 && cAltura.getText().length() > 0) {
+            if (cDescricao.getText().length() > 0 && (!jCCor.getSelectedItem().toString().equals("Selecione")) && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0 && cDensidade.getText().length() > 0 && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0 && cResistencia.getText().length() > 0) {
 
                 mat.setDescricao(cDescricao.getText());
-                mat.setQuantidade(Integer.valueOf(cQuantidade.getText()));
-                mat.setLargura(BigDecimal.valueOf(Double.valueOf(cLargura.getText())));
-                mat.setComprimento(BigDecimal.valueOf(Double.valueOf(cComprimento.getText())));
-                mat.setAltura(BigDecimal.valueOf(Double.valueOf(cAltura.getText())));
+                mat.setCor(jCCor.getSelectedItem().toString());
+                mat.setCondutividade(BigDecimal.valueOf(Double.valueOf(cCondutividade.getText())));
+                mat.setEspessura(BigDecimal.valueOf(Double.valueOf(cEspessura.getText())));
+                mat.setDencidade(BigDecimal.valueOf(Double.valueOf(cDensidade.getText())));
+                mat.setCalor(BigDecimal.valueOf(Double.valueOf(cCalor.getText())));
+                mat.setResistencia(BigDecimal.valueOf(Double.valueOf(cResistencia.getText())));
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(mat, codigoTabela);
@@ -285,22 +309,23 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                     DaoGenerico.saveOrUpdate(mat, idUpdate);
                     DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
                 }
-
+                JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao inserir Registro!");
             }
-            JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
             cDescricao.setText("");
-            cQuantidade.setText("");
-            cLargura.setText("");
-            cComprimento.setText("");
-            cAltura.setText("");
+            jCCor.setSelectedIndex(0);
+            cCondutividade.setText("");
+            cEspessura.setText("");
+            cDensidade.setText("");
             jTabbedPane2.setSelectedIndex(1);
-            DaoGenerico.listarMaterial(jTabela);  //metodo atualiza tabela
+            DaoMaterial.listarMaterial(jTabela);  //metodo atualiza tabela
             jBEditar.setEnabled(true);
             jBExcluir.setEnabled(true);
             jBSalvar.setEnabled(false);
 
         } catch (Exception ex) {
-            System.out.println("" + ex);
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
@@ -315,7 +340,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         for (Object o : resultado) {
             Material mat = (Material) o;
             modelo.addRow(new Object[]{
-                mat.getId(), mat.getDescricao(), mat.getQuantidade(), mat.getLargura(), mat.getComprimento(), mat.getAltura()
+                mat.getId(), mat.getDescricao(), mat.getCor(), mat.getCondutividade(), mat.getEspessura(), mat.getDencidade(), mat.getCalor(), mat.getResistencia()
             });
         }
     }//GEN-LAST:event_jBPesquisaActionPerformed
@@ -332,11 +357,12 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
             idUpdate = mat.getId();
             cDescricao.setText(mat.getDescricao());
-            cQuantidade.setText(String.valueOf(mat.getQuantidade()));
-            cLargura.setText(String.valueOf(mat.getLargura()));
-            cComprimento.setText(String.valueOf(mat.getComprimento()));
-            cAltura.setText(String.valueOf(mat.getAltura()));
-            Dados_OLD = "%" + mat.getDescricao() + "%" + mat.getQuantidade() + "%" + mat.getLargura() + "%" + mat.getLargura() + "%" + mat.getAltura() + "%";
+            cCondutividade.setText(String.valueOf(mat.getCondutividade()));
+            cEspessura.setText(String.valueOf(mat.getEspessura()));
+            cDensidade.setText(String.valueOf(mat.getDencidade()));
+            cCalor.setText(String.valueOf(mat.getCalor()));
+            cResistencia.setText(String.valueOf(mat.getCalor()));
+            Dados_OLD = "%"+mat.getDescricao()+"%"+mat.getCor()+"%"+mat.getCondutividade()+"%"+mat.getEspessura()+"%"+mat.getDencidade()+"%"+mat.getCalor()+"%"+mat.getResistencia()+"%";
         }
 
         jTabbedPane2.setSelectedIndex(0);
@@ -387,23 +413,27 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cAltura;
-    private javax.swing.JTextField cComprimento;
+    private javax.swing.JTextField cCalor;
+    private javax.swing.JTextField cCondutividade;
+    private javax.swing.JTextField cDensidade;
     private javax.swing.JTextField cDescricao;
-    private javax.swing.JTextField cLargura;
+    private javax.swing.JTextField cEspessura;
     private javax.swing.JTextField cPesquisa;
-    private javax.swing.JTextField cQuantidade;
+    private javax.swing.JTextField cResistencia;
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBPesquisa;
     private javax.swing.JButton jBSair;
     private javax.swing.JButton jBSalvar;
+    private javax.swing.JComboBox<String> jCCor;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
