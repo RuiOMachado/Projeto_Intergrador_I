@@ -456,9 +456,18 @@ public class Data {
     public static String formatarData (Date dt) throws Exception{
        
        java.util.Date pega = dt;
-       SimpleDateFormat formato = new SimpleDateFormat("d/M/y");
+       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
        String data = formato.format(pega);
-      // java.sql.Date dataFormatada = new java.sql.Date(formato.parse(data).getTime());
+       
+       return data;
+       
+    }
+    
+    public static String formatarData2 (Date dt) throws Exception{
+       
+       java.util.Date pega = dt;
+       SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+       String data = formato.format(pega);
        
        return data;
        

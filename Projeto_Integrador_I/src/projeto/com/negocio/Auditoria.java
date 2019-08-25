@@ -55,7 +55,7 @@ public class Auditoria implements java.io.Serializable {
         this.idDado      = idDado;
         this.dataEntrada = new Date();
         this.tipo        = tipo;
-        this.content     = content;
+        this.content     = "";
         this.contentOld  = content;
     }
     

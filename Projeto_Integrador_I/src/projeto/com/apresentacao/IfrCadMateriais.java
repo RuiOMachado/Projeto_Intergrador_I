@@ -395,7 +395,6 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
 
             String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
-
             resultado = DaoMaterial.buscaIdMaterial(Integer.parseInt(idString));
 
             for (Object o : resultado) {

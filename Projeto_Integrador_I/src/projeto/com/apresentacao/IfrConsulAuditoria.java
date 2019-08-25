@@ -1,7 +1,12 @@
 package projeto.com.apresentacao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import projeto.com.apoio.Data;
 import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.negocio.Auditoria;
@@ -282,7 +287,7 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bntSairActionPerformed
 
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActionPerformed
-        Auditoria aud ;
+        Auditoria aud;
         if (rda.isSelected()) {
             //aud.setEstado("A");
             System.out.println("ENTROU NO ATIVO");
@@ -305,26 +310,34 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnActionPerformed
 
     private void jBFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFiltrarActionPerformed
+        String DInicial = null;
+        String DFinal = null;
+        try {
+            DInicial = Data.formatarData2(jDInicial.getDate());
+            DFinal = Data.formatarData2(jDFinal.getDate());
 
-        /*DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-
-        String DInicial = dateFormat.format(jDInicial.getDate());
-        String DFinal = dateFormat.format(jDFinal.getDate());
-        System.out.println("INICIAL : " + DInicial);
-        System.out.println("FINAL : " + DFinal);*/
-        System.out.println(jTUsuario.getText());
-        System.out.println(jCClasse.getSelectedItem().toString());
-        System.out.println(jTIdDado.getText());
-        if (jTUsuario.getText().equals("") && jTIdDado.getText().equals("x'")) {
-            DaoGenerico.listarAuditoria(jTableAuditoria);
+        } catch (Exception ex) {
+            Logger.getLogger(IfrConsulAuditoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        if (jTUsuario.getText().equals("") && jCClasse.getSelectedItem().toString().equals("Selecione..") && jTIdDado.getText().equals("")) {
+            System.out.println(jDInicial.getDate());
+            System.out.println(jDFinal.getDate());
+            if(jDInicial.getDate() == null && jDFinal.getDate() == null){
+                DaoAuditoria.listarAuditoria(jTableAuditoria);
+            }else{
+                DaoAuditoria.buscarAuditoriaData(jTableAuditoria, DInicial, DFinal);
+            }
         } else {
-            DaoGenerico.listarAuditoria(jTableAuditoria, jTUsuario.getText(), jCClasse.getSelectedItem().toString(), jTIdDado.getText());//, DInicial, DFinal);
+            DaoAuditoria.buscarAuditoria(jTableAuditoria, jTUsuario.getText(), jCClasse.getSelectedItem().toString(), jTIdDado.getText(), DInicial, DFinal);
         }
     }//GEN-LAST:event_jBFiltrarActionPerformed
 
     private static void popularCombo(JComboBox combo) {
 
         combo.removeAllItems();
+        combo.addItem("Selecione..");
         combo.addItem("Usuario");
         combo.addItem("Material");
     }
