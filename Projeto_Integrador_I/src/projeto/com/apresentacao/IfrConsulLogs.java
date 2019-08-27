@@ -141,10 +141,11 @@ public class IfrConsulLogs extends javax.swing.JInternalFrame {
 
         for (Object o : resultado) {
             Log log = (Log) o;
-
+          
             jTextArea.setText("Informações Sobre o Erro ! "+
                               "Código : "+log.getId()+"|"+
                               "Descrição : "+log.getDescricao());
+            jTextArea.setLineWrap(true);
         }
     }//GEN-LAST:event_tblLogsMouseClicked
 

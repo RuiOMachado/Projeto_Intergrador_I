@@ -134,7 +134,7 @@ public class Formatacao {
             System.err.println(e);
         }
         return (dataFormatada);
-        
+
     }
 
     public static String removerFormatacao(String dado) {
@@ -154,16 +154,18 @@ public class Formatacao {
 
         return dataHoje;
     }
-    
 
-    public static String getDataHoraAtual() {
+    private static String getDataHoraAtual() {
         Date now = new Date();
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String dataHoje = df.format(now);
-
         return dataHoje;
     }
     
-    
-
+    public static Date getDateHoraAtual() throws ParseException {
+        Date now = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date dataHoje = df.parse(getDataHoraAtual());
+        return dataHoje;
+    }
 }

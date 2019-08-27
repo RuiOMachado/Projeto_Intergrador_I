@@ -8,10 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
-import projeto.com.negocio.Auditoria;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Login;
-import projeto.com.negocio.Material;
 
 /**
  *

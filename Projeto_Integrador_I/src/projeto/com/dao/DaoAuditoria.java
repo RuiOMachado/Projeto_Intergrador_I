@@ -7,7 +7,6 @@ import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import projeto.com.apoio.Data;
-import projeto.com.apoio.Formatacao;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
 import projeto.com.negocio.Auditoria;

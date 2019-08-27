@@ -70,4 +70,21 @@ public class DaoMaterial {
         }
         return resultado;
     }
+    
+     public static Material buscarIdMaterial(int id) {
+        Material material = null;
+        List resultado = null;
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Material where id = " + id);
+            resultado = q.list();
+
+        } catch (Exception ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        }
+        return material;
+    }
+   
 }

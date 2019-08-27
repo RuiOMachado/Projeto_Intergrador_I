@@ -74,9 +74,17 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
         jLabel1.setText("<html> <font>Descrição </font> <font color=RED>*</font> <font>:</font> </html>");
 
+        cDescricao.setToolTipText("Descrição do material");
+
+        cCondutividade.setToolTipText("Condutividade térmica do material");
+
         jLabel3.setText("<html> <font>Condutividade Térmica (W/mK )</font> <font color=RED>*</font> <font>:</font> </html>");
 
+        cEspessura.setToolTipText("Espessura do Material");
+
         jLabel4.setText("<html> <font>Espessura Equivalente ( cm )</font> <font color=RED>*</font> <font>:</font> </html>");
+
+        cDensidade.setToolTipText("Densidade do material");
 
         jLabel5.setText("<html> <font>Densidade Equivalente (Kg/m³) </font> <font color=RED>*</font> <font>:</font> </html>");
 
@@ -90,7 +98,11 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
         jLabel7.setText("<html> <font> Calor Específico (kJ/kg K) </font> <font color=RED>*</font> <font>:</font> </html>");
 
-        jLabel9.setText("<html> <font> Resistência Termica (m²  K/W) </font> <font color=RED>*</font> <font>:</font> </html>");
+        cCalor.setToolTipText("Calor específico do Material");
+
+        jLabel9.setText("<html> <font> Resistência Térmica (m²  K/W) </font> <font color=RED>*</font> <font>:</font> </html>");
+
+        cResistencia.setToolTipText("Resistência Térmica do Material");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

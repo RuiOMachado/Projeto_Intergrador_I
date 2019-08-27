@@ -44,6 +44,8 @@ public class Menu extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jCad_Usuario = new javax.swing.JMenuItem();
         jCad_Material = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
@@ -123,6 +125,18 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
+        jMenu8.setText("Cálculos");
+
+        jMenuItem2.setText("Calcular Resistência Térmica");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu8);
+
         jMenu7.setText("Relatórios");
         jMenuBar1.add(jMenu7);
 
@@ -178,6 +192,12 @@ public class Menu extends javax.swing.JFrame {
         logs.setVisible(true);
     }//GEN-LAST:event_jmiLogsActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        IfrCalculo cal = new IfrCalculo();
+        jDesk.add(cal);
+        cal.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jCad_Material;
@@ -190,9 +210,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jmiAuditoria;
     private javax.swing.JMenuItem jmiLogs;
     private javax.swing.JMenuItem jmiSair;

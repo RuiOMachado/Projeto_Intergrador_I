@@ -49,7 +49,7 @@ public class Auditoria implements java.io.Serializable {
     @Column(name = "content")
     private String content;
 
-    public Auditoria(String classe, String idDado, String usuario, String tipo, String content) {
+    public Auditoria(String classe, String idDado, String usuario, String tipo, String content){
         this.usuario     = usuario;
         this.classe      = classe;
         this.idDado      = idDado;

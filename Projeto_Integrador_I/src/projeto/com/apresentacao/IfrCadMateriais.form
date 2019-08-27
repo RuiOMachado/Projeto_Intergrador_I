@@ -153,8 +153,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cDescricao">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Descri&#xe7;&#xe3;o do material"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cCondutividade">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Condutividade t&#xe9;rmica do material"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -162,6 +168,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cEspessura">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Espessura do Material"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -169,6 +178,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cDensidade">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Densidade do material"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -212,13 +224,19 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cCalor">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Calor espec&#xed;fico do Material"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt; Resist&#xea;ncia Termica (m&#xb2;  K/W) &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt; Resist&#xea;ncia T&#xe9;rmica (m&#xb2;  K/W) &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cResistencia">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Resist&#xea;ncia T&#xe9;rmica do Material"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

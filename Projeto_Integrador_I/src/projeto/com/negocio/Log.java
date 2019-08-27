@@ -40,7 +40,7 @@ public class Log implements java.io.Serializable {
     public Log() {
     }
     
-    public Log(String usuario, String descricao) {
+    public Log(String usuario, String descricao){
         this.dataEntrada = new Date();
         this.usuario     = usuario;
         this.descricao   = descricao;
