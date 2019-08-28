@@ -46,7 +46,8 @@ public class Menu extends javax.swing.JFrame {
         jCad_Material = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        jMRMaterial = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -61,7 +62,6 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar2.add(jMenu5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         jDesk.setPreferredSize(new java.awt.Dimension(1280, 720));
 
@@ -137,8 +137,17 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu8);
 
-        jMenu7.setText("Relatórios");
-        jMenuBar1.add(jMenu7);
+        jMRMaterial.setText("Relatórios");
+
+        jMenuItem3.setText("Material");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMRMaterial.add(jMenuItem3);
+
+        jMenuBar1.add(jMRMaterial);
 
         setJMenuBar(jMenuBar1);
 
@@ -198,23 +207,30 @@ public class Menu extends javax.swing.JFrame {
         cal.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        IfrRelatorioMaterial remat = new IfrRelatorioMaterial();
+        jDesk.add(remat);
+        remat.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jCad_Material;
     private javax.swing.JMenuItem jCad_Usuario;
     private javax.swing.JDesktopPane jDesk;
+    private javax.swing.JMenu jMRMaterial;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jmiAuditoria;
     private javax.swing.JMenuItem jmiLogs;
     private javax.swing.JMenuItem jmiSair;
