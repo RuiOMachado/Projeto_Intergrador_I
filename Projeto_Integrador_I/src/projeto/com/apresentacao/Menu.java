@@ -208,9 +208,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        IfrRelatorioMaterial remat = new IfrRelatorioMaterial();
-        jDesk.add(remat);
-        remat.setVisible(true);
+        //IfrRelatorioMaterial remat = new IfrRelatorioMaterial();
+        //jDesk.add(remat);
+       // remat.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
 

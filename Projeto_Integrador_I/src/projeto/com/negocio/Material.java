@@ -2,13 +2,17 @@
 package projeto.com.negocio;
 
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -19,6 +23,9 @@ import javax.persistence.Table;
     ,schema="public")
 
 public class Material implements java.io.Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
+    private List<ItemCalculo> itemCalculoList;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -113,6 +120,15 @@ public class Material implements java.io.Serializable {
     
     public String subString() {
         return "%"+descricao+"%"+cor+"%"+condutividade+"%"+espessura+"%"+dencidade+"%"+calor+"%"+resistencia+"%";
+    }
+
+    @XmlTransient
+    public List<ItemCalculo> getItemCalculoList() {
+        return itemCalculoList;
+    }
+
+    public void setItemCalculoList(List<ItemCalculo> itemCalculoList) {
+        this.itemCalculoList = itemCalculoList;
     }
     
 }

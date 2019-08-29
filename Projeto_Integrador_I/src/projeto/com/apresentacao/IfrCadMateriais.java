@@ -1,5 +1,6 @@
 package projeto.com.apresentacao;
 
+import java.awt.Event;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -72,6 +73,8 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setEnabled(false);
+
         jLabel1.setText("<html> <font>Descrição </font> <font color=RED>*</font> <font>:</font> </html>");
 
         cDescricao.setToolTipText("Descrição do material");
@@ -99,10 +102,15 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         jLabel7.setText("<html> <font> Calor Específico (kJ/kg K) </font> <font color=RED>*</font> <font>:</font> </html>");
 
         cCalor.setToolTipText("Calor específico do Material");
+        cCalor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cCalorKeyReleased(evt);
+            }
+        });
 
         jLabel9.setText("<html> <font> Resistência Térmica (m²  K/W) </font> <font color=RED>*</font> <font>:</font> </html>");
 
-        cResistencia.setToolTipText("Resistência Térmica do Material");
+        cResistencia.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,8 +132,8 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jCCor, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cResistencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                        .addComponent(cResistencia, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jCCor, javax.swing.GroupLayout.Alignment.LEADING, 0, 210, Short.MAX_VALUE)
                         .addComponent(cCalor, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(cDensidade, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(cEspessura, javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +171,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cResistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addContainerGap())
         );
@@ -303,8 +311,9 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
         try {
             Material mat = new Material();
-            if (cDescricao.getText().length() > 0 && (!jCCor.getSelectedItem().toString().equals("Selecione")) && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0 && cDensidade.getText().length() > 0 && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0 && cResistencia.getText().length() > 0) {
-
+            
+            if (cDescricao.getText().length() > 0 && (!jCCor.getSelectedItem().toString().equals("Selecione")) && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0 && cDensidade.getText().length() > 0 && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0) {
+                calResistencia(); 
                 mat.setDescricao(cDescricao.getText());
                 mat.setCor(jCCor.getSelectedItem().toString());
                 mat.setCondutividade(BigDecimal.valueOf(Double.valueOf(cCondutividade.getText())));
@@ -322,7 +331,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                     DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
                 }
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Erro ao inserir Registro!");
             }
             cDescricao.setText("");
@@ -374,7 +383,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             cDensidade.setText(String.valueOf(mat.getDencidade()));
             cCalor.setText(String.valueOf(mat.getCalor()));
             cResistencia.setText(String.valueOf(mat.getCalor()));
-            Dados_OLD = "%"+mat.getDescricao()+"%"+mat.getCor()+"%"+mat.getCondutividade()+"%"+mat.getEspessura()+"%"+mat.getDencidade()+"%"+mat.getCalor()+"%"+mat.getResistencia()+"%";
+            Dados_OLD = "%" + mat.getDescricao() + "%" + mat.getCor() + "%" + mat.getCondutividade() + "%" + mat.getEspessura() + "%" + mat.getDencidade() + "%" + mat.getCalor() + "%" + mat.getResistencia() + "%";
         }
 
         jTabbedPane2.setSelectedIndex(0);
@@ -422,6 +431,17 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
+    private void cCalorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cCalorKeyReleased
+        if (evt.getKeyCode() == Event.ENTER) {
+            calResistencia();
+        }
+    }//GEN-LAST:event_cCalorKeyReleased
+
+    private void calResistencia() {
+        Double espessura = Double.parseDouble(cEspessura.getText());
+        Double condutividade = Double.parseDouble(cCondutividade.getText());
+        cResistencia.setText(String.valueOf(Math.ceil(espessura/condutividade)));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cCalor;

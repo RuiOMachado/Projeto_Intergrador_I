@@ -1,8 +1,6 @@
 package projeto.com.dao;
-
-import java.sql.Connection;
+import com.sun.jndi.ldap.Connection;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JTable;
@@ -14,16 +12,13 @@ import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JRViewer;
-import org.hibernate.cfg.AnnotationConfiguration;
+
 
 /**
  *

@@ -1,7 +1,6 @@
 package projeto.com.apresentacao;
 
 import java.awt.Event;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import projeto.com.dao.DaoMaterial;
@@ -13,7 +12,6 @@ import projeto.com.negocio.Material;
  */
 public class DlgBuscaMaterial extends javax.swing.JDialog {
 
-    Material material;
     IfrCalculo ifrCalculo;
     
     public DlgBuscaMaterial(java.awt.Frame parent, boolean modal) {
@@ -22,11 +20,10 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
         DaoMaterial.listarMaterial(tblMaterial);
     }
     
-    public DlgBuscaMaterial(java.awt.Frame parent, boolean modal,Material material ,IfrCalculo ifrCalculo) {
+    public DlgBuscaMaterial(java.awt.Frame parent, boolean modal, IfrCalculo ifrCalculo) {
         super(parent, modal);
         initComponents();
         this.ifrCalculo = ifrCalculo;
-        this.material = material;
         DaoMaterial.listarMaterial(tblMaterial);
     }
 
@@ -161,6 +158,7 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
 
     private void tblMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMaterialMouseClicked
         List resultado = null;
+        Material material = new Material();
         String idString = String.valueOf(tblMaterial.getValueAt(tblMaterial.getSelectedRow(), 0));
         int codigoTabela = Integer.parseInt(idString);
 
@@ -176,6 +174,7 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
             material.setCondutividade(mat.getCondutividade());
             material.setEspessura(mat.getEspessura());
         }
+        ifrCalculo.definirValorMaterial(String.valueOf(codigoTabela), material.getDescricao());
         dispose();
     }//GEN-LAST:event_tblMaterialMouseClicked
 

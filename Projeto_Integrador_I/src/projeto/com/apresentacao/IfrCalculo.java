@@ -6,21 +6,33 @@
 package projeto.com.apresentacao;
 
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.util.List;
 import javax.swing.JOptionPane;
+import projeto.com.apoio.Calcular;
+import projeto.com.dao.DaoGenerico;
+import projeto.com.dao.DaoItemCalculo;
+import projeto.com.dao.DaoLog;
+import projeto.com.dao.DaoMaterial;
+import projeto.com.negocio.Calculo;
+import projeto.com.negocio.ItemCalculo;
+import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
+import projeto.com.negocio.Produto;
 
 /**
  *
  * @author Douglas
  */
 public class IfrCalculo extends javax.swing.JInternalFrame {
-    
-     Material matIn = new Material();
-     Material matNu = new Material();
-     Material matEx = new Material();
-     
+
+    int codigoTabela = 0;
+    int idUpdate = 0;
+    double rt = 0;
+
     public IfrCalculo() {
         initComponents();
+        desabilitarBotoes();
     }
 
     /**
@@ -32,101 +44,37 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        matNucleo = new javax.swing.JTextField();
-        matInterno = new javax.swing.JTextField();
-        matExterno = new javax.swing.JTextField();
-        btnCalcular = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        t2 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        t1 = new javax.swing.JTextField();
-        remMaterialNucleo = new javax.swing.JButton();
-        remMaterialInterno = new javax.swing.JButton();
-        remMaterialExterno = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        lblEx = new javax.swing.JLabel();
-        lblNu = new javax.swing.JLabel();
-        lblIn = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblItemCalculo = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        lblRt = new javax.swing.JLabel();
+        lblTransmisividade = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnPesquisar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        tfdIdCalculo = new javax.swing.JTextField();
+        btnNovoCalculo = new javax.swing.JButton();
+        tfdCalculo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tfdDescricao = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        btnAdicionar = new javax.swing.JButton();
+        tfdDescricaoMaterial = new javax.swing.JTextField();
+        tfdIdMaterial = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lblRsi = new javax.swing.JLabel();
+        lblRse = new javax.swing.JLabel();
+        btnAtualizar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        comboProduto = new javax.swing.JComboBox<>();
+        comboEstacao = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
 
         setTitle("Cálculo");
-
-        matNucleo.setEnabled(false);
-        matNucleo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                matNucleoMouseClicked(evt);
-            }
-        });
-        matNucleo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matNucleoActionPerformed(evt);
-            }
-        });
-
-        matInterno.setEnabled(false);
-        matInterno.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                matInternoMouseClicked(evt);
-            }
-        });
-
-        matExterno.setEnabled(false);
-        matExterno.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                matExternoMouseClicked(evt);
-            }
-        });
-
-        btnCalcular.setText("Calcular");
-        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalcularActionPerformed(evt);
-            }
-        });
-
-        jTextField2.setEnabled(false);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Interior");
-
-        jLabel2.setText("Exterior");
-
-        jLabel3.setText("Resistência Termica (m²  K/W) ");
-
-        jLabel7.setText("Temperatura ( º C )");
-
-        jLabel8.setText("Temperatura ( º C )");
-
-        remMaterialNucleo.setText("Remover");
-        remMaterialNucleo.setToolTipText("Remover Material");
-        remMaterialNucleo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                remMaterialNucleoActionPerformed(evt);
-            }
-        });
-
-        remMaterialInterno.setText("Rem.");
-        remMaterialInterno.setToolTipText("Remover Material");
-        remMaterialInterno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                remMaterialInternoActionPerformed(evt);
-            }
-        });
-
-        remMaterialExterno.setText("Rem.");
-        remMaterialExterno.setToolTipText("Remover Material");
-        remMaterialExterno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                remMaterialExternoActionPerformed(evt);
-            }
-        });
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -135,233 +83,456 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
             }
         });
 
-        lblEx.setText("jLabel4");
+        tblItemCalculo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "#", "Código", "Descrição", "Resistência"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        lblNu.setText("jLabel5");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        lblIn.setText("jLabel6");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblItemCalculo);
+
+        jLabel1.setText("Transmissividade Térmica ( U )");
+
+        lblRt.setText("0.0");
+
+        lblTransmisividade.setText("0.0");
+
+        jLabel4.setText("Resistência térmica Total ( RT )");
+
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Cálculo");
+
+        tfdIdCalculo.setToolTipText("ID");
+        tfdIdCalculo.setEnabled(false);
+
+        btnNovoCalculo.setText("Novo");
+        btnNovoCalculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoCalculoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Descrição");
+
+        tfdDescricao.setEnabled(false);
+
+        jLabel9.setText("Material");
+
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+
+        tfdDescricaoMaterial.setEnabled(false);
+
+        tfdIdMaterial.setEnabled(false);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel7.setText("RSi");
+
+        jLabel8.setText("RSe");
+
+        lblRsi.setText("0.0");
+
+        lblRse.setText("0.0");
+
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.setToolTipText("Atualizar resistências");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Produto");
+
+        comboProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Parede", "Cobertura" }));
+        comboProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboProdutoMouseClicked(evt);
+            }
+        });
+
+        comboEstacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Inverno", "Verão" }));
+        comboEstacao.setFocusTraversalPolicyProvider(true);
+        comboEstacao.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboEstacaoMouseClicked(evt);
+            }
+        });
+
+        jLabel5.setText("Estação");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(comboProduto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(comboEstacao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblRsi)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblRse))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel8)))
+                        .addGap(65, 65, 65))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(48, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRsi)
+                    .addComponent(lblRse))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboEstacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtualizar))
+                .addGap(0, 8, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(remMaterialExterno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(matExterno))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(tfdCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(23, 23, 23)
+                                    .addComponent(btnNovoCalculo))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(matNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(24, 24, 24)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnCalcular)
-                                            .addComponent(remMaterialNucleo))))
-                                .addGap(31, 31, 31))
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel4))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblTransmisividade)
+                                            .addComponent(lblRt)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tfdIdCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel3)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblEx)
-                                .addGap(92, 92, 92)
-                                .addComponent(lblNu)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(lblIn))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(remMaterialInterno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(matInterno)))))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1)
-                        .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(134, 134, 134))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                                .addComponent(tfdIdMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfdDescricaoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(matNucleo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(matInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(matExterno, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(remMaterialNucleo)
-                                .addComponent(remMaterialExterno))
-                            .addComponent(remMaterialInterno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(t1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(t2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(13, 13, 13)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(tfdIdCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(lblEx)
-                    .addComponent(lblNu)
-                    .addComponent(lblIn))
-                .addGap(43, 43, 43)
-                .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(btnSair)
+                    .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNovoCalculo)
+                    .addComponent(tfdCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPesquisar)
+                    .addComponent(jLabel9)
+                    .addComponent(btnAdicionar)
+                    .addComponent(tfdDescricaoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdIdMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRt)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTransmisividade)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSair)
+                    .addComponent(btnSalvar))
                 .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void remMaterialExternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remMaterialExternoActionPerformed
-        if(!"".equals(matExterno.getText())){
-            removerValorMatExterno();
-        }else{
-            JOptionPane.showMessageDialog(null, "O item material já está disponivel para o cálculo!");
-        }     
-    }//GEN-LAST:event_remMaterialExternoActionPerformed
-
-    private void remMaterialNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remMaterialNucleoActionPerformed
-        if(!"".equals(matNucleo.getText())){
-            removerValorMatNucleo();
-        }else{
-            JOptionPane.showMessageDialog(null, "O item material já está disponivel para o cálculo!");
-        }   
-    }//GEN-LAST:event_remMaterialNucleoActionPerformed
-
-    private void remMaterialInternoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remMaterialInternoActionPerformed
-        if(!"".equals(matInterno.getText())){
-            removerValorMatInterno();
-        }else{
-            JOptionPane.showMessageDialog(null, "O item material já está disponivel para o cálculo!");
-        }   
-    }//GEN-LAST:event_remMaterialInternoActionPerformed
-
-    private void matExternoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matExternoMouseClicked
-        DlgBuscaMaterial busca = new DlgBuscaMaterial(null, true, matEx, this);
-        busca.setLocationRelativeTo(this);
-        busca.setVisible(true);
-        definirValorMatExterno();
-    }//GEN-LAST:event_matExternoMouseClicked
-
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void matNucleoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matNucleoActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        DlgBuscaMaterial busca = new DlgBuscaMaterial(null, true, this);
+        busca.setLocationRelativeTo(this);
+        busca.setVisible(true);
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnNovoCalculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoCalculoActionPerformed
+        try {
+            Calculo cal = new Calculo();
+
+            if (tfdCalculo.getText().length() > 0) {
+                cal.setDescricao(tfdCalculo.getText());
+                cal.setSituacao("A");
+
+                if (codigoTabela == 0) {
+                    DaoGenerico.saveOrUpdate(cal, codigoTabela);
+                    //DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                } else {
+                    cal.setId(idUpdate);
+                    DaoGenerico.saveOrUpdate(cal, idUpdate);
+                    //DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
+                }
+                habilitarBotoes();
+                tfdIdCalculo.setText(String.valueOf(cal.getId()));
+                tfdDescricao.setText(cal.getDescricao());
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao inserir Registro!");
+            }
+            tfdCalculo.setText("");
+
+        } catch (Exception ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        }
+
+    }//GEN-LAST:event_btnNovoCalculoActionPerformed
+
+    private void comboEstacaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboEstacaoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_matNucleoActionPerformed
+    }//GEN-LAST:event_comboEstacaoMouseClicked
 
-    private void matNucleoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matNucleoMouseClicked
-        DlgBuscaMaterial busca = new DlgBuscaMaterial(null, true, matNu, this);
-        busca.setLocationRelativeTo(this);
-        busca.setVisible(true);
-        definirValorMatNucleo();
-    }//GEN-LAST:event_matNucleoMouseClicked
+    private void comboProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboProdutoMouseClicked
 
-    private void matInternoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matInternoMouseClicked
-        DlgBuscaMaterial busca = new DlgBuscaMaterial(null, true, matIn, this);
-        busca.setLocationRelativeTo(this);
-        busca.setVisible(true);
-        definirValorMatInterno();
-    }//GEN-LAST:event_matInternoMouseClicked
+    }//GEN-LAST:event_comboProdutoMouseClicked
 
-    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        Double tp = Double.parseDouble(t1.getText()) - Double.parseDouble(t2.getText());
-        System.out.println("temp" + tp);
-    }//GEN-LAST:event_btnCalcularActionPerformed
-    
-    public void definirValorMatExterno() {
-        matExterno.setText(matEx.getDescricao());
-        matExterno.setBackground(Color.YELLOW);
-        lblEx.setText(String.valueOf(matEx.getResistencia()));
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        if ("Parede".equals(comboProduto.getSelectedItem().toString())) {
+            lblRsi.setText("0.13");
+            lblRse.setText("0.04");
+        } else if ("Cobertura".equals(comboProduto.getSelectedItem().toString())) {
+            lblRsi.setText("0.17");
+            lblRse.setText("0.04");
+        } else {
+            lblRsi.setText("0.0");
+            lblRse.setText("0.0");
+        }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+
+        desabilitarBotoes();
+        JOptionPane.showMessageDialog(null, "Calculo efetuado!");
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        Material material = new Material();
+        try {    
+            ItemCalculo item = new ItemCalculo();
+            Calculo cal = new Calculo();
+            cal.setId(Integer.parseInt(tfdIdCalculo.getText()));
+            Produto pro = new Produto();
+            pro.setId(comboProduto.getSelectedIndex());
+            List resultado = null;
+            if (tfdDescricaoMaterial.getText().length() > 0) {
+                resultado = DaoMaterial.buscaIdMaterial(Integer.parseInt(tfdIdMaterial.getText()));
+
+                for (Object o : resultado) {
+                    Material mat = (Material) o;
+                    material.setId(mat.getId());
+                    material.setDescricao(mat.getDescricao());
+                    material.setResistencia(mat.getResistencia());
+                    material.setCalor(mat.getCalor());
+                    material.setDencidade(mat.getDencidade());
+                    material.setCor(mat.getCor());
+                    material.setCondutividade(mat.getCondutividade());
+                    material.setEspessura(mat.getEspessura());
+                }
+                item.setIdMaterial(material);
+                item.setIdCalculo(cal);
+                item.setIdProduto(pro);
+                item.setResistenciaInt(BigDecimal.valueOf(Double.parseDouble(lblRsi.getText())));
+                item.setResistenciaExt(BigDecimal.valueOf(Double.parseDouble(lblRse.getText())));
+                item.setResistenciaTotal(BigDecimal.valueOf(Double.parseDouble(lblRt.getText())));
+                item.setTransmissividadeTer(BigDecimal.valueOf(Double.parseDouble(lblTransmisividade.getText())));
+
+                if (codigoTabela == 0) {
+                    DaoGenerico.saveOrUpdate(item, codigoTabela);
+                    //DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                } else {
+                    item.setId(idUpdate);
+                    DaoGenerico.saveOrUpdate(item, idUpdate);
+                    //DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
+                }
+                JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
+                atualizarTabelaItem();
+            } else {
+                tfdIdMaterial.setBackground(Color.red);
+                tfdDescricaoMaterial.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "Material Inválido!");
+                tfdIdMaterial.setBackground(Color.white);
+                tfdDescricaoMaterial.setBackground(Color.white);
+            }
+        } catch (Exception ex) {
+
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        }
+        
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    public void desabilitarBotoes() {
+        comboEstacao.setEnabled(false);
+        comboProduto.setEnabled(false);
+        btnAtualizar.setEnabled(false);
+        btnPesquisar.setEnabled(false);
+        btnAdicionar.setEnabled(false);
+    }
+
+    public void habilitarBotoes() {
+        comboEstacao.setEnabled(true);
+        comboProduto.setEnabled(true);
+        btnAtualizar.setEnabled(true);
+        btnPesquisar.setEnabled(true);
+        btnAdicionar.setEnabled(true);
+    }
+
+    public void definirValorMaterial(String id, String descricao) {
+        tfdIdMaterial.setText(id);
+        tfdDescricaoMaterial.setText(descricao);
     }
     
-    public void definirValorMatInterno() {
-        matInterno.setText(matIn.getDescricao());
-        matInterno.setBackground(Color.YELLOW);
-        lblIn.setText(String.valueOf(matIn.getResistencia()));
+    public void atualizarTabelaItem() {
+        System.out.println("id" + tfdIdCalculo.getText());
+        DaoItemCalculo.listarItemCalculo(tblItemCalculo, Integer.parseInt(tfdIdCalculo.getText()));
+        ///resistencia total
+        Double total = Calcular.somarColuna(tblItemCalculo, 3) + Double.parseDouble(lblRsi.getText()) + Double.parseDouble(lblRse.getText());
+        Double trasnT = 1/total;
+        rt = rt + total;
+        lblRt.setText(String.valueOf(Math.ceil(rt)));
+        lblTransmisividade.setText(String.valueOf(trasnT));
     }
     
-    public void definirValorMatNucleo() {
-        matNucleo.setText(matNu.getDescricao());
-        matNucleo.setBackground(Color.RED);
-        lblNu.setText(String.valueOf(matNu.getResistencia()));
-    }
-    
-    public void removerValorMatNucleo() {
-        matNucleo.setText("");
-        matNucleo.setBackground(Color.WHITE);
-    }
-    
-    public void removerValorMatInterno() {
-        matInterno.setText("");
-        matInterno.setBackground(Color.WHITE);
-    }
-    
-    public void removerValorMatExterno() {
-        matExterno.setText("");
-        matExterno.setBackground(Color.WHITE);
-    }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCalcular;
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnNovoCalculo;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> comboEstacao;
+    private javax.swing.JComboBox<String> comboProduto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JLabel lblEx;
-    private javax.swing.JLabel lblIn;
-    private javax.swing.JLabel lblNu;
-    private javax.swing.JTextField matExterno;
-    private javax.swing.JTextField matInterno;
-    private javax.swing.JTextField matNucleo;
-    private javax.swing.JButton remMaterialExterno;
-    private javax.swing.JButton remMaterialInterno;
-    private javax.swing.JButton remMaterialNucleo;
-    private javax.swing.JTextField t1;
-    private javax.swing.JTextField t2;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblRse;
+    private javax.swing.JLabel lblRsi;
+    private javax.swing.JLabel lblRt;
+    private javax.swing.JLabel lblTransmisividade;
+    private javax.swing.JTable tblItemCalculo;
+    private javax.swing.JTextField tfdCalculo;
+    private javax.swing.JTextField tfdDescricao;
+    private javax.swing.JTextField tfdDescricaoMaterial;
+    private javax.swing.JTextField tfdIdCalculo;
+    private javax.swing.JTextField tfdIdMaterial;
     // End of variables declaration//GEN-END:variables
 }

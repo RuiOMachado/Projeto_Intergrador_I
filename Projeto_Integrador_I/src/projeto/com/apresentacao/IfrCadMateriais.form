@@ -68,6 +68,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="jPanel1">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Cadastro">
@@ -96,8 +99,8 @@
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jCCor" alignment="0" max="32767" attributes="0"/>
-                              <Component id="cResistencia" alignment="0" pref="210" max="32767" attributes="0"/>
+                              <Component id="cResistencia" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jCCor" alignment="0" pref="210" max="32767" attributes="0"/>
                               <Component id="cCalor" alignment="0" max="32767" attributes="0"/>
                               <Component id="cDensidade" alignment="0" max="32767" attributes="0"/>
                               <Component id="cEspessura" alignment="0" max="32767" attributes="0"/>
@@ -139,7 +142,7 @@
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cResistencia" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -227,6 +230,9 @@
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Calor espec&#xed;fico do Material"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cCalorKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
@@ -235,7 +241,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="cResistencia">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="Resist&#xea;ncia T&#xe9;rmica do Material"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
