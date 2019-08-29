@@ -16,7 +16,7 @@ public class IfrConsulLogs extends javax.swing.JInternalFrame {
      */
     public IfrConsulLogs() {
         initComponents();
-        DaoGenerico.listarLogs(tblLogs);
+        DaoLog.listarLogs(tblLogs);
     }
 
     /**

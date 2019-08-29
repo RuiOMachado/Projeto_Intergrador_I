@@ -31,7 +31,7 @@ public class DaoItemCalculo {
             for (Object o : resultado) {
                 ItemCalculo item = (ItemCalculo) o;
                 modelo.addRow(new Object[]{
-                    item.getId(), item.getIdMaterial(), item.getIdMaterial().getDescricao(), item.getIdMaterial().getResistencia()
+                    item.getId(), item.getIdMaterial().getId(), item.getIdMaterial().getDescricao(), item.getIdMaterial().getResistencia()
                 });
             }
 

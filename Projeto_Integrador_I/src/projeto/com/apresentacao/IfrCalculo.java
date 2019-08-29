@@ -91,7 +91,7 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "#", "Código", "Descrição", "Resistência"
+                "#", "Código Material", "Descrição", "Resistência"
             }
         ) {
             Class[] types = new Class [] {

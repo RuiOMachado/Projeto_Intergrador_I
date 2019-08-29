@@ -5,6 +5,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import projeto.com.apoio.Data;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
 import projeto.com.negocio.Log;
@@ -52,7 +53,7 @@ public class DaoLog {
             for (Object o : resultado) {
                 Log log = (Log) o;
                 modelo.addRow(new Object[]{
-                    log.getId(), log.getUsuario(), log.getDataEntrada(), log.getDescricao()
+                    log.getId(), log.getUsuario(), Data.formatarData(log.getDataEntrada()), log.getDescricao()
                 });
             }
 
