@@ -25,8 +25,7 @@ public class DaoItemCalculo {
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-            //org.hibernate.Query q = sessao.createQuery("from Item_calculo where id_calculo = "+id+"order by id");
-            org.hibernate.Query q = sessao.createQuery("from item_calculo order by id");
+            org.hibernate.Query q = sessao.createQuery("from ItemCalculo where id_calculo = "+id+"order by id");
             resultado = q.list();
 
             for (Object o : resultado) {

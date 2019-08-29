@@ -455,7 +455,6 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
                     DaoGenerico.saveOrUpdate(item, idUpdate);
                     //DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
                 }
-                JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
                 atualizarTabelaItem();
             } else {
                 tfdIdMaterial.setBackground(Color.red);
@@ -493,13 +492,12 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
     }
     
     public void atualizarTabelaItem() {
-        System.out.println("id" + tfdIdCalculo.getText());
         DaoItemCalculo.listarItemCalculo(tblItemCalculo, Integer.parseInt(tfdIdCalculo.getText()));
         ///resistencia total
         Double total = Calcular.somarColuna(tblItemCalculo, 3) + Double.parseDouble(lblRsi.getText()) + Double.parseDouble(lblRse.getText());
         Double trasnT = 1/total;
         rt = rt + total;
-        lblRt.setText(String.valueOf(Math.ceil(rt)));
+        lblRt.setText(String.valueOf(total));
         lblTransmisividade.setText(String.valueOf(trasnT));
     }
     

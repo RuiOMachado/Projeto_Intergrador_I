@@ -1,10 +1,8 @@
 package projeto.com.apresentacao;
 
-import static java.awt.image.ImageObserver.WIDTH;
 import java.util.List;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
-import projeto.com.dao.DaoMaterial;
 import projeto.com.negocio.Log;
 
 /**
