@@ -128,6 +128,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="toolTipText" type="java.lang.String" value="Informa&#xe7;&#xf5;es detalhadas do log de erro"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>

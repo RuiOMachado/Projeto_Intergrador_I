@@ -82,6 +82,7 @@ public class IfrConsulLogs extends javax.swing.JInternalFrame {
 
         jTextArea.setColumns(20);
         jTextArea.setRows(5);
+        jTextArea.setToolTipText("Informações detalhadas do log de erro");
         jTextArea.setEnabled(false);
         jScrollPane2.setViewportView(jTextArea);
 
