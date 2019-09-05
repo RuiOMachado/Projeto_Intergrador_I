@@ -33,6 +33,7 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
     public IfrCalculo() {
         initComponents();
         desabilitarBotoes();
+        
     }
 
     /**

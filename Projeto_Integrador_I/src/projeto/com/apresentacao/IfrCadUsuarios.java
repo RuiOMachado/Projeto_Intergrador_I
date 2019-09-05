@@ -36,7 +36,6 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         cSenha = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        btnOk = new javax.swing.JButton();
         comboTipo = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jBPesquisa = new javax.swing.JButton();
@@ -47,34 +46,6 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         jBEditar = new javax.swing.JButton();
         jBSalvar = new javax.swing.JButton();
         jBSair = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jTabbedPanePermissoes = new javax.swing.JTabbedPane();
-        menuMateriais = new javax.swing.JPanel();
-        cmb1 = new javax.swing.JCheckBox();
-        cmb2 = new javax.swing.JCheckBox();
-        cmb3 = new javax.swing.JCheckBox();
-        cmb4 = new javax.swing.JCheckBox();
-        menuUsuarios = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        menuCalculo = new javax.swing.JPanel();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox20 = new javax.swing.JCheckBox();
-        jCheckBox21 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox19 = new javax.swing.JCheckBox();
-        menuRelatorio = new javax.swing.JPanel();
-        jCheckBox13 = new javax.swing.JCheckBox();
-        jCheckBox14 = new javax.swing.JCheckBox();
-        jPanel4 = new javax.swing.JPanel();
-        cpb1 = new javax.swing.JCheckBox();
-        cpb2 = new javax.swing.JCheckBox();
-        cpb3 = new javax.swing.JCheckBox();
-        cpb4 = new javax.swing.JCheckBox();
 
         jTabbedPane2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -98,16 +69,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
         jLabel3.setText("<html> <font>Tipo </font> <font color=RED>*</font> <font>:</font> </html>");
 
-        btnOk.setText("Ok");
-        btnOk.setEnabled(false);
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
-
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Administrador", "Operador", "Consultor", "Personalizado" }));
-        comboTipo.setEnabled(false);
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Administrador", "Operador" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,10 +87,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cNome, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                     .addComponent(cSenha)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(247, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,16 +103,13 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
                 .addComponent(cSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel8))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOk))
-                        .addGap(0, 12, Short.MAX_VALUE)))
+                        .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 21, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -252,273 +208,19 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Controle Permissões"));
-        jPanel3.setEnabled(false);
-
-        jTabbedPanePermissoes.setEnabled(false);
-        jTabbedPanePermissoes.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTabbedPanePermissoesFocusLost(evt);
-            }
-        });
-
-        cmb1.setText("Inserir");
-        cmb1.setEnabled(false);
-        cmb1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb1ActionPerformed(evt);
-            }
-        });
-
-        cmb2.setText("Editar");
-        cmb2.setEnabled(false);
-
-        cmb3.setText("Excluir");
-        cmb3.setEnabled(false);
-
-        cmb4.setText("Consultar");
-        cmb4.setEnabled(false);
-
-        javax.swing.GroupLayout menuMateriaisLayout = new javax.swing.GroupLayout(menuMateriais);
-        menuMateriais.setLayout(menuMateriaisLayout);
-        menuMateriaisLayout.setHorizontalGroup(
-            menuMateriaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuMateriaisLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(menuMateriaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmb4)
-                    .addComponent(cmb3)
-                    .addComponent(cmb2)
-                    .addComponent(cmb1))
-                .addContainerGap(474, Short.MAX_VALUE))
-        );
-        menuMateriaisLayout.setVerticalGroup(
-            menuMateriaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuMateriaisLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(cmb1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmb2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmb3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmb4)
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
-
-        jTabbedPanePermissoes.addTab("Cad. Materiais", menuMateriais);
-
-        jCheckBox1.setText("Controle de permissões");
-
-        jCheckBox2.setText("Botão tipo de permissão");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox3.setText("Inserção");
-        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox3ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox4.setText("Edição");
-
-        jCheckBox5.setText("Exclusão");
-
-        javax.swing.GroupLayout menuUsuariosLayout = new javax.swing.GroupLayout(menuUsuarios);
-        menuUsuarios.setLayout(menuUsuariosLayout);
-        menuUsuariosLayout.setHorizontalGroup(
-            menuUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuUsuariosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menuUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5))
-                .addContainerGap(412, Short.MAX_VALUE))
-        );
-        menuUsuariosLayout.setVerticalGroup(
-            menuUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuUsuariosLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox5)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-
-        jTabbedPanePermissoes.addTab("Cad. Usuários", menuUsuarios);
-
-        jCheckBox6.setText("Calcular fator solar");
-        jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox6ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox7.setText("Consultar");
-
-        jCheckBox20.setText("Editar");
-
-        jCheckBox21.setText("Excluir");
-
-        jCheckBox8.setText("Adicionar projeto");
-
-        jCheckBox19.setText("Calcular resistência");
-
-        javax.swing.GroupLayout menuCalculoLayout = new javax.swing.GroupLayout(menuCalculo);
-        menuCalculo.setLayout(menuCalculoLayout);
-        menuCalculoLayout.setHorizontalGroup(
-            menuCalculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuCalculoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(menuCalculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox6)
-                    .addComponent(jCheckBox7)
-                    .addComponent(jCheckBox20)
-                    .addComponent(jCheckBox21)
-                    .addComponent(jCheckBox8)
-                    .addComponent(jCheckBox19))
-                .addContainerGap(436, Short.MAX_VALUE))
-        );
-        menuCalculoLayout.setVerticalGroup(
-            menuCalculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuCalculoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jCheckBox6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox19)
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
-        jTabbedPanePermissoes.addTab("Lanc. Calculos", menuCalculo);
-
-        jCheckBox13.setText("Emitir");
-        jCheckBox13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox13ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox14.setText("Visualizar");
-
-        javax.swing.GroupLayout menuRelatorioLayout = new javax.swing.GroupLayout(menuRelatorio);
-        menuRelatorio.setLayout(menuRelatorioLayout);
-        menuRelatorioLayout.setHorizontalGroup(
-            menuRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuRelatorioLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(menuRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox14)
-                    .addComponent(jCheckBox13))
-                .addContainerGap(474, Short.MAX_VALUE))
-        );
-        menuRelatorioLayout.setVerticalGroup(
-            menuRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuRelatorioLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jCheckBox13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox14)
-                .addContainerGap(100, Short.MAX_VALUE))
-        );
-
-        jTabbedPanePermissoes.addTab("Relatórios", menuRelatorio);
-
-        cpb1.setText("Inserir");
-        cpb1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cpb1ActionPerformed(evt);
-            }
-        });
-
-        cpb2.setText("Editar");
-
-        cpb3.setText("Excluir");
-
-        cpb4.setText("Consultar");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cpb4)
-                    .addComponent(cpb3)
-                    .addComponent(cpb2)
-                    .addComponent(cpb1))
-                .addContainerGap(474, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(cpb1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cpb2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cpb3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cpb4)
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
-
-        jTabbedPanePermissoes.addTab("Cad. Projeto", jPanel4);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPanePermissoes, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPanePermissoes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(342, Short.MAX_VALUE)
-                        .addComponent(jBExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBSair))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(342, Short.MAX_VALUE)
+                .addComponent(jBExcluir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBSalvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBSair)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -529,9 +231,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(263, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(274, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSair)
                     .addComponent(jBSalvar)
@@ -542,7 +242,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(315, Short.MAX_VALUE)))
+                    .addContainerGap(70, Short.MAX_VALUE)))
         );
 
         pack();
@@ -637,7 +337,6 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         jBExcluir.setEnabled(false);
         jBEditar.setEnabled(false);
         jBSalvar.setEnabled(true);
-        btnOk.setEnabled(true);
         comboTipo.setEnabled(true);
     }//GEN-LAST:event_jBEditarActionPerformed
 
@@ -663,112 +362,31 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
-    private void jTabbedPanePermissoesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPanePermissoesFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTabbedPanePermissoesFocusLost
-
-    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3ActionPerformed
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
-
-    private void jCheckBox13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox13ActionPerformed
-
-    private void cmb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmb1ActionPerformed
-
-    private void cpb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpb1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cpb1ActionPerformed
-
-    private void jCheckBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox6ActionPerformed
-
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        if("Administrador".equals(comboTipo.getSelectedItem().toString())) {
-            
-        }else if ("Operador".equals(comboTipo.getSelectedItem().toString())) {
-            
-        }else if ("Consultor".equals(comboTipo.getSelectedItem().toString())) {
-            
-        }else if ("Personalizado".equals(comboTipo.getSelectedItem().toString())) {
-            jTabbedPanePermissoes.setEnabled(true);
-            cmb1.setEnabled(true);
-            cmb2.setEnabled(true);
-            cmb3.setEnabled(true);
-            cmb4.setEnabled(true);
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Selecione um tipo de usuário!");
-            jTabbedPanePermissoes.setEnabled(false);
-            cmb1.setEnabled(false);
-            cmb2.setEnabled(false);
-            cmb3.setEnabled(false);
-            cmb4.setEnabled(false);
-        }
-    }//GEN-LAST:event_btnOkActionPerformed
-
     private void cSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cSenhaKeyReleased
         if (evt.getKeyCode() == Event.ENTER) {
             comboTipo.setEnabled(true);
-            btnOk.setEnabled(true);
         }
     }//GEN-LAST:event_cSenhaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnOk;
     private javax.swing.JTextField cNome;
     private javax.swing.JTextField cPesquisa;
     private javax.swing.JPasswordField cSenha;
-    private javax.swing.JCheckBox cmb1;
-    private javax.swing.JCheckBox cmb2;
-    private javax.swing.JCheckBox cmb3;
-    private javax.swing.JCheckBox cmb4;
     private javax.swing.JComboBox<String> comboTipo;
-    private javax.swing.JCheckBox cpb1;
-    private javax.swing.JCheckBox cpb2;
-    private javax.swing.JCheckBox cpb3;
-    private javax.swing.JCheckBox cpb4;
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBPesquisa;
     private javax.swing.JButton jBSair;
     private javax.swing.JButton jBSalvar;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox13;
-    private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox19;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox20;
-    private javax.swing.JCheckBox jCheckBox21;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPanePermissoes;
     private javax.swing.JTable jTableUser;
-    private javax.swing.JPanel menuCalculo;
-    private javax.swing.JPanel menuMateriais;
-    private javax.swing.JPanel menuRelatorio;
-    private javax.swing.JPanel menuUsuarios;
     // End of variables declaration//GEN-END:variables
 }

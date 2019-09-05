@@ -44,6 +44,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jCad_Usuario = new javax.swing.JMenuItem();
         jCad_Material = new javax.swing.JMenuItem();
+        jCad_Permissoes = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMRMaterial = new javax.swing.JMenu();
@@ -122,6 +123,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu6.add(jCad_Material);
+
+        jCad_Permissoes.setText("Permissões");
+        jCad_Permissoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCad_PermissoesActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jCad_Permissoes);
 
         jMenuBar1.add(jMenu6);
 
@@ -213,9 +222,16 @@ public class Menu extends javax.swing.JFrame {
        // remat.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jCad_PermissoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCad_PermissoesActionPerformed
+        IfrCadPermissoes cal = new IfrCadPermissoes();
+        jDesk.add(cal);
+        cal.setVisible(true);
+    }//GEN-LAST:event_jCad_PermissoesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jCad_Material;
+    private javax.swing.JMenuItem jCad_Permissoes;
     private javax.swing.JMenuItem jCad_Usuario;
     private javax.swing.JDesktopPane jDesk;
     private javax.swing.JMenu jMRMaterial;
