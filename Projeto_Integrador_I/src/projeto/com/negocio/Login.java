@@ -22,6 +22,9 @@ public class Login  implements java.io.Serializable {
      private int id;
      private String nome;
      private String senha;
+     private String tipo;
+
+   
      private String estado;
 
     public Login() {
@@ -80,8 +83,17 @@ public class Login  implements java.io.Serializable {
     }
     
     public String subString() {
-        return "%"+nome+"%"+senha+"%";
+        return "%"+nome+"%"+senha+"%"+tipo+"%";
     } 
+    
+    @Column(name="tipo", length=45)
+     public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
 }
 
