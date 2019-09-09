@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import projeto.com.apresentacao.NewLogin;
@@ -18,6 +19,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 /**
@@ -87,7 +89,7 @@ public class DaoMaterial {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("SELECT descricao, condutividade, espessura, dencidade, calor, resistencia, cor from Material where upper(descricao) LIKE upper('%" + material + "%') AND upper (cor) LIKE upper('" + cor + "') Order by descricao");
+            org.hibernate.Query q = sessao.createQuery("from Material ");//where upper(descricao) LIKE upper('%" + material + "%') AND upper (cor) LIKE upper('" + cor + "') Order by descricao");
             resultado = q.list();
 
             System.out.println("RETORNO " + resultado.toString());
@@ -122,9 +124,10 @@ public class DaoMaterial {
             // Compila o relatorio
             System.out.println("ENTRO AQUI");
             List materialLista = pesquisaRelatorioMaterial(material, cor);
+            System.out.println();
             JRBeanCollectionDataSource bc = new JRBeanCollectionDataSource(materialLista);
-            JasperReport relatorio = (JasperReport) JRLoader.loadObject(getClass().getClassLoader().getResource("/projeto/com/relatorio/RMateriais.jasper"));
-            //JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/projeto/com/relatorio/RMateriais.jrxml"));
+            //JasperReport relatorio = (JasperReport) JRLoader.loadObject(getClass().getClassLoader().getResource("/projeto/com/relatorio/RMateriais.jasper"));
+            JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/projeto/com/relatorio/rel_audit_geral.jrxml"));
             // Mapeia campos de parametros para o relatorio, mesmo que nao existam
             
             java.util.Map parametros = new HashMap();
@@ -133,8 +136,8 @@ public class DaoMaterial {
             JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, bc);
 
             // Exibe resultado em video
-            //JasperViewer.viewReport(impressao, false);
-            JRViewer viewer = new JRViewer(impressao);
+            JasperViewer.viewReport(impressao, false);
+            //JRViewer viewer = new JRViewer(impressao);
             //JasperExportManager.exportReportToPdfFile(impressao,"projeto/com/relatorio/RelatorioUser.pdf");
         } catch (Exception e) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + e), 0);

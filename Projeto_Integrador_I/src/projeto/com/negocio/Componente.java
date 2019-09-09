@@ -32,6 +32,8 @@ public class Componente implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "categoria")
+    private String categoria;
     @Column(name = "descricao")
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idComponente")
@@ -43,7 +45,7 @@ public class Componente implements Serializable {
     public Componente(Integer id) {
         this.id = id;
     }
-
+    
     public Integer getId() {
         return id;
     }
@@ -67,5 +69,14 @@ public class Componente implements Serializable {
     public void setPermissaoList(List<Permissao> permissaoList) {
         this.permissaoList = permissaoList;
     }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
     
 }

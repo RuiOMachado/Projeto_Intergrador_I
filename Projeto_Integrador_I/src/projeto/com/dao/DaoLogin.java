@@ -72,4 +72,24 @@ public class DaoLogin {
         }
          return resultado;
     }
+    
+    public static Login ultimoLogin(){
+        Login log = new Login();
+        List resultado = null;
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Login");
+           
+            resultado = q.list();
+            for (Object o : resultado) {
+                log = (Login) o;
+                log.getId();
+            }
+        } catch (HibernateException he) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro ultimo login :" + he), 0);
+        }
+         return log;
+    }
 }

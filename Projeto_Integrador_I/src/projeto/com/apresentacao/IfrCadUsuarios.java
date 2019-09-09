@@ -8,6 +8,7 @@ import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoEncryption;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLogin;
+import projeto.com.dao.DaoPermissao;
 import projeto.com.negocio.Login;
 
 /**
@@ -283,7 +284,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSairActionPerformed
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-
+        
         try {
             Login login = new Login();
             if (cNome.getText().length() > 0 && cSenha.getText().length() > 0) {
@@ -294,12 +295,17 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(login, codigoTabela);
+                    Login log = DaoLogin.ultimoLogin();
+                    DaoPermissao.inserirPermissao(log);
                     DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                    
                 } else {
                     login.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(login, idUpdate);
                     DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "EDITAR");
                 }
+                
+                
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
 
             }
@@ -312,7 +318,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
             jBSalvar.setEnabled(false);
 
         } catch (Exception ex) {
-            System.out.println("" + ex);
+            System.out.println("Erro deu aqui" + ex);
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 

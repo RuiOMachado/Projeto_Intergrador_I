@@ -21,8 +21,8 @@ import javax.persistence.Table;
  * @author Douglas
  */
 @Entity
-@Table(name="permissao"
-    ,schema="public"
+@Table(name = "permissao",
+         schema = "public"
 )
 public class Permissao implements Serializable {
 
@@ -32,11 +32,16 @@ public class Permissao implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "estado")
-    private boolean estado;
     @JoinColumn(name = "id_componente", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Componente idComponente;
+    @Basic(optional = false)
+    @JoinColumn(name = "id_login", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Login idLogin;
+    @Column(name = "estado")
+    private boolean estado;
+    
 
     public Permissao() {
     }
@@ -72,6 +77,17 @@ public class Permissao implements Serializable {
 
     public void setIdComponente(Componente idComponente) {
         this.idComponente = idComponente;
+    }
+    
+    public Login getIdLogin() {
+        return idLogin;
+    }
+
+    /**
+     * @param idLogin the idLogin to set
+     */
+    public void setIdLogin(Login idLogin) {
+        this.idLogin = idLogin;
     }
 
 }
