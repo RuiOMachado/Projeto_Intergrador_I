@@ -56,7 +56,7 @@ public class DaoLogin {
         }
         return resultado;
     }
-    
+       
     public static Login buscaLogin(String nome) {
         List resultado = null;
         Login log = new Login();

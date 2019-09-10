@@ -7,8 +7,10 @@ import javax.swing.table.DefaultTableModel;
 import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoEncryption;
 import projeto.com.dao.DaoGenerico;
+import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoLogin;
 import projeto.com.dao.DaoPermissao;
+import projeto.com.negocio.Log;
 import projeto.com.negocio.Login;
 
 /**
@@ -254,9 +256,9 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
         DefaultTableModel modelo = (DefaultTableModel) jTableUser.getModel();
         modelo.setNumRows(0);
-        
+
         resultado = DaoLogin.pesquisaLogin(cPesquisa.getText());
-        
+
         for (Object o : resultado) {
             Login log = (Login) o;
             modelo.addRow(new Object[]{
@@ -284,41 +286,38 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSairActionPerformed
 
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
-        
+
         try {
             Login login = new Login();
-            if (cNome.getText().length() > 0 && cSenha.getText().length() > 0) {
+            if (cNome.getText().length() > 0 && cSenha.getText().length() > 0 && !"Selecionar".equals(comboTipo.getSelectedItem().toString())) {
 
                 login.setNome(cNome.getText());
                 login.setSenha(DaoEncryption.encryptionString(cSenha.getText()));
                 login.setEstado("A");
+                login.setTipo(comboTipo.getSelectedItem().toString());
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(login, codigoTabela);
                     Login log = DaoLogin.ultimoLogin();
-                    DaoPermissao.inserirPermissaoFull(log);
+                    DaoPermissao.inserirPermissaoFull(log , comboTipo.getSelectedItem().toString());
                     DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "INCLUIR");
-                    
+                    JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
+                    request();
                 } else {
                     login.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(login, idUpdate);
+                    DaoPermissao.inserirPermissaoFull(DaoLogin.buscaLogin(login.getNome()), comboTipo.getSelectedItem().toString());
                     DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "EDITAR");
+                    JOptionPane.showMessageDialog(null, "Registro editado com sucesso!");
+                    request();
                 }
-                
-                
-                JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
 
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao inserir registro!");
             }
-            cNome.setText("");
-            cSenha.setText("");
-            jTabbedPane2.setSelectedIndex(1);
-            DaoGenerico.listarLogin(jTableUser);
-            jBEditar.setEnabled(true);
-            jBExcluir.setEnabled(true);
-            jBSalvar.setEnabled(false);
 
         } catch (Exception ex) {
-            System.out.println("Erro deu aqui" + ex);
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
     }//GEN-LAST:event_jBSalvarActionPerformed
 
@@ -374,6 +373,16 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cSenhaKeyReleased
 
+    public void request() {
+        cNome.setText("");
+        cSenha.setText("");
+        jTabbedPane2.setSelectedIndex(1);
+        DaoGenerico.listarLogin(jTableUser);
+        jBEditar.setEnabled(true);
+        jBExcluir.setEnabled(true);
+        jBSalvar.setEnabled(false);
+        comboTipo.setSelectedIndex(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cNome;

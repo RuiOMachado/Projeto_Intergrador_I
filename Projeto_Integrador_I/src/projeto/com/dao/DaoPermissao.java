@@ -74,7 +74,7 @@ public class DaoPermissao {
             for (Object o : resultado) {
                 Permissao per = (Permissao) o;
                 modelo.addRow(new Object[]{
-                    per.getId(), per.getIdComponente().getCategoria(), per.getIdComponente().getDescricao(), per.getEstado()
+                    per.getId(), per.getIdLogin().getNome(), per.getIdComponente().getDescricao(), per.getEstado()
                 });
             }
             
@@ -101,7 +101,7 @@ public class DaoPermissao {
             for (Object o : resultado) {
                 Permissao per = (Permissao) o;
                 modelo.addRow(new Object[]{
-                    per.getId(), per.getIdComponente().getCategoria(), per.getIdComponente().getDescricao(), per.getEstado()
+                    per.getId(), per.getIdLogin().getNome(), per.getIdComponente().getDescricao(), per.getEstado()
                 });
             }
 
@@ -110,7 +110,11 @@ public class DaoPermissao {
         }
     }
 
-    public static void inserirPermissaoFull(Login login) {
+    public static void inserirPermissaoFull(Login login, String tipo) {
+        //obs - pendente
+        //metodo recebera o tipo como parametro
+        //se for tipo = administrador insere full 
+        //se for operador insere permissoes pre definidas
         List resultado = null;
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
@@ -124,7 +128,6 @@ public class DaoPermissao {
             for (Object o : resultado) {
                 Componente com = (Componente) o;
                 com.setId(com.getId());
-                System.out.println(com.getCategoria());
                 per.setIdLogin(login);
                 per.setIdComponente(com);
                 per.setEstado(true);

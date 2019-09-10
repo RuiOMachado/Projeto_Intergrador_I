@@ -64,7 +64,7 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "#", "Categoria", "Descrição", "Estado"
+                "#", "Usuário", "Descrição", "Estado"
             }
         ) {
             Class[] types = new Class [] {
