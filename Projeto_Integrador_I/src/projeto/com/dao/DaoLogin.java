@@ -76,7 +76,7 @@ public class DaoLogin {
                 log.getSenha();
                 log.getEstado();
             }
-            
+            sessao.close();
         } catch (HibernateException he) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
