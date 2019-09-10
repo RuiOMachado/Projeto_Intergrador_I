@@ -1,7 +1,6 @@
 package projeto.com.apresentacao;
 
 import java.util.List;
-import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
 import projeto.com.negocio.Log;
 

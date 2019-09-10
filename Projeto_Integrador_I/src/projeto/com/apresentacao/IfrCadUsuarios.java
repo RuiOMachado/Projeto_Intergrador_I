@@ -296,7 +296,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(login, codigoTabela);
                     Login log = DaoLogin.ultimoLogin();
-                    DaoPermissao.inserirPermissao(log);
+                    DaoPermissao.inserirPermissaoFull(log);
                     DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "INCLUIR");
                     
                 } else {

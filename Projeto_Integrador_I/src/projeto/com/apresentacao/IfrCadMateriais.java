@@ -2,6 +2,7 @@ package projeto.com.apresentacao;
 
 import java.awt.Event;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -9,6 +10,8 @@ import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
+import projeto.com.dao.DaoPermissao;
+import projeto.com.negocio.Componente;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
 
@@ -21,6 +24,9 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     int codigoTabela = 0;
     int idUpdate = 0;
     String Dados_OLD = "";
+    ArrayList<Componente> componente = new ArrayList();
+
+    ;
 
     /**
      * Creates new form IfrCad_Materiais
@@ -38,7 +44,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jmConsulta = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cDescricao = new javax.swing.JTextField();
@@ -60,16 +66,17 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         cPesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabela = new javax.swing.JTable();
-        jBExcluir = new javax.swing.JButton();
-        jBEditar = new javax.swing.JButton();
-        jBSalvar = new javax.swing.JButton();
-        jBSair = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
+        btnTestarPermissaodosBotoes = new javax.swing.JButton();
 
         setTitle("Cadastro de Materiais");
 
-        jTabbedPane2.addFocusListener(new java.awt.event.FocusAdapter() {
+        jmConsulta.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTabbedPane2FocusLost(evt);
+                jmConsultaFocusLost(evt);
             }
         });
 
@@ -171,12 +178,12 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cResistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addContainerGap())
         );
 
-        jTabbedPane2.addTab("Cadastro", jPanel1);
+        jmConsulta.addTab("Cadastro", jPanel1);
 
         jBPesquisa.setText("Busca");
         jBPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -239,35 +246,42 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                 .addContainerGap(101, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Consulta", jPanel2);
+        jmConsulta.addTab("Consulta", jPanel2);
 
-        jBExcluir.setText("Excluir");
-        jBExcluir.setEnabled(false);
-        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setText("Excluir");
+        btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBExcluirActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
-        jBEditar.setText("Editar");
-        jBEditar.setEnabled(false);
-        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEditarActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        jBSalvar.setText("Salvar");
-        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalvarActionPerformed(evt);
+                btnSalvarActionPerformed(evt);
             }
         });
 
-        jBSair.setText("Sair");
-        jBSair.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSairActionPerformed(evt);
+                btnSairActionPerformed(evt);
+            }
+        });
+
+        btnTestarPermissaodosBotoes.setText("testar");
+        btnTestarPermissaodosBotoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTestarPermissaodosBotoesActionPerformed(evt);
             }
         });
 
@@ -277,29 +291,32 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jmConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTestarPermissaodosBotoes)
+                .addGap(70, 70, 70)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane2)
+                .addComponent(jmConsulta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBEditar)
-                    .addComponent(jBSair)
-                    .addComponent(jBSalvar)
-                    .addComponent(jBExcluir))
+                    .addComponent(btnEditar)
+                    .addComponent(btnSair)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnTestarPermissaodosBotoes))
                 .addContainerGap())
         );
 
@@ -308,12 +325,12 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
             Material mat = new Material();
-            
+
             if (cDescricao.getText().length() > 0 && (!jCCor.getSelectedItem().toString().equals("Selecione")) && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0 && cDensidade.getText().length() > 0 && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0) {
-                calResistencia(); 
+                calResistencia();
                 mat.setDescricao(cDescricao.getText());
                 mat.setCor(jCCor.getSelectedItem().toString());
                 mat.setCondutividade(BigDecimal.valueOf(Double.valueOf(cCondutividade.getText())));
@@ -339,16 +356,16 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             cCondutividade.setText("");
             cEspessura.setText("");
             cDensidade.setText("");
-            jTabbedPane2.setSelectedIndex(1);
+            jmConsulta.setSelectedIndex(1);
             DaoMaterial.listarMaterial(jTabela);  //metodo atualiza tabela
-            jBEditar.setEnabled(true);
-            jBExcluir.setEnabled(true);
-            jBSalvar.setEnabled(false);
+            btnEditar.setEnabled(true);
+            btnExcluir.setEnabled(true);
+            btnSalvar.setEnabled(false);
 
         } catch (Exception ex) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
-    }//GEN-LAST:event_jBSalvarActionPerformed
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void jBPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisaActionPerformed
         List resultado = null;
@@ -366,7 +383,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBPesquisaActionPerformed
 
-    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         List resultado = null;
         String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
         codigoTabela = Integer.parseInt(idString);
@@ -386,31 +403,31 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             Dados_OLD = "%" + mat.getDescricao() + "%" + mat.getCor() + "%" + mat.getCondutividade() + "%" + mat.getEspessura() + "%" + mat.getDencidade() + "%" + mat.getCalor() + "%" + mat.getResistencia() + "%";
         }
 
-        jTabbedPane2.setSelectedIndex(0);
+        jmConsulta.setSelectedIndex(0);
         cDescricao.requestFocus();
-        jBExcluir.setEnabled(false);
-        jBEditar.setEnabled(false);
-        jBSalvar.setEnabled(true);
-    }//GEN-LAST:event_jBEditarActionPerformed
+        btnExcluir.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnSalvar.setEnabled(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jTabbedPane2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusLost
-        if (jTabbedPane2.getSelectedIndex() == 1) {
-            jBEditar.setEnabled(true);
-            jBExcluir.setEnabled(true);
-            jBSalvar.setEnabled(false);
+    private void jmConsultaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jmConsultaFocusLost
+        if (jmConsulta.getSelectedIndex() == 1) {
+            btnEditar.setEnabled(true);
+            btnExcluir.setEnabled(true);
+            btnSalvar.setEnabled(false);
             jBPesquisa.requestFocus();
         } else {
-            jBEditar.setEnabled(false);
-            jBExcluir.setEnabled(false);
-            jBSalvar.setEnabled(true);
+            btnEditar.setEnabled(false);
+            btnExcluir.setEnabled(false);
+            btnSalvar.setEnabled(true);
         }
-    }//GEN-LAST:event_jTabbedPane2FocusLost
+    }//GEN-LAST:event_jmConsultaFocusLost
 
-    private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jBSairActionPerformed
+    }//GEN-LAST:event_btnSairActionPerformed
 
-    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         Material mat = new Material();
         List resultado = null;
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
@@ -429,7 +446,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             jBPesquisaActionPerformed(evt);
 
         }
-    }//GEN-LAST:event_jBExcluirActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void cCalorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cCalorKeyReleased
         if (evt.getKeyCode() == Event.ENTER) {
@@ -437,13 +454,35 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cCalorKeyReleased
 
+    private void btnTestarPermissaodosBotoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestarPermissaodosBotoesActionPerformed
+        startComponents();
+    }//GEN-LAST:event_btnTestarPermissaodosBotoesActionPerformed
+
     private void calResistencia() {
         Double espessura = Double.parseDouble(cEspessura.getText());
         Double condutividade = Double.parseDouble(cCondutividade.getText());
-        cResistencia.setText(String.valueOf(Math.ceil(espessura/condutividade)));
+        cResistencia.setText(String.valueOf(Math.ceil(espessura / condutividade)));
     }
 
+    //tentar fazer este metodo generico, mas vamos deixar em observação pra esta sprint
+    public void startComponents() {
+        try {
+            btnSalvar.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1));
+            btnEditar.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2));
+            btnExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3));
+        } catch (Exception e) {
+            System.out.println(" erro "+e);
+        }
+
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnTestarPermissaodosBotoes;
     private javax.swing.JTextField cCalor;
     private javax.swing.JTextField cCondutividade;
     private javax.swing.JTextField cDensidade;
@@ -451,11 +490,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     private javax.swing.JTextField cEspessura;
     private javax.swing.JTextField cPesquisa;
     private javax.swing.JTextField cResistencia;
-    private javax.swing.JButton jBEditar;
-    private javax.swing.JButton jBExcluir;
     private javax.swing.JButton jBPesquisa;
-    private javax.swing.JButton jBSair;
-    private javax.swing.JButton jBSalvar;
     private javax.swing.JComboBox<String> jCCor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -468,7 +503,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTabela;
+    private javax.swing.JTabbedPane jmConsulta;
     // End of variables declaration//GEN-END:variables
 }

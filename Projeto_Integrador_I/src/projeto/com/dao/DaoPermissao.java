@@ -60,7 +60,7 @@ public class DaoPermissao {
         }
     }
 
-    public static void inserirPermissao(Login login) {
+    public static void inserirPermissaoFull(Login login) {
         List resultado = null;
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
@@ -88,5 +88,50 @@ public class DaoPermissao {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro inserir permissao :" + he), 0);
         }
     }
+    
+    public static void salvarPermissao(JTable tabela) {
+        //recebe a tela como parametro (lá de salvar permissão)
+
+        
+    }
+    
+    
+    //metodo insere a permisão de acordo com o usuario, em cada botao
+    //metodo verifica a permissao do banco para o componente
+    //basta na chamada do metodo colocar o id cadastrado no banco
+    public static boolean inserirPermissaoComponente(Login login, int id_comp) {
+        Login l = DaoLogin.buscaLogin(login.getNome());
+        List resultado = null;
+        boolean retorno = false;
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = '" + l.getId() + "' AND id_componente = '" + id_comp + "'");
+            resultado = q.list();
+            
+            
+            for (Object o : resultado) {
+                Permissao per = (Permissao) o;
+                
+                    per.getId();
+                    per.getIdComponente();
+                    per.getIdLogin();
+                    per.getEstado();
+                    //testes
+                    System.out.println("Usuário -"+per.getIdLogin().getNome());
+                    System.out.println("id Usuário -"+per.getIdLogin().getId());
+                    System.out.println("id componente -"+per.getIdComponente().getId());
+                    System.out.println("estado -" +per.getEstado());
+                    retorno = per.getEstado();
+            }
+
+        } catch (Exception ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        }
+        return retorno;
+
+        
+    }
+    
 
 }

@@ -35,6 +35,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jDesk = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
@@ -49,6 +50,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMRMaterial = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -61,6 +64,8 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu5.setText("Edit");
         jMenuBar2.add(jMenu5);
+
+        jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -158,6 +163,13 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMRMaterial);
 
+        jMenu7.setText("Ajuda");
+
+        jMenuItem5.setText("Sobre");
+        jMenu7.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu7);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -241,12 +253,15 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jmiAuditoria;
     private javax.swing.JMenuItem jmiLogs;
     private javax.swing.JMenuItem jmiSair;

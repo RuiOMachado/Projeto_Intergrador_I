@@ -5,6 +5,7 @@
  */
 package projeto.com.apresentacao;
 
+import javax.swing.JOptionPane;
 import projeto.com.dao.DaoPermissao;
 
 /**
@@ -86,6 +87,11 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
         });
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Botões", "Tela", "Tela Material", "Tela Login", "Tela Relatórios", "Tela Permissões" }));
 
@@ -141,6 +147,11 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        DaoPermissao.salvarPermissao(jTable);
+        JOptionPane.showMessageDialog(rootPane, "Permissão aplicada com sucesso!");
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

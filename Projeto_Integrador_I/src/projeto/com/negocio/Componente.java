@@ -41,6 +41,12 @@ public class Componente implements Serializable {
 
     public Componente() {
     }
+    
+    public Componente(String categoria, String descricao) {
+        this.categoria = categoria;
+        this.descricao = descricao;
+        
+    }
 
     public Componente(Integer id) {
         this.id = id;

@@ -57,6 +57,32 @@ public class DaoLogin {
         return resultado;
     }
     
+    public static Login buscaLogin(String nome) {
+        List resultado = null;
+        Login log = new Login();
+        try {
+
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Login where nome = '" + nome + "'");
+            resultado = q.list();
+            
+            for (Object o : resultado) {
+                log = (Login) o;
+                log.getId();
+                log.getNome();
+                log.getTipo();
+                log.getSenha();
+                log.getEstado();
+            }
+            
+        } catch (HibernateException he) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
+        }
+        return log;
+    }
+    
     public static List pesquisaLogin(String login){
         List resultado = null;
          try {
