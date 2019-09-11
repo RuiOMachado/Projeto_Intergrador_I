@@ -197,7 +197,7 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedItem().hashCode(), jTable);
+        DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedIndex(), jTable);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed

@@ -7,8 +7,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
-import static projeto.com.dao.DaoComponente.buscaComponente;
-import static projeto.com.dao.DaoLogin.buscaLogin;
 import projeto.com.negocio.Componente;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Login;
@@ -45,7 +43,8 @@ public class DaoPermissao {
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-
+            System.out.println("id login -"+ usuario);
+            System.out.println("id comp -"+ componente);
             org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = " + usuario + "AND id_componente = "+componente);
             resultado = q.list();
 
