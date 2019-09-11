@@ -43,15 +43,13 @@ public class DaoPermissao {
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-            System.out.println("id login -"+ usuario);
-            System.out.println("id comp -"+ componente);
-            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = " + usuario + "AND id_componente = "+componente);
+            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = " + usuario + "AND id_componente = " + componente);
             resultado = q.list();
 
             for (Object o : resultado) {
                 Permissao per = (Permissao) o;
                 modelo.addRow(new Object[]{
-                    per.getId(), per.getIdLogin().getNome(), per.getIdComponente().getDescricao(), per.getEstado()
+                    per.getId(), per.getIdComponente().getId(), per.getIdLogin().getNome(), per.getIdComponente().getDescricao(), per.getEstado()
                 });
             }
 
@@ -78,7 +76,7 @@ public class DaoPermissao {
             for (Object o : resultado) {
                 Permissao per = (Permissao) o;
                 modelo.addRow(new Object[]{
-                    per.getId(), per.getIdLogin().getNome(), per.getIdComponente().getDescricao(), per.getEstado()
+                    per.getId(), per.getIdComponente().getId(), per.getIdLogin().getNome(), per.getIdComponente().getDescricao(), per.getEstado()
                 });
             }
 
@@ -111,7 +109,7 @@ public class DaoPermissao {
                 }
 
             } else if ("Operador".equals(tipo)) {
-                   
+
             }
 
         } catch (HibernateException he) {
@@ -152,6 +150,21 @@ public class DaoPermissao {
         }
         return retorno;
 
+    }
+
+    private static List buscaIdComponente(int id) {
+        List resultado = null;
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Componente where id = " + id);
+            resultado = q.list();
+
+        } catch (Exception ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        }
+        return resultado;
     }
 
 }

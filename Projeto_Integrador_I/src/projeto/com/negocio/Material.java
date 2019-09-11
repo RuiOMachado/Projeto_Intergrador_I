@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -122,13 +121,5 @@ public class Material implements java.io.Serializable {
         return "%"+descricao+"%"+cor+"%"+condutividade+"%"+espessura+"%"+dencidade+"%"+calor+"%"+resistencia+"%";
     }
 
-    @XmlTransient
-    public List<ItemCalculo> getItemCalculoList() {
-        return itemCalculoList;
-    }
-
-    public void setItemCalculoList(List<ItemCalculo> itemCalculoList) {
-        this.itemCalculoList = itemCalculoList;
-    }
     
 }

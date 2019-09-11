@@ -397,7 +397,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             cResistencia.setText(String.valueOf(mat.getCalor()));
             Dados_OLD = "%" + mat.getDescricao() + "%" + mat.getCor() + "%" + mat.getCondutividade() + "%" + mat.getEspessura() + "%" + mat.getDencidade() + "%" + mat.getCalor() + "%" + mat.getResistencia() + "%";
         }
-
+        ///jmConsulta.sete
         jmConsulta.setSelectedIndex(0);
         cDescricao.requestFocus();
         btnExcluir.setEnabled(false);

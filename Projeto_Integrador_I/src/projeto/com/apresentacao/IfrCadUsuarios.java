@@ -354,7 +354,6 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
                 } else {
                     login.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(login, idUpdate);
-                    DaoPermissao.inserirPermissaoFull(DaoLogin.buscaLogin(login.getNome()), comboTipo.getSelectedItem().toString());
                     DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "EDITAR");
                     JOptionPane.showMessageDialog(null, "Registro editado com sucesso!");
                     request();

@@ -89,5 +89,9 @@ public class Permissao implements Serializable {
     public void setIdLogin(Login idLogin) {
         this.idLogin = idLogin;
     }
+    
+    public String subString() {
+        return "%"+id+"%"+idLogin+"%"+idComponente+"%";
+    }
 
 }

@@ -8,7 +8,10 @@ package projeto.com.apresentacao;
 import java.util.List;
 import javax.swing.JOptionPane;
 import projeto.com.dao.DaoGenerico;
+import projeto.com.dao.DaoLogin;
 import projeto.com.dao.DaoPermissao;
+import projeto.com.negocio.Componente;
+import projeto.com.negocio.Login;
 import projeto.com.negocio.Permissao;
 
 /**
@@ -23,10 +26,11 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
     public IfrCadPermissoes() {
         initComponents();
         DaoPermissao.listarPermissao(jTable);
-        jTable.getColumnModel().getColumn(0).setPreferredWidth(10);
-        jTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jTable.getColumnModel().getColumn(0).setPreferredWidth(5);
+        jTable.getColumnModel().getColumn(1).setPreferredWidth(5);
         jTable.getColumnModel().getColumn(2).setPreferredWidth(150);
-        jTable.getColumnModel().getColumn(3).setPreferredWidth(10);
+        jTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+        jTable.getColumnModel().getColumn(4).setPreferredWidth(5);
     }
 
     /**
@@ -66,20 +70,20 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "#", "Usuário", "Descrição", "Estado"
+                "#", "Id_Componente", "Usuário", "Descrição", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -92,8 +96,8 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable);
         if (jTable.getColumnModel().getColumnCount() > 0) {
-            jTable.getColumnModel().getColumn(2).setPreferredWidth(100);
-            jTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTable.getColumnModel().getColumn(4).setPreferredWidth(50);
         }
 
         btnSair.setText("Sair");
@@ -192,12 +196,46 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        DaoPermissao.salvarPermissao(jTable);
-        JOptionPane.showMessageDialog(rootPane, "Permissão aplicada com sucesso!");
+        Permissao  per = new Permissao();
+        Componente com = new Componente();  
+        
+        if (jTable.getSelectedRow() != -1) {
+            int id            = (int) jTable.getValueAt(jTable.getSelectedRow(), 0);
+            int id_componente = (int) jTable.getValueAt(jTable.getSelectedRow(), 1);
+            String nome       = String.valueOf(jTable.getValueAt(jTable.getSelectedRow(), 2));
+            boolean estado    = (boolean) jTable.getValueAt(jTable.getSelectedRow(), 4);
+            Login log      = DaoLogin.buscaLogin(nome);
+            
+            com.setId(id_componente);
+            per.setId(id);
+            per.setIdComponente(com);
+            per.setIdLogin(log);
+            per.setEstado(estado);
+            DaoGenerico.saveOrUpdate(per,id);
+            JOptionPane.showMessageDialog(rootPane, "Permissão aplicada com sucesso!");
+            
+            if("".equals(tfdUsuario.getText())){
+                
+                DaoPermissao.listarPermissao(jTable);
+                
+            }else{
+                
+                DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedIndex(), jTable);
+                
+            }
+            
+        }else{
+            
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma permissão para aplicar!");
+        
+        }
+        ///JOptionPane.showMessageDialog(rootPane, "Permissão aplicada com sucesso!");
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedIndex(), jTable);
+       
+            DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedIndex(), jTable);
+            
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed

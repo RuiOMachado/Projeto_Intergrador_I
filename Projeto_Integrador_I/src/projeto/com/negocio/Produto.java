@@ -57,4 +57,8 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
     
+    public String subString() {
+        return "%"+id+"%"+descricao+"%";
+    }
+    
 }
