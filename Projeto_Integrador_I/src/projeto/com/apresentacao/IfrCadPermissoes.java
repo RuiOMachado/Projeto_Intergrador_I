@@ -5,8 +5,11 @@
  */
 package projeto.com.apresentacao;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoPermissao;
+import projeto.com.negocio.Permissao;
 
 /**
  *
@@ -36,21 +39,26 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTUsuario = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        tfdUsuario = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         jCCategoria = new javax.swing.JComboBox<>();
+        btnExcluir = new javax.swing.JButton();
+        btnProcurarUsuario = new javax.swing.JButton();
+        tfdId = new javax.swing.JTextField();
 
         jLabel1.setText("Usuário");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        tfdUsuario.setEnabled(false);
+
+        btnBuscar.setText("Filtrar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -102,7 +110,24 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
             }
         });
 
-        jCCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Botão", "Menu", "Menu Item", "Tela Material", "Tela Login", "Tela Relatórios", "Tela Permissões" }));
+        jCCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Botão", "Menu", "Menu Item" }));
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnProcurarUsuario.setText("...");
+        btnProcurarUsuario.setToolTipText("Procurar Usuário");
+        btnProcurarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcurarUsuarioActionPerformed(evt);
+            }
+        });
+
+        tfdId.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,23 +137,29 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSalvar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSair))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfdId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfdUsuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnProcurarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                                .addComponent(jButton1)))))
+                                .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBuscar)))))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -137,16 +168,19 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(tfdUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar)
                     .addComponent(jLabel2)
-                    .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProcurarUsuario)
+                    .addComponent(tfdId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
-                    .addComponent(btnSalvar))
+                    .addComponent(btnSalvar)
+                    .addComponent(btnExcluir))
                 .addGap(19, 19, 19))
         );
 
@@ -162,20 +196,53 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(rootPane, "Permissão aplicada com sucesso!");
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DaoPermissao.filtroPermissao(jTUsuario.getText(), jCCategoria.getSelectedItem().toString(), jTable);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedItem().hashCode(), jTable);
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        Permissao per = new Permissao();
+        List resultado = null;
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
+
+            String idString = String.valueOf(jTable.getValueAt(jTable.getSelectedRow(), 0));
+            resultado = DaoPermissao.buscaIdPermissao(Integer.parseInt(idString));
+
+            for (Object o : resultado) {
+                per = (Permissao) o;
+            }
+
+            DaoGenerico.delete(per);
+            //DaoAuditoria.saveAuditoria("Permissao", mat.subString(), Dados_OLD, Integer.valueOf(idString), "DELETAR");
+            JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
+            DaoPermissao.listarPermissao(jTable);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnProcurarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarUsuarioActionPerformed
+        DlgBuscaUsuario busca = new DlgBuscaUsuario(null, true, this);
+        busca.setLocationRelativeTo(this);
+        busca.setVisible(true);
+    }//GEN-LAST:event_btnProcurarUsuarioActionPerformed
+
+    
+    public void definirValorUsuario(String id, String descricao) {
+        tfdId.setText(id);
+        tfdUsuario.setText(descricao);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnProcurarUsuario;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTUsuario;
     private javax.swing.JTable jTable;
+    private javax.swing.JTextField tfdId;
+    private javax.swing.JTextField tfdUsuario;
     // End of variables declaration//GEN-END:variables
 }

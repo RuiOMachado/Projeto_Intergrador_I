@@ -18,7 +18,7 @@ public class DaoLogin {
 
     public static void listarLogin(JTable jTabela) {
         List resultado = null;
-
+        String estado = "A";
         DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
         modelo.setNumRows(0);
 
@@ -26,7 +26,7 @@ public class DaoLogin {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Login order by id");
+            org.hibernate.Query q = sessao.createQuery("from Login where estado = '" + estado + "' order by id");
             resultado = q.list();
             modelo.setNumRows(0);
             for (Object o : resultado) {
@@ -83,13 +83,13 @@ public class DaoLogin {
         return log;
     }
     
-    public static List pesquisaLogin(String login){
+    public static List pesquisaLogin(String login, String estado){
         List resultado = null;
          try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Login where upper(nome) LIKE upper('%" + login + "%') Order by id");
+            org.hibernate.Query q = sessao.createQuery("from Login where upper(nome) LIKE upper('%" + login + "%') AND estado ='" +estado+ "'  Order by id");
             resultado = q.list();
             
             

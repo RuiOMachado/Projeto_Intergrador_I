@@ -37,38 +37,16 @@ public class DaoPermissao {
         return resultado;
     }
 
-    public static void filtroPermissao(String usuario, String componente, JTable jTabela) {
+    public static void filtroPermissao(int usuario, int componente, JTable jTabela) {
         List resultado = null;
-        int primiero = 0;
-        int ultimo = 0;
-        int entrou = 0;
-        System.out.println("Usuario na busca " + usuario);
-        Login log = new Login();
-        log = buscaLogin(usuario);
-        
-        System.out.println("Componente selecionado " + componente);
-        String comp = buscaComponente(componente);
-        System.out.println(comp);
-        String[] scomp = comp.split("@", 4);
-        for(String a : scomp){
-            if(entrou == 0){
-                primiero = Integer.valueOf(a);
-                System.out.println(a);
-                entrou++;
-            }else{
-                ultimo = Integer.valueOf(a);
-            }
-        }
-        System.out.println("Componente selecionado " + primiero + " and " + ultimo);
-        
         DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
         modelo.setNumRows(0);
-       
+
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = " + log.getId() + " AND id_componente between " + primiero + " AND " + ultimo);
+            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = " + usuario + "AND id_componente = "+componente);
             resultado = q.list();
 
             for (Object o : resultado) {
@@ -77,7 +55,7 @@ public class DaoPermissao {
                     per.getId(), per.getIdLogin().getNome(), per.getIdComponente().getDescricao(), per.getEstado()
                 });
             }
-            
+
             sessao.close();
 
         } catch (Exception ex) {
@@ -122,17 +100,19 @@ public class DaoPermissao {
 
             org.hibernate.Query q = sessao.createQuery("from Componente");
             resultado = q.list();
+            if ("Administrador".equals(tipo)) {
+                Permissao per = new Permissao();
+                for (Object o : resultado) {
+                    Componente com = (Componente) o;
+                    com.setId(com.getId());
+                    per.setIdLogin(login);
+                    per.setIdComponente(com);
+                    per.setEstado(true);
+                    DaoGenerico.saveOrUpdate(per, 0);
+                }
 
-            Permissao per = new Permissao();
-
-            for (Object o : resultado) {
-                Componente com = (Componente) o;
-                com.setId(com.getId());
-                per.setIdLogin(login);
-                per.setIdComponente(com);
-                per.setEstado(true);
-
-                DaoGenerico.saveOrUpdate(per, 0);
+            } else if ("Operador".equals(tipo)) {
+                   
             }
 
         } catch (HibernateException he) {
@@ -165,11 +145,6 @@ public class DaoPermissao {
                 per.getIdComponente();
                 per.getIdLogin();
                 per.getEstado();
-                //testes
-                System.out.println("Usuário -" + per.getIdLogin().getNome());
-                System.out.println("id Usuário -" + per.getIdLogin().getId());
-                System.out.println("id componente -" + per.getIdComponente().getId());
-                System.out.println("estado -" + per.getEstado());
                 retorno = per.getEstado();
             }
 

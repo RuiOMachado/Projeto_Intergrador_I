@@ -5,7 +5,6 @@
  */
 package projeto.com.dao;
 
-import com.sun.javafx.css.Combinator;
 import java.util.List;
 import org.hibernate.Session;
 import projeto.com.apresentacao.NewLogin;

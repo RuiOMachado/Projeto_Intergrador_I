@@ -2,7 +2,6 @@ package projeto.com.apresentacao;
 
 import java.awt.Event;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +10,6 @@ import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
 import projeto.com.dao.DaoPermissao;
-import projeto.com.negocio.Componente;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
 
@@ -24,9 +22,6 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     int codigoTabela = 0;
     int idUpdate = 0;
     String Dados_OLD = "";
-    ArrayList<Componente> componente = new ArrayList();
-
-    ;
 
     /**
      * Creates new form IfrCad_Materiais
