@@ -35,7 +35,7 @@ public class DaoPermissao {
         return resultado;
     }
 
-    public static void filtroPermissao(int usuario, int componente, JTable jTabela) {
+    public static void filtroPermissao(int usuario, String componente, JTable jTabela) {
         List resultado = null;
         DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
         modelo.setNumRows(0);
@@ -43,7 +43,9 @@ public class DaoPermissao {
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = " + usuario + "AND id_componente = " + componente);
+            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = " + usuario+" order by id");
+            
+            
             resultado = q.list();
 
             for (Object o : resultado) {
@@ -117,15 +119,11 @@ public class DaoPermissao {
         }
     }
 
-    public static void salvarPermissao(JTable tabela) {
-        //recebe a tela como parametro (lá de salvar permissão)
-
-    }
 
     //metodo insere a permisão de acordo com o usuario, em cada botao
     //metodo verifica a permissao do banco para o componente
     //basta na chamada do metodo colocar o id cadastrado no banco
-    public static boolean inserirPermissaoComponente(Login login, int id_comp) {
+    public static boolean inserirPermissaoComponente(Login login, int id_comp, boolean estado_atual) {
         Login l = DaoLogin.buscaLogin(login.getNome());
         List resultado = null;
         boolean retorno = false;
@@ -145,26 +143,21 @@ public class DaoPermissao {
                 retorno = per.getEstado();
             }
 
-        } catch (Exception ex) {
+        } catch (HibernateException ex) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
+        if(retorno == true && estado_atual == true){
+            
+            retorno = true;
+            
+        }else{
+            
+            retorno = false;
+            
+        }
+        
         return retorno;
-
-    }
-
-    private static List buscaIdComponente(int id) {
-        List resultado = null;
-        try {
-            Session sessao = HibernateUtil.getSessionFactory().openSession();
-            sessao.beginTransaction();
-
-            org.hibernate.Query q = sessao.createQuery("from Componente where id = " + id);
-            resultado = q.list();
-
-        } catch (Exception ex) {
-            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
-        }
-        return resultado;
+        
     }
 
 }

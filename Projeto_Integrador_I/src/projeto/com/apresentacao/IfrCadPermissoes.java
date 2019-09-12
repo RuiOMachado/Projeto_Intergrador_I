@@ -27,9 +27,9 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
         initComponents();
         DaoPermissao.listarPermissao(jTable);
         jTable.getColumnModel().getColumn(0).setPreferredWidth(5);
-        jTable.getColumnModel().getColumn(1).setPreferredWidth(5);
-        jTable.getColumnModel().getColumn(2).setPreferredWidth(150);
-        jTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+        jTable.getColumnModel().getColumn(1).setPreferredWidth(6);
+        jTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTable.getColumnModel().getColumn(3).setPreferredWidth(200);
         jTable.getColumnModel().getColumn(4).setPreferredWidth(5);
     }
 
@@ -220,7 +220,7 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
                 
             }else{
                 
-                DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedIndex(), jTable);
+                DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedItem().toString(), jTable);
                 
             }
             
@@ -234,7 +234,7 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
        
-            DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedIndex(), jTable);
+            DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedItem().toString(), jTable);
             
     }//GEN-LAST:event_btnBuscarActionPerformed
 

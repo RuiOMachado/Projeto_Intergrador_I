@@ -1,5 +1,4 @@
 package projeto.com.dao;
-import com.sun.jndi.ldap.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;

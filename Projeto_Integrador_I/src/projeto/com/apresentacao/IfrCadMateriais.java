@@ -28,6 +28,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
      */
     public IfrCadMateriais() {
         initComponents();
+        startComponents();
     }
 
     /**
@@ -407,14 +408,15 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
     private void jmConsultaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jmConsultaFocusLost
         if (jmConsulta.getSelectedIndex() == 1) {
-            btnEditar.setEnabled(true);
-            btnExcluir.setEnabled(true);
-            btnSalvar.setEnabled(false);
+            btnEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2, true));
+            btnExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3, true));
+            btnSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1, false));
             jBPesquisa.requestFocus();
+            
         } else {
-            btnEditar.setEnabled(false);
-            btnExcluir.setEnabled(false);
-            btnSalvar.setEnabled(true);
+            btnEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2, false));
+            btnExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3, false));
+            btnSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1, true));
         }
     }//GEN-LAST:event_jmConsultaFocusLost
 
@@ -461,15 +463,26 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
     //tentar fazer este metodo generico, mas vamos deixar em observação pra esta sprint
     public void startComponents() {
-        try {
-            btnSalvar.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1));
-            btnEditar.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2));
-            btnExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3));
-        } catch (Exception e) {
-            System.out.println(" erro "+e);
-        }
-
+            btnSalvar.setEnabled       (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,1,true));
+            btnEditar.setEnabled       (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,2,true));
+            btnExcluir.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,3,true));
+            jmConsulta.setEnabledAt    (0, DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            jmConsulta.setEnabledAt    (1, DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,4,true));
+            
+            ///componentes menu cadastro
+            cDescricao.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            cCondutividade.setEditable(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            cEspessura.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            jCCor.setEnabled          (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            cCalor.setEnabled         (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            cDensidade.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            
+            //componentes menu consulta
+            cPesquisa.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,4,true));
+            jBPesquisa.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,4,true));
+            
     }
+   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
