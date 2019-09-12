@@ -26,6 +26,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
     public IfrCadUsuarios() {
         initComponents();
         DaoLogin.listarLogin(jTableUser);
+        startComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -317,14 +318,14 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
     private void jTabbedPane2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusLost
         if (jTabbedPane2.getSelectedIndex() == 1) {
-            jBEditar.setEnabled(true);
-            jBExcluir.setEnabled(true);
-            jBSalvar.setEnabled(false);
+            jBEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
+            jBExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
+            jBSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,false));
             jBPesquisa.requestFocus();
         } else {
-            jBEditar.setEnabled(false);
-            jBExcluir.setEnabled(false);
-            jBSalvar.setEnabled(true);
+            jBEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,false));
+            jBExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,false));
+            jBSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
             btnAtivar.setEnabled(false);
         }
     }//GEN-LAST:event_jTabbedPane2FocusLost
@@ -385,9 +386,9 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         }
         jTabbedPane2.setSelectedIndex(0);
         cNome.requestFocus();
-        jBExcluir.setEnabled(false);
-        jBEditar.setEnabled(false);
-        jBSalvar.setEnabled(true);
+        jBExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
+        jBEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
+        jBSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
         comboTipo.setEnabled(true);
     }//GEN-LAST:event_jBEditarActionPerformed
 
@@ -444,14 +445,29 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAtivarActionPerformed
 
+    public void startComponents() {
+        jBEditar.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
+        jBExcluir.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
+        jBSalvar.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
+        
+        ///Componentes menu cadastro
+        cNome.setEnabled         (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
+        cSenha.setEnabled        (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
+        comboTipo.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
+        
+        ///componente menu consulta
+        jTabbedPane2.setEnabledAt(1,DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,10,true));
+        jTabbedPane2.setEnabledAt(0,DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
+    }
+    
     public void request() {
         cNome.setText("");
         cSenha.setText("");
         jTabbedPane2.setSelectedIndex(1);
         DaoGenerico.listarLogin(jTableUser);
-        jBEditar.setEnabled(true);
-        jBExcluir.setEnabled(true);
-        jBSalvar.setEnabled(false);
+        jBEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
+        jBExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
+        jBSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,false));
         comboTipo.setSelectedIndex(0);
     }
 
