@@ -1,5 +1,6 @@
 package projeto.com.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -35,7 +36,7 @@ public class DaoPermissao {
         return resultado;
     }
 
-    public static void filtroPermissao(int usuario, String componente, JTable jTabela) {
+    public static void filtroPermissao(int usuario, Componente componente, JTable jTabela) {
         List resultado = null;
         DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
         modelo.setNumRows(0);
@@ -43,9 +44,7 @@ public class DaoPermissao {
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = " + usuario+" order by id");
-            
-            
+            org.hibernate.Query q = sessao.createQuery("select p from Permissao p where p.idLogin =" + usuario + " AND p.idComponente.categoria = '" + componente.getCategoria() + "' order by id");
             resultado = q.list();
 
             for (Object o : resultado) {
@@ -119,7 +118,6 @@ public class DaoPermissao {
         }
     }
 
-
     //metodo insere a permisão de acordo com o usuario, em cada botao
     //metodo verifica a permissao do banco para o componente
     //basta na chamada do metodo colocar o id cadastrado no banco
@@ -146,18 +144,52 @@ public class DaoPermissao {
         } catch (HibernateException ex) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
-        if(retorno == true && estado_atual == true){
-            
+        if (retorno == true && estado_atual == true) {
+
             retorno = true;
-            
-        }else{
-            
+
+        } else {
+
             retorno = false;
-            
+
         }
-        
+
         return retorno;
-        
+
+    }
+
+    //conferir com fabricio
+    public static List<Permissao> iniciaPermissao(Login login, ArrayList<Componente> componente) {
+        Login log = DaoLogin.buscaLogin(login.getNome());
+        ArrayList<Permissao> permissao = null;
+        List resultado = null;
+        boolean estado = false;
+        int id = 0;
+
+        for (Componente comp : componente) {
+
+            try {
+                Session sessao = HibernateUtil.getSessionFactory().openSession();
+                sessao.beginTransaction();
+                org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = '" + log.getId() + "' AND id_componente = '" + comp.getId() + "'");
+                resultado = q.list();
+
+                for (Object o : resultado) {
+                    Permissao per = (Permissao) o;
+                    estado = per.getEstado();
+                    id = per.getId();
+                }
+
+            } catch (HibernateException ex) {
+                DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+            }
+            Permissao p = new Permissao();
+            p.setId(id);
+            p.setEstado(estado);
+            p.setIdLogin(login);
+            permissao.add(p);
+        }
+        return permissao;
     }
 
 }

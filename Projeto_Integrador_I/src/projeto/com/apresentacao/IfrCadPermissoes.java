@@ -220,7 +220,7 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
                 
             }else{
                 
-                DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedItem().toString(), jTable);
+                //DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedItem().toString(), jTable);
                 
             }
             
@@ -234,7 +234,9 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
        
-            DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), jCCategoria.getSelectedItem().toString(), jTable);
+            Componente componente = new Componente();
+            componente.setCategoria(jCCategoria.getSelectedItem().toString());
+            DaoPermissao.filtroPermissao(Integer.parseInt(tfdId.getText()), componente, jTable);
             
     }//GEN-LAST:event_btnBuscarActionPerformed
 

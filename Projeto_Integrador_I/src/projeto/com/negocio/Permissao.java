@@ -45,6 +45,7 @@ public class Permissao implements Serializable {
 
     public Permissao() {
     }
+    
 
     public Permissao(Integer id) {
         this.id = id;
