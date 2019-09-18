@@ -38,6 +38,7 @@ public class Menu extends javax.swing.JFrame {
         jmiPermissoes = new javax.swing.JMenuItem();
         menuCalculo = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         menuRelatorio = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
@@ -129,7 +130,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(menuCadastro);
 
-        menuCalculo.setText("Cálculos");
+        menuCalculo.setText("Lançamento");
 
         jMenuItem2.setText("Calcular Resistência Térmica");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +139,9 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         menuCalculo.add(jMenuItem2);
+
+        jMenuItem6.setText("Projeto");
+        menuCalculo.add(jMenuItem6);
 
         jMenuBar1.add(menuCalculo);
 
@@ -259,6 +263,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jmiAuditoria;
     private javax.swing.JMenuItem jmiLogs;
     private javax.swing.JMenuItem jmiPermissoes;
