@@ -25,12 +25,7 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
      */
     public IfrCadPermissoes() {
         initComponents();
-        DaoPermissao.listarPermissao(jTable);
-        jTable.getColumnModel().getColumn(0).setPreferredWidth(5);
-        jTable.getColumnModel().getColumn(1).setPreferredWidth(6);
-        jTable.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTable.getColumnModel().getColumn(3).setPreferredWidth(200);
-        jTable.getColumnModel().getColumn(4).setPreferredWidth(5);
+        redimencionarTabela();
     }
 
     /**
@@ -269,6 +264,15 @@ public class IfrCadPermissoes extends javax.swing.JInternalFrame {
     public void definirValorUsuario(String id, String descricao) {
         tfdId.setText(id);
         tfdUsuario.setText(descricao);
+    }
+    
+    public void redimencionarTabela(){
+        DaoPermissao.listarPermissao(jTable);
+        jTable.getColumnModel().getColumn(0).setPreferredWidth(5);
+        jTable.getColumnModel().getColumn(1).setPreferredWidth(6);
+        jTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTable.getColumnModel().getColumn(3).setPreferredWidth(200);
+        jTable.getColumnModel().getColumn(4).setPreferredWidth(5);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

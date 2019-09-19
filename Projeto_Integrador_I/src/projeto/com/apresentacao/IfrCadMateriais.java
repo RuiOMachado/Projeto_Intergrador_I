@@ -356,6 +356,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             cCondutividade.setText("");
             cEspessura.setText("");
             cDensidade.setText("");
+            cFatorSolar.setText("");
             jmConsulta.setSelectedIndex(1);
             DaoMaterial.listarMaterial(jTabela);  //metodo atualiza tabela
 

@@ -141,6 +141,11 @@ public class Menu extends javax.swing.JFrame {
         menuCalculo.add(jMenuItem2);
 
         jMenuItem6.setText("Projeto");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         menuCalculo.add(jMenuItem6);
 
         jMenuBar1.add(menuCalculo);
@@ -233,6 +238,12 @@ public class Menu extends javax.swing.JFrame {
         jDesk.add(cal);
         cal.setVisible(true);
     }//GEN-LAST:event_jmiPermissoesActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        IfrCalcular cal = new IfrCalcular();
+        jDesk.add(cal);
+        cal.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     public void startComponents() {
         //menus

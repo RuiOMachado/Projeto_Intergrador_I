@@ -464,7 +464,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         cNome.setText("");
         cSenha.setText("");
         jTabbedPane2.setSelectedIndex(1);
-        DaoGenerico.listarLogin(jTableUser);
+        DaoLogin.listarLogin(jTableUser);
         jBEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
         jBExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
         jBSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,false));
