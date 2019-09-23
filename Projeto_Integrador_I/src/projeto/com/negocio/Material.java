@@ -2,7 +2,6 @@
 package projeto.com.negocio;
 
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,8 +23,7 @@ import javax.persistence.Table;
 public class Material implements java.io.Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
-    
-
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -42,13 +40,13 @@ public class Material implements java.io.Serializable {
     @Column(name = "cor")
     private String cor;
     @Column(name = "fatorsolar")
-    private String fatorsolar;
+    private BigDecimal fatorsolar;
 
-    public String getFatorsolar() {
+    public BigDecimal getFatorsolar() {
         return fatorsolar;
     }
 
-    public void setFatorsolar(String fatorsolar) {
+    public void setFatorsolar(BigDecimal fatorsolar) {
         this.fatorsolar = fatorsolar;
     }
 
@@ -110,6 +108,5 @@ public class Material implements java.io.Serializable {
     public String subString() {
         return "%"+descricao+"%"+cor+"%"+condutividade+"%"+dencidade+"%"+calor+"%"+fatorsolar+"%";
     }
-
     
 }

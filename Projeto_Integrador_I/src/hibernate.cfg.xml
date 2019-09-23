@@ -51,10 +51,14 @@ Contributor(s):
     <mapping class="projeto.com.negocio.Log"/>
     <mapping class="projeto.com.negocio.Auditoria"/>
     <mapping class="projeto.com.negocio.Parametro"/>
-    <mapping class="projeto.com.negocio.Calculo"/>
-    <mapping class="projeto.com.negocio.ItemCalculo"/>
-    <mapping class="projeto.com.negocio.Produto"/>
     <mapping class="projeto.com.negocio.Permissao"/>
     <mapping class="projeto.com.negocio.Componente"/>
+    <mapping class="projeto.com.negocio.Projeto"/>
+    <mapping class="projeto.com.negocio.ItemMaterial"/>
+    <mapping class="projeto.com.negocio.ItemFace"/>
+    <mapping class="projeto.com.negocio.Face"/>
+    <mapping class="projeto.com.negocio.Cidade"/>
+    <mapping class="projeto.com.negocio.Calculo"/>
+    <mapping class="projeto.com.negocio.Ambiente"/>
   </session-factory>
 </hibernate-configuration>
