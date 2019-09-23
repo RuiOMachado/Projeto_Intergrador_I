@@ -167,12 +167,11 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
         for (Object o : resultado) {
             Material mat = (Material) o;
             material.setDescricao(mat.getDescricao());
-            material.setResistencia(mat.getResistencia());
             material.setCalor(mat.getCalor());
             material.setDencidade(mat.getDencidade());
             material.setCor(mat.getCor());
             material.setCondutividade(mat.getCondutividade());
-            material.setEspessura(mat.getEspessura());
+            material.setFatorsolar(mat.getFatorsolar());
         }
         ifrCalculo.definirValorMaterial(String.valueOf(codigoTabela), material.getDescricao());
         dispose();
@@ -203,7 +202,7 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
         for (Object o : resultado) {
             Material mat = (Material) o;
             modelo.addRow(new Object[]{
-                mat.getId(), mat.getDescricao(), mat.getCor(), mat.getCondutividade(), mat.getEspessura(), mat.getDencidade(), mat.getCalor(), mat.getResistencia()
+                mat.getId(), mat.getDescricao(), mat.getCor(), mat.getCondutividade(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
             });
         }
     }

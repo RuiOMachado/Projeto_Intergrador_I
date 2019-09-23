@@ -12,6 +12,12 @@
     <class>projeto.com.negocio.Menu</class>
     <class>projeto.com.negocio.Componente</class>
     <class>projeto.com.negocio.Permissao</class>
+    <class>projeto.com.negocio.Face</class>
+    <class>projeto.com.negocio.ItemFace</class>
+    <class>projeto.com.negocio.ItemMaterial</class>
+    <class>projeto.com.negocio.Cidade</class>
+    <class>projeto.com.negocio.Ambiente</class>
+    <class>projeto.com.negocio.Projeto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Projeto_Integrador_1"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

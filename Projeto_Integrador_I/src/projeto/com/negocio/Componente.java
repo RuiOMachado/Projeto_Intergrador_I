@@ -36,6 +36,8 @@ public class Componente implements Serializable {
     private String categoria;
     @Column(name = "descricao")
     private String descricao;
+    @Column(name = "nome_componente")
+    private String nome_componente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idComponente")
     private List<Permissao> permissaoList;
 
@@ -82,6 +84,14 @@ public class Componente implements Serializable {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public String getNome_componente() {
+        return nome_componente;
+    }
+
+    public void setNome_componente(String nome_componente) {
+        this.nome_componente = nome_componente;
     }
     
     

@@ -24,7 +24,7 @@ import javax.persistence.Table;
 public class Material implements java.io.Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
-    private List<ItemCalculo> itemCalculoList;
+    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,16 +35,22 @@ public class Material implements java.io.Serializable {
     private String descricao;
     @Column(name = "condutividade")
     private BigDecimal condutividade;
-    @Column(name = "espessura")
-    private BigDecimal espessura;
     @Column(name = "dencidade")
     private BigDecimal dencidade;
     @Column(name = "calor")
     private BigDecimal calor;
-    @Column(name = "resistencia")
-    private BigDecimal resistencia;
     @Column(name = "cor")
     private String cor;
+    @Column(name = "fatorsolar")
+    private String fatorsolar;
+
+    public String getFatorsolar() {
+        return fatorsolar;
+    }
+
+    public void setFatorsolar(String fatorsolar) {
+        this.fatorsolar = fatorsolar;
+    }
 
     public Material() {
     }
@@ -77,14 +83,6 @@ public class Material implements java.io.Serializable {
         this.condutividade = condutividade;
     }
 
-    public BigDecimal getEspessura() {
-        return espessura;
-    }
-
-    public void setEspessura(BigDecimal espessura) {
-        this.espessura = espessura;
-    }
-
     public BigDecimal getDencidade() {
         return dencidade;
     }
@@ -101,14 +99,6 @@ public class Material implements java.io.Serializable {
         this.calor = calor;
     }
 
-    public BigDecimal getResistencia() {
-        return resistencia;
-    }
-
-    public void setResistencia(BigDecimal resistencia) {
-        this.resistencia = resistencia;
-    }
-
     public String getCor() {
         return cor;
     }
@@ -118,7 +108,7 @@ public class Material implements java.io.Serializable {
     }
     
     public String subString() {
-        return "%"+descricao+"%"+cor+"%"+condutividade+"%"+espessura+"%"+dencidade+"%"+calor+"%"+resistencia+"%";
+        return "%"+descricao+"%"+cor+"%"+condutividade+"%"+dencidade+"%"+calor+"%"+fatorsolar+"%";
     }
 
     

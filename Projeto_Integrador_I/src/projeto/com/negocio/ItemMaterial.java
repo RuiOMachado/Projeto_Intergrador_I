@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projeto.com.negocio;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,11 +20,12 @@ import javax.persistence.Table;
  * @author Douglas
  */
 @Entity
-@Table(name="item_calculo"
+@Table(name="item_material"
     ,schema="public"
 )
-public class ItemCalculo implements Serializable {
+public class ItemMaterial implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -40,20 +39,24 @@ public class ItemCalculo implements Serializable {
     private BigDecimal resistenciaTotal;
     @Column(name = "transmissividade_ter")
     private BigDecimal transmissividadeTer;
-    @JoinColumn(name = "id_calculo", referencedColumnName = "id")
+    @Column(name = "indice_radiacao")
+    private BigDecimal indiceRadiacao;
+    @Column(name = "espessura")
+    private BigDecimal espessura;
+    @Column(name = "resistencia")
+    private BigDecimal resistencia;
+    @Column(name = "total_qfo")
+    private BigDecimal totalQfo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemmaterial")
+    private List<ItemFace> itemFaceList;
+    @JoinColumn(name = "id_face", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Calculo idCalculo;
-    @JoinColumn(name = "id_material", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Material idMaterial;
-    @JoinColumn(name = "id_produto", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Produto idProduto;
+    private Face idFace;
 
-    public ItemCalculo() {
+    public ItemMaterial() {
     }
 
-    public ItemCalculo(Integer id) {
+    public ItemMaterial(Integer id) {
         this.id = id;
     }
 
@@ -97,28 +100,52 @@ public class ItemCalculo implements Serializable {
         this.transmissividadeTer = transmissividadeTer;
     }
 
-    public Calculo getIdCalculo() {
-        return idCalculo;
+    public BigDecimal getIndiceRadiacao() {
+        return indiceRadiacao;
     }
 
-    public void setIdCalculo(Calculo idCalculo) {
-        this.idCalculo = idCalculo;
+    public void setIndiceRadiacao(BigDecimal indiceRadiacao) {
+        this.indiceRadiacao = indiceRadiacao;
     }
 
-    public Material getIdMaterial() {
-        return idMaterial;
+    public BigDecimal getEspessura() {
+        return espessura;
     }
 
-    public void setIdMaterial(Material idMaterial) {
-        this.idMaterial = idMaterial;
+    public void setEspessura(BigDecimal espessura) {
+        this.espessura = espessura;
     }
 
-    public Produto getIdProduto() {
-        return idProduto;
+    public BigDecimal getResistencia() {
+        return resistencia;
     }
 
-    public void setIdProduto(Produto idProduto) {
-        this.idProduto = idProduto;
+    public void setResistencia(BigDecimal resistencia) {
+        this.resistencia = resistencia;
+    }
+
+    public BigDecimal getTotalQfo() {
+        return totalQfo;
+    }
+
+    public void setTotalQfo(BigDecimal totalQfo) {
+        this.totalQfo = totalQfo;
+    }
+
+    public List<ItemFace> getItemFaceList() {
+        return itemFaceList;
+    }
+
+    public void setItemFaceList(List<ItemFace> itemFaceList) {
+        this.itemFaceList = itemFaceList;
+    }
+
+    public Face getIdFace() {
+        return idFace;
+    }
+
+    public void setIdFace(Face idFace) {
+        this.idFace = idFace;
     }
     
 }

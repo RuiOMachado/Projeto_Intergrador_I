@@ -7,7 +7,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
-import projeto.com.negocio.ItemCalculo;
 import projeto.com.negocio.Log;
 
 /**
@@ -29,10 +28,10 @@ public class DaoItemCalculo {
             resultado = q.list();
 
             for (Object o : resultado) {
-                ItemCalculo item = (ItemCalculo) o;
-                modelo.addRow(new Object[]{
-                    item.getId(), item.getIdMaterial().getId(), item.getIdMaterial().getDescricao(), item.getIdMaterial().getResistencia()
-                });
+               // ItemCalculo item = (ItemCalculo) o;
+               // modelo.addRow(new Object[]{
+                //    item.getId(), item.getIdMaterial().getId(), item.getIdMaterial().getDescricao(), item.getIdMaterial().getResistencia()
+              //  });
             }
 
         } catch (HibernateException he) {

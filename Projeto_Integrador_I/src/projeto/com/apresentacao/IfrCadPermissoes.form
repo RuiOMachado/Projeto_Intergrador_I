@@ -23,9 +23,9 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnExcluirPermissoes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSalvarPermissoes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSair" min="-2" pref="70" max="-2" attributes="0"/>
                   </Group>
@@ -40,13 +40,13 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="tfdUsuario" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnProcurarUsuario" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="btnProcurarUsuarioPermissoes" min="-2" pref="46" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jCCategoria" min="-2" pref="149" max="-2" attributes="0"/>
+                              <Component id="cmbCategoriaPermissoes" min="-2" pref="149" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnBuscarPermissoes" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -62,10 +62,10 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfdUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBuscarPermissoes" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnProcurarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbCategoriaPermissoes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnProcurarUsuarioPermissoes" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfdId" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -73,8 +73,8 @@
               <EmptySpace pref="32" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSair" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSalvarPermissoes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnExcluirPermissoes" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
@@ -92,12 +92,12 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnBuscar">
+    <Component class="javax.swing.JButton" name="btnBuscarPermissoes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtrar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarPermissoesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -167,15 +167,15 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnSalvar">
+    <Component class="javax.swing.JButton" name="btnSalvarPermissoes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarPermissoesActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jCCategoria">
+    <Component class="javax.swing.JComboBox" name="cmbCategoriaPermissoes">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -190,21 +190,21 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnExcluir">
+    <Component class="javax.swing.JButton" name="btnExcluirPermissoes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirPermissoesActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnProcurarUsuario">
+    <Component class="javax.swing.JButton" name="btnProcurarUsuarioPermissoes">
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
         <Property name="toolTipText" type="java.lang.String" value="Procurar Usu&#xe1;rio"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcurarUsuarioActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcurarUsuarioPermissoesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfdId">

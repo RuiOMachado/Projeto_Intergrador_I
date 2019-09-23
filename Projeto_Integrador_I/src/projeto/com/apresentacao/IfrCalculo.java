@@ -15,10 +15,9 @@ import projeto.com.dao.DaoItemCalculo;
 import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
 import projeto.com.negocio.Calculo;
-import projeto.com.negocio.ItemCalculo;
+import projeto.com.negocio.ItemMaterial;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
-import projeto.com.negocio.Produto;
 
 /**
  *
@@ -70,6 +69,7 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnNovoCalculo = new javax.swing.JButton();
@@ -142,6 +142,8 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
 
         jLabel15.setText("Tipo");
 
+        jButton3.setText("+");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -178,10 +180,15 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 90, Short.MAX_VALUE)
                             .addComponent(tfdArea, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(65, 65, 65)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton3)))))
                 .addContainerGap(139, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -204,10 +211,11 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(tfdFace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
@@ -411,11 +419,11 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         Material material = new Material();
         try {    
-            ItemCalculo item = new ItemCalculo();
+            ItemMaterial item = new ItemMaterial();
             Calculo cal = new Calculo();
             cal.setId(Integer.parseInt(tfdIdFace.getText()));
-            Produto pro = new Produto();
-            pro.setId(1);
+            //Produto pro = new Produto();
+            //pro.setId(1);
             List resultado = null;
             if (tfdDescricaoMaterial.getText().length() > 0) {
                 resultado = DaoMaterial.buscaIdMaterial(Integer.parseInt(tfdIdMaterial.getText()));
@@ -424,16 +432,14 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
                     Material mat = (Material) o;
                     material.setId(mat.getId());
                     material.setDescricao(mat.getDescricao());
-                    material.setResistencia(mat.getResistencia());
                     material.setCalor(mat.getCalor());
                     material.setDencidade(mat.getDencidade());
                     material.setCor(mat.getCor());
                     material.setCondutividade(mat.getCondutividade());
-                    material.setEspessura(mat.getEspessura());
                 }
-                item.setIdMaterial(material);
-                item.setIdCalculo(cal);
-                item.setIdProduto(pro);
+                //item.setIdMaterial(material);
+               // item.setIdCalculo(cal);
+               // item.setIdProduto(pro);
                 item.setResistenciaInt(BigDecimal.valueOf(10));
                 item.setResistenciaExt(BigDecimal.valueOf(10));
                 item.setResistenciaTotal(BigDecimal.valueOf(Double.parseDouble(lblRt.getText())));
@@ -467,8 +473,8 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
             Calculo cal = new Calculo();
 
             if (tfdFace.getText().length() > 0) {
-                cal.setDescricao(tfdFace.getText());
-                cal.setSituacao("A");
+                //cal.setDescricao(tfdFace.getText());
+                //cal.setSituacao("A");
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(cal, codigoTabela);
@@ -480,7 +486,7 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
                 }
                 habilitarBotoes();
                 tfdIdFace.setText(String.valueOf(cal.getId()));
-                tfdDescricao.setText(cal.getDescricao());
+                //tfdDescricao.setText(cal.getDescricao());
             } else {
                 JOptionPane.showMessageDialog(null, "Erro ao inserir Registro!");
             }
@@ -539,6 +545,7 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

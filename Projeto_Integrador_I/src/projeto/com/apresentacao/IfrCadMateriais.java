@@ -40,40 +40,36 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jmConsulta = new javax.swing.JTabbedPane();
+        jmConsultaMaterial = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cDescricao = new javax.swing.JTextField();
-        cCondutividade = new javax.swing.JTextField();
+        tfdDescricaoMaterial = new javax.swing.JTextField();
+        tfdCondutividadeMaterial = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cEspessura = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        cDensidade = new javax.swing.JTextField();
+        tfdDesnsidadeMaterial = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jCCor = new javax.swing.JComboBox<>();
+        jcbCorMaterial = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        cCalor = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        cResistencia = new javax.swing.JTextField();
-        cFatorSolar = new javax.swing.JTextField();
+        tfdCalorMaterial = new javax.swing.JTextField();
+        tfdFatorSolarMaterial = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jBPesquisa = new javax.swing.JButton();
         cPesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabela = new javax.swing.JTable();
-        btnExcluir = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnSalvar = new javax.swing.JButton();
+        btnExcluirMaterial = new javax.swing.JButton();
+        btnEditarMaterial = new javax.swing.JButton();
+        btnSalvarMaterial = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
         setTitle("Cadastro de Materiais");
 
-        jmConsulta.addFocusListener(new java.awt.event.FocusAdapter() {
+        jmConsultaMaterial.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jmConsultaFocusLost(evt);
+                jmConsultaMaterialFocusLost(evt);
             }
         });
 
@@ -81,17 +77,18 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
         jLabel1.setText("<html> <font>Descrição </font> <font color=RED>*</font> <font>:</font> </html>");
 
-        cDescricao.setToolTipText("Descrição do material");
+        tfdDescricaoMaterial.setToolTipText("Descrição do material");
 
-        cCondutividade.setToolTipText("Condutividade térmica do material");
+        tfdCondutividadeMaterial.setToolTipText("Condutividade térmica do material");
+        tfdCondutividadeMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdCondutividadeMaterialActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("<html> <font>Condutividade Térmica (W/mK )</font> <font color=RED>*</font> <font>:</font> </html>");
 
-        cEspessura.setToolTipText("Espessura do Material");
-
-        jLabel4.setText("<html> <font>Espessura Equivalente ( cm )</font> <font color=RED>*</font> <font>:</font> </html>");
-
-        cDensidade.setToolTipText("Densidade do material");
+        tfdDesnsidadeMaterial.setToolTipText("Densidade do material");
 
         jLabel5.setText("<html> <font>Densidade Equivalente (Kg/m³) </font> <font color=RED>*</font> <font>:</font> </html>");
 
@@ -101,20 +98,16 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
         jLabel6.setText("<html> <font>Cor </font> <font color=RED>*</font> <font>:</font> </html>");
 
-        jCCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Escura", "Média", "Clara" }));
+        jcbCorMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Escura", "Média", "Clara" }));
 
         jLabel7.setText("<html> <font> Calor Específico (kJ/kg K) </font> <font color=RED>*</font> <font>:</font> </html>");
 
-        cCalor.setToolTipText("Calor específico do Material");
-        cCalor.addKeyListener(new java.awt.event.KeyAdapter() {
+        tfdCalorMaterial.setToolTipText("Calor específico do Material");
+        tfdCalorMaterial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                cCalorKeyReleased(evt);
+                tfdCalorMaterialKeyReleased(evt);
             }
         });
-
-        jLabel9.setText("<html> <font> Resistência Térmica (m²  K/W) </font> <font color=RED>*</font> <font>:</font> </html>");
-
-        cResistencia.setEnabled(false);
 
         jLabel2.setText("Fator Solar");
 
@@ -126,28 +119,24 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cFatorSolar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel8))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdDescricaoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(cResistencia, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jCCor, javax.swing.GroupLayout.Alignment.LEADING, 0, 210, Short.MAX_VALUE)
-                                .addComponent(cCalor, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cDensidade, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cEspessura, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cCondutividade, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jcbCorMaterial, javax.swing.GroupLayout.Alignment.LEADING, 0, 210, Short.MAX_VALUE)
+                                .addComponent(tfdCalorMaterial, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfdDesnsidadeMaterial, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfdCondutividadeMaterial, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(tfdFatorSolarMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 205, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -156,44 +145,33 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfdDescricaoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbCorMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cCondutividade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfdCondutividadeMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cEspessura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cDensidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfdDesnsidadeMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cCalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cResistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfdCalorMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(cFatorSolar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfdFatorSolarMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addContainerGap())
         );
 
-        jmConsulta.addTab("Cadastro", jPanel1);
+        jmConsultaMaterial.addTab("Cadastro", jPanel1);
 
         jBPesquisa.setText("Busca");
         jBPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -204,20 +182,20 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
         jTabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Descrição", "Cor", "Espessura", "Densidade", "Calor", "Resistência"
+                "ID", "Descrição", "Cor", "Densidade", "Calor", "Fator Solar"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Long.class, java.lang.Long.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Long.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -253,31 +231,31 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                     .addComponent(cPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        jmConsulta.addTab("Consulta", jPanel2);
+        jmConsultaMaterial.addTab("Consulta", jPanel2);
 
-        btnExcluir.setText("Excluir");
-        btnExcluir.setEnabled(false);
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluirMaterial.setText("Excluir");
+        btnExcluirMaterial.setEnabled(false);
+        btnExcluirMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
+                btnExcluirMaterialActionPerformed(evt);
             }
         });
 
-        btnEditar.setText("Editar");
-        btnEditar.setEnabled(false);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarMaterial.setText("Editar");
+        btnEditarMaterial.setEnabled(false);
+        btnEditarMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnEditarMaterialActionPerformed(evt);
             }
         });
 
-        btnSalvar.setText("Salvar");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvarMaterial.setText("Salvar");
+        btnSalvarMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
+                btnSalvarMaterialActionPerformed(evt);
             }
         });
 
@@ -294,15 +272,15 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jmConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jmConsultaMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExcluirMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditarMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalvarMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -310,13 +288,13 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jmConsulta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jmConsultaMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
+                    .addComponent(btnEditarMaterial)
                     .addComponent(btnSair)
-                    .addComponent(btnSalvar)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnSalvarMaterial)
+                    .addComponent(btnExcluirMaterial))
                 .addContainerGap())
         );
 
@@ -325,19 +303,17 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+    private void btnSalvarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMaterialActionPerformed
         try {
             Material mat = new Material();
 
-            if (cDescricao.getText().length() > 0 && (!jCCor.getSelectedItem().toString().equals("Selecione")) && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0 && cDensidade.getText().length() > 0 && cCondutividade.getText().length() > 0 && cEspessura.getText().length() > 0) {
+            if (tfdDescricaoMaterial.getText().length() > 0 && (!jcbCorMaterial.getSelectedItem().toString().equals("Selecione")) && tfdCondutividadeMaterial.getText().length() > 0 && tfdDesnsidadeMaterial.getText().length() > 0 && tfdCondutividadeMaterial.getText().length() > 0) {
                 calResistencia();
-                mat.setDescricao(cDescricao.getText());
-                mat.setCor(jCCor.getSelectedItem().toString());
-                mat.setCondutividade(BigDecimal.valueOf(Double.valueOf(cCondutividade.getText())));
-                mat.setEspessura(BigDecimal.valueOf(Double.valueOf(cEspessura.getText())));
-                mat.setDencidade(BigDecimal.valueOf(Double.valueOf(cDensidade.getText())));
-                mat.setCalor(BigDecimal.valueOf(Double.valueOf(cCalor.getText())));
-                mat.setResistencia(BigDecimal.valueOf(Double.valueOf(cResistencia.getText())));
+                mat.setDescricao(tfdDescricaoMaterial.getText());
+                mat.setCor(jcbCorMaterial.getSelectedItem().toString());
+                mat.setCondutividade(BigDecimal.valueOf(Double.valueOf(tfdCondutividadeMaterial.getText())));
+                mat.setDencidade(BigDecimal.valueOf(Double.valueOf(tfdDesnsidadeMaterial.getText())));
+                mat.setCalor(BigDecimal.valueOf(Double.valueOf(tfdCalorMaterial.getText())));
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(mat, codigoTabela);
@@ -351,19 +327,18 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Erro ao inserir Registro!");
             }
-            cDescricao.setText("");
-            jCCor.setSelectedIndex(0);
-            cCondutividade.setText("");
-            cEspessura.setText("");
-            cDensidade.setText("");
-            cFatorSolar.setText("");
-            jmConsulta.setSelectedIndex(1);
+            tfdDescricaoMaterial.setText("");
+            jcbCorMaterial.setSelectedIndex(0);
+            tfdCondutividadeMaterial.setText("");
+            tfdDesnsidadeMaterial.setText("");
+            tfdFatorSolarMaterial.setText("");
+            jmConsultaMaterial.setSelectedIndex(1);
             DaoMaterial.listarMaterial(jTabela);  //metodo atualiza tabela
 
         } catch (Exception ex) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
-    }//GEN-LAST:event_btnSalvarActionPerformed
+    }//GEN-LAST:event_btnSalvarMaterialActionPerformed
 
     private void jBPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisaActionPerformed
         List resultado = null;
@@ -376,12 +351,12 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         for (Object o : resultado) {
             Material mat = (Material) o;
             modelo.addRow(new Object[]{
-                mat.getId(), mat.getDescricao(), mat.getCor(), mat.getCondutividade(), mat.getEspessura(), mat.getDencidade(), mat.getCalor(), mat.getResistencia()
+                mat.getId(), mat.getDescricao(), mat.getCor(), mat.getCondutividade(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
             });
         }
     }//GEN-LAST:event_jBPesquisaActionPerformed
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    private void btnEditarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMaterialActionPerformed
         List resultado = null;
         String idString = String.valueOf(jTabela.getValueAt(jTabela.getSelectedRow(), 0));
         codigoTabela = Integer.parseInt(idString);
@@ -392,37 +367,35 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             Material mat = (Material) o;
 
             idUpdate = mat.getId();
-            cDescricao.setText(mat.getDescricao());
-            cCondutividade.setText(String.valueOf(mat.getCondutividade()));
-            cEspessura.setText(String.valueOf(mat.getEspessura()));
-            cDensidade.setText(String.valueOf(mat.getDencidade()));
-            cCalor.setText(String.valueOf(mat.getCalor()));
-            cResistencia.setText(String.valueOf(mat.getCalor()));
-            Dados_OLD = "%" + mat.getDescricao() + "%" + mat.getCor() + "%" + mat.getCondutividade() + "%" + mat.getEspessura() + "%" + mat.getDencidade() + "%" + mat.getCalor() + "%" + mat.getResistencia() + "%";
+            tfdDescricaoMaterial.setText(mat.getDescricao());
+            tfdCondutividadeMaterial.setText(String.valueOf(mat.getCondutividade()));
+            tfdDesnsidadeMaterial.setText(String.valueOf(mat.getDencidade()));
+            tfdCalorMaterial.setText(String.valueOf(mat.getCalor()));
+            Dados_OLD = "%" + mat.getDescricao() + "%" + mat.getCor() + "%" + mat.getCondutividade() + "%" + mat.getDencidade() + "%" + mat.getCalor() + "%" + mat.getFatorsolar() + "%";
         }
-        jmConsulta.setSelectedIndex(0);
-        cDescricao.requestFocus();
-    }//GEN-LAST:event_btnEditarActionPerformed
+        jmConsultaMaterial.setSelectedIndex(0);
+        tfdDescricaoMaterial.requestFocus();
+    }//GEN-LAST:event_btnEditarMaterialActionPerformed
 
-    private void jmConsultaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jmConsultaFocusLost
-        if (jmConsulta.getSelectedIndex() == 1) {
-            btnEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2, true));
-            btnExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3, true));
-            btnSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1, false));
+    private void jmConsultaMaterialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jmConsultaMaterialFocusLost
+        if (jmConsultaMaterial.getSelectedIndex() == 1) {
+            btnEditarMaterial.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2, true));
+            btnExcluirMaterial.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3, true));
+            btnSalvarMaterial.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1, false));
             jBPesquisa.requestFocus();
             
         } else {
-            btnEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2, false));
-            btnExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3, false));
-            btnSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1, true));
+            btnEditarMaterial.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2, false));
+            btnExcluirMaterial.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3, false));
+            btnSalvarMaterial.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1, true));
         }
-    }//GEN-LAST:event_jmConsultaFocusLost
+    }//GEN-LAST:event_jmConsultaMaterialFocusLost
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+    private void btnExcluirMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMaterialActionPerformed
         Material mat = new Material();
         List resultado = null;
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
@@ -441,35 +414,38 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             jBPesquisaActionPerformed(evt);
 
         }
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    }//GEN-LAST:event_btnExcluirMaterialActionPerformed
 
-    private void cCalorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cCalorKeyReleased
+    private void tfdCalorMaterialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdCalorMaterialKeyReleased
         if (evt.getKeyCode() == Event.ENTER) {
             calResistencia();
         }
-    }//GEN-LAST:event_cCalorKeyReleased
+    }//GEN-LAST:event_tfdCalorMaterialKeyReleased
+
+    private void tfdCondutividadeMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdCondutividadeMaterialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdCondutividadeMaterialActionPerformed
 
     private void calResistencia() {
-        Double espessura = Double.parseDouble(cEspessura.getText());
-        Double condutividade = Double.parseDouble(cCondutividade.getText());
-        cResistencia.setText(String.valueOf(Math.ceil(espessura / condutividade)));
+        //Double espessura = Double.parseDouble(cEspessura.getText());
+        //Double condutividade = Double.parseDouble(cCondutividade.getText());
+        //cResistencia.setText(String.valueOf(Math.ceil(espessura / condutividade)));
     }
 
     //tentar fazer este metodo generico, mas vamos deixar em observação pra esta sprint
     public void startComponents() {
-            btnSalvar.setEnabled       (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,1,true));
-            btnEditar.setEnabled       (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,2,true));
-            btnExcluir.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,3,true));
-            jmConsulta.setEnabledAt    (0, DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
-            jmConsulta.setEnabledAt    (1, DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,4,true));
+            btnSalvarMaterial.setEnabled       (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,1,true));
+            btnEditarMaterial.setEnabled       (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,2,true));
+            btnExcluirMaterial.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,3,true));
+            jmConsultaMaterial.setEnabledAt    (0, DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            jmConsultaMaterial.setEnabledAt    (1, DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,4,true));
             
             ///componentes menu cadastro
-            cDescricao.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
-            cCondutividade.setEditable(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
-            cEspessura.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
-            jCCor.setEnabled          (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
-            cCalor.setEnabled         (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
-            cDensidade.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            tfdDescricaoMaterial.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            tfdCondutividadeMaterial.setEditable(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            jcbCorMaterial.setEnabled          (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            tfdCalorMaterial.setEnabled         (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
+            tfdDesnsidadeMaterial.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,5,true));
             
             //componentes menu consulta
             cPesquisa.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,4,true));
@@ -480,33 +456,29 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnEditarMaterial;
+    private javax.swing.JButton btnExcluirMaterial;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton btnSalvar;
-    private javax.swing.JTextField cCalor;
-    private javax.swing.JTextField cCondutividade;
-    private javax.swing.JTextField cDensidade;
-    private javax.swing.JTextField cDescricao;
-    private javax.swing.JTextField cEspessura;
-    private javax.swing.JTextField cFatorSolar;
+    private javax.swing.JButton btnSalvarMaterial;
     private javax.swing.JTextField cPesquisa;
-    private javax.swing.JTextField cResistencia;
     private javax.swing.JButton jBPesquisa;
-    private javax.swing.JComboBox<String> jCCor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTabela;
-    private javax.swing.JTabbedPane jmConsulta;
+    private javax.swing.JComboBox<String> jcbCorMaterial;
+    private javax.swing.JTabbedPane jmConsultaMaterial;
+    private javax.swing.JTextField tfdCalorMaterial;
+    private javax.swing.JTextField tfdCondutividadeMaterial;
+    private javax.swing.JTextField tfdDescricaoMaterial;
+    private javax.swing.JTextField tfdDesnsidadeMaterial;
+    private javax.swing.JTextField tfdFatorSolarMaterial;
     // End of variables declaration//GEN-END:variables
 }

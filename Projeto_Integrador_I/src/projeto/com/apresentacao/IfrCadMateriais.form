@@ -27,16 +27,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jmConsulta" min="-2" pref="564" max="-2" attributes="0"/>
+              <Component id="jmConsultaMaterial" min="-2" pref="564" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnExcluir" min="-2" pref="75" max="-2" attributes="0"/>
+              <Component id="btnExcluirMaterial" min="-2" pref="75" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnEditar" min="-2" pref="75" max="-2" attributes="0"/>
+              <Component id="btnEditarMaterial" min="-2" pref="75" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnSalvar" min="-2" pref="75" max="-2" attributes="0"/>
+              <Component id="btnSalvarMaterial" min="-2" pref="75" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnSair" min="-2" pref="75" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -46,13 +46,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jmConsulta" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jmConsultaMaterial" min="-2" pref="366" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEditarMaterial" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSair" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSalvarMaterial" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnExcluirMaterial" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -60,9 +60,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="jmConsulta">
+    <Container class="javax.swing.JTabbedPane" name="jmConsultaMaterial">
       <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jmConsultaFocusLost"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jmConsultaMaterialFocusLost"/>
       </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -85,32 +85,28 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="cFatorSolar" min="-2" pref="210" max="-2" attributes="0"/>
-                              <EmptySpace pref="126" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cDescricao" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
+                                  <Component id="tfdDescricaoMaterial" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="cResistencia" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jCCor" alignment="0" pref="210" max="32767" attributes="0"/>
-                                      <Component id="cCalor" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cDensidade" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cEspessura" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cCondutividade" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jcbCorMaterial" alignment="0" pref="210" max="32767" attributes="0"/>
+                                      <Component id="tfdCalorMaterial" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfdDesnsidadeMaterial" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfdCondutividadeMaterial" alignment="0" max="32767" attributes="0"/>
                                   </Group>
+                                  <Component id="tfdFatorSolarMaterial" alignment="0" min="-2" pref="210" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="205" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -123,44 +119,30 @@
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cDescricao" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdDescricaoMaterial" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jCCor" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcbCorMaterial" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cCondutividade" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdCondutividadeMaterial" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cEspessura" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cDensidade" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdDesnsidadeMaterial" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cCalor" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cResistencia" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdCalorMaterial" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="cFatorSolar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="tfdFatorSolarMaterial" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -171,32 +153,25 @@
                 <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Descri&#xe7;&#xe3;o &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cDescricao">
+            <Component class="javax.swing.JTextField" name="tfdDescricaoMaterial">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Descri&#xe7;&#xe3;o do material"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cCondutividade">
+            <Component class="javax.swing.JTextField" name="tfdCondutividadeMaterial">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Condutividade t&#xe9;rmica do material"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdCondutividadeMaterialActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Condutividade T&#xe9;rmica (W/mK )&lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cEspessura">
-              <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="Espessura do Material"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Espessura Equivalente ( cm )&lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="cDensidade">
+            <Component class="javax.swing.JTextField" name="tfdDesnsidadeMaterial">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Densidade do material"/>
               </Properties>
@@ -222,7 +197,7 @@
                 <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Cor &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jCCor">
+            <Component class="javax.swing.JComboBox" name="jcbCorMaterial">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -242,25 +217,15 @@
                 <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt; Calor Espec&#xed;fico (kJ/kg K) &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cCalor">
+            <Component class="javax.swing.JTextField" name="tfdCalorMaterial">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Calor espec&#xed;fico do Material"/>
               </Properties>
               <Events>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cCalorKeyReleased"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tfdCalorMaterialKeyReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel9">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt; Resist&#xea;ncia T&#xe9;rmica (m&#xb2;  K/W) &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="cResistencia">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="cFatorSolar">
+            <Component class="javax.swing.JTextField" name="tfdFatorSolarMaterial">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
@@ -305,7 +270,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="263" max="-2" attributes="0"/>
-                      <EmptySpace pref="131" max="32767" attributes="0"/>
+                      <EmptySpace pref="32" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -331,23 +296,17 @@
                 <Component class="javax.swing.JTable" name="jTabela">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="7" rowCount="4">
+                      <Table columnCount="6" rowCount="4">
                         <Column editable="false" title="ID" type="java.lang.Integer"/>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
                         <Column editable="false" title="Cor" type="java.lang.String"/>
-                        <Column editable="false" title="Espessura" type="java.lang.Long"/>
                         <Column editable="false" title="Densidade" type="java.lang.Long"/>
                         <Column editable="false" title="Calor" type="java.lang.Long"/>
-                        <Column editable="true" title="Resist&#xea;ncia" type="java.lang.Object"/>
+                        <Column editable="true" title="Fator Solar" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -391,30 +350,30 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnExcluir">
+    <Component class="javax.swing.JButton" name="btnExcluirMaterial">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirMaterialActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnEditar">
+    <Component class="javax.swing.JButton" name="btnEditarMaterial">
       <Properties>
         <Property name="text" type="java.lang.String" value="Editar"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarMaterialActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnSalvar">
+    <Component class="javax.swing.JButton" name="btnSalvarMaterial">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarMaterialActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSair">

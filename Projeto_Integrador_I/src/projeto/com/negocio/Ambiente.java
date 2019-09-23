@@ -1,17 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projeto.com.negocio;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,13 +17,12 @@ import javax.persistence.Table;
  * @author Douglas
  */
 @Entity
-@Table(name="produto"
+@Table(name="ambiente"
     ,schema="public"
 )
+public class Ambiente implements Serializable {
 
-
-public class Produto implements Serializable {
-
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -33,11 +30,13 @@ public class Produto implements Serializable {
     private Integer id;
     @Column(name = "descricao")
     private String descricao;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAmbiente")
+    private List<Calculo> calculoList;
 
-    public Produto() {
+    public Ambiente() {
     }
 
-    public Produto(Integer id) {
+    public Ambiente(Integer id) {
         this.id = id;
     }
 
@@ -56,9 +55,13 @@ public class Produto implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-    public String subString() {
-        return "%"+id+"%"+descricao+"%";
+
+    public List<Calculo> getCalculoList() {
+        return calculoList;
+    }
+
+    public void setCalculoList(List<Calculo> calculoList) {
+        this.calculoList = calculoList;
     }
     
 }

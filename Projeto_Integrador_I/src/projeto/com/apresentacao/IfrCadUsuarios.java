@@ -34,7 +34,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jmConsultaUsuario = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cNome = new javax.swing.JTextField();
@@ -42,7 +42,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         cSenha = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        comboTipo = new javax.swing.JComboBox<>();
+        cmbTipoUsuario = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jBPesquisa = new javax.swing.JButton();
         cPesquisa = new javax.swing.JTextField();
@@ -50,15 +50,15 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         jTableUser = new javax.swing.JTable();
         rdAtivo = new javax.swing.JRadioButton();
         rdInativo = new javax.swing.JRadioButton();
-        jBExcluir = new javax.swing.JButton();
-        jBEditar = new javax.swing.JButton();
-        jBSalvar = new javax.swing.JButton();
+        btnExcluirUsuario = new javax.swing.JButton();
+        btnEditarUsuario = new javax.swing.JButton();
+        btnSalvarUsuario = new javax.swing.JButton();
         jBSair = new javax.swing.JButton();
-        btnAtivar = new javax.swing.JButton();
+        btnAtivarUsuario = new javax.swing.JButton();
 
-        jTabbedPane2.addFocusListener(new java.awt.event.FocusAdapter() {
+        jmConsultaUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTabbedPane2FocusLost(evt);
+                jmConsultaUsuarioFocusLost(evt);
             }
         });
 
@@ -78,7 +78,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
         jLabel3.setText("<html> <font>Tipo </font> <font color=RED>*</font> <font>:</font> </html>");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Administrador", "Operador" }));
+        cmbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Administrador", "Operador" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,7 +96,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cNome, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                     .addComponent(cSenha)
-                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(263, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -110,19 +110,16 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel8))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 21, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
                 .addContainerGap())
         );
 
-        jTabbedPane2.addTab("Cadastro", jPanel1);
+        jmConsultaUsuario.addTab("Cadastro", jPanel1);
 
         jBPesquisa.setText("Busca");
         jBPesquisa.addActionListener(new java.awt.event.ActionListener() {
@@ -197,28 +194,28 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Consulta", jPanel2);
+        jmConsultaUsuario.addTab("Consulta", jPanel2);
 
-        jBExcluir.setText("Excluir");
-        jBExcluir.setEnabled(false);
-        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluirUsuario.setText("Excluir");
+        btnExcluirUsuario.setEnabled(false);
+        btnExcluirUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBExcluirActionPerformed(evt);
+                btnExcluirUsuarioActionPerformed(evt);
             }
         });
 
-        jBEditar.setText("Editar");
-        jBEditar.setEnabled(false);
-        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarUsuario.setText("Editar");
+        btnEditarUsuario.setEnabled(false);
+        btnEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEditarActionPerformed(evt);
+                btnEditarUsuarioActionPerformed(evt);
             }
         });
 
-        jBSalvar.setText("Salvar");
-        jBSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvarUsuario.setText("Salvar");
+        btnSalvarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalvarActionPerformed(evt);
+                btnSalvarUsuarioActionPerformed(evt);
             }
         });
 
@@ -229,11 +226,11 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
             }
         });
 
-        btnAtivar.setText("Ativar");
-        btnAtivar.setEnabled(false);
-        btnAtivar.addActionListener(new java.awt.event.ActionListener() {
+        btnAtivarUsuario.setText("Ativar");
+        btnAtivarUsuario.setEnabled(false);
+        btnAtivarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtivarActionPerformed(evt);
+                btnAtivarUsuarioActionPerformed(evt);
             }
         });
 
@@ -243,38 +240,38 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(282, Short.MAX_VALUE)
-                .addComponent(btnAtivar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAtivarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBExcluir)
+                .addComponent(btnExcluirUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBEditar)
+                .addComponent(btnEditarUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBSalvar)
+                .addComponent(btnSalvarUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBSair)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jTabbedPane2)
+                    .addComponent(jmConsultaUsuario)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(278, Short.MAX_VALUE)
+                .addContainerGap(282, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSair)
-                    .addComponent(jBSalvar)
-                    .addComponent(jBEditar)
-                    .addComponent(jBExcluir)
-                    .addComponent(btnAtivar))
+                    .addComponent(btnSalvarUsuario)
+                    .addComponent(btnEditarUsuario)
+                    .addComponent(btnExcluirUsuario)
+                    .addComponent(btnAtivarUsuario))
                 .addGap(20, 20, 20))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(70, Short.MAX_VALUE)))
+                    .addComponent(jmConsultaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(100, Short.MAX_VALUE)))
         );
 
         pack();
@@ -286,12 +283,12 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         if(rdAtivo.isSelected()){
             
             estado = "A";
-            btnAtivar.setEnabled(false);
+            btnAtivarUsuario.setEnabled(false);
             
         }else if(rdInativo.isSelected()){
             
             estado = "I";
-            btnAtivar.setEnabled(true);
+            btnAtivarUsuario.setEnabled(true);
             
         }else{
             
@@ -316,39 +313,39 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBPesquisaActionPerformed
 
-    private void jTabbedPane2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusLost
-        if (jTabbedPane2.getSelectedIndex() == 1) {
-            jBEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
-            jBExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
-            jBSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,false));
+    private void jmConsultaUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jmConsultaUsuarioFocusLost
+        if (jmConsultaUsuario.getSelectedIndex() == 1) {
+            btnEditarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
+            btnExcluirUsuario.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
+            btnSalvarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,false));
             jBPesquisa.requestFocus();
         } else {
-            jBEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,false));
-            jBExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,false));
-            jBSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
-            btnAtivar.setEnabled(false);
+            btnEditarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,false));
+            btnExcluirUsuario.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,false));
+            btnSalvarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
+            btnAtivarUsuario.setEnabled(false);
         }
-    }//GEN-LAST:event_jTabbedPane2FocusLost
+    }//GEN-LAST:event_jmConsultaUsuarioFocusLost
 
     private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
         dispose();
     }//GEN-LAST:event_jBSairActionPerformed
 
-    private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
+    private void btnSalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarUsuarioActionPerformed
 
         try {
             Login login = new Login();
-            if (cNome.getText().length() > 0 && cSenha.getText().length() > 0 && !"Selecionar".equals(comboTipo.getSelectedItem().toString())) {
+            if (cNome.getText().length() > 0 && cSenha.getText().length() > 0 && !"Selecionar".equals(cmbTipoUsuario.getSelectedItem().toString())) {
 
                 login.setNome(cNome.getText());
                 login.setSenha(DaoEncryption.encryptionString(cSenha.getText()));
                 login.setEstado("A");
-                login.setTipo(comboTipo.getSelectedItem().toString());
+                login.setTipo(cmbTipoUsuario.getSelectedItem().toString());
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(login, codigoTabela);
                     Login log = DaoLogin.ultimoLogin();
-                    DaoPermissao.inserirPermissaoFull(log , comboTipo.getSelectedItem().toString());
+                    DaoPermissao.inserirPermissaoFull(log , cmbTipoUsuario.getSelectedItem().toString());
                     DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "INCLUIR");
                     JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
                     request();
@@ -367,9 +364,9 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
-    }//GEN-LAST:event_jBSalvarActionPerformed
+    }//GEN-LAST:event_btnSalvarUsuarioActionPerformed
 
-    private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
+    private void btnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUsuarioActionPerformed
         List resultado = null;
         String idString = String.valueOf(jTableUser.getValueAt(jTableUser.getSelectedRow(), 0));
         codigoTabela = Integer.parseInt(idString);
@@ -384,15 +381,15 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
             cSenha.setText(log.getSenha());
             Dados_OLD = "%" + log.getNome() + "%" + log.getSenha() + "%" + log.getTipo() + "%";
         }
-        jTabbedPane2.setSelectedIndex(0);
+        jmConsultaUsuario.setSelectedIndex(0);
         cNome.requestFocus();
-        jBExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
-        jBEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
-        jBSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
-        comboTipo.setEnabled(true);
-    }//GEN-LAST:event_jBEditarActionPerformed
+        btnExcluirUsuario.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
+        btnEditarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
+        btnSalvarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
+        cmbTipoUsuario.setEnabled(true);
+    }//GEN-LAST:event_btnEditarUsuarioActionPerformed
 
-    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+    private void btnExcluirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirUsuarioActionPerformed
         Login login = new Login();
         List resultado = null;
         if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
@@ -413,15 +410,15 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
             jBPesquisaActionPerformed(evt);
 
         }
-    }//GEN-LAST:event_jBExcluirActionPerformed
+    }//GEN-LAST:event_btnExcluirUsuarioActionPerformed
 
     private void cSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cSenhaKeyReleased
         if (evt.getKeyCode() == Event.ENTER) {
-            comboTipo.setEnabled(true);
+            cmbTipoUsuario.setEnabled(true);
         }
     }//GEN-LAST:event_cSenhaKeyReleased
 
-    private void btnAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtivarActionPerformed
+    private void btnAtivarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtivarUsuarioActionPerformed
 
         Login login = new Login();
         List resultado = null;
@@ -443,46 +440,46 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
             jBPesquisaActionPerformed(evt);
 
         }
-    }//GEN-LAST:event_btnAtivarActionPerformed
+    }//GEN-LAST:event_btnAtivarUsuarioActionPerformed
 
     public void startComponents() {
-        jBEditar.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
-        jBExcluir.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
-        jBSalvar.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
+        btnEditarUsuario.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
+        btnExcluirUsuario.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
+        btnSalvarUsuario.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
         
         ///Componentes menu cadastro
         cNome.setEnabled         (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
         cSenha.setEnabled        (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
-        comboTipo.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
+        cmbTipoUsuario.setEnabled     (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
         
         ///componente menu consulta
-        jTabbedPane2.setEnabledAt(1,DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,10,true));
-        jTabbedPane2.setEnabledAt(0,DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
+        jmConsultaUsuario.setEnabledAt(1,DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,10,true));
+        jmConsultaUsuario.setEnabledAt(0,DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,11,true));
     }
     
     public void request() {
         cNome.setText("");
         cSenha.setText("");
-        jTabbedPane2.setSelectedIndex(1);
+        jmConsultaUsuario.setSelectedIndex(1);
         DaoLogin.listarLogin(jTableUser);
-        jBEditar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
-        jBExcluir.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
-        jBSalvar.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,false));
-        comboTipo.setSelectedIndex(0);
+        btnEditarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,true));
+        btnExcluirUsuario.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,true));
+        btnSalvarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,false));
+        cmbTipoUsuario.setSelectedIndex(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtivar;
+    private javax.swing.JButton btnAtivarUsuario;
+    private javax.swing.JButton btnEditarUsuario;
+    private javax.swing.JButton btnExcluirUsuario;
+    private javax.swing.JButton btnSalvarUsuario;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField cNome;
     private javax.swing.JTextField cPesquisa;
     private javax.swing.JPasswordField cSenha;
-    private javax.swing.JComboBox<String> comboTipo;
-    private javax.swing.JButton jBEditar;
-    private javax.swing.JButton jBExcluir;
+    private javax.swing.JComboBox<String> cmbTipoUsuario;
     private javax.swing.JButton jBPesquisa;
     private javax.swing.JButton jBSair;
-    private javax.swing.JButton jBSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -490,8 +487,8 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTableUser;
+    private javax.swing.JTabbedPane jmConsultaUsuario;
     private javax.swing.JRadioButton rdAtivo;
     private javax.swing.JRadioButton rdInativo;
     // End of variables declaration//GEN-END:variables
