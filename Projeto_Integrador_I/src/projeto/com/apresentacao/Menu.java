@@ -29,14 +29,14 @@ public class Menu extends javax.swing.JFrame {
         jDesk = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
-        jmiLogs = new javax.swing.JMenuItem();
+        jmiLog = new javax.swing.JMenuItem();
         jmiAuditoria = new javax.swing.JMenuItem();
         jmiSair = new javax.swing.JMenuItem();
         menuCadastro = new javax.swing.JMenu();
-        jCad_Usuario = new javax.swing.JMenuItem();
-        jCad_Material = new javax.swing.JMenuItem();
-        jmiPermissoes = new javax.swing.JMenuItem();
-        menuCalculo = new javax.swing.JMenu();
+        jmiUsuario = new javax.swing.JMenuItem();
+        jmiMaterial = new javax.swing.JMenuItem();
+        jmiPermissao = new javax.swing.JMenuItem();
+        menuLancamento = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         menuRelatorio = new javax.swing.JMenu();
@@ -74,16 +74,19 @@ public class Menu extends javax.swing.JFrame {
         );
 
         menuArquivo.setText("Arquivo");
+        menuArquivo.setName("menuArquivo"); // NOI18N
 
-        jmiLogs.setText("Consulta de registros Logs");
-        jmiLogs.addActionListener(new java.awt.event.ActionListener() {
+        jmiLog.setText("Consulta de registros Logs");
+        jmiLog.setName("jmiLog"); // NOI18N
+        jmiLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiLogsActionPerformed(evt);
+                jmiLogActionPerformed(evt);
             }
         });
-        menuArquivo.add(jmiLogs);
+        menuArquivo.add(jmiLog);
 
         jmiAuditoria.setText("Consulta de registros Auditoria");
+        jmiAuditoria.setName("jmiAuditoria"); // NOI18N
         jmiAuditoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiAuditoriaActionPerformed(evt);
@@ -103,34 +106,39 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(menuArquivo);
 
         menuCadastro.setText("Cadastro");
+        menuCadastro.setName("menuCadastro"); // NOI18N
 
-        jCad_Usuario.setText("Usuário");
-        jCad_Usuario.addActionListener(new java.awt.event.ActionListener() {
+        jmiUsuario.setText("Usuário");
+        jmiUsuario.setName("jmiUsuario"); // NOI18N
+        jmiUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCad_UsuarioActionPerformed(evt);
+                jmiUsuarioActionPerformed(evt);
             }
         });
-        menuCadastro.add(jCad_Usuario);
+        menuCadastro.add(jmiUsuario);
 
-        jCad_Material.setText("Materiais");
-        jCad_Material.addActionListener(new java.awt.event.ActionListener() {
+        jmiMaterial.setText("Materiais");
+        jmiMaterial.setName("jmiMaterial"); // NOI18N
+        jmiMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCad_MaterialActionPerformed(evt);
+                jmiMaterialActionPerformed(evt);
             }
         });
-        menuCadastro.add(jCad_Material);
+        menuCadastro.add(jmiMaterial);
 
-        jmiPermissoes.setText("Permissões");
-        jmiPermissoes.addActionListener(new java.awt.event.ActionListener() {
+        jmiPermissao.setText("Permissões");
+        jmiPermissao.setName("jmiPermissao"); // NOI18N
+        jmiPermissao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiPermissoesActionPerformed(evt);
+                jmiPermissaoActionPerformed(evt);
             }
         });
-        menuCadastro.add(jmiPermissoes);
+        menuCadastro.add(jmiPermissao);
 
         jMenuBar1.add(menuCadastro);
 
-        menuCalculo.setText("Lançamento");
+        menuLancamento.setText("Lançamento");
+        menuLancamento.setName("menuLancamento"); // NOI18N
 
         jMenuItem2.setText("Calcular Resistência Térmica");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +146,7 @@ public class Menu extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        menuCalculo.add(jMenuItem2);
+        menuLancamento.add(jMenuItem2);
 
         jMenuItem6.setText("Projeto");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -146,11 +154,12 @@ public class Menu extends javax.swing.JFrame {
                 jMenuItem6ActionPerformed(evt);
             }
         });
-        menuCalculo.add(jMenuItem6);
+        menuLancamento.add(jMenuItem6);
 
-        jMenuBar1.add(menuCalculo);
+        jMenuBar1.add(menuLancamento);
 
         menuRelatorio.setText("Relatórios");
+        menuRelatorio.setName("menuRelatorio"); // NOI18N
 
         jMenuItem3.setText("Material");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -197,17 +206,17 @@ public class Menu extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jmiSairActionPerformed
 
-    private void jCad_MaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCad_MaterialActionPerformed
+    private void jmiMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiMaterialActionPerformed
         IfrCadMateriais cadMateriais = new IfrCadMateriais();
         jDesk.add(cadMateriais);
         cadMateriais.setVisible(true);
-    }//GEN-LAST:event_jCad_MaterialActionPerformed
+    }//GEN-LAST:event_jmiMaterialActionPerformed
 
-    private void jCad_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCad_UsuarioActionPerformed
+    private void jmiUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUsuarioActionPerformed
         IfrCadUsuarios cadUsuarios = new IfrCadUsuarios();
         jDesk.add(cadUsuarios);
         cadUsuarios.setVisible(true);
-    }//GEN-LAST:event_jCad_UsuarioActionPerformed
+    }//GEN-LAST:event_jmiUsuarioActionPerformed
 
     private void jmiAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAuditoriaActionPerformed
         IfrConsulAuditoria audit = new IfrConsulAuditoria();
@@ -215,11 +224,11 @@ public class Menu extends javax.swing.JFrame {
         audit.setVisible(true);
     }//GEN-LAST:event_jmiAuditoriaActionPerformed
 
-    private void jmiLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiLogsActionPerformed
+    private void jmiLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiLogActionPerformed
         IfrConsulLogs logs = new IfrConsulLogs();
         jDesk.add(logs);
         logs.setVisible(true);
-    }//GEN-LAST:event_jmiLogsActionPerformed
+    }//GEN-LAST:event_jmiLogActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         IfrCalculo cal = new IfrCalculo();
@@ -233,11 +242,11 @@ public class Menu extends javax.swing.JFrame {
         // remat.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jmiPermissoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPermissoesActionPerformed
+    private void jmiPermissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPermissaoActionPerformed
         IfrCadPermissoes cal = new IfrCadPermissoes();
         jDesk.add(cal);
         cal.setVisible(true);
-    }//GEN-LAST:event_jmiPermissoesActionPerformed
+    }//GEN-LAST:event_jmiPermissaoActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         IfrCalcular cal = new IfrCalcular();
@@ -249,18 +258,16 @@ public class Menu extends javax.swing.JFrame {
         //menus
         menuArquivo.setEnabled  (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 12, true));
         menuCadastro.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 13, true));
-        menuCalculo.setEnabled  (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 14, true));
+        menuLancamento.setEnabled  (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 14, true));
         menuRelatorio.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 15, true));
         
         //menu item       
-        jmiLogs.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 17, true));
+        jmiLog.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 17, true));
         jmiAuditoria.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 18, true));
-        jmiPermissoes.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 16, true));
+        jmiPermissao.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 16, true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem jCad_Material;
-    private javax.swing.JMenuItem jCad_Usuario;
     private javax.swing.JDesktopPane jDesk;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
@@ -276,12 +283,14 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jmiAuditoria;
-    private javax.swing.JMenuItem jmiLogs;
-    private javax.swing.JMenuItem jmiPermissoes;
+    private javax.swing.JMenuItem jmiLog;
+    private javax.swing.JMenuItem jmiMaterial;
+    private javax.swing.JMenuItem jmiPermissao;
     private javax.swing.JMenuItem jmiSair;
+    private javax.swing.JMenuItem jmiUsuario;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuCadastro;
-    private javax.swing.JMenu menuCalculo;
+    private javax.swing.JMenu menuLancamento;
     private javax.swing.JMenu menuRelatorio;
     // End of variables declaration//GEN-END:variables
 }

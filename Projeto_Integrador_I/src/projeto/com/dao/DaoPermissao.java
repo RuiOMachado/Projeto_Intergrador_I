@@ -1,7 +1,8 @@
 package projeto.com.dao;
 
-import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
@@ -159,37 +160,32 @@ public class DaoPermissao {
     }
 
     //conferir com fabricio
-    public static List<Permissao> iniciaPermissao(Login login, ArrayList<Componente> componente) {
-        Login log = DaoLogin.buscaLogin(login.getNome());
-        ArrayList<Permissao> permissao = null;
+    public static void definirPermissao(javax.swing.JInternalFrame tela) {
+        java.awt.Component[] cpTela = tela.getContentPane().getComponents();
+        java.awt.Component[] cpjTela;
+
+        Login log = DaoLogin.buscaLogin(NewLogin.usuarioLogado.getNome());
+
         List resultado = null;
-        boolean estado = false;
-        int id = 0;
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = '" + log.getId() + "'");
+            resultado = q.list();
 
-        for (Componente comp : componente) {
-
-            try {
-                Session sessao = HibernateUtil.getSessionFactory().openSession();
-                sessao.beginTransaction();
-                org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = '" + log.getId() + "' AND id_componente = '" + comp.getId() + "'");
-                resultado = q.list();
-
-                for (Object o : resultado) {
-                    Permissao per = (Permissao) o;
-                    estado = per.getEstado();
-                    id = per.getId();
+            for (int i = 0; i < cpTela.length; i++) {
+                if (cpTela[i] instanceof javax.swing.JButton) {
+                    JButton botao = (JButton) cpTela[i];
+                    for (Object o : resultado) {
+                        Permissao per = (Permissao) o;
+                        if (per.getIdComponente().getNome_componente().equals(botao.getName()) && per.getEstado()) {
+                            botao.setEnabled(true);
+                        }
+                    }
                 }
-
-            } catch (HibernateException ex) {
-                DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
             }
-            Permissao p = new Permissao();
-            p.setId(id);
-            p.setEstado(estado);
-            p.setIdLogin(login);
-            permissao.add(p);
+        } catch (HibernateException ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
-        return permissao;
     }
-
 }

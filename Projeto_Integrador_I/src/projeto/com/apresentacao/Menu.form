@@ -53,19 +53,22 @@
         <Menu class="javax.swing.JMenu" name="menuArquivo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Arquivo"/>
+            <Property name="name" type="java.lang.String" value="menuArquivo" noResource="true"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiLogs">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiLog">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta de registros Logs"/>
+                <Property name="name" type="java.lang.String" value="jmiLog" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiLogsActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiLogActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiAuditoria">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consulta de registros Auditoria"/>
+                <Property name="name" type="java.lang.String" value="jmiAuditoria" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiAuditoriaActionPerformed"/>
@@ -87,37 +90,42 @@
         <Menu class="javax.swing.JMenu" name="menuCadastro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cadastro"/>
+            <Property name="name" type="java.lang.String" value="menuCadastro" noResource="true"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jCad_Usuario">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiUsuario">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+                <Property name="name" type="java.lang.String" value="jmiUsuario" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCad_UsuarioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiUsuarioActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jCad_Material">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiMaterial">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Materiais"/>
+                <Property name="name" type="java.lang.String" value="jmiMaterial" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCad_MaterialActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiMaterialActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiPermissoes">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiPermissao">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Permiss&#xf5;es"/>
+                <Property name="name" type="java.lang.String" value="jmiPermissao" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPermissoesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPermissaoActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuCalculo">
+        <Menu class="javax.swing.JMenu" name="menuLancamento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Lan&#xe7;amento"/>
+            <Property name="name" type="java.lang.String" value="menuLancamento" noResource="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
@@ -141,6 +149,7 @@
         <Menu class="javax.swing.JMenu" name="menuRelatorio">
           <Properties>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
+            <Property name="name" type="java.lang.String" value="menuRelatorio" noResource="true"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">

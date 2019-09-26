@@ -11,7 +11,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import projeto.com.apoio.Calcular;
 import projeto.com.dao.DaoGenerico;
-import projeto.com.dao.DaoItemCalculo;
+import projeto.com.dao.DaoCalculo;
 import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
 import projeto.com.negocio.Calculo;
@@ -519,7 +519,7 @@ public class IfrCalculo extends javax.swing.JInternalFrame {
     }
     
     public void atualizarTabelaItem() {
-        DaoItemCalculo.listarItemCalculo(tblItemCalculo, Integer.parseInt(tfdIdFace.getText()));
+        DaoCalculo.listarItemMaterial(tblItemCalculo, Integer.parseInt(tfdIdFace.getText()));
         Double total;
         total = Calcular.somarColuna(tblItemCalculo, 3);
         Double trasnT = 1/total;

@@ -26,7 +26,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
     public IfrCadUsuarios() {
         initComponents();
         DaoLogin.listarLogin(jTableUser);
-        //startComponents();
+        DaoPermissao.definirPermissao(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -56,6 +56,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         jBSair = new javax.swing.JButton();
         btnAtivarUsuario = new javax.swing.JButton();
 
+        jmConsultaUsuario.setName("jmConsultarUsuario"); // NOI18N
         jmConsultaUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jmConsultaUsuarioFocusLost(evt);
@@ -79,6 +80,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         jLabel3.setText("<html> <font>Tipo </font> <font color=RED>*</font> <font>:</font> </html>");
 
         cmbTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Administrador", "Operador" }));
+        cmbTipoUsuario.setName("cmbTipoUsuario"); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,6 +200,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
         btnExcluirUsuario.setText("Excluir");
         btnExcluirUsuario.setEnabled(false);
+        btnExcluirUsuario.setName("btnExcluirUsuario"); // NOI18N
         btnExcluirUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirUsuarioActionPerformed(evt);
@@ -206,6 +209,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
         btnEditarUsuario.setText("Editar");
         btnEditarUsuario.setEnabled(false);
+        btnEditarUsuario.setName("btnEditarUsuario"); // NOI18N
         btnEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarUsuarioActionPerformed(evt);
@@ -213,6 +217,8 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         });
 
         btnSalvarUsuario.setText("Salvar");
+        btnSalvarUsuario.setEnabled(false);
+        btnSalvarUsuario.setName("btnSalvarUsuario"); // NOI18N
         btnSalvarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarUsuarioActionPerformed(evt);
@@ -228,6 +234,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
 
         btnAtivarUsuario.setText("Ativar");
         btnAtivarUsuario.setEnabled(false);
+        btnAtivarUsuario.setName("btnAtivarUsuario"); // NOI18N
         btnAtivarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtivarUsuarioActionPerformed(evt);
@@ -259,7 +266,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(282, Short.MAX_VALUE)
+                .addContainerGap(286, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSair)
                     .addComponent(btnSalvarUsuario)
@@ -270,8 +277,8 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jmConsultaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(100, Short.MAX_VALUE)))
+                    .addComponent(jmConsultaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(80, Short.MAX_VALUE)))
         );
 
         pack();
@@ -283,12 +290,12 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
         if(rdAtivo.isSelected()){
             
             estado = "A";
-            btnAtivarUsuario.setEnabled(false);
+            //btnAtivarUsuario.setEnabled(false);
             
         }else if(rdInativo.isSelected()){
             
             estado = "I";
-            btnAtivarUsuario.setEnabled(true);
+            //btnAtivarUsuario.setEnabled(true);
             
         }else{
             
@@ -323,7 +330,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
             //btnEditarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,8,false));
             //btnExcluirUsuario.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,7,false));
             //btnSalvarUsuario.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado,6,true));
-            btnAtivarUsuario.setEnabled(false);
+            //btnAtivarUsuario.setEnabled(false);
         }
     }//GEN-LAST:event_jmConsultaUsuarioFocusLost
 
