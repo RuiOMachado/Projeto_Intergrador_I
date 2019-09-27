@@ -44,7 +44,11 @@ public class Projeto implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date datafinal;
     @Column(name = "estado")
-    private Integer estado;
+    private Boolean estado;
+    @Column(name = "qnt_comodo")
+    private Integer qnt_comodo;
+
+ 
     @JoinColumn(name = "id_regiao", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idRegiao;
@@ -98,11 +102,11 @@ public class Projeto implements Serializable {
         this.datafinal = datafinal;
     }
 
-    public Integer getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
@@ -120,6 +124,18 @@ public class Projeto implements Serializable {
 
     public void setCalculoList(List<Calculo> calculoList) {
         this.calculoList = calculoList;
+    }
+    
+       public Integer getQnt_comodo() {
+        return qnt_comodo;
+    }
+
+    public void setQnt_comodo(Integer qnt_comodo) {
+        this.qnt_comodo = qnt_comodo;
+    }
+    
+    public String subString() {
+        return "%"+descricao+"%"+nomecliente+"%"+estado+"%"+datafinal+"%"+datainicio+"%"+qnt_comodo+"%";
     }
     
 }

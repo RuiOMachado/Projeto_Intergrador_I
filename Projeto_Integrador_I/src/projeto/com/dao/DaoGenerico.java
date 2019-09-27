@@ -1,5 +1,6 @@
 package projeto.com.dao;
 
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import projeto.com.apresentacao.NewLogin;
@@ -55,6 +56,21 @@ public class DaoGenerico{
             ses.close();
         }
         return retorno;
+    }
+    
+    public static List buscaId(int id, String tabela){
+        List resultado = null;
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from "+tabela+" where id = " + id);
+            resultado = q.list();
+
+        } catch (Exception ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        }
+        return resultado;
     }
 
 }
