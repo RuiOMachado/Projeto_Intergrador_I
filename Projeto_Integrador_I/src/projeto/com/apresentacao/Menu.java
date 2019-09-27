@@ -37,7 +37,6 @@ public class Menu extends javax.swing.JFrame {
         jmiMaterial = new javax.swing.JMenuItem();
         jmiPermissao = new javax.swing.JMenuItem();
         menuLancamento = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         menuRelatorio = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -140,14 +139,6 @@ public class Menu extends javax.swing.JFrame {
         menuLancamento.setText("Lançamento");
         menuLancamento.setName("menuLancamento"); // NOI18N
 
-        jMenuItem2.setText("Calcular Resistência Térmica");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        menuLancamento.add(jMenuItem2);
-
         jMenuItem6.setText("Projeto");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,12 +221,6 @@ public class Menu extends javax.swing.JFrame {
         logs.setVisible(true);
     }//GEN-LAST:event_jmiLogActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        IfrCalculo cal = new IfrCalculo();
-        jDesk.add(cal);
-        cal.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         //IfrRelatorioMaterial remat = new IfrRelatorioMaterial();
         //jDesk.add(remat);
@@ -277,7 +262,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

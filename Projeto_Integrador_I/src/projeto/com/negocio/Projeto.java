@@ -2,9 +2,7 @@ package projeto.com.negocio;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,8 +19,8 @@ import javax.persistence.TemporalType;
  * @author Douglas
  */
 @Entity
-@Table(name="projeto"
-    ,schema="public"
+@Table(name = "projeto",
+         schema = "public"
 )
 public class Projeto implements Serializable {
 
@@ -44,16 +41,12 @@ public class Projeto implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date datafinal;
     @Column(name = "estado")
-    private Boolean estado;
+    private String estado;
     @Column(name = "qnt_comodo")
-    private Integer qnt_comodo;
-
- 
+    private Integer qntComodo;
     @JoinColumn(name = "id_regiao", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idRegiao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProjeto")
-    private List<Calculo> calculoList;
 
     public Projeto() {
     }
@@ -102,12 +95,20 @@ public class Projeto implements Serializable {
         this.datafinal = datafinal;
     }
 
-    public Boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Integer getQntComodo() {
+        return qntComodo;
+    }
+
+    public void setQntComodo(Integer qntComodo) {
+        this.qntComodo = qntComodo;
     }
 
     public Cidade getIdRegiao() {
@@ -118,24 +119,8 @@ public class Projeto implements Serializable {
         this.idRegiao = idRegiao;
     }
 
-    public List<Calculo> getCalculoList() {
-        return calculoList;
-    }
-
-    public void setCalculoList(List<Calculo> calculoList) {
-        this.calculoList = calculoList;
-    }
-    
-       public Integer getQnt_comodo() {
-        return qnt_comodo;
-    }
-
-    public void setQnt_comodo(Integer qnt_comodo) {
-        this.qnt_comodo = qnt_comodo;
-    }
-    
     public String subString() {
-        return "%"+descricao+"%"+nomecliente+"%"+estado+"%"+datafinal+"%"+datainicio+"%"+qnt_comodo+"%";
+        return "%"+descricao+"%"+nomecliente+"%"+estado+"%"+datafinal+"%"+datainicio+"%"+qntComodo+"%";
     }
     
 }

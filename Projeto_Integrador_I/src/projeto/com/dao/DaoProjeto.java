@@ -26,13 +26,13 @@ public class DaoProjeto {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Projeto order by id");
+            org.hibernate.Query q = sessao.createQuery("from Projeto where estado = 'Andamento' order by id");
             resultado = q.list();
 
             for (Object o : resultado) {
                 Projeto pro = (Projeto) o;
                 modelo.addRow(new Object[]{
-                    pro.getId(), pro.getDescricao(), pro.getNomecliente(),pro.getEstado()
+                    pro.getId(), pro.getDescricao(), pro.getNomecliente(), pro.getEstado()
                 });
             }
 

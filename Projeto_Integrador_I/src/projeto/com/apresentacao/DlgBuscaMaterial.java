@@ -12,7 +12,7 @@ import projeto.com.negocio.Material;
  */
 public class DlgBuscaMaterial extends javax.swing.JDialog {
 
-    IfrCalculo ifrCalculo;
+    DlgCalculo ifrCalculo;
     
     public DlgBuscaMaterial(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -20,7 +20,7 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
         DaoMaterial.listarMaterial(tblMaterial);
     }
     
-    public DlgBuscaMaterial(java.awt.Frame parent, boolean modal, IfrCalculo ifrCalculo) {
+    public DlgBuscaMaterial(java.awt.Frame parent, boolean modal, DlgCalculo ifrCalculo) {
         super(parent, modal);
         initComponents();
         this.ifrCalculo = ifrCalculo;

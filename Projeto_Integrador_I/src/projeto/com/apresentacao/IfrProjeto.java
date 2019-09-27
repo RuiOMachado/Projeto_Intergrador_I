@@ -1,8 +1,8 @@
 package projeto.com.apresentacao;
 
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
-import projeto.com.dao.CombosDAO;
 import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
@@ -19,10 +19,11 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
 
     int codigoTabela = 0;
     int idUpdate = 0;
+    String Dados_OLD = "";
 
     public IfrProjeto() {
         initComponents();
-        redimencionarTabela();
+        DaoProjeto.listarProjeto(tblProjeto);
     }
 
     /**
@@ -48,11 +49,12 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         tfdDescricaoCidade = new javax.swing.JTextField();
         btnBuscarProjeto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable = new javax.swing.JTable();
+        tblProjeto = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
         btnEditarProjeto = new javax.swing.JButton();
         btnSalvarProjeto = new javax.swing.JButton();
         btnExcluirProjeto = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setTitle("Lançamento de projeto");
 
@@ -100,18 +102,18 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfdDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
                         .addComponent(tfdNomeCliente)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(tfdCodCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(tfdDescricaoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnBuscarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(tfdSatus, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tfdSatus, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                        .addComponent(tfdDescricao))
                     .addComponent(tfdQtdComodo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -141,7 +143,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblProjeto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -153,7 +155,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -167,11 +169,12 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable.setEnabled(false);
-        jScrollPane1.setViewportView(jTable);
-        if (jTable.getColumnModel().getColumnCount() > 0) {
-            jTable.getColumnModel().getColumn(3).setResizable(false);
-        }
+        tblProjeto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProjetoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblProjeto);
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +198,18 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         });
 
         btnExcluirProjeto.setText("Excluir");
+        btnExcluirProjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirProjetoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,19 +219,21 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnExcluirProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluirProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEditarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSalvarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jButton1)
+                            .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -226,7 +243,9 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
                     .addComponent(btnEditarProjeto)
@@ -252,18 +271,19 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 pro.setDescricao(tfdDescricao.getText());
                 pro.setNomecliente(tfdNomeCliente.getText());
                 pro.setDatainicio(new Date());
-                pro.setEstado(true);
+                pro.setEstado("Andamento");
                 pro.setIdRegiao(cid);
+                pro.setQntComodo(Integer.parseInt(tfdQtdComodo.getText()));
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(pro, codigoTabela);
                     JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
-                    //DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                    DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, codigoTabela, "INCLUIR");
                 } else {
                     pro.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(pro, idUpdate);
                     JOptionPane.showMessageDialog(null, "Registro editado com sucesso!");
-                    //.saveAuditoria("Projeto", pro.subString(), Dados_OLD, codigoTabela, "EDITAR");
+                    DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, codigoTabela, "EDITAR");
                 }
 
             } else {
@@ -276,7 +296,24 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarProjetoActionPerformed
 
     private void btnEditarProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProjetoActionPerformed
-        // TODO add your handling code here:
+        List resultado = null;
+        String idString = String.valueOf(tblProjeto.getValueAt(tblProjeto.getSelectedRow(), 0));
+        codigoTabela = Integer.parseInt(idString);
+
+        resultado = DaoProjeto.buscaIdProjeto(codigoTabela);
+
+        for (Object o : resultado) {
+            Projeto pro = (Projeto) o;
+            idUpdate = pro.getId();
+            tfdSatus.setText(pro.getEstado());
+            tfdDescricao.setText(pro.getDescricao());
+            tfdCodCidade.setText(String.valueOf(pro.getIdRegiao().getId()));
+            tfdDescricaoCidade.setText(pro.getIdRegiao().getDescricao());
+            tfdNomeCliente.setText(pro.getNomecliente());
+            tfdQtdComodo.setText(String.valueOf(pro.getQntComodo()));
+            Dados_OLD = "%" + pro.getDescricao() + "%" + pro.getNomecliente() + "%" + pro.getEstado() + "%" + pro.getDatafinal() + "%" + pro.getDatainicio() + "%" + pro.getQntComodo() + "%";
+        }
+        tfdNomeCliente.requestFocus();
     }//GEN-LAST:event_btnEditarProjetoActionPerformed
 
     private void btnBuscarProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProjetoActionPerformed
@@ -285,14 +322,39 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         busca.setVisible(true);
     }//GEN-LAST:event_btnBuscarProjetoActionPerformed
 
-    public void redimencionarTabela() {
-       // new CombosDAO().popularCombo("cidade", cmbCidade);
-        DaoProjeto.listarProjeto(jTable);
-        jTable.getColumnModel().getColumn(0).setPreferredWidth(5);
-        jTable.getColumnModel().getColumn(1).setPreferredWidth(200);
-        jTable.getColumnModel().getColumn(2).setPreferredWidth(200);
-        jTable.getColumnModel().getColumn(3).setPreferredWidth(5);
-    }
+    private void btnExcluirProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirProjetoActionPerformed
+        Projeto pro = new Projeto();
+        
+        List resultado = null;
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
+
+            String idString = String.valueOf(tblProjeto.getValueAt(tblProjeto.getSelectedRow(), 0));
+            resultado = DaoProjeto.buscaIdProjeto(Integer.parseInt(idString));
+            for (Object o : resultado) {
+                pro = (Projeto) o;
+                pro.setEstado("Excluído");
+                System.out.println("id regiao"+pro.getIdRegiao().getId());
+            }
+            
+            DaoGenerico.saveOrUpdate(pro,pro.getId());
+            DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, Integer.valueOf(idString), "DELETAR");
+            JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
+            
+        }
+        DaoProjeto.listarProjeto(tblProjeto);
+    }//GEN-LAST:event_btnExcluirProjetoActionPerformed
+
+    private void tblProjetoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProjetoMouseClicked
+        if(evt.getClickCount() == 2){
+          DlgCalculo cal = new DlgCalculo(null, true, this);
+          cal.setVisible(true);
+        }
+    }//GEN-LAST:event_tblProjetoMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DlgCalculo cal = new DlgCalculo(null, true, this);
+          cal.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void limparCampos() {
         tfdDescricao.setText("");
@@ -301,7 +363,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         tfdSatus.setText("");
         tfdCodCidade.setText("");
         tfdDescricaoCidade.setText("");
-        DaoProjeto.listarProjeto(jTable);  //metodo atualiza tabela
+        DaoProjeto.listarProjeto(tblProjeto);  //metodo atualiza tabela
     }
     
     public void definirValorCidade(String id, String descricao) {
@@ -315,6 +377,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExcluirProjeto;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvarProjeto;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -322,7 +385,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable;
+    private javax.swing.JTable tblProjeto;
     private javax.swing.JTextField tfdCodCidade;
     private javax.swing.JTextField tfdDescricao;
     private javax.swing.JTextField tfdDescricaoCidade;
