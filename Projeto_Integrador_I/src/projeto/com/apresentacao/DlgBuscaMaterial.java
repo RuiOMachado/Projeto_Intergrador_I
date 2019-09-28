@@ -2,6 +2,7 @@ package projeto.com.apresentacao;
 
 import java.awt.Event;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import projeto.com.dao.DaoMaterial;
 import projeto.com.negocio.Material;
@@ -13,13 +14,13 @@ import projeto.com.negocio.Material;
 public class DlgBuscaMaterial extends javax.swing.JDialog {
 
     DlgCalculo ifrCalculo;
-    
+
     public DlgBuscaMaterial(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         DaoMaterial.listarMaterial(tblMaterial);
     }
-    
+
     public DlgBuscaMaterial(java.awt.Frame parent, boolean modal, DlgCalculo ifrCalculo) {
         super(parent, modal);
         initComponents();
@@ -53,11 +54,11 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Descrição", "Cor", "Espessura", "Densidade", "Calor", "Resistência"
+                "ID", "Descrição", "Cor", "Densidade", "Calor", "FatorSolar", "Espessura"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Long.class, java.lang.Long.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, true
@@ -77,6 +78,15 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(tblMaterial);
+        if (tblMaterial.getColumnModel().getColumnCount() > 0) {
+            tblMaterial.getColumnModel().getColumn(0).setResizable(false);
+            tblMaterial.getColumnModel().getColumn(1).setResizable(false);
+            tblMaterial.getColumnModel().getColumn(2).setResizable(false);
+            tblMaterial.getColumnModel().getColumn(3).setResizable(false);
+            tblMaterial.getColumnModel().getColumn(4).setResizable(false);
+            tblMaterial.getColumnModel().getColumn(5).setResizable(false);
+            tblMaterial.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         btnOk.setText("Ok");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +130,7 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnOk)
+                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSair))
                     .addGroup(layout.createSequentialGroup()
@@ -137,8 +147,8 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
                     .addComponent(tfdPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
                     .addComponent(btnSair))
@@ -157,6 +167,46 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void tblMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMaterialMouseClicked
+        if (evt.getClickCount() == 2) {
+            definirValores();
+        }
+    }//GEN-LAST:event_tblMaterialMouseClicked
+
+    private void tfdPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdPesquisaActionPerformed
+
+    }//GEN-LAST:event_tfdPesquisaActionPerformed
+
+    private void tfdPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdPesquisaKeyReleased
+        if (evt.getKeyCode() == Event.ENTER) {
+            buscar();
+        }
+    }//GEN-LAST:event_tfdPesquisaKeyReleased
+
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        if (tblMaterial.getSelectedRow() != -1) {
+        definirValores();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma Materialidade!");
+        }
+    }//GEN-LAST:event_btnOkActionPerformed
+
+    private void buscar() {
+        List resultado = null;
+
+        DefaultTableModel modelo = (DefaultTableModel) tblMaterial.getModel();
+        modelo.setNumRows(0);
+
+        resultado = DaoMaterial.pesquisaMaterial(tfdPesquisa.getText());
+
+        for (Object o : resultado) {
+            Material mat = (Material) o;
+            modelo.addRow(new Object[]{
+                mat.getId(), mat.getDescricao(), mat.getCor(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
+            });
+        }
+    }
+
+    public void definirValores() {
         List resultado = null;
         Material material = new Material();
         String idString = String.valueOf(tblMaterial.getValueAt(tblMaterial.getSelectedRow(), 0));
@@ -175,36 +225,6 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
         }
         ifrCalculo.definirValorMaterial(String.valueOf(codigoTabela), material.getDescricao());
         dispose();
-    }//GEN-LAST:event_tblMaterialMouseClicked
-
-    private void tfdPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdPesquisaActionPerformed
-        
-    }//GEN-LAST:event_tfdPesquisaActionPerformed
-
-    private void tfdPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdPesquisaKeyReleased
-        if (evt.getKeyCode() == Event.ENTER) {
-            buscar();
-        }
-    }//GEN-LAST:event_tfdPesquisaKeyReleased
-
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        
-    }//GEN-LAST:event_btnOkActionPerformed
- 
-    private void buscar(){
-        List resultado = null;
-
-        DefaultTableModel modelo = (DefaultTableModel) tblMaterial.getModel();
-        modelo.setNumRows(0);
-
-        resultado = DaoMaterial.pesquisaMaterial(tfdPesquisa.getText());
-
-        for (Object o : resultado) {
-            Material mat = (Material) o;
-            modelo.addRow(new Object[]{
-                mat.getId(), mat.getDescricao(), mat.getCor(), mat.getCondutividade(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
-            });
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
