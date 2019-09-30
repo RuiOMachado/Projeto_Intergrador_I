@@ -19,6 +19,7 @@ public class DlgBuscaFace extends javax.swing.JDialog {
     int codigoTabela = 0;
     int idUpdate = 0;
     String Dados_OLD = "";
+    public static Face FACE = null;
 
     public DlgBuscaFace(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -30,6 +31,7 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         initComponents();
         this.dlgCalculo = dlgCalculo;
         DaoProjeto.listarFace(jTable1,DlgCalculo.AMBIENTE.getId());
+        FACE = new Face();
     }
 
     @SuppressWarnings("unchecked")
@@ -101,7 +103,7 @@ public class DlgBuscaFace extends javax.swing.JDialog {
 
         btnRemoverFace.setText("-");
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Parece", "Cobertura", "Piso" }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Parede", "Cobertura", "Piso" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,7 +161,10 @@ public class DlgBuscaFace extends javax.swing.JDialog {
             face.setNome(fac.getNome());
             face.setTipo(fac.getTipo());
             face.setId_ambiente(fac.getId_ambiente());
+            FACE.setId(fac.getId());
+            FACE.setTipo(fac.getTipo());
         }
+        dlgCalculo.definirValorResistencias(FACE.getTipo());
         dlgCalculo.definirValorFace(String.valueOf(codigoTabela), face.getNome());
         dispose();
     }//GEN-LAST:event_jTable1MouseClicked

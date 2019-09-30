@@ -2,9 +2,7 @@ package projeto.com.negocio;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,8 +17,8 @@ import javax.persistence.Table;
  * @author Douglas
  */
 @Entity
-@Table(name="item_material"
-    ,schema="public"
+@Table(name = "item_material",
+         schema = "public"
 )
 public class ItemMaterial implements Serializable {
 
@@ -47,11 +44,12 @@ public class ItemMaterial implements Serializable {
     private BigDecimal resistencia;
     @Column(name = "total_qfo")
     private BigDecimal totalQfo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemmaterial")
-    private List<ItemFace> itemFaceList;
     @JoinColumn(name = "id_face", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Face idFace;
+    @JoinColumn(name = "id_material", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Material idMaterial;
 
     public ItemMaterial() {
     }
@@ -132,20 +130,20 @@ public class ItemMaterial implements Serializable {
         this.totalQfo = totalQfo;
     }
 
-    public List<ItemFace> getItemFaceList() {
-        return itemFaceList;
-    }
-
-    public void setItemFaceList(List<ItemFace> itemFaceList) {
-        this.itemFaceList = itemFaceList;
-    }
-
     public Face getIdFace() {
         return idFace;
     }
 
     public void setIdFace(Face idFace) {
         this.idFace = idFace;
+    }
+
+    public Material getIdMaterial() {
+        return idMaterial;
+    }
+
+    public void setIdMaterial(Material idMaterial) {
+        this.idMaterial = idMaterial;
     }
     
 }

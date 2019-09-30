@@ -47,13 +47,13 @@ public class Calcular {
         return df.format(num);
     }
     
-    public static Double somarColuna(JTable table, int coluna) {
+    public static Double somarColuna(JTable table, int coluna, Double rt) {
 
          double count=0;
          for (int i=0; i<=table.getRowCount()-1;i++) {
              count+=Double.parseDouble(table.getValueAt(i, coluna).toString());
          }
-       return count;
+       return count+rt;
     }
 
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
+import projeto.com.apoio.Calcular;
+import projeto.com.dao.DaoCalculo;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
@@ -25,19 +27,19 @@ public class DlgCalculo extends javax.swing.JDialog {
     double rt = 0;
     IfrProjeto ifrProjeto;
     public static Ambiente AMBIENTE = null;
-    
+
     public DlgCalculo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
+
     public DlgCalculo(java.awt.Frame parent, boolean modal, IfrProjeto ifrProjeto) {
         super(parent, modal);
         initComponents();
         this.ifrProjeto = ifrProjeto;
         definirValorProjeto();
         AMBIENTE = new Ambiente();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -46,7 +48,7 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblItemCalculo = new javax.swing.JTable();
+        tblItemMaterialidade = new javax.swing.JTable();
         btnAdicionar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btnPesquisar = new javax.swing.JButton();
@@ -57,8 +59,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdEspessuraMaterialidade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tfdResistenciaExterna = new javax.swing.JTextField();
-        tfdTipo = new javax.swing.JTextField();
-        cmbTipo = new javax.swing.JComboBox<>();
+        tfdResistenciaInterna = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -81,7 +82,7 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Inclusão de Materiais"));
 
-        tblItemCalculo.setModel(new javax.swing.table.DefaultTableModel(
+        tblItemMaterialidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -107,10 +108,11 @@ public class DlgCalculo extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblItemCalculo);
+        jScrollPane1.setViewportView(tblItemMaterialidade);
 
         btnAdicionar.setText("+");
         btnAdicionar.setDoubleBuffered(true);
+        btnAdicionar.setEnabled(false);
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);
@@ -135,10 +137,12 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jLabel1.setText("Espessura");
 
+        tfdEspessuraMaterialidade.setToolTipText("Espessura da Materialidade em \"cm\"");
+
         jLabel4.setText("Resistência");
 
-        tfdResistenciaExterna.setText("0.04");
-        tfdResistenciaExterna.setToolTipText("Resistência Interna");
+        tfdResistenciaExterna.setText("0.00");
+        tfdResistenciaExterna.setToolTipText("Resistência Externa");
         tfdResistenciaExterna.setEnabled(false);
         tfdResistenciaExterna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,17 +150,8 @@ public class DlgCalculo extends javax.swing.JDialog {
             }
         });
 
-        tfdTipo.setEnabled(false);
-
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "0.10", "0.13", "0.17" }));
-        cmbTipo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cmbTipoMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cmbTipoMousePressed(evt);
-            }
-        });
+        tfdResistenciaInterna.setText("0.00");
+        tfdResistenciaInterna.setToolTipText("Resistência Interna");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,27 +160,25 @@ public class DlgCalculo extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tfdIdMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfdEspessuraMaterialidade, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tfdResistenciaExterna, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(10, 10, 10)
-                        .addComponent(tfdTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tfdDescricaoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(tfdEspessuraMaterialidade, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfdResistenciaExterna, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdDescricaoMaterial))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(tfdResistenciaInterna))
+                .addGap(38, 38, 38))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,14 +192,11 @@ public class DlgCalculo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfdEspessuraMaterialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(tfdEspessuraMaterialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdResistenciaInterna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdResistenciaExterna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfdTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(jLabel4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -220,16 +210,16 @@ public class DlgCalculo extends javax.swing.JDialog {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 149, Short.MAX_VALUE))
                     .addComponent(jScrollPane1)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionar))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -285,7 +275,8 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdDescricaoFace.setEnabled(false);
 
         btnProcurarFace.setText("...");
-        btnProcurarFace.setToolTipText("Procurar Projeto");
+        btnProcurarFace.setToolTipText("Procurar Face");
+        btnProcurarFace.setEnabled(false);
         btnProcurarFace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProcurarFaceActionPerformed(evt);
@@ -322,7 +313,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnProcurarComodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnProcurarFace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,18 +346,15 @@ public class DlgCalculo extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSalvar)
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 10, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -376,7 +364,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(80, 80, 80)
+                .addGap(161, 161, 161)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
                     .addComponent(btnSalvar))
@@ -387,40 +375,35 @@ public class DlgCalculo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        Material material = new Material();
+        System.out.println("aqui");
+        Double rt = Double.parseDouble(tfdResistenciaExterna.getText()) + Double.parseDouble(tfdResistenciaInterna.getText());
+        
         try {
             ItemMaterial item = new ItemMaterial();
-            Calculo cal = new Calculo();
-            //cal.setId(Integer.parseInt(tfdIdComodo.getText()));
-            
+            Face face         = new Face();
+            Material mat      = new Material(); 
             List resultado = null;
-            if (tfdDescricaoMaterial.getText().length() > 0) {
-                resultado = DaoMaterial.buscaIdMaterial(Integer.parseInt(tfdIdMaterial.getText()));
-
-                for (Object o : resultado) {
-                    Material mat = (Material) o;
-                    material.setId(mat.getId());
-                    material.setDescricao(mat.getDescricao());
-                    material.setCalor(mat.getCalor());
-                    material.setDencidade(mat.getDencidade());
-                    material.setCor(mat.getCor());
-                    material.setCondutividade(mat.getCondutividade());
-                }
-                //item.setIdMaterial(material);
-                // item.setIdCalculo(cal);
-                // item.setIdProduto(pro);
-                item.setResistenciaInt(BigDecimal.valueOf(10));
-                item.setResistenciaExt(BigDecimal.valueOf(10));
+            if (tfdDescricaoMaterial.getText().length() > 0 && tfdEspessuraMaterialidade.getText().length() > 0) {
+                face.setId(Integer.parseInt(tfdIdFace.getText()));
+                mat.setId(Integer.parseInt(tfdIdMaterial.getText()));
+                item.setResistenciaInt(BigDecimal.valueOf(Double.valueOf(tfdResistenciaInterna.getText())));
+                item.setResistenciaExt(BigDecimal.valueOf(Double.valueOf(tfdResistenciaExterna.getText())));
+                item.setIdFace(face);
+                item.setIdMaterial(mat);
+                item.setEspessura(BigDecimal.valueOf(Double.valueOf(tfdEspessuraMaterialidade.getText())));
+                //item.setResistenciaTotal(BigDecimal.valueOf(Calcular.somarColuna(tblItemMaterialidade, 3, rt)));
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(item, codigoTabela);
-                    //DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                    //DaoAuditoria.saveAuditoria("Item_Material", mat.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                    JOptionPane.showMessageDialog(rootPane, "Registro adicionado!");
                 } else {
                     item.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(item, idUpdate);
-                    //DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
+                    //DaoAuditoria.saveAuditoria("Item_Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
+                    JOptionPane.showMessageDialog(rootPane, "Registro editada!");
                 }
-                //atualizarTabelaItem();
+                DaoCalculo.listarItemMaterial(tblItemMaterialidade, face.getId());
             } else {
                 tfdIdMaterial.setBackground(Color.red);
                 tfdDescricaoMaterial.setBackground(Color.red);
@@ -439,6 +422,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         DlgBuscaMaterial busca = new DlgBuscaMaterial(null, true, this);
         busca.setLocationRelativeTo(this);
         busca.setVisible(true);
+        btnAdicionar.setEnabled(true);
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -456,29 +440,15 @@ public class DlgCalculo extends javax.swing.JDialog {
         busca.setLocationRelativeTo(this);
         busca.setVisible(true);
         AMBIENTE.setId(Integer.parseInt(tfdIdComodo2.getText()));
+        btnProcurarFace.setEnabled(true);
     }//GEN-LAST:event_btnProcurarComodoActionPerformed
 
     private void tfdResistenciaExternaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdResistenciaExternaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdResistenciaExternaActionPerformed
 
-    private void cmbTipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbTipoMousePressed
-
-    }//GEN-LAST:event_cmbTipoMousePressed
-
-    private void cmbTipoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbTipoMouseClicked
-         if("0.13".equals(cmbTipo.getSelectedItem().toString())){
-            tfdTipo.setText("Parede");
-        }else if("0.10".equals(cmbTipo.getSelectedItem().toString())){
-            tfdTipo.setText("Cobertura");
-        }else if("0.17".equals(cmbTipo.getSelectedItem().toString())){
-            tfdTipo.setText("Piso");
-        }
-    }//GEN-LAST:event_cmbTipoMouseClicked
-
     private void btnProcurarFaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarFaceActionPerformed
         DlgBuscaFace busca = new DlgBuscaFace(null, true, this);
-        
         busca.setLocationRelativeTo(this);
         busca.setVisible(true);
     }//GEN-LAST:event_btnProcurarFaceActionPerformed
@@ -487,26 +457,43 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdIdMaterial.setText(id);
         tfdDescricaoMaterial.setText(descricao);
     }
-    
+
     public void definirValorProjeto() {
         tfdIdProjeto2.setText(String.valueOf(IfrProjeto.PROJETO.getId()));
         tfdDescricaoProjeto2.setText(IfrProjeto.PROJETO.getDescricao());
     }
-    
+
     public void definirValorAmbiente(String id, String descricao) {
         tfdIdComodo2.setText(id);
         tfdDescricaoComodo2.setText(descricao);
     }
-    
+
     public void definirValorFace(String id, String descricao) {
         tfdIdFace.setText(id);
         tfdDescricaoFace.setText(descricao);
     }
+
+    public void definirValorResistencias(String tipo) {
+
+        if ("Parede".equals(tipo)) {
+            tfdResistenciaInterna.setText("0.13");
+            tfdResistenciaExterna.setText("0.04");
+        } else if ("Piso".equals(tipo)) {
+            tfdResistenciaInterna.setText("0.17");
+            tfdResistenciaExterna.setText("0.04");
+        } else if ("Cobertura".equals(tipo)) {
+            tfdResistenciaInterna.setText("0.10");
+            tfdResistenciaExterna.setText("0.04");
+        } else {
+            tfdResistenciaInterna.setText("0.00");
+            tfdResistenciaExterna.setText("0.00");
+        }
+    }
+
+    public void atualizarTabelaItem() {
     
-     public void atualizarTabelaItem() {
-     }
-     
-    
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -515,7 +502,6 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JButton btnProcurarFace;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -529,7 +515,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblItemCalculo;
+    private javax.swing.JTable tblItemMaterialidade;
     private javax.swing.JTextField tfdDescricaoComodo2;
     private javax.swing.JTextField tfdDescricaoFace;
     private javax.swing.JTextField tfdDescricaoMaterial;
@@ -540,6 +526,6 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JTextField tfdIdMaterial;
     private javax.swing.JTextField tfdIdProjeto2;
     private javax.swing.JTextField tfdResistenciaExterna;
-    private javax.swing.JTextField tfdTipo;
+    private javax.swing.JTextField tfdResistenciaInterna;
     // End of variables declaration//GEN-END:variables
 }

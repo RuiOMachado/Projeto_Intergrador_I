@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
+import projeto.com.negocio.ItemMaterial;
 import projeto.com.negocio.Log;
 
 /**
@@ -14,8 +15,8 @@ import projeto.com.negocio.Log;
  * @author Douglas
  */
 public class DaoCalculo {
-    
-    public static void listarItemMaterial(JTable jTabela, int id) {
+
+    public static void listarItemMaterial(JTable jTabela, int idFace) {
         List resultado = null;
 
         DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
@@ -24,22 +25,22 @@ public class DaoCalculo {
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-            org.hibernate.Query q = sessao.createQuery("from ItemCalculo where id_calculo = "+id+"order by id");
+            org.hibernate.Query q = sessao.createQuery("from ItemMaterial where idFace = " + idFace + "order by id");
             resultado = q.list();
 
             for (Object o : resultado) {
-               // ItemCalculo item = (ItemCalculo) o;
-               // modelo.addRow(new Object[]{
-                //    item.getId(), item.getIdMaterial().getId(), item.getIdMaterial().getDescricao(), item.getIdMaterial().getResistencia()
-              //  });
+                ItemMaterial item = (ItemMaterial) o;
+                modelo.addRow(new Object[]{
+                    item.getId(), item.getIdMaterial().getId(), item.getIdMaterial().getDescricao(), item.getResistencia()
+                });
             }
 
         } catch (HibernateException he) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
     }
-    
-    public static void calcularRt(int idFace, int idProjeto){
-    
+
+    public static void calcularRt(int idFace, int idProjeto) {
+
     }
 }

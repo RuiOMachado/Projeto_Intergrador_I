@@ -2,6 +2,7 @@
 package projeto.com.negocio;
 
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +22,9 @@ import javax.persistence.Table;
     ,schema="public")
 
 public class Material implements java.io.Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
+    private List<ItemMaterial> itemMaterialList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
     private static final long serialVersionUID = 1L;
@@ -107,6 +111,14 @@ public class Material implements java.io.Serializable {
     
     public String subString() {
         return "%"+descricao+"%"+cor+"%"+condutividade+"%"+dencidade+"%"+calor+"%"+fatorsolar+"%";
+    }
+
+    public List<ItemMaterial> getItemMaterialList() {
+        return itemMaterialList;
+    }
+
+    public void setItemMaterialList(List<ItemMaterial> itemMaterialList) {
+        this.itemMaterialList = itemMaterialList;
     }
     
 }
