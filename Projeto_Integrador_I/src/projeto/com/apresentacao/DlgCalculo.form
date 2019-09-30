@@ -161,21 +161,23 @@
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="tfdDescricaoMaterial" min="-2" pref="305" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnPesquisar" min="-2" pref="61" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfdEspessuraMaterialidade" pref="65" max="32767" attributes="0"/>
-                                  <Component id="tfdResistenciaInterna" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tfdEspessuraMaterialidade" min="-2" pref="65" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="tfdResistenciaExterna" min="-2" pref="65" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="cmbTipo" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="tfdResistenciaExterna" min="-2" pref="65" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="tfdTipo" min="-2" pref="143" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="tfdDescricaoMaterial" min="-2" pref="305" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnPesquisar" min="-2" pref="61" max="-2" attributes="0"/>
                       <EmptySpace pref="28" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -198,8 +200,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdResistenciaInterna" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdResistenciaExterna" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="21" max="32767" attributes="0"/>
                   </Group>
@@ -243,9 +246,39 @@
                 <Property name="text" type="java.lang.String" value="Resist&#xea;ncia"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfdResistenciaInterna">
-            </Component>
             <Component class="javax.swing.JTextField" name="tfdResistenciaExterna">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0.04"/>
+                <Property name="toolTipText" type="java.lang.String" value="Resist&#xea;ncia Interna"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfdResistenciaExternaActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tfdTipo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cmbTipo">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Selecionar"/>
+                    <StringItem index="1" value="0.10"/>
+                    <StringItem index="2" value="0.13"/>
+                    <StringItem index="3" value="0.17"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cmbTipoMouseClicked"/>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cmbTipoMousePressed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -290,7 +323,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jTextField5" alignment="0" pref="47" max="32767" attributes="0"/>
+                      <Component id="tfdIdFace" alignment="0" pref="47" max="32767" attributes="0"/>
                       <Component id="tfdIdComodo2" alignment="0" max="32767" attributes="0"/>
                       <Component id="tfdIdProjeto2" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -304,18 +337,14 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="tfdDescricaoProjeto2" alignment="0" pref="210" max="32767" attributes="0"/>
                       <Component id="tfdDescricaoComodo2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField6" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfdDescricaoFace" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnProcurarProjeto2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnProcurarFace2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnProcurarComodo" max="32767" attributes="0"/>
+                      <Component id="btnProcurarFace" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="126" max="32767" attributes="0"/>
+                  <EmptySpace pref="230" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -335,16 +364,15 @@
                       <Component id="tfdIdComodo2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfdDescricaoComodo2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnProcurarProjeto2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnProcurarComodo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdIdFace" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnProcurarFace2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdDescricaoFace" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnProcurarFace" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
               </Group>
@@ -393,16 +421,16 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnProcurarProjeto2">
+        <Component class="javax.swing.JButton" name="btnProcurarComodo">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
             <Property name="toolTipText" type="java.lang.String" value="Procurar Com&#xf4;do"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcurarProjeto2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcurarComodoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="tfdIdFace">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -417,23 +445,18 @@
             <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o Face"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
+        <Component class="javax.swing.JTextField" name="tfdDescricaoFace">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnProcurarFace2">
+        <Component class="javax.swing.JButton" name="btnProcurarFace">
           <Properties>
             <Property name="text" type="java.lang.String" value="..."/>
             <Property name="toolTipText" type="java.lang.String" value="Procurar Projeto"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jButton1"/>
-          </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcurarFaceActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

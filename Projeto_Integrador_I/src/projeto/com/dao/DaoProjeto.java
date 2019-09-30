@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
 import projeto.com.negocio.Ambiente;
+import projeto.com.negocio.Face;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Projeto;
 
@@ -84,6 +85,31 @@ public class DaoProjeto {
                 Ambiente pro = (Ambiente) o;
                 modelo.addRow(new Object[]{
                     pro.getId(), pro.getDescricao(), pro.getId_projeto()
+                });
+            }
+
+        } catch (HibernateException he) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
+        }
+    }
+    
+     public static void listarFace(JTable jTabela, int idAmbiente) {
+        List resultado = null;
+
+        DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
+        modelo.setNumRows(0);
+
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Face where id_ambiente = "+idAmbiente+" order by id");
+            resultado = q.list();
+
+            for (Object o : resultado) {
+                Face pro = (Face) o;
+                modelo.addRow(new Object[]{
+                    pro.getId(), pro.getNome(),pro.getTipo(), pro.getId_ambiente()
                 });
             }
 

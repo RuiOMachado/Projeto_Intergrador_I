@@ -32,6 +32,9 @@ public class Face implements Serializable {
     private String nome;
     @Column(name = "tipo")
     private String tipo;
+    @Column(name = "id_ambiente")
+    private Integer id_ambiente;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFace")
     private List<ItemMaterial> itemMaterialList;
 
@@ -72,6 +75,18 @@ public class Face implements Serializable {
 
     public void setItemMaterialList(List<ItemMaterial> itemMaterialList) {
         this.itemMaterialList = itemMaterialList;
+    }
+    
+    public Integer getId_ambiente() {
+        return id_ambiente;
+    }
+
+    public void setId_ambiente(Integer id_ambiente) {
+        this.id_ambiente = id_ambiente;
+    }
+    
+    public String subString() {
+        return "%"+nome+"%"+tipo+"%"+id_ambiente+"%";
     }
     
 }
