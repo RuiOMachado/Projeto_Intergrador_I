@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
+import projeto.com.negocio.Ambiente;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Projeto;
 
@@ -55,4 +56,40 @@ public class DaoProjeto {
         }
         return resultado;
     }
+    
+    public static void criarAmbiente(String descricaoProjeto, int qnt, int idProjeto, int id){
+        Ambiente ambiente = new Ambiente();
+        for (int i = 0; i < qnt; i++) {
+            ambiente.setDescricao(descricaoProjeto+" - Comodo - "+i);
+            ambiente.setId_projeto(idProjeto);
+            DaoGenerico.saveOrUpdate(ambiente, id);
+            System.out.println("criou comodo "+i);
+        }
+    }
+    
+    public static void listarAmbiente(JTable jTabela, int idProjeto) {
+        List resultado = null;
+
+        DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
+        modelo.setNumRows(0);
+
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Ambiente where id_projeto = "+idProjeto+" order by id");
+            resultado = q.list();
+
+            for (Object o : resultado) {
+                Ambiente pro = (Ambiente) o;
+                modelo.addRow(new Object[]{
+                    pro.getId(), pro.getDescricao(), pro.getId_projeto()
+                });
+            }
+
+        } catch (HibernateException he) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
+        }
+    }
+    
 }

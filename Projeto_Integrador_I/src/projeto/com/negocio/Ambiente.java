@@ -30,6 +30,8 @@ public class Ambiente implements Serializable {
     private Integer id;
     @Column(name = "descricao")
     private String descricao;
+    @Column(name = "id_projeto")
+    private Integer id_projeto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAmbiente")
     private List<Calculo> calculoList;
 
@@ -38,6 +40,14 @@ public class Ambiente implements Serializable {
 
     public Ambiente(Integer id) {
         this.id = id;
+    }
+
+    public Integer getId_projeto() {
+        return id_projeto;
+    }
+
+    public void setId_projeto(Integer id_projeto) {
+        this.id_projeto = id_projeto;
     }
 
     public Integer getId() {
