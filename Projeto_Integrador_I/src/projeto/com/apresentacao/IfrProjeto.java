@@ -7,8 +7,8 @@ import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoProjeto;
-import projeto.com.negocio.Cidade;
 import projeto.com.negocio.Log;
+import projeto.com.negocio.Municipios;
 import projeto.com.negocio.Projeto;
 
 /**
@@ -112,18 +112,18 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfdNomeCliente)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(tfdCodCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(tfdCodCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(tfdDescricaoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdDescricaoCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnBuscarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(tfdSatus, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
-                        .addComponent(tfdDescricao))
+                            .addComponent(tfdSatus, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfdDescricao)
+                        .addComponent(tfdNomeCliente))
                     .addComponent(tfdQtdComodo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -232,9 +232,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -247,7 +245,8 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnSalvarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -259,7 +258,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCalcularFacesProjeto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
                     .addComponent(btnEditarProjeto)
@@ -280,13 +279,13 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
             Projeto pro = new Projeto();
 
             if (tfdDescricao.getText().length() > 0 && tfdNomeCliente.getText().length() > 0) {
-                Cidade cid = new Cidade();
-                cid.setId(Integer.parseInt(tfdCodCidade.getText()));
+                Municipios cid = new Municipios();
+                cid.setCodigoIbge(Integer.parseInt(tfdCodCidade.getText()));
                 pro.setDescricao(tfdDescricao.getText());
                 pro.setNomecliente(tfdNomeCliente.getText());
                 pro.setDatainicio(new Date());
                 pro.setEstado("Andamento");
-                pro.setIdRegiao(cid);
+                pro.setIdMunicipios(cid);
                 pro.setQntComodo(Integer.parseInt(tfdQtdComodo.getText()));
 
                 if (codigoTabela == 0) {
@@ -323,8 +322,8 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
             idUpdate = pro.getId();
             tfdSatus.setText(pro.getEstado());
             tfdDescricao.setText(pro.getDescricao());
-            tfdCodCidade.setText(String.valueOf(pro.getIdRegiao().getId()));
-            tfdDescricaoCidade.setText(pro.getIdRegiao().getDescricao());
+            tfdCodCidade.setText(String.valueOf(pro.getIdMunicipios().getCodigoIbge()));
+            tfdDescricaoCidade.setText(pro.getIdMunicipios().getNome());
             tfdNomeCliente.setText(pro.getNomecliente());
             tfdQtdComodo.setText(String.valueOf(pro.getQntComodo()));
             Dados_OLD = "%" + pro.getDescricao() + "%" + pro.getNomecliente() + "%" + pro.getEstado() + "%" + pro.getDatafinal() + "%" + pro.getDatainicio() + "%" + pro.getQntComodo() + "%";

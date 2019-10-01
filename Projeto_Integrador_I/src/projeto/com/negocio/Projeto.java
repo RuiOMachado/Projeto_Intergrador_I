@@ -44,9 +44,9 @@ public class Projeto implements Serializable {
     private String estado;
     @Column(name = "qnt_comodo")
     private Integer qntComodo;
-    @JoinColumn(name = "id_regiao", referencedColumnName = "id")
+    @JoinColumn(name = "id_municipios", referencedColumnName = "codigo_ibge")
     @ManyToOne(optional = false)
-    private Cidade idRegiao;
+    private Municipios idMunicipios;
 
     public Projeto() {
     }
@@ -111,16 +111,16 @@ public class Projeto implements Serializable {
         this.qntComodo = qntComodo;
     }
 
-    public Cidade getIdRegiao() {
-        return idRegiao;
+    public Municipios getIdMunicipios() {
+        return idMunicipios;
     }
 
-    public void setIdRegiao(Cidade idRegiao) {
-        this.idRegiao = idRegiao;
+    public void setIdMunicipios(Municipios idMunicipios) {
+        this.idMunicipios = idMunicipios;
     }
-
+    
     public String subString() {
-        return "%"+descricao+"%"+nomecliente+"%"+estado+"%"+datafinal+"%"+datainicio+"%"+qntComodo+"%";
+        return "%"+id+"%"+descricao+"%"+nomecliente+"%"+qntComodo+"%"+idMunicipios+"%";
     }
     
 }

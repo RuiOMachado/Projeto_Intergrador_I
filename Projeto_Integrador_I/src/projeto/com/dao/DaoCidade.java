@@ -7,8 +7,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
-import projeto.com.negocio.Cidade;
 import projeto.com.negocio.Log;
+import projeto.com.negocio.Municipios;
 
 /**
  *
@@ -22,7 +22,7 @@ public class DaoCidade {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Cidade where upper(descricao) LIKE upper('%" + cidade + "%') Order by id");
+            org.hibernate.Query q = sessao.createQuery("from Municipios where upper(nome) LIKE upper('%" + cidade + "%') Order by id");
             resultado = q.list();
 
         } catch (HibernateException he) {
@@ -37,7 +37,7 @@ public class DaoCidade {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Cidade where id = " + id);
+            org.hibernate.Query q = sessao.createQuery("from Municipios where id = " + id);
             resultado = q.list();
 
         } catch (Exception ex) {
@@ -56,13 +56,13 @@ public class DaoCidade {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Cidade order by id");
+            org.hibernate.Query q = sessao.createQuery("from Municipios order by nome");
             resultado = q.list();
 
             for (Object o : resultado) {
-                Cidade cid = (Cidade) o;
+                Municipios cid = (Municipios) o;
                 modelo.addRow(new Object[]{
-                    cid.getId(), cid.getDescricao(), cid.getRegiao(), cid.getSiglaRegiao(), cid.getPotencialsolar()
+                    cid.getCodigoIbge(), cid.getNome(), cid.getCodigoUf().getUf(),cid.getLatitude()
                 });
             }
 

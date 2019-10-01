@@ -3,7 +3,7 @@ import java.awt.Event;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import projeto.com.dao.DaoCidade;
-import projeto.com.negocio.Cidade;
+import projeto.com.negocio.Municipios;
 
 /**
  *
@@ -57,20 +57,20 @@ public class DlgBuscaCidade extends javax.swing.JDialog {
 
         tblCidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "#", "Descrição", "Região", "UF", "Potencial Solar"
+                "#", "Nome", "UF", "Latitude"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -92,7 +92,6 @@ public class DlgBuscaCidade extends javax.swing.JDialog {
             tblCidade.getColumnModel().getColumn(1).setResizable(false);
             tblCidade.getColumnModel().getColumn(2).setResizable(false);
             tblCidade.getColumnModel().getColumn(3).setResizable(false);
-            tblCidade.getColumnModel().getColumn(4).setResizable(false);
         }
 
         btnSair.setText("Sair");
@@ -168,26 +167,26 @@ public class DlgBuscaCidade extends javax.swing.JDialog {
         resultado = DaoCidade.pesquisaCidade(tfdPesquisa.getText());
 
         for (Object o : resultado) {
-            Cidade cid = (Cidade) o;
+            Municipios cid = (Municipios) o;
             modelo.addRow(new Object[]{
-                cid.getId(), cid.getDescricao(), cid.getRegiao(), cid.getSiglaRegiao(), cid.getPotencialsolar()
+                cid.getCodigoIbge(), cid.getNome(), cid.getCodigoUf().getUf(), cid.getLatitude()
             });
         }
     }
     
     public void defineValor(){
         List resultado = null;
-        Cidade cidade = new Cidade();
+        Municipios cidade = new Municipios();
         String idString = String.valueOf(tblCidade.getValueAt(tblCidade.getSelectedRow(), 0));
         int codigoTabela = Integer.parseInt(idString);
 
         resultado = DaoCidade.buscaIdCidade(codigoTabela);
 
         for (Object o : resultado) {
-            Cidade cid = (Cidade) o;
+            Municipios cid = (Municipios) o;
             cidade = cid;
         }
-        ifrProjeto.definirValorCidade(String.valueOf(codigoTabela), cidade.getDescricao());
+        ifrProjeto.definirValorCidade(String.valueOf(codigoTabela), cidade.getNome());
         dispose();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

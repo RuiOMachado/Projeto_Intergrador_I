@@ -57,8 +57,9 @@ Contributor(s):
     <mapping class="projeto.com.negocio.ItemMaterial"/>
     <mapping class="projeto.com.negocio.ItemFace"/>
     <mapping class="projeto.com.negocio.Face"/>
-    <mapping class="projeto.com.negocio.Cidade"/>
     <mapping class="projeto.com.negocio.Calculo"/>
     <mapping class="projeto.com.negocio.Ambiente"/>
+    <mapping class="projeto.com.negocio.Estados"/>
+    <mapping class="projeto.com.negocio.Municipios"/>
   </session-factory>
 </hibernate-configuration>
