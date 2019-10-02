@@ -32,6 +32,8 @@ public class ItemFace implements Serializable {
     private BigDecimal area;
     @Column(name = "total_qfo")
     private BigDecimal totalQfo;
+    @Column(name = "id_face")
+    private Integer idFace;
     @JoinColumn(name = "id_calculo", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Calculo idCalculo;
@@ -70,6 +72,14 @@ public class ItemFace implements Serializable {
         this.totalQfo = totalQfo;
     }
 
+    public Integer getIdFace() {
+        return idFace;
+    }
+
+    public void setIdFace(Integer idFace) {
+        this.idFace = idFace;
+    }
+
     public Calculo getIdCalculo() {
         return idCalculo;
     }
@@ -86,4 +96,7 @@ public class ItemFace implements Serializable {
         this.idItemmaterial = idItemmaterial;
     }
 
+    public String subString() {
+        return "%"+area+"%"+totalQfo+"%"+idCalculo+"%"+idItemmaterial+"%"+idFace+"%";
+    }
 }

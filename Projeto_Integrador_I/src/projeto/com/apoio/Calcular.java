@@ -46,14 +46,26 @@ public class Calcular {
 
         return df.format(num);
     }
-    
-    public static Double somarColuna(JTable table, int coluna, Double rt) {
 
-         double count=0;
-         for (int i=0; i<=table.getRowCount()-1;i++) {
-             count+=Double.parseDouble(table.getValueAt(i, coluna).toString());
-         }
-       return count+rt;
+    public static Double somarColuna(JTable table, int coluna, double rt) {
+
+        double count = 0;
+        for (int i = 0; i <= table.getRowCount() - 1; i++) {
+            count += Double.parseDouble(table.getValueAt(i, coluna).toString());
+        }
+        return count + rt;
+    }
+
+    public static Double arredondar(double valor, int casas, int ceilOrFloor) {
+        double arredondado = valor;
+        arredondado *= (Math.pow(10, casas));
+        if (ceilOrFloor == 0) {
+            arredondado = Math.ceil(arredondado);
+        } else {
+            arredondado = Math.floor(arredondado);
+        }
+        arredondado /= (Math.pow(10, casas));
+        return arredondado;
     }
 
 }

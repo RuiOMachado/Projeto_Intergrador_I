@@ -45,6 +45,8 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         btnAdicionarFace = new javax.swing.JButton();
         btnRemoverFace = new javax.swing.JButton();
         cmbTipo = new javax.swing.JComboBox<>();
+        cmbPosicaoRadiacao = new javax.swing.JComboBox<>();
+        cmbEstacao = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -104,6 +106,13 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         btnRemoverFace.setText("-");
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Parede", "Cobertura", "Piso" }));
+        cmbTipo.setToolTipText("Tipo de face");
+
+        cmbPosicaoRadiacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Norte", "Sul", "Leste", "Oeste", "Nordeste", "Noroeste", "Sudeste", "Sudoeste", " " }));
+        cmbPosicaoRadiacao.setToolTipText("Ponto de ascendência do sol");
+
+        cmbEstacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Inverno", "Verão" }));
+        cmbEstacao.setToolTipText("Estação");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,18 +120,24 @@ public class DlgBuscaFace extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbPosicaoRadiacao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbEstacao, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdicionarFace, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRemoverFace, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(btnRemoverFace, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,12 +147,14 @@ public class DlgBuscaFace extends javax.swing.JDialog {
                     .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdicionarFace)
                     .addComponent(btnRemoverFace)
-                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbPosicaoRadiacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEstacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -163,9 +180,12 @@ public class DlgBuscaFace extends javax.swing.JDialog {
             face.setId_ambiente(fac.getId_ambiente());
             FACE.setId(fac.getId());
             FACE.setTipo(fac.getTipo());
+            FACE.setRegiaoSolar(fac.getRegiaoSolar());
+            FACE.setEstacao(fac.getEstacao());
         }
         dlgCalculo.definirValorResistencias(FACE.getTipo());
         dlgCalculo.definirValorFace(String.valueOf(codigoTabela), face.getNome());
+        dlgCalculo.definirValorEstacoes(FACE.getEstacao());
         dispose();
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -173,11 +193,13 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         try {
             Face face = new Face();
 
-            if (tfdDescricao.getText().length() > 0 && (!cmbTipo.getSelectedItem().toString().equals("Selecione"))) {
+            if (tfdDescricao.getText().length() > 0 && (!cmbTipo.getSelectedItem().toString().equals("Selecione")) && (!cmbPosicaoRadiacao.getSelectedItem().toString().equals("Selecione")) && (!cmbEstacao.getSelectedItem().toString().equals("Selecione"))) {
                 face.setNome(tfdDescricao.getText());
                 face.setTipo(cmbTipo.getSelectedItem().toString());
                 face.setId_ambiente(DlgCalculo.AMBIENTE.getId());
-
+                face.setRegiaoSolar(cmbPosicaoRadiacao.getSelectedItem().toString());
+                face.setEstacao(cmbEstacao.getSelectedItem().toString());
+                
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(face, codigoTabela);
                     DaoAuditoria.saveAuditoria("Face", face.subString(), Dados_OLD, codigoTabela, "INCLUIR");
@@ -203,6 +225,8 @@ public class DlgBuscaFace extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarFace;
     private javax.swing.JButton btnRemoverFace;
+    private javax.swing.JComboBox<String> cmbEstacao;
+    private javax.swing.JComboBox<String> cmbPosicaoRadiacao;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;

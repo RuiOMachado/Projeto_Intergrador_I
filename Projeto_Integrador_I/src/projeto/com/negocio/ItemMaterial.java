@@ -2,7 +2,9 @@ package projeto.com.negocio;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,6 +24,9 @@ import javax.persistence.Table;
          schema = "public"
 )
 public class ItemMaterial implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemmaterial")
+    private List<ItemFace> itemFaceList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -144,6 +150,14 @@ public class ItemMaterial implements Serializable {
 
     public void setIdMaterial(Material idMaterial) {
         this.idMaterial = idMaterial;
+    }
+
+    public List<ItemFace> getItemFaceList() {
+        return itemFaceList;
+    }
+
+    public void setItemFaceList(List<ItemFace> itemFaceList) {
+        this.itemFaceList = itemFaceList;
     }
     
 }

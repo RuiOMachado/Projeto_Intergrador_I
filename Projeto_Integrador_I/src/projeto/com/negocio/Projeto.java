@@ -2,7 +2,9 @@ package projeto.com.negocio;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +26,9 @@ import javax.persistence.TemporalType;
          schema = "public"
 )
 public class Projeto implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProjeto")
+    private List<Calculo> calculoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -121,6 +127,14 @@ public class Projeto implements Serializable {
     
     public String subString() {
         return "%"+id+"%"+descricao+"%"+nomecliente+"%"+qntComodo+"%"+idMunicipios+"%";
+    }
+
+    public List<Calculo> getCalculoList() {
+        return calculoList;
+    }
+
+    public void setCalculoList(List<Calculo> calculoList) {
+        this.calculoList = calculoList;
     }
     
 }

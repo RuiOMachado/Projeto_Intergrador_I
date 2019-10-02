@@ -1,6 +1,5 @@
 package projeto.com.apresentacao;
 
-import java.awt.Event;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -308,7 +307,6 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             Material mat = new Material();
 
             if (tfdDescricaoMaterial.getText().length() > 0 && (!jcbCorMaterial.getSelectedItem().toString().equals("Selecione")) && tfdCondutividadeMaterial.getText().length() > 0 && tfdDesnsidadeMaterial.getText().length() > 0 && tfdCondutividadeMaterial.getText().length() > 0) {
-                calResistencia();
                 mat.setDescricao(tfdDescricaoMaterial.getText());
                 mat.setCor(jcbCorMaterial.getSelectedItem().toString());
                 mat.setCondutividade(BigDecimal.valueOf(Double.valueOf(tfdCondutividadeMaterial.getText())));
@@ -419,20 +417,13 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExcluirMaterialActionPerformed
 
     private void tfdCalorMaterialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdCalorMaterialKeyReleased
-        if (evt.getKeyCode() == Event.ENTER) {
-            calResistencia();
-        }
+       
     }//GEN-LAST:event_tfdCalorMaterialKeyReleased
 
     private void tfdCondutividadeMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdCondutividadeMaterialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdCondutividadeMaterialActionPerformed
 
-    private void calResistencia() {
-        //Double espessura = Double.parseDouble(cEspessura.getText());
-        //Double condutividade = Double.parseDouble(cCondutividade.getText());
-        //cResistencia.setText(String.valueOf(Math.ceil(espessura / condutividade)));
-    }
 
     //tentar fazer este metodo generico, mas vamos deixar em observação pra esta sprint
     public void startComponents() {

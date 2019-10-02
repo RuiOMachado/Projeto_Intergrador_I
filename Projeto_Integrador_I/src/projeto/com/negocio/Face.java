@@ -34,6 +34,10 @@ public class Face implements Serializable {
     private String tipo;
     @Column(name = "id_ambiente")
     private Integer id_ambiente;
+    @Column(name = "regiaoSolar")
+    private String regiaoSolar;
+    @Column(name = "estacao")
+    private String estacao;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idFace")
     private List<ItemMaterial> itemMaterialList;
@@ -85,8 +89,24 @@ public class Face implements Serializable {
         this.id_ambiente = id_ambiente;
     }
     
+    public String getRegiaoSolar() {
+        return regiaoSolar;
+    }
+
+    public void setRegiaoSolar(String regiaoSolar) {
+        this.regiaoSolar = regiaoSolar;
+    }
+    
+    public String getEstacao() {
+        return estacao;
+    }
+
+    public void setEstacao(String estacao) {
+        this.estacao = estacao;
+    }
+    
     public String subString() {
-        return "%"+nome+"%"+tipo+"%"+id_ambiente+"%";
+        return "%"+nome+"%"+tipo+"%"+id_ambiente+"%"+regiaoSolar+"%"+estacao+"%";
     }
     
 }
