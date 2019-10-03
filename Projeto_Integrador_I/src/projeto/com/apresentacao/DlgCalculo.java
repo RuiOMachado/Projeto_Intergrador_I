@@ -7,18 +7,15 @@ import java.math.RoundingMode;
 import java.util.List;
 import javax.swing.JOptionPane;
 import projeto.com.apoio.Calcular;
-import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoCalculo;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
 import projeto.com.negocio.Ambiente;
-import projeto.com.negocio.Calculo;
 import projeto.com.negocio.Face;
 import projeto.com.negocio.ItemMaterial;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
-import projeto.com.negocio.Projeto;
 
 /**
  *
@@ -85,7 +82,6 @@ public class DlgCalculo extends javax.swing.JDialog {
         jLabel21 = new javax.swing.JLabel();
         tfdDescricaoFace = new javax.swing.JTextField();
         btnProcurarFace = new javax.swing.JButton();
-        btnCriarCalculo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         tfdRt = new javax.swing.JTextField();
@@ -96,6 +92,11 @@ public class DlgCalculo extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         tfdRadiacao = new javax.swing.JTextField();
+        tfdArea = new javax.swing.JTextField();
+        tfdQfo = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -174,11 +175,11 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jLabel3.setText("Temperatura");
 
-        tfdTe.setText("0°");
+        tfdTe.setText("0");
         tfdTe.setToolTipText("Temperatura Externa");
         tfdTe.setEnabled(false);
 
-        tfdTi.setText("0°");
+        tfdTi.setText("0");
         tfdTi.setToolTipText("Temperatura Interna");
         tfdTi.setEnabled(false);
 
@@ -325,15 +326,6 @@ public class DlgCalculo extends javax.swing.JDialog {
             }
         });
 
-        btnCriarCalculo.setText("Criar Cálculo");
-        btnCriarCalculo.setToolTipText("Criar Cálculo");
-        btnCriarCalculo.setEnabled(false);
-        btnCriarCalculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCriarCalculoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -364,8 +356,6 @@ public class DlgCalculo extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnProcurarComodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnProcurarFace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnCriarCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -378,22 +368,19 @@ public class DlgCalculo extends javax.swing.JDialog {
                     .addComponent(jLabel17)
                     .addComponent(tfdIdProjeto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel19)
-                            .addComponent(tfdIdComodo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)
-                            .addComponent(tfdDescricaoComodo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnProcurarComodo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdIdFace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel20)
-                            .addComponent(jLabel21)
-                            .addComponent(tfdDescricaoFace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnProcurarFace)))
-                    .addComponent(btnCriarCalculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(tfdIdComodo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(tfdDescricaoComodo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProcurarComodo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdIdFace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21)
+                    .addComponent(tfdDescricaoFace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnProcurarFace))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -418,6 +405,21 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         tfdRadiacao.setText("0.0");
 
+        tfdArea.setText("0.0");
+
+        tfdQfo.setEnabled(false);
+
+        jLabel10.setText("Área");
+
+        jLabel11.setText("qfo");
+
+        jButton1.setText("Calcular");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -427,36 +429,45 @@ public class DlgCalculo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(18, 18, 18))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addGap(34, 34, 34)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tfdFluxoTermico, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdTransmitancia)
-                                    .addComponent(tfdRt)
-                                    .addComponent(tfdAbsorvidade)
-                                    .addComponent(tfdRadiacao))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSalvar)
-                                .addGap(518, 518, 518))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(34, 34, 34))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfdArea, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfdQfo)
+                                    .addComponent(tfdFluxoTermico, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                                    .addComponent(tfdTransmitancia, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfdRt, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfdAbsorvidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfdRadiacao, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(531, 531, 531)
+                                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -492,8 +503,17 @@ public class DlgCalculo extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(tfdFluxoTermico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfdArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfdQfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
                             .addComponent(btnSalvar))
-                        .addGap(25, 51, Short.MAX_VALUE))))
+                        .addGap(24, 24, 24))))
         );
 
         pack();
@@ -558,16 +578,11 @@ public class DlgCalculo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        double rst    = Calcular.somarColuna(tblItemMaterialidade, 3, rt);
-        double rse    = Double.parseDouble(tfdResistenciaExterna.getText());
-        double u      = 1/rst;
-        double deltaT = Double.parseDouble(tfdTe.getText()) - Double.parseDouble(tfdTi.getText());
-        double absorv = Double.parseDouble(tfdAbsorvidade.getText());
-        double i      = Double.parseDouble(tfdRadiacao.getText());;
-        double q      = u * ((absorv*i*rse)+deltaT); 
-        tfdFluxoTermico.setText(String.valueOf(Calcular.arredondar(q, 4, 1)));
-        tfdAbsorvidade.setText("");
-        tfdRadiacao.setText("");
+        double areaM  = Double.parseDouble(tfdArea.getText());
+        double q      = Double.parseDouble(tfdFluxoTermico.getText());
+        double qfo    = areaM*q;
+        tfdQfo.setText(String.valueOf(Calcular.arredondar(qfo, 4, 1)));
+        tfdArea.setText("");
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -591,32 +606,20 @@ public class DlgCalculo extends javax.swing.JDialog {
         busca.setLocationRelativeTo(this);
         busca.setVisible(true);
 
-        btnCriarCalculo.setEnabled(true);
     }//GEN-LAST:event_btnProcurarFaceActionPerformed
 
-    private void btnCriarCalculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarCalculoActionPerformed
-        Projeto projeto = new Projeto();
-        Ambiente ambiente = new Ambiente();
-        if (tfdDescricaoFace.getText().length() > 0) {
-            Calculo cal = new Calculo();
-            projeto.setId(Integer.parseInt(tfdIdProjeto2.getText()));
-            ambiente.setId(Integer.parseInt(tfdIdComodo2.getText()));
-            cal.setIdAmbiente(ambiente);
-            cal.setIdProjeto(projeto);
-
-            if (codigoTabela == 0) {
-                DaoGenerico.saveOrUpdate(cal, codigoTabela);
-                DaoAuditoria.saveAuditoria("Cálculo", cal.subString(), Dados_OLD, codigoTabela, "INCLUIR");
-            } else {
-                cal.setId(idUpdate);
-                DaoGenerico.saveOrUpdate(cal, idUpdate);
-                DaoAuditoria.saveAuditoria("Cálculo", cal.subString(), Dados_OLD, codigoTabela, "EDITAR");
-            }
-            JOptionPane.showMessageDialog(null, "Cálculo criado!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro ao criar cálculo!");
-        }
-    }//GEN-LAST:event_btnCriarCalculoActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        double rst    = Calcular.somarColuna(tblItemMaterialidade, 3, rt);
+        double rse    = Double.parseDouble(tfdResistenciaExterna.getText());
+        double u      = 1/rst;
+        double deltaT = Double.parseDouble(tfdTe.getText()) - Double.parseDouble(tfdTi.getText());
+        double absorv = Double.parseDouble(tfdAbsorvidade.getText());
+        double i      = Double.parseDouble(tfdRadiacao.getText());
+        double q      = u * ((absorv*i*rse)+deltaT); 
+        tfdFluxoTermico.setText(String.valueOf(Calcular.arredondar(q, 4, 1)));
+        tfdAbsorvidade.setText("");
+        tfdRadiacao.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void definirValorMaterial(String id, String descricao) {
         tfdIdMaterial.setText(id);
@@ -678,13 +681,15 @@ public class DlgCalculo extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnCriarCalculo;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnProcurarComodo;
     private javax.swing.JButton btnProcurarFace;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -705,6 +710,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblItemMaterialidade;
     private javax.swing.JTextField tfdAbsorvidade;
+    private javax.swing.JTextField tfdArea;
     private javax.swing.JTextField tfdDescricaoComodo2;
     private javax.swing.JTextField tfdDescricaoFace;
     private javax.swing.JTextField tfdDescricaoMaterial;
@@ -715,6 +721,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JTextField tfdIdFace;
     private javax.swing.JTextField tfdIdMaterial;
     private javax.swing.JTextField tfdIdProjeto2;
+    private javax.swing.JTextField tfdQfo;
     private javax.swing.JTextField tfdRadiacao;
     private javax.swing.JTextField tfdResistenciaExterna;
     private javax.swing.JTextField tfdResistenciaInterna;

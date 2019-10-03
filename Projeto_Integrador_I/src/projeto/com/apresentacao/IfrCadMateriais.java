@@ -27,7 +27,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
      */
     public IfrCadMateriais() {
         initComponents();
-        DaoPermissao.definirPermissao(this);
+        DaoPermissao.definirPermissaoBotoes(this);
     }
 
     @SuppressWarnings("unchecked")

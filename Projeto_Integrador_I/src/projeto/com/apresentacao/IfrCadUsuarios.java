@@ -26,7 +26,7 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
     public IfrCadUsuarios() {
         initComponents();
         DaoLogin.listarLogin(jTableUser);
-        DaoPermissao.definirPermissao(this);
+        DaoPermissao.definirPermissaoBotoes(this);
     }
 
     @SuppressWarnings("unchecked")
