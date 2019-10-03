@@ -89,8 +89,6 @@ public class DaoMaterial {
             org.hibernate.Query q = sessao.createQuery("from Material ");//where upper(descricao) LIKE upper('%" + material + "%') AND upper (cor) LIKE upper('" + cor + "') Order by descricao");
             resultado = q.list();
 
-            System.out.println("RETORNO " + resultado.toString());
-
         } catch (HibernateException he) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
@@ -119,18 +117,13 @@ public class DaoMaterial {
 
         try {
             // Compila o relatorio
-            System.out.println("ENTRO AQUI");
             List materialLista = pesquisaRelatorioMaterial(material, cor);
-            System.out.println();
-            JRBeanCollectionDataSource bc = new JRBeanCollectionDataSource(materialLista);
             //JasperReport relatorio = (JasperReport) JRLoader.loadObject(getClass().getClassLoader().getResource("/projeto/com/relatorio/RMateriais.jasper"));
-            JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/projeto/com/relatorio/rel_audit_geral.jrxml"));
+            JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/projeto/com/relatorio/RelatorioDeMateriais.jrxml"));
             // Mapeia campos de parametros para o relatorio, mesmo que nao existam
-            
-            java.util.Map parametros = new HashMap();
 
             // Executa relatoio
-            JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, bc);
+            JasperPrint impressao = JasperFillManager.fillReport(relatorio, null, new JRBeanCollectionDataSource(materialLista));
 
             // Exibe resultado em video
             JasperViewer.viewReport(impressao, false);
