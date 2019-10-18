@@ -47,6 +47,10 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         cmbTipo = new javax.swing.JComboBox<>();
         cmbPosicaoRadiacao = new javax.swing.JComboBox<>();
         cmbEstacao = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -108,11 +112,23 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Parede", "Cobertura", "Piso" }));
         cmbTipo.setToolTipText("Tipo de face");
 
-        cmbPosicaoRadiacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Norte", "Sul", "Leste", "Oeste", "Nordeste", "Noroeste", "Sudeste", "Sudoeste", " " }));
+        cmbPosicaoRadiacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Norte", "Sul", "Leste", "Oeste", "Nordeste", "Noroeste", "Sudeste", "Sudoeste", "H" }));
         cmbPosicaoRadiacao.setToolTipText("Ponto de ascendência do sol");
 
         cmbEstacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Inverno", "Verão" }));
         cmbEstacao.setToolTipText("Estação");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        jLabel1.setText("Tipo");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        jLabel2.setText("Nome da face");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        jLabel3.setText("Incidência Solar");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        jLabel4.setText("Estação do ano");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,11 +154,26 @@ public class DlgBuscaFace extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jLabel2)
+                .addGap(84, 84, 84)
+                .addComponent(jLabel1)
+                .addGap(70, 70, 70)
+                .addComponent(jLabel3)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdicionarFace)
@@ -152,7 +183,7 @@ public class DlgBuscaFace extends javax.swing.JDialog {
                     .addComponent(cmbEstacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -229,6 +260,10 @@ public class DlgBuscaFace extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cmbPosicaoRadiacao;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField tfdDescricao;
