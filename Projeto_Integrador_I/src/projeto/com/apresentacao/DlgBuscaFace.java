@@ -18,6 +18,7 @@ public class DlgBuscaFace extends javax.swing.JDialog {
     DlgCalculo dlgCalculo;
     int codigoTabela = 0;
     int idUpdate = 0;
+    float latitude; 
     String Dados_OLD = "";
     public static Face FACE = null;
 
@@ -26,12 +27,13 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         initComponents();
     }
     
-    public DlgBuscaFace(java.awt.Frame parent, boolean modal, DlgCalculo dlgCalculo) {
+    public DlgBuscaFace(java.awt.Frame parent, boolean modal, DlgCalculo dlgCalculo, float latitude) {
         super(parent, modal);
         initComponents();
         this.dlgCalculo = dlgCalculo;
         DaoProjeto.listarFace(jTable1,DlgCalculo.AMBIENTE.getId());
         FACE = new Face();
+        this.latitude = latitude;
     }
 
     @SuppressWarnings("unchecked")
@@ -217,6 +219,7 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         dlgCalculo.definirValorResistencias(FACE.getTipo());
         dlgCalculo.definirValorFace(String.valueOf(codigoTabela), face.getNome());
         dlgCalculo.definirValorEstacoes(FACE.getEstacao());
+        dlgCalculo.definirValorRaidacao(latitude,FACE.getRegiaoSolar());
         dispose();
     }//GEN-LAST:event_jTable1MouseClicked
 

@@ -9,13 +9,14 @@ import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Municipios;
+import projeto.com.negocio.Radiacao;
 
 /**
  *
  * @author Douglas
  */
 public class DaoCidade {
-    
+
     public static List pesquisaCidade(String cidade) {
         List resultado = null;
         try {
@@ -30,8 +31,8 @@ public class DaoCidade {
         }
         return resultado;
     }
-    
-     public static List buscaIdCidade(int id) {
+
+    public static List buscaIdCidade(int id) {
         List resultado = null;
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
@@ -45,8 +46,8 @@ public class DaoCidade {
         }
         return resultado;
     }
-     
-     public static void listarCidade(JTable jTabela) {
+
+    public static void listarCidade(JTable jTabela) {
         List resultado = null;
 
         DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
@@ -62,7 +63,7 @@ public class DaoCidade {
             for (Object o : resultado) {
                 Municipios cid = (Municipios) o;
                 modelo.addRow(new Object[]{
-                    cid.getCodigoIbge(), cid.getNome(), cid.getCodigoUf().getUf(),cid.getLatitude()
+                    cid.getCodigoIbge(), cid.getNome(), cid.getCodigoUf().getUf(), cid.getLatitude()
                 });
             }
 

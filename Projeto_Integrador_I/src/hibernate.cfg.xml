@@ -61,5 +61,6 @@ Contributor(s):
     <mapping class="projeto.com.negocio.Ambiente"/>
     <mapping class="projeto.com.negocio.Estados"/>
     <mapping class="projeto.com.negocio.Municipios"/>
+    <mapping class="projeto.com.negocio.Radiacao"/>
   </session-factory>
 </hibernate-configuration>

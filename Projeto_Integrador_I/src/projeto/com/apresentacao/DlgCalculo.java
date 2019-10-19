@@ -26,6 +26,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     int codigoTabela = 0;
     int idUpdate = 0;
     double rt = 0;
+    float latitude;
     IfrProjeto ifrProjeto;
     public static Ambiente AMBIENTE = null;
     String Dados_OLD = "";
@@ -35,12 +36,13 @@ public class DlgCalculo extends javax.swing.JDialog {
         initComponents();
     }
 
-    public DlgCalculo(java.awt.Frame parent, boolean modal, IfrProjeto ifrProjeto) {
+    public DlgCalculo(java.awt.Frame parent, boolean modal, IfrProjeto ifrProjeto, float latitude) {
         super(parent, modal);
         initComponents();
         this.ifrProjeto = ifrProjeto;
         definirValorProjeto();
         AMBIENTE = new Ambiente();
+        this.latitude = latitude;
 
     }
 
@@ -602,7 +604,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     }//GEN-LAST:event_tfdResistenciaExternaActionPerformed
 
     private void btnProcurarFaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcurarFaceActionPerformed
-        DlgBuscaFace busca = new DlgBuscaFace(null, true, this);
+        DlgBuscaFace busca = new DlgBuscaFace(null, true, this, latitude);
         busca.setLocationRelativeTo(this);
         busca.setVisible(true);
 
@@ -634,6 +636,11 @@ public class DlgCalculo extends javax.swing.JDialog {
     public void definirValorAmbiente(String id, String descricao) {
         tfdIdComodo2.setText(id);
         tfdDescricaoComodo2.setText(descricao);
+    }
+    
+    public void definirValorRaidacao(float latitude, String RadiacaoSolar){
+        int valor = DaoCalculo.converteCoordenadas(latitude, RadiacaoSolar);
+        tfdRadiacao.setText(String.valueOf(valor));
     }
 
     public void definirValorFace(String id, String descricao) {

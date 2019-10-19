@@ -21,6 +21,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
     int idUpdate = 0;
     String Dados_OLD = "";
     DlgCalculo dlgCalculo;
+    float latitude;
     public static Projeto PROJETO = null;
 
     public IfrProjeto() {
@@ -361,14 +362,14 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
     private void tblProjetoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProjetoMouseClicked
         if (evt.getClickCount() == 2) {
             definirValorProjeto();
-            DlgCalculo cal = new DlgCalculo(null, true, this);
+            DlgCalculo cal = new DlgCalculo(null, true, this,latitude);
             cal.setVisible(true);
         }
     }//GEN-LAST:event_tblProjetoMouseClicked
 
     private void btnCalcularFacesProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularFacesProjetoActionPerformed
             definirValorProjeto();
-            DlgCalculo cal = new DlgCalculo(null, true, this);
+            DlgCalculo cal = new DlgCalculo(null, true, this, latitude);
             cal.setVisible(true);
     }//GEN-LAST:event_btnCalcularFacesProjetoActionPerformed
 
@@ -403,7 +404,9 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
             Projeto pro = (Projeto) o;
             projeto.setId(pro.getId());
             projeto.setDescricao(pro.getDescricao());
+            latitude = pro.getIdMunicipios().getLatitude();
         }
+        
         PROJETO.setId(projeto.getId());
         PROJETO.setDescricao(projeto.getDescricao());
     }

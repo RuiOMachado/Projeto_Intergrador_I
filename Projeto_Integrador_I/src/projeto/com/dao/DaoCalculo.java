@@ -9,6 +9,7 @@ import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
 import projeto.com.negocio.ItemMaterial;
 import projeto.com.negocio.Log;
+import projeto.com.negocio.Radiacao;
 
 /**
  *
@@ -42,5 +43,100 @@ public class DaoCalculo {
 
     public static void calcularRt(int idFace, int idProjeto) {
 
+    }
+    
+    public static int converteCoordenadas(float latitude, String PontosCardeais) {
+        String lat = String.valueOf(latitude);
+        String valor = lat.substring(1, 3);
+        if(valor.charAt(1) == '.'){
+            valor = lat.substring(1, 2);
+        }
+        
+        System.out.println(valor);
+        int resposta = 0;
+        org.hibernate.Query q = null;
+        List resultado = null;
+
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+            
+            if (Integer.valueOf(valor) >= 0 && Integer.valueOf(valor) <= 4) {
+                int test1 = Integer.valueOf(valor) - 0;
+                int test2 = Integer.valueOf(valor) - 4;
+                if (test1 >= test2) {
+                    q = sessao.createQuery("from Radiacao where latitude = 4 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                } else {
+                    q = sessao.createQuery("from Radiacao where latitude = 0 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                }
+            } else if (Integer.valueOf(valor) >= 4 && Integer.valueOf(valor) <= 8) {
+                int test1 = Integer.valueOf(valor) - 4;
+                int test2 = Integer.valueOf(valor) - 8;
+                if (test1 >= test2) {
+                    q = sessao.createQuery("from Radiacao where latitude = 8 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                } else {
+                    q = sessao.createQuery("from Radiacao where latitude = 4 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                }
+            } else if (Integer.valueOf(valor) >= 8 && Integer.valueOf(valor) <= 13) {
+                int test1 = Integer.valueOf(valor) - 8;
+                int test2 = Integer.valueOf(valor) - 13;
+                if (test1 >= test2) {
+                    q = sessao.createQuery("from Radiacao where latitude = 13 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                } else {
+                    q = sessao.createQuery("from Radiacao where latitude = 8 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                }
+            } else if (Integer.valueOf(valor) >= 13 && Integer.valueOf(valor) <= 17) {
+                int test1 = Integer.valueOf(valor) - 13;
+                int test2 = Integer.valueOf(valor) - 17;
+                if (test1 >= test2) {
+                    q = sessao.createQuery("from Radiacao where latitude = 17 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                } else {
+                    q = sessao.createQuery("from Radiacao where latitude = 13 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                }
+            } else if (Integer.valueOf(valor) >= 17 && Integer.valueOf(valor) <= 20) {
+                int test1 = Integer.valueOf(valor) - 17;
+                int test2 = Integer.valueOf(valor) - 20;
+                if (test1 >= test2) {
+                    q = sessao.createQuery("from Radiacao where latitude = 20 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                } else {
+                    q = sessao.createQuery("from Radiacao where latitude = 17 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                }
+            } else if (Integer.valueOf(valor) >= 20 && Integer.valueOf(valor) <= 23) {
+                int test1 = Integer.valueOf(valor) - 20;
+                int test2 = Integer.valueOf(valor) - 23;
+                if (test1 >= test2) {
+                    q = sessao.createQuery("from Radiacao where latitude = 23 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                } else {
+                    q = sessao.createQuery("from Radiacao where latitude = 20 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                }
+            } else if (Integer.valueOf(valor) >= 23 && Integer.valueOf(valor) <= 25) {
+                int test1 = Integer.valueOf(valor) - 23;
+                int test2 = Integer.valueOf(valor) - 25;
+                if (test1 >= test2) {
+                    q = sessao.createQuery("from Radiacao where latitude = 25 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                } else {
+                    q = sessao.createQuery("from Radiacao where latitude = 23 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                }
+            } else if (Integer.valueOf(valor) >= 25 && Integer.valueOf(valor) <= 30) {
+                int test1 = Integer.valueOf(valor) - 25;
+                int test2 = Integer.valueOf(valor) - 30;
+                if (test1 >= test2) {
+                    q = sessao.createQuery("from Radiacao where latitude = 30 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                } else {
+                    q = sessao.createQuery("from Radiacao where latitude = 25 and UPPER(nome) = UPPER('" + PontosCardeais + "')");
+                }
+            }
+
+            resultado = q.list();
+
+            for (Object o : resultado) {
+                Radiacao rad = (Radiacao) o;
+                    resposta = rad.getValor();
+            }
+
+        } catch (HibernateException he) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
+        }
+        return resposta;
     }
 }
