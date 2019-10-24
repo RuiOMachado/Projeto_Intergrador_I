@@ -278,7 +278,8 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
     private void btnSalvarProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarProjetoActionPerformed
         try {
             Projeto pro = new Projeto();
-
+            int qnt = 0;
+            
             if (tfdDescricao.getText().length() > 0 && tfdNomeCliente.getText().length() > 0) {
                 Municipios cid = new Municipios();
                 cid.setCodigoIbge(Integer.parseInt(tfdCodCidade.getText()));
@@ -288,16 +289,17 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 pro.setEstado("Andamento");
                 pro.setIdMunicipios(cid);
                 pro.setQntComodo(Integer.parseInt(tfdQtdComodo.getText()));
-
+                qnt = pro.getQntComodo();
+                
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(pro, codigoTabela);
-                    DaoProjeto.criarAmbiente(tfdDescricao.getText(),Integer.parseInt(tfdQtdComodo.getText()), pro.getId(), codigoTabela);
+                    DaoProjeto.criarAmbiente(tfdDescricao.getText(),Integer.parseInt(tfdQtdComodo.getText()), pro.getId(), codigoTabela, 0);
                     JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
                     DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, codigoTabela, "INCLUIR");
                 } else {
                     pro.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(pro, idUpdate);
-                    DaoProjeto.criarAmbiente(tfdDescricao.getText(),Integer.parseInt(tfdQtdComodo.getText()), pro.getId(), idUpdate);
+                    DaoProjeto.criarAmbiente(tfdDescricao.getText(),Integer.parseInt(tfdQtdComodo.getText()), pro.getId(), idUpdate, qnt);
                     JOptionPane.showMessageDialog(null, "Registro editado com sucesso!");
                     DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, codigoTabela, "EDITAR");
                 }

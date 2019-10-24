@@ -32,8 +32,6 @@ public class Ambiente implements Serializable {
     private String descricao;
     @Column(name = "id_projeto")
     private Integer id_projeto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAmbiente")
-    private List<Calculo> calculoList;
 
     public Ambiente() {
     }
@@ -66,12 +64,5 @@ public class Ambiente implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<Calculo> getCalculoList() {
-        return calculoList;
-    }
-
-    public void setCalculoList(List<Calculo> calculoList) {
-        this.calculoList = calculoList;
-    }
     
 }

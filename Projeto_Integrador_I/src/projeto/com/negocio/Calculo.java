@@ -39,8 +39,9 @@ public class Calculo implements Serializable {
     private BigDecimal fluxoCalorTotal;
     @Column(name = "carga_termica")
     private BigDecimal cargaTermica;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCalculo")
-    private List<ItemFace> itemFaceList;
+    @Column(name = "id_face")
+    private Integer idFace;
+
     @JoinColumn(name = "id_ambiente", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Ambiente idAmbiente;
@@ -95,14 +96,6 @@ public class Calculo implements Serializable {
         this.cargaTermica = cargaTermica;
     }
 
-    public List<ItemFace> getItemFaceList() {
-        return itemFaceList;
-    }
-
-    public void setItemFaceList(List<ItemFace> itemFaceList) {
-        this.itemFaceList = itemFaceList;
-    }
-
     public Ambiente getIdAmbiente() {
         return idAmbiente;
     }
@@ -119,8 +112,17 @@ public class Calculo implements Serializable {
         this.idProjeto = idProjeto;
     }
     
+    
+    public Integer getIdFace() {
+        return idFace;
+    }
+
+    public void setIdFace(Integer idFace) {
+        this.idFace = idFace;
+    }
+    
     public String subString() {
-        return "%"+qfo+"%"+qft+"%"+fluxoCalorTotal+"%"+cargaTermica+"%"+idAmbiente+"%"+idProjeto+"%";
+        return "%"+qfo+"%"+qft+"%"+fluxoCalorTotal+"%"+cargaTermica+"%"+idAmbiente+"%"+idProjeto+"%"+idFace+"%";
     }
     
 }

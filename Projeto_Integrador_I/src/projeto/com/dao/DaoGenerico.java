@@ -41,11 +41,11 @@ public class DaoGenerico{
 
     public static boolean delete(Object obj) {
         boolean retorno = true;
-        Session ses = null;
+        Session sessao = null;
         try {
-            ses = HibernateUtil.getSessionFactory().openSession();
-            Transaction t = ses.beginTransaction();
-            ses.delete(obj);
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = sessao.beginTransaction();
+            sessao.delete(obj);
 
             t.commit();
 
@@ -53,7 +53,7 @@ public class DaoGenerico{
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
             retorno = false;
         } finally {
-            ses.close();
+            sessao.close();
         }
         return retorno;
     }

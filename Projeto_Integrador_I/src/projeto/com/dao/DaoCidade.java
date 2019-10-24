@@ -9,7 +9,6 @@ import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Municipios;
-import projeto.com.negocio.Radiacao;
 
 /**
  *

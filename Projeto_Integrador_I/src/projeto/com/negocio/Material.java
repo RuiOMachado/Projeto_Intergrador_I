@@ -23,10 +23,6 @@ import javax.persistence.Table;
 
 public class Material implements java.io.Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
-    private List<ItemMaterial> itemMaterialList;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -113,12 +109,5 @@ public class Material implements java.io.Serializable {
         return "%"+descricao+"%"+cor+"%"+condutividade+"%"+dencidade+"%"+calor+"%"+fatorsolar+"%";
     }
 
-    public List<ItemMaterial> getItemMaterialList() {
-        return itemMaterialList;
-    }
-
-    public void setItemMaterialList(List<ItemMaterial> itemMaterialList) {
-        this.itemMaterialList = itemMaterialList;
-    }
     
 }
