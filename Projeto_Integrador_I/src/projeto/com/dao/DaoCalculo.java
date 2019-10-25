@@ -17,7 +17,7 @@ import projeto.com.negocio.Radiacao;
  */
 public class DaoCalculo {
 
-    public static void listarItemMaterial(JTable jTabela, int idFace) {
+    public static void listarItemMaterial(JTable jTabela, int idFace, int idCalculo) {
         List resultado = null;
 
         DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
@@ -26,7 +26,7 @@ public class DaoCalculo {
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-            org.hibernate.Query q = sessao.createQuery("from ItemMaterial where idFace = " + idFace + "order by id");
+            org.hibernate.Query q = sessao.createQuery("from ItemMaterial where idFace = " + idFace + " AND idCalculo = " + idCalculo +"");
             resultado = q.list();
 
             for (Object o : resultado) {

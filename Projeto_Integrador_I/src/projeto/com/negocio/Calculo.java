@@ -41,6 +41,8 @@ public class Calculo implements Serializable {
     private BigDecimal cargaTermica;
     @Column(name = "id_face")
     private Integer idFace;
+    @Column(name = "area")
+    private BigDecimal area;
 
     @JoinColumn(name = "id_ambiente", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -121,8 +123,16 @@ public class Calculo implements Serializable {
         this.idFace = idFace;
     }
     
+        public BigDecimal getArea() {
+        return area;
+    }
+
+    public void setArea(BigDecimal area) {
+        this.area = area;
+    }
+    
     public String subString() {
-        return "%"+qfo+"%"+qft+"%"+fluxoCalorTotal+"%"+cargaTermica+"%"+idAmbiente+"%"+idProjeto+"%"+idFace+"%";
+        return "%"+qfo+"%"+qft+"%"+fluxoCalorTotal+"%"+cargaTermica+"%"+idAmbiente+"%"+idProjeto+"%"+idFace+"%"+area+"%";
     }
     
 }

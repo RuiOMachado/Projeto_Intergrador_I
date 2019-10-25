@@ -50,6 +50,8 @@ public class ItemMaterial implements Serializable {
     private BigDecimal resistencia;
     @Column(name = "total_qfo")
     private BigDecimal totalQfo;
+    @Column(name = "id_calculo")
+    private Integer idCalculo;
     @JoinColumn(name = "id_face", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Face idFace;
@@ -158,6 +160,14 @@ public class ItemMaterial implements Serializable {
 
     public void setItemFaceList(List<ItemFace> itemFaceList) {
         this.itemFaceList = itemFaceList;
+    }
+
+    public Integer getIdCalculo() {
+        return idCalculo;
+    }
+
+    public void setIdCalculo(Integer idCalculo) {
+        this.idCalculo = idCalculo;
     }
     
 }

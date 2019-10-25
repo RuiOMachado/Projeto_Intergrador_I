@@ -247,8 +247,10 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         tfdTransmitancia.setEnabled(false);
 
-        jLabel6.setText("F. Térmico (q)");
+        jLabel6.setText("F. Térmico (qfo)");
+        jLabel6.setToolTipText("");
 
+        tfdFluxoTermico.setToolTipText("Fluxo térmico pelo fechamento opaco");
         tfdFluxoTermico.setEnabled(false);
 
         tfdAbsorvidade.setText("0.0");
@@ -267,7 +269,7 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jLabel10.setText("Área");
 
-        jLabel11.setText("qfo");
+        jLabel11.setText("F. Térmico (Q)");
 
         jButton1.setText("Calcular");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -342,7 +344,7 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jTextField2.setEnabled(false);
 
-        btnExcluirCalculo.setText("Excluir");
+        btnExcluirCalculo.setText("-");
         btnExcluirCalculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirCalculoActionPerformed(evt);
@@ -366,21 +368,19 @@ public class DlgCalculo extends javax.swing.JDialog {
                         .addGap(26, 26, 26)
                         .addComponent(tfdDescricaoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAdicionarCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel22)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel15)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnExcluirCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAdicionarCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExcluirCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel22)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel15)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -392,19 +392,15 @@ public class DlgCalculo extends javax.swing.JDialog {
                     .addComponent(jLabel12)
                     .addComponent(tfdDescricaoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(btnAdicionarCalculo))
+                    .addComponent(btnAdicionarCalculo)
+                    .addComponent(btnExcluirCalculo))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(btnExcluirCalculo)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel22)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -715,6 +711,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                 item.setIdFace(face);
                 item.setIdMaterial(material);
                 item.setEspessura(BigDecimal.valueOf(Double.valueOf(tfdEspessuraMaterialidade.getText())));
+                item.setIdCalculo(Integer.parseInt(tfdCodigoCalculo1.getText()));
                 //item.setResistenciaTotal(BigDecimal.valueOf(Calcular.somarColuna(tblItemMaterialidade, 3, rt)));
 
                 if (codigoTabela == 0) {
@@ -727,7 +724,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                     //DaoAuditoria.saveAuditoria("Item_Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
                     JOptionPane.showMessageDialog(rootPane, "Registro editada!");
                 }
-                DaoCalculo.listarItemMaterial(tblItemMaterialidade, face.getId());
+                DaoCalculo.listarItemMaterial(tblItemMaterialidade, face.getId(), Integer.parseInt(tfdCodigoCalculo1.getText()));
                 atualizarResultados();
             } else {
                 tfdIdMaterial.setBackground(Color.red);
@@ -778,6 +775,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         busca.setLocationRelativeTo(this);
         busca.setVisible(true);
         DaoProjeto.listarCalculo(jTable1, Integer.parseInt(tfdIdProjeto2.getText()), Integer.parseInt(tfdIdComodo2.getText()), Integer.parseInt(tfdIdFace.getText()));
+        DaoCalculo.listarItemMaterial(tblItemMaterialidade, Integer.parseInt(tfdIdFace.getText()), Integer.parseInt(tfdCodigoCalculo1.getText()));
     }//GEN-LAST:event_btnProcurarFaceActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -791,6 +789,18 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdFluxoTermico.setText(String.valueOf(Calcular.arredondar(q, 4, 1)));
         tfdAbsorvidade.setText("");
         tfdRadiacao.setText("");
+        Calculo cal = new Calculo();
+        Projeto pro = new Projeto();
+        Ambiente amb = new Ambiente();
+        amb.setId(Integer.parseInt(tfdIdComodo2.getText()));
+        pro.setId(Integer.parseInt(tfdIdProjeto2.getText()));
+        cal.setIdAmbiente(amb);
+        cal.setId(Integer.parseInt(tfdCodigoCalculo1.getText()));
+        cal.setQfo(BigDecimal.valueOf(Double.parseDouble(tfdFluxoTermico.getText())));
+        cal.setIdProjeto(pro);
+        cal.setIdFace(Integer.parseInt(tfdIdFace.getText()));
+        DaoGenerico.saveOrUpdate(cal, 1);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -800,6 +810,7 @@ public class DlgCalculo extends javax.swing.JDialog {
             tfdCodigoCalculo1.setText(String.valueOf(codigoTabela));
             tfdDescricaoCalculo1.setText("Calculo - " + codigoTabela);
             jTabbedPane1.setSelectedIndex(1);
+            DaoCalculo.listarItemMaterial(tblItemMaterialidade, Integer.parseInt(tfdIdFace.getText()), Integer.parseInt(tfdCodigoCalculo1.getText()));
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
