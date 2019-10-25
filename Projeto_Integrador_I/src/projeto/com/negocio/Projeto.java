@@ -27,9 +27,6 @@ import javax.persistence.TemporalType;
 )
 public class Projeto implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProjeto")
-    private List<Calculo> calculoList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +47,9 @@ public class Projeto implements Serializable {
     private String estado;
     @Column(name = "qnt_comodo")
     private Integer qntComodo;
+    @Column(name = "email")
+    private String email;
+
     @JoinColumn(name = "id_municipios", referencedColumnName = "codigo_ibge")
     @ManyToOne(optional = false)
     private Municipios idMunicipios;
@@ -126,15 +126,15 @@ public class Projeto implements Serializable {
     }
     
     public String subString() {
-        return "%"+id+"%"+descricao+"%"+nomecliente+"%"+qntComodo+"%"+idMunicipios+"%";
+        return "%"+id+"%"+descricao+"%"+nomecliente+"%"+qntComodo+"%"+idMunicipios+"%"+email+"%";
+    }
+    
+    public String getEmail() {
+        return email;
     }
 
-    public List<Calculo> getCalculoList() {
-        return calculoList;
-    }
-
-    public void setCalculoList(List<Calculo> calculoList) {
-        this.calculoList = calculoList;
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }
