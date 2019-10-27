@@ -59,6 +59,8 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         tfdCodCidade = new javax.swing.JTextField();
         tfdDescricaoCidade = new javax.swing.JTextField();
         btnBuscarProjeto = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        tfdEmail = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProjeto = new javax.swing.JTable();
         btnSair = new javax.swing.JButton();
@@ -99,6 +101,8 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setText("Email");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -112,21 +116,28 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(tfdCodCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(tfdDescricaoCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(btnBuscarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(tfdSatus, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(tfdDescricao)
-                        .addComponent(tfdNomeCliente))
-                    .addComponent(tfdQtdComodo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfdCodCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfdDescricaoCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfdSatus, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfdDescricao)
+                            .addComponent(tfdNomeCliente))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(tfdQtdComodo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfdEmail)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +161,9 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(tfdQtdComodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfdQtdComodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(tfdEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -287,6 +300,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 pro.setNomecliente(tfdNomeCliente.getText());
                 pro.setDatainicio(new Date());
                 pro.setEstado("Andamento");
+                pro.setEmail(tfdEmail.getText());
                 pro.setIdMunicipios(cid);
                 pro.setQntComodo(Integer.parseInt(tfdQtdComodo.getText()));
                 qnt = pro.getQntComodo();
@@ -329,6 +343,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
             tfdDescricaoCidade.setText(pro.getIdMunicipios().getNome());
             tfdNomeCliente.setText(pro.getNomecliente());
             tfdQtdComodo.setText(String.valueOf(pro.getQntComodo()));
+            tfdEmail.setText(pro.getEmail());
             Dados_OLD = "%" + pro.getDescricao() + "%" + pro.getNomecliente() + "%" + pro.getEstado() + "%" + pro.getDatafinal() + "%" + pro.getDatainicio() + "%" + pro.getQntComodo() + "%";
         }
         tfdNomeCliente.requestFocus();
@@ -386,6 +401,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         tfdSatus.setText("");
         tfdCodCidade.setText("");
         tfdDescricaoCidade.setText("");
+        tfdEmail.setText("");
         DaoProjeto.listarProjeto(tblProjeto);  //metodo atualiza tabela
     }
 
@@ -424,6 +440,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -431,6 +448,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfdCodCidade;
     private javax.swing.JTextField tfdDescricao;
     private javax.swing.JTextField tfdDescricaoCidade;
+    private javax.swing.JTextField tfdEmail;
     private javax.swing.JTextField tfdNomeCliente;
     private javax.swing.JTextField tfdQtdComodo;
     private javax.swing.JTextField tfdSatus;
