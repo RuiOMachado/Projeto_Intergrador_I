@@ -1,6 +1,5 @@
 package projeto.com.dao;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

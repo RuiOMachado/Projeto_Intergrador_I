@@ -25,9 +25,6 @@ import javax.persistence.Table;
 )
 public class ItemMaterial implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItemmaterial")
-    private List<ItemFace> itemFaceList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -154,20 +151,16 @@ public class ItemMaterial implements Serializable {
         this.idMaterial = idMaterial;
     }
 
-    public List<ItemFace> getItemFaceList() {
-        return itemFaceList;
-    }
-
-    public void setItemFaceList(List<ItemFace> itemFaceList) {
-        this.itemFaceList = itemFaceList;
-    }
-
     public Integer getIdCalculo() {
         return idCalculo;
     }
 
     public void setIdCalculo(Integer idCalculo) {
         this.idCalculo = idCalculo;
+    }
+    
+    public String subString() {
+        return "%"+idCalculo+"%"+idFace+"%"+idMaterial+"%"+espessura+"%"+resistenciaInt+"%"+resistenciaExt+"%"+resistencia+"%";
     }
     
 }
