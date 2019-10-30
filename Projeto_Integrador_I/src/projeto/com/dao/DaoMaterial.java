@@ -38,9 +38,9 @@ public class DaoMaterial {
             resultado = q.list();
 
             for (Object o : resultado) {
-                Material mat1 = (Material) o;
+                Material mat = (Material) o;
                 modelo.addRow(new Object[]{
-                    mat1.getId(), mat1.getDescricao(), mat1.getCondutividade(), mat1.getDencidade(), mat1.getFatorsolar()
+                    mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
                 });
             }
 

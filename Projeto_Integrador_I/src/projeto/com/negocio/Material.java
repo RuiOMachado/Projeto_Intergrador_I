@@ -1,4 +1,3 @@
-
 package projeto.com.negocio;
 
 import java.math.BigDecimal;
@@ -15,8 +14,8 @@ import javax.persistence.Table;
  * @author Douglas
  */
 @Entity
-@Table(name="material"
-    ,schema="public")
+@Table(name = "material",
+         schema = "public")
 
 public class Material implements java.io.Serializable {
 
@@ -38,14 +37,8 @@ public class Material implements java.io.Serializable {
     private String cor;
     @Column(name = "fatorsolar")
     private BigDecimal fatorsolar;
-
-    public BigDecimal getFatorsolar() {
-        return fatorsolar;
-    }
-
-    public void setFatorsolar(BigDecimal fatorsolar) {
-        this.fatorsolar = fatorsolar;
-    }
+    @Column(name = "classe")
+    private String classe;
 
     public Material() {
     }
@@ -101,10 +94,25 @@ public class Material implements java.io.Serializable {
     public void setCor(String cor) {
         this.cor = cor;
     }
-    
-    public String subString() {
-        return "%"+descricao+"%"+cor+"%"+condutividade+"%"+dencidade+"%"+calor+"%"+fatorsolar+"%";
+
+    public String getClasse() {
+        return classe;
     }
 
-    
+    public void setClasse(String classe) {
+        this.classe = classe;
+    }
+
+    public BigDecimal getFatorsolar() {
+        return fatorsolar;
+    }
+
+    public void setFatorsolar(BigDecimal fatorsolar) {
+        this.fatorsolar = fatorsolar;
+    }
+
+    public String subString() {
+        return "%" + descricao + "%" + cor + "%" + condutividade + "%" + dencidade + "%" + calor + "%" + fatorsolar + "%"+ classe + "%";
+    }
+
 }

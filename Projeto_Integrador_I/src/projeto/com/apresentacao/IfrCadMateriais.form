@@ -102,7 +102,7 @@
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jcbCorMaterial" alignment="0" pref="210" max="32767" attributes="0"/>
+                                      <Component id="cmbClasseMaterial" alignment="0" pref="210" max="32767" attributes="0"/>
                                       <Component id="tfdCalorMaterial" alignment="0" max="32767" attributes="0"/>
                                       <Component id="tfdDesnsidadeMaterial" alignment="0" max="32767" attributes="0"/>
                                       <Component id="tfdCondutividadeMaterial" alignment="0" max="32767" attributes="0"/>
@@ -126,7 +126,7 @@
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jcbCorMaterial" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbClasseMaterial" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -197,17 +197,20 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Cor &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;font&gt;Classe &lt;/font&gt; &lt;font color=RED&gt;*&lt;/font&gt; &lt;font&gt;:&lt;/font&gt; &lt;/html&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jcbCorMaterial">
+            <Component class="javax.swing.JComboBox" name="cmbClasseMaterial">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
+                  <StringArray count="7">
                     <StringItem index="0" value="Selecione"/>
-                    <StringItem index="1" value="Escura"/>
-                    <StringItem index="2" value="M&#xe9;dia"/>
-                    <StringItem index="3" value="Clara"/>
+                    <StringItem index="1" value="Vidro"/>
+                    <StringItem index="2" value="Cer&#xe2;mica"/>
+                    <StringItem index="3" value="Argamassa"/>
+                    <StringItem index="4" value="C&#xe2;mara de ar"/>
+                    <StringItem index="5" value="Concreto"/>
+                    <StringItem index="6" value="Madeira"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -300,9 +303,9 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="4">
-                        <Column editable="false" title="ID" type="java.lang.Integer"/>
+                        <Column editable="false" title="#" type="java.lang.Integer"/>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
-                        <Column editable="false" title="Cor" type="java.lang.String"/>
+                        <Column editable="false" title="Classe" type="java.lang.String"/>
                         <Column editable="false" title="Densidade" type="java.lang.Double"/>
                         <Column editable="false" title="Calor" type="java.lang.Double"/>
                         <Column editable="false" title="Fator Solar" type="java.lang.Double"/>
@@ -315,27 +318,27 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>

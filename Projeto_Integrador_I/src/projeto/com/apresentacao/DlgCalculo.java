@@ -102,7 +102,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdDescricaoCalculo1 = new javax.swing.JTextField();
         tfdArea = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tfdQft = new javax.swing.JTextField();
+        tfdQFO = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         tfdRt = new javax.swing.JTextField();
@@ -201,7 +201,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnProcurarComodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnProcurarFace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,20 +239,20 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Projeto", "Face", "Comodo"
+                "Código", "Projeto", "Face", "Comodo", "qfo", "qft"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -271,8 +271,11 @@ public class DlgCalculo extends javax.swing.JDialog {
         jScrollPane2.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btnAdicionarCalculo.setText("+");
@@ -489,7 +492,7 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jLabel2.setText("Resistência Total (rt)");
 
-        tfdQft.setEnabled(false);
+        tfdQFO.setEnabled(false);
 
         jLabel5.setText("Transmitância (U)");
 
@@ -497,7 +500,7 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         tfdRt.setEnabled(false);
 
-        jLabel11.setText("F. Térmico (Q)");
+        jLabel11.setText("F. Térmico (Qfo)");
 
         tfdTransmitancia.setEnabled(false);
 
@@ -566,7 +569,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfdArea, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfdQft)
+                            .addComponent(tfdQFO)
                             .addComponent(tfdQfo)
                             .addComponent(tfdTransmitancia, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfdRt, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -617,7 +620,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfdQft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfdQFO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -634,14 +637,11 @@ public class DlgCalculo extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 918, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1)
+                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -754,7 +754,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         double areaM = Double.parseDouble(tfdArea.getText());
         double Q = Double.parseDouble(tfdQfo.getText());
         double qfo = areaM * Q;
-        tfdQft.setText(String.valueOf(Calcular.arredondar(qfo, 4, 1)));
+        tfdQFO.setText(String.valueOf(Calcular.arredondar(qfo, 4, 1)));
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -836,13 +836,13 @@ public class DlgCalculo extends javax.swing.JDialog {
         cal.setIdAmbiente(amb);
         cal.setId(Integer.parseInt(tfdCodigoCalculo1.getText()));
         cal.setQfo(BigDecimal.valueOf(Double.parseDouble(tfdQfo.getText())));
-        cal.setQft(BigDecimal.valueOf(Double.parseDouble(tfdQft.getText())));
+        //cal.setQft(BigDecimal.valueOf(Double.parseDouble(tfdQft.getText())));
         cal.setIdProjeto(pro);
         cal.setIdFace(Integer.parseInt(tfdIdFace.getText()));
-        cal.setArea(BigDecimal.valueOf(Double.parseDouble(tfdQfo.getText())));
+        cal.setArea(BigDecimal.valueOf(Double.parseDouble(tfdArea.getText())));
         DaoGenerico.saveOrUpdate(cal, 1);
         JOptionPane.showMessageDialog(null, "Gravado!"); 
-
+        limparCampos();
         }else{
            JOptionPane.showMessageDialog(null, "Erro ao Gravar!"); 
         }
@@ -937,6 +937,16 @@ public class DlgCalculo extends javax.swing.JDialog {
         jTable1.getColumnModel().getColumn(2).setPreferredWidth(10);
         jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
     }
+    
+    public void limparCampos(){
+        tfdArea.setText("");
+        tfdAbsorvidade.setText("");
+        tfdQFO.setText("");
+        tfdQfo.setText("");
+        tfdTransmitancia.setText("");
+        tfdRt.setText("");
+        tfdRadiacao.setText("");
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -994,8 +1004,8 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JTextField tfdIdFace;
     private javax.swing.JTextField tfdIdMaterial;
     private javax.swing.JTextField tfdIdProjeto2;
+    private javax.swing.JTextField tfdQFO;
     private javax.swing.JTextField tfdQfo;
-    private javax.swing.JTextField tfdQft;
     private javax.swing.JTextField tfdRadiacao;
     private javax.swing.JTextField tfdResistenciaExterna;
     private javax.swing.JTextField tfdResistenciaInterna;
