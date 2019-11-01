@@ -80,6 +80,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         btnAdicionarCalculo = new javax.swing.JButton();
         btnExcluirCalculo = new javax.swing.JButton();
+        cmbTipoCalculo = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItemMaterialidade = new javax.swing.JTable();
@@ -292,13 +293,15 @@ public class DlgCalculo extends javax.swing.JDialog {
             }
         });
 
+        cmbTipoCalculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Fech. Opaco", "Fech. Translúcido" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(jLabel12)
@@ -311,7 +314,9 @@ public class DlgCalculo extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(btnAdicionarCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnExcluirCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnExcluirCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbTipoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(129, Short.MAX_VALUE))
         );
@@ -325,7 +330,8 @@ public class DlgCalculo extends javax.swing.JDialog {
                     .addComponent(tfdDescricaoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(btnAdicionarCalculo)
-                    .addComponent(btnExcluirCalculo))
+                    .addComponent(btnExcluirCalculo)
+                    .addComponent(cmbTipoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(151, Short.MAX_VALUE))
@@ -775,7 +781,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         try {
             Calculo cal = new Calculo();
 
-            if (tfdIdFace.getText().length() > 0 && tfdIdProjeto2.getText().length() > 0 && tfdIdComodo2.getText().length() > 0) {
+            if (tfdIdFace.getText().length() > 0 && tfdIdProjeto2.getText().length() > 0 && tfdIdComodo2.getText().length() > 0 && (!cmbTipoCalculo.getSelectedItem().toString().equals("Selecione"))) {
                 Projeto pro = new Projeto();
                 Ambiente am = new Ambiente();
                 pro.setId(Integer.parseInt(tfdIdProjeto2.getText()));
@@ -783,6 +789,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                 cal.setIdAmbiente(am);
                 cal.setIdProjeto(pro);
                 cal.setIdFace(Integer.parseInt(tfdIdFace.getText()));
+                cal.setTipo(cmbTipoCalculo.getSelectedItem().toString());
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(cal, codigoTabela);
@@ -959,6 +966,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JButton btnProcurarFace;
     private javax.swing.JButton btnRemoverMaterialidade;
     private javax.swing.JButton btnSair;
+    private javax.swing.JComboBox<String> cmbTipoCalculo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

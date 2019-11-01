@@ -2,9 +2,7 @@ package projeto.com.negocio;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -43,7 +40,10 @@ public class Calculo implements Serializable {
     private Integer idFace;
     @Column(name = "area")
     private BigDecimal area;
+    @Column(name = "tipo")
+    private String tipo;
 
+   
     @JoinColumn(name = "id_ambiente", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Ambiente idAmbiente;
@@ -131,8 +131,16 @@ public class Calculo implements Serializable {
         this.area = area;
     }
     
+     public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
     public String subString() {
-        return "%"+qfo+"%"+qft+"%"+fluxoCalorTotal+"%"+cargaTermica+"%"+idAmbiente+"%"+idProjeto+"%"+idFace+"%"+area+"%";
+        return "%"+qfo+"%"+qft+"%"+fluxoCalorTotal+"%"+cargaTermica+"%"+idAmbiente+"%"+idProjeto+"%"+idFace+"%"+area+"%"+tipo+"%";
     }
     
 }

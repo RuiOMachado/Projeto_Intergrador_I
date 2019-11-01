@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import projeto.com.apresentacao.NewLogin;
 import projeto.com.config.HibernateUtil;
+import projeto.com.negocio.Calculo;
 import projeto.com.negocio.ItemMaterial;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Radiacao;
@@ -41,8 +42,23 @@ public class DaoCalculo {
         }
     }
 
-    public static void calcularRt(int idFace, int idProjeto) {
+    public static boolean verificarTipoCalculo(int idCalculo) {
+        Calculo cal = new Calculo();
+        List resultado = null;
+        boolean ok = false;
+        
+            resultado = DaoGenerico.buscaId(idCalculo, "Calculo");
 
+            for (Object o : resultado) {
+                cal = (Calculo) o;
+            }
+            if("Fech. Opaco".equals(cal.getTipo())){
+                ok = true;
+            }else{
+                ok = false;
+            }
+            return ok;
+        
     }
     
     public static int converteCoordenadas(float latitude, String PontosCardeais) {

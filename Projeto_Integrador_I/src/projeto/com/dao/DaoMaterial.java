@@ -48,6 +48,31 @@ public class DaoMaterial {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
     }
+    
+    public static void listarMaterialDlg(JTable jTabela, String classe) {
+        List resultado = null;
+
+        DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
+        modelo.setNumRows(0);
+
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Material where clase = '" + classe +"' order by id");
+            resultado = q.list();
+
+            for (Object o : resultado) {
+                Material mat = (Material) o;
+                modelo.addRow(new Object[]{
+                    mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
+                });
+            }
+
+        } catch (HibernateException he) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
+        }
+    }
 
     public static List buscaIdMaterial(int id) {
         List resultado = null;
