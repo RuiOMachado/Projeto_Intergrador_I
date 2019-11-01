@@ -34,13 +34,13 @@ public class DaoMaterial {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Material order by id");
+            org.hibernate.Query q = sessao.createQuery("from Material order by descricao");
             resultado = q.list();
 
             for (Object o : resultado) {
                 Material mat = (Material) o;
                 modelo.addRow(new Object[]{
-                    mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
+                    mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getCalor(), mat.getFatorsolar()
                 });
             }
 
@@ -49,7 +49,7 @@ public class DaoMaterial {
         }
     }
     
-    public static void listarMaterialDlg(JTable jTabela, String classe) {
+    public static void listarMaterialDlg(JTable jTabela, String classe1, String classe2) {
         List resultado = null;
 
         DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
@@ -59,13 +59,13 @@ public class DaoMaterial {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Material where clase = '" + classe +"' order by id");
+            org.hibernate.Query q = sessao.createQuery("from Material where classe = '" + classe1 +"' or classe = '" + classe2 +"' order by descricao");
             resultado = q.list();
 
             for (Object o : resultado) {
                 Material mat = (Material) o;
                 modelo.addRow(new Object[]{
-                    mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
+                    mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getCalor(), mat.getFatorsolar()
                 });
             }
 
@@ -89,19 +89,42 @@ public class DaoMaterial {
         return resultado;
     }
 
-    public static List pesquisaMaterial(String material) {
+    public static List pesquisaMaterial(String descricao) {
         List resultado = null;
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%" + material + "%') Order by id");
+            org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%" + descricao + "%') Order by descricao");
             resultado = q.list();
 
         } catch (HibernateException he) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
         return resultado;
+    }
+    
+    public static void pesquisaMaterialDlg(JTable jTabela, String descricao, String classe1, String classe2) {
+        List resultado = null;
+        DefaultTableModel modelo = (DefaultTableModel) jTabela.getModel();
+        modelo.setNumRows(0);
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+            org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%" + descricao + "%') order by descricao");
+            //org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%" + descricao + "%') AND classe = '" + classe1 +"' or classe = '" + classe2 +"' order by descricao");
+            resultado = q.list();
+
+        for (Object o : resultado) {
+                Material mat = (Material) o;
+                modelo.addRow(new Object[]{
+                    mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getCalor(), mat.getFatorsolar()
+                });
+            }
+
+        } catch (HibernateException he) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
+        }
     }
 
     public static List pesquisaRelatorioMaterial(String material, String cor) {

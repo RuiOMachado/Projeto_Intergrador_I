@@ -306,7 +306,7 @@
                         <Column editable="false" title="#" type="java.lang.Integer"/>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
                         <Column editable="false" title="Classe" type="java.lang.String"/>
-                        <Column editable="false" title="Densidade" type="java.lang.Double"/>
+                        <Column editable="false" title="Condutividade" type="java.lang.Double"/>
                         <Column editable="false" title="Calor" type="java.lang.Double"/>
                         <Column editable="false" title="Fator Solar" type="java.lang.Double"/>
                       </Table>

@@ -33,6 +33,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     float latitude;
     IfrProjeto ifrProjeto;
     public static Ambiente AMBIENTE = null;
+    public static Calculo CALCULO = null;
     String Dados_OLD = "";
 
     public DlgCalculo(java.awt.Frame parent, boolean modal) {
@@ -46,6 +47,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         this.ifrProjeto = ifrProjeto;
         definirValorProjeto();
         AMBIENTE = new Ambiente();
+        CALCULO = new Calculo();
         this.latitude = latitude;
         redimencionarTabela();
     }
@@ -647,7 +649,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1)
                     .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -717,6 +719,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAdicionarMaterialidadeActionPerformed
 
     private void btnPesquisarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarMaterialActionPerformed
+        CALCULO.setId(Integer.parseInt(tfdCodigoCalculo1.getText()));
         DlgBuscaMaterial busca = new DlgBuscaMaterial(null, true, this);
         busca.setLocationRelativeTo(this);
         busca.setVisible(true);
@@ -771,6 +774,7 @@ public class DlgCalculo extends javax.swing.JDialog {
             int codigoTabela = Integer.parseInt(idString);
             tfdCodigoCalculo1.setText(String.valueOf(codigoTabela));
             tfdDescricaoCalculo1.setText("Calculo - " + codigoTabela);
+            definirValorTipoCalculo();
             jTabbedPane1.setSelectedIndex(1);
             DaoCalculo.listarItemMaterial(tblItemMaterialidade, Integer.parseInt(tfdIdFace.getText()), Integer.parseInt(tfdCodigoCalculo1.getText()));
             atualizarResultados();
@@ -953,6 +957,22 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdTransmitancia.setText("");
         tfdRt.setText("");
         tfdRadiacao.setText("");
+    }
+    
+    public void definirValorTipoCalculo(){
+        List resultado = null;
+        Calculo calculo = new Calculo();
+        String idString = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        codigoTabela = Integer.parseInt(idString);
+
+        resultado = DaoGenerico.buscaId(codigoTabela,"Calculo");
+
+        for (Object o : resultado) {
+            Calculo cal = (Calculo) o;
+            calculo = cal;
+        }
+        tfdDescricaoCalculo1.setToolTipText(calculo.getTipo());
+        tfdCodigoCalculo1.setToolTipText(calculo.getTipo());
     }
 
 

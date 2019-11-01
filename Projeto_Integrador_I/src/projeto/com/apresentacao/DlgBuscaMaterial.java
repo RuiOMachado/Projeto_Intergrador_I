@@ -3,7 +3,7 @@ package projeto.com.apresentacao;
 import java.awt.Event;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import projeto.com.dao.DaoCalculo;
 import projeto.com.dao.DaoMaterial;
 import projeto.com.negocio.Material;
 
@@ -18,14 +18,14 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
     public DlgBuscaMaterial(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        DaoMaterial.listarMaterial(tblMaterial);
+        listarMaterialidades();
     }
 
     public DlgBuscaMaterial(java.awt.Frame parent, boolean modal, DlgCalculo ifrCalculo) {
         super(parent, modal);
         initComponents();
         this.ifrCalculo = ifrCalculo;
-        DaoMaterial.listarMaterial(tblMaterial);
+        listarMaterialidades();
     }
 
     /**
@@ -147,7 +147,7 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
                     .addComponent(btnSair))
@@ -161,25 +161,11 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        buscar();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
     private void tblMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMaterialMouseClicked
         if (evt.getClickCount() == 2) {
             definirValores();
         }
     }//GEN-LAST:event_tblMaterialMouseClicked
-
-    private void tfdPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdPesquisaActionPerformed
-
-    }//GEN-LAST:event_tfdPesquisaActionPerformed
-
-    private void tfdPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdPesquisaKeyReleased
-        if (evt.getKeyCode() == Event.ENTER) {
-            buscar();
-        }
-    }//GEN-LAST:event_tfdPesquisaKeyReleased
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         if (tblMaterial.getSelectedRow() != -1) {
@@ -189,21 +175,19 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnOkActionPerformed
 
-    private void buscar() {
-        List resultado = null;
-
-        DefaultTableModel modelo = (DefaultTableModel) tblMaterial.getModel();
-        modelo.setNumRows(0);
-
-        resultado = DaoMaterial.pesquisaMaterial(tfdPesquisa.getText());
-
-        for (Object o : resultado) {
-            Material mat = (Material) o;
-            modelo.addRow(new Object[]{
-                mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
-            });
+    private void tfdPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfdPesquisaKeyReleased
+        if (evt.getKeyCode() == Event.ENTER) {
+            DaoMaterial.pesquisaMaterialDlg(tblMaterial, tfdPesquisa.getText(), "Vidro", "Câmara de ar");
         }
-    }
+    }//GEN-LAST:event_tfdPesquisaKeyReleased
+
+    private void tfdPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdPesquisaActionPerformed
+
+    }//GEN-LAST:event_tfdPesquisaActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       DaoMaterial.pesquisaMaterialDlg(tblMaterial, tfdPesquisa.getText(), "Vidro", "Câmara de ar");
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     public void definirValores() {
         List resultado = null;
@@ -224,6 +208,16 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
         }
         ifrCalculo.definirValorMaterial(String.valueOf(codigoTabela), material.getDescricao());
         dispose();
+    }
+    
+    public void listarMaterialidades(){
+        if(DaoCalculo.verificarTipoCalculo(ifrCalculo.CALCULO.getId())){
+            DaoMaterial.listarMaterial(tblMaterial);
+        }else{
+            DaoMaterial.listarMaterialDlg(tblMaterial, "Vidro", "Câmara de ar");
+            btnBuscar.setEnabled(false);
+            tfdPesquisa.setEnabled(false);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

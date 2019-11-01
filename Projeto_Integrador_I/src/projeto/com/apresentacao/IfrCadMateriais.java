@@ -183,7 +183,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "#", "Descrição", "Classe", "Densidade", "Calor", "Fator Solar"
+                "#", "Descrição", "Classe", "Condutividade", "Calor", "Fator Solar"
             }
         ) {
             Class[] types = new Class [] {
@@ -357,7 +357,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
         for (Object o : resultado) {
             Material mat = (Material) o;
             modelo.addRow(new Object[]{
-                mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getDencidade(), mat.getCalor(), mat.getFatorsolar()
+                mat.getId(), mat.getDescricao(), mat.getClasse(), mat.getCondutividade(), mat.getCalor(), mat.getFatorsolar()
             });
         }
     }//GEN-LAST:event_jBPesquisaActionPerformed
