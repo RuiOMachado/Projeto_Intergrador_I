@@ -1,5 +1,6 @@
 package projeto.com.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -155,4 +156,61 @@ public class DaoCalculo {
         }
         return resposta;
     }
+    
+    public static Calculo getCalculoObj(String idCalculo){
+        List resultado = null;
+        Calculo calculo = new Calculo();
+        int id = Integer.parseInt(idCalculo);
+        
+        resultado = DaoGenerico.buscaId(id,"Calculo");
+
+        for (Object o : resultado) {
+            Calculo cal = (Calculo) o;
+            calculo = cal;
+        }
+        return calculo;
+    }
+    
+    public static Double getSomaQfoQft(String idProjeto, String idAmbiente){
+        Object sumQfo = null;
+        Object sumQft = null;
+        double somaQfo  = 0;
+        double somaQft  = 0;
+        int idPro = Integer.parseInt(idProjeto);
+        int idAmb = Integer.parseInt(idAmbiente);
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+	
+            ArrayList<Double> qfo = (ArrayList<Double>) sessao.createSQLQuery("select sum(qfo) from calculo where id_projeto = "+idPro+" or id_ambiente = "+idAmb+"").list();
+	    ArrayList<Double> qft = (ArrayList<Double>) sessao.createSQLQuery("select sum(qft) from calculo where id_projeto = "+idPro+" or id_ambiente = "+idAmb+"").list();
+		
+		sumQfo = qfo.get(0);		
+		sumQft = qft.get(0);
+	
+
+		somaQfo = (Double) sumQfo;
+		somaQft = (Double) sumQft;
+
+        } catch (HibernateException he) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
+        }
+        return somaQfo + somaQft;
+    }
+    
+    public static String getTipoCalculo(String idCalculo) {
+        int id = Integer.parseInt(idCalculo);
+        List resultado = null;
+        Calculo calculo = new Calculo();
+
+        resultado = DaoGenerico.buscaId(id, "Calculo");
+
+        for (Object o : resultado) {
+            Calculo cal = (Calculo) o;
+            calculo = cal;
+        }
+        return calculo.getTipo();
+    }
+    
+    
 }

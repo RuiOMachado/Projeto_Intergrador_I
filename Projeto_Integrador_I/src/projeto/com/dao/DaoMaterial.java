@@ -142,18 +142,16 @@ public class DaoMaterial {
         return resultado;
     }
 
-    public static Material buscarIdMaterial(int id) {
-        Material material = null;
+    public static Material buscarIdMaterial(String idMaterial) {
         List resultado = null;
-        try {
-            Session sessao = HibernateUtil.getSessionFactory().openSession();
-            sessao.beginTransaction();
+        Material material = new Material();
+        int id = Integer.parseInt(idMaterial);
+        
+        resultado = DaoGenerico.buscaId(id,"Material");
 
-            org.hibernate.Query q = sessao.createQuery("from Material where id = " + id);
-            resultado = q.list();
-
-        } catch (Exception ex) {
-            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        for (Object o : resultado) {
+            Material mat = (Material) o;
+            material = mat;
         }
         return material;
     }

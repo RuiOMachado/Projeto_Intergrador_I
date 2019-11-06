@@ -211,13 +211,13 @@ public class DlgBuscaMaterial extends javax.swing.JDialog {
     }
     
     public void listarMaterialidades(){
-        if(DaoCalculo.verificarTipoCalculo(ifrCalculo.CALCULO.getId())){
+        //if(DaoCalculo.verificarTipoCalculo(ifrCalculo.CALCULO.getId())){
             DaoMaterial.listarMaterial(tblMaterial);
-        }else{
-            DaoMaterial.listarMaterialDlg(tblMaterial, "Vidro", "Câmara de ar");
-            btnBuscar.setEnabled(false);
-            tfdPesquisa.setEnabled(false);
-        }
+       /// }else{
+           // DaoMaterial.listarMaterialDlg(tblMaterial, "Vidro", "Câmara de ar");
+          //  btnBuscar.setEnabled(false);
+           // tfdPesquisa.setEnabled(false);
+       // }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
