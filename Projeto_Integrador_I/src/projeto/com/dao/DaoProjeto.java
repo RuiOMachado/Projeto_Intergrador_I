@@ -140,7 +140,7 @@ public class DaoProjeto {
             for (Object o : resultado) {
                 Calculo pro = (Calculo) o;
                 modelo.addRow(new Object[]{
-                    pro.getId(), pro.getIdProjeto().getDescricao(), pro.getIdFace(), pro.getIdAmbiente().getId(), pro.getQfo(), pro.getQft(), pro.getTipo()
+                    pro.getId(), pro.getIdProjeto().getDescricao(), pro.getTipo(), pro.getIdAmbiente().getId(), pro.getQfo(), pro.getQft()
                 });
             }
 

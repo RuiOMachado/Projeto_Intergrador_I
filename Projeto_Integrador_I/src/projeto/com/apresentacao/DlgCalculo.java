@@ -86,6 +86,8 @@ public class DlgCalculo extends javax.swing.JDialog {
         btnCalcularCargaTermica = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         tfdCargaTermica = new javax.swing.JTextField();
+        tfdBtu = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItemMaterialidade = new javax.swing.JTable();
@@ -247,20 +249,20 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Projeto", "Face", "Comodo", "qfo", "qft", "Tipo"
+                "Código", "Projeto", "Tipo", "Comodo", "qfo", "qft"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -284,7 +286,6 @@ public class DlgCalculo extends javax.swing.JDialog {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
         }
 
         btnAdicionarCalculo.setText("+");
@@ -310,9 +311,13 @@ public class DlgCalculo extends javax.swing.JDialog {
             }
         });
 
-        jLabel22.setText("Carga Térmica");
+        jLabel22.setText("Carga Térmica W");
 
         tfdCargaTermica.setEnabled(false);
+
+        tfdBtu.setEnabled(false);
+
+        jLabel23.setText("BTU/H");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -338,54 +343,64 @@ public class DlgCalculo extends javax.swing.JDialog {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmbTipoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfdCargaTermica, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCalcularCargaTermica)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnCalcularCargaTermica)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel22)
+                                .addComponent(jLabel23))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfdBtu)
+                                .addComponent(tfdCargaTermica, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)))))
                 .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfdCodigoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(tfdDescricaoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(btnAdicionarCalculo)
-                    .addComponent(btnExcluirCalculo)
-                    .addComponent(cmbTipoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCalcularCargaTermica)
-                    .addComponent(jLabel22)
-                    .addComponent(tfdCargaTermica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfdCodigoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(tfdDescricaoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)
+                            .addComponent(btnAdicionarCalculo)
+                            .addComponent(btnExcluirCalculo)
+                            .addComponent(cmbTipoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(tfdCargaTermica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfdBtu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel23))
+                .addGap(14, 14, 14)
+                .addComponent(btnCalcularCargaTermica)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cálculo", jPanel2);
 
         tblItemMaterialidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "#", "Código Material", "Descrição", "Resistência"
+                "#", "Código Material", "Descrição", "Resistência", "FatorSolar"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -397,6 +412,13 @@ public class DlgCalculo extends javax.swing.JDialog {
             }
         });
         jScrollPane1.setViewportView(tblItemMaterialidade);
+        if (tblItemMaterialidade.getColumnModel().getColumnCount() > 0) {
+            tblItemMaterialidade.getColumnModel().getColumn(0).setResizable(false);
+            tblItemMaterialidade.getColumnModel().getColumn(1).setResizable(false);
+            tblItemMaterialidade.getColumnModel().getColumn(2).setResizable(false);
+            tblItemMaterialidade.getColumnModel().getColumn(3).setResizable(false);
+            tblItemMaterialidade.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         btnAdicionarMaterialidade.setText("+");
         btnAdicionarMaterialidade.setDoubleBuffered(true);
@@ -735,6 +757,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                 item.setIdMaterial(material);
                 item.setEspessura(BigDecimal.valueOf(Double.valueOf(tfdEspessuraMaterialidade.getText())));
                 item.setIdCalculo(Integer.parseInt(tfdCodigoCalculo1.getText()));
+                
                 //item.setResistenciaTotal(BigDecimal.valueOf(Calcular.somarColuna(tblItemMaterialidade, 3, rt)));
 
                 if (codigoTabela == 0) {
@@ -813,17 +836,14 @@ public class DlgCalculo extends javax.swing.JDialog {
             tfdQFO.setText(String.valueOf(Calcular.arredondar(qfo, 4, 1)));
         } else if ("Fech. Translúcido".equals(cal.getTipo())) {
             double rst = Calcular.somarColuna(tblItemMaterialidade, 3, rt);
-            double rse = Double.parseDouble(tfdResistenciaExterna.getText());
             double u = 1 / rst;
             double deltaT = Double.parseDouble(tfdTe.getText()) - Double.parseDouble(tfdTi.getText());
-            double absorv = Double.parseDouble(tfdAbsorvidade.getText());
+            double qft = u * deltaT;
             double i = Double.parseDouble(tfdRadiacao.getText());
-            double q = u * ((absorv * i * rse) + deltaT);
-            tfdQfo.setText(String.valueOf(Calcular.arredondar(q, 4, 1)));
+            double qfs = Calcular.somarColuna(jTable1, 4, 0) * i;
             double areaM = Double.parseDouble(tfdArea.getText());
-            double Q = Double.parseDouble(tfdQfo.getText());
-            double qfo = areaM * Q;
-            tfdQFO.setText(String.valueOf(Calcular.arredondar(qfo, 4, 1)));
+            double Qft = (qft + qfs) * areaM;
+            tfdQFT.setText(String.valueOf(Calcular.arredondar(Qft, 4, 1)));
         } else {
             JOptionPane.showMessageDialog(null, "Erro! Tipo de calculo inválido!");
         }
@@ -856,6 +876,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                 cal.setIdProjeto(pro);
                 cal.setQfo(BigDecimal.valueOf(Double.parseDouble("0")));
                 cal.setQft(BigDecimal.valueOf(Double.parseDouble("0")));
+                cal.setCargaTermica(BigDecimal.valueOf(Double.parseDouble("0")));
                 cal.setIdFace(Integer.parseInt(tfdIdFace.getText()));
                 cal.setTipo(cmbTipoCalculo.getSelectedItem().toString());
 
@@ -946,9 +967,11 @@ public class DlgCalculo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRemoverMaterialidadeActionPerformed
 
     private void btnCalcularCargaTermicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularCargaTermicaActionPerformed
+        double btu = 3.412;
         double somaQfo = Calcular.somarColuna(jTable1, 4, 0);
         double somaQft = Calcular.somarColuna(jTable1, 5, 0);
-        tfdCargaTermica.setText(String.valueOf(somaQfo+somaQft));
+        tfdCargaTermica.setText(String.valueOf(Calcular.arredondar((somaQfo+somaQft),4,1)));
+        tfdBtu.setText(String.valueOf(Calcular.arredondar((somaQfo+somaQft) * btu,4,1)));
     }//GEN-LAST:event_btnCalcularCargaTermicaActionPerformed
 
     public void definirValorMaterial(String id, String descricao) {
@@ -1076,6 +1099,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1094,6 +1118,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JTable tblItemMaterialidade;
     private javax.swing.JTextField tfdAbsorvidade;
     private javax.swing.JTextField tfdArea;
+    private javax.swing.JTextField tfdBtu;
     private javax.swing.JTextField tfdCargaTermica;
     private javax.swing.JTextField tfdCodigoCalculo;
     private javax.swing.JTextField tfdCodigoCalculo1;
