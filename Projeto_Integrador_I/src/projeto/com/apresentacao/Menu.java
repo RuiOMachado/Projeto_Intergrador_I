@@ -1,5 +1,8 @@
 package projeto.com.apresentacao;
 
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoPermissao;
 import projeto.com.negocio.Log;
@@ -10,9 +13,14 @@ import projeto.com.negocio.Log;
  */
 public class Menu extends javax.swing.JFrame {
 
+    IfrDashboards dash;
+
     public Menu() {
         initComponents();
+        dash = new IfrDashboards(jDesk, null);
+
         setExtendedState(MAXIMIZED_BOTH);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -27,6 +35,9 @@ public class Menu extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jDesk = new javax.swing.JDesktopPane();
+        jLProjeto = new javax.swing.JLabel();
+        jCProjeto = new javax.swing.JComboBox<>();
+        jBBuscar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         jmiLog = new javax.swing.JMenuItem();
@@ -61,15 +72,43 @@ public class Menu extends javax.swing.JFrame {
 
         jDesk.setPreferredSize(new java.awt.Dimension(1280, 720));
 
+        jLProjeto.setText("Projeto:");
+
+        jCProjeto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "projeto do seculo", "tete", "teste da vó" }));
+
+        jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
+
+        jDesk.setLayer(jLProjeto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesk.setLayer(jCProjeto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesk.setLayer(jBBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDeskLayout = new javax.swing.GroupLayout(jDesk);
         jDesk.setLayout(jDeskLayout);
         jDeskLayout.setHorizontalGroup(
             jDeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jDeskLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLProjeto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jBBuscar)
+                .addContainerGap(807, Short.MAX_VALUE))
         );
         jDeskLayout.setVerticalGroup(
             jDeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jDeskLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLProjeto)
+                    .addComponent(jCProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBBuscar))
+                .addContainerGap(647, Short.MAX_VALUE))
         );
 
         menuArquivo.setText("Arquivo");
@@ -201,6 +240,7 @@ public class Menu extends javax.swing.JFrame {
         IfrCadMateriais cadMateriais = new IfrCadMateriais();
         jDesk.add(cadMateriais);
         cadMateriais.setVisible(true);
+
     }//GEN-LAST:event_jmiMaterialActionPerformed
 
     private void jmiUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUsuarioActionPerformed
@@ -239,21 +279,35 @@ public class Menu extends javax.swing.JFrame {
         cal.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+       jDesk.removeAll();
+       jDesk.add(jBBuscar);
+       jDesk.add(jLProjeto);
+       jDesk.add(jCProjeto);
+        dash = new IfrDashboards(jDesk, jCProjeto.getSelectedItem().toString());
+
+        System.out.println(jCProjeto.getSelectedItem().toString());
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
     public void startComponents() {
         //menus
-        menuArquivo.setEnabled  (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 12, true));
-        menuCadastro.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 13, true));
-        menuLancamento.setEnabled  (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 14, true));
+        menuArquivo.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 12, true));
+        menuCadastro.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 13, true));
+        menuLancamento.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 14, true));
         menuRelatorio.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 15, true));
-        
+
         //menu item       
-        jmiLog.setEnabled      (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 17, true));
-        jmiAuditoria.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 18, true));
+        jmiLog.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 17, true));
+        jmiAuditoria.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 18, true));
         jmiPermissao.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 16, true));
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBBuscar;
+    private javax.swing.JComboBox<String> jCProjeto;
     private javax.swing.JDesktopPane jDesk;
+    private javax.swing.JLabel jLProjeto;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;

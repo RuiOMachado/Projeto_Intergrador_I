@@ -1,6 +1,7 @@
 package projeto.com.dao;
 
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.HibernateException;
@@ -147,6 +148,55 @@ public class DaoProjeto {
         } catch (HibernateException he) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
         }
+    }
+    
+    public static String[] comboProjeto() {
+        List resultado = null;
+        String Lista[] = new String [50];
+        int valor = 0;
+        
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Projeto");
+            resultado = q.list();
+            Lista[valor] = "Selecione";
+            for (Object o : resultado) {
+                Projeto pro = (Projeto) o;
+                valor++;
+                Lista[valor] = pro.getDescricao();
+                
+            }
+            
+            System.out.println(Lista.toString());
+        } catch (HibernateException he) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + he), 0);
+        }
+        return Lista;
+    }
+    
+    public static String buscaDescricaoProjeto(String projeto) {
+        List resultado = null;
+        String email = "";
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Projeto where upper(descricao) LIKE upper('%" + projeto + "%')");
+            resultado = q.list();
+            
+            for (Object o : resultado) {
+                Projeto pro = (Projeto) o;  
+                email = pro.getEmail();
+                
+            }
+
+        } catch (Exception ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        }
+        
+        return email;
     }
 
 }
