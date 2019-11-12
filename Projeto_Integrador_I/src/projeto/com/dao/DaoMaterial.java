@@ -174,10 +174,9 @@ public class DaoMaterial {
             JasperExportManager.exportReportToPdfFile(impressao, "relatorio/RelatorioDeMateriais.pdf");
             // Exibe resultado em video
             JasperViewer.viewReport(impressao, false);
-
-            
-            
+          
             DlgEmail de = new DlgEmail(null, true, email + ",", "relatorio/RelatorioDeMateriais.pdf");
+            de.setLocationRelativeTo(null);
             de.setVisible(true);
         } catch (Exception e) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + e), 0);

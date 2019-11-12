@@ -284,7 +284,7 @@ public class Menu extends javax.swing.JFrame {
        jDesk.add(jBBuscar);
        jDesk.add(jLProjeto);
        jDesk.add(jCProjeto);
-        dash = new IfrDashboards(jDesk, jCProjeto.getSelectedItem().toString());
+       dash = new IfrDashboards(jDesk, jCProjeto.getSelectedItem().toString());
 
         System.out.println(jCProjeto.getSelectedItem().toString());
     }//GEN-LAST:event_jBBuscarActionPerformed
