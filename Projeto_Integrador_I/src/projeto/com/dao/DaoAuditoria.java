@@ -24,11 +24,8 @@ public class DaoAuditoria {
     public static boolean saveAuditoria(String classe, String dadoNovo, String dadoOld, int id, String tipo) {
         boolean retorno = true;
         Session sessao = null;
-        List resultado = null;
-        String rest = "";
-        String idDado = idDados(classe);
 
-        Auditoria aud = new Auditoria(classe, String.valueOf(idDado), NewLogin.usuarioLogado.getNome(), "INCLUIR", dadoNovo);
+        Auditoria aud = new Auditoria(classe, String.valueOf(id), NewLogin.usuarioLogado.getNome(), "INCLUIR", dadoNovo);
         try {
 
             sessao = HibernateUtil.getSessionFactory().openSession();

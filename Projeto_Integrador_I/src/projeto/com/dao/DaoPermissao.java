@@ -159,7 +159,6 @@ public class DaoPermissao {
 
     }
 
-    //conferir com fabricio
     public static void definirPermissaoBotoes(javax.swing.JInternalFrame tela) {
         java.awt.Component[] cpTela = tela.getContentPane().getComponents();
 
@@ -179,6 +178,36 @@ public class DaoPermissao {
                         Permissao per = (Permissao) o;
                         if (per.getIdComponente().getNome_componente().equals(botao.getName()) && per.getEstado()) {
                             botao.setEnabled(true);
+                            System.out.println("nome botao ----"+ botao.getName());
+                        }
+                    }
+                }
+            }
+        } catch (HibernateException ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        }
+    }
+    
+    public static void definirPermissaoBotoesDlg(javax.swing.JDialog tela) {
+        java.awt.Component[] cpTela = tela.getContentPane().getComponents();
+
+        Login log = DaoLogin.buscaLogin(NewLogin.usuarioLogado.getNome());
+
+        List resultado = null;
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+            org.hibernate.Query q = sessao.createQuery("from Permissao where id_login = '" + log.getId() + "'");
+            resultado = q.list();
+
+            for (int i = 0; i < cpTela.length; i++) {
+                if (cpTela[i] instanceof javax.swing.JButton) {
+                    JButton botao = (JButton) cpTela[i];
+                    for (Object o : resultado) {
+                        Permissao per = (Permissao) o;
+                        if (per.getIdComponente().getNome_componente().equals(botao.getName()) && per.getEstado()) {
+                            botao.setEnabled(true);
+                            System.out.println("nome botao----"+ botao.getName());
                         }
                     }
                 }

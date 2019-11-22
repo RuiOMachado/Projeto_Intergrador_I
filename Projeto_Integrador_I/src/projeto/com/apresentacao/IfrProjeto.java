@@ -3,9 +3,11 @@ package projeto.com.apresentacao;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import projeto.com.apoio.ArduinoSerial;
 import projeto.com.dao.DaoAuditoria;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
+import projeto.com.dao.DaoPermissao;
 import projeto.com.dao.DaoProjeto;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Municipios;
@@ -23,18 +25,23 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
     DlgCalculo dlgCalculo;
     float latitude;
     public static Projeto PROJETO = null;
+    ArduinoSerial arduino = null;
 
     public IfrProjeto() {
         initComponents();
+        DaoPermissao.definirPermissaoBotoes(this);
         DaoProjeto.listarProjeto(tblProjeto);
         PROJETO = new Projeto();
+        arduino = new ArduinoSerial("COM3");     
     }
 
     public IfrProjeto(DlgCalculo dlgCalculo) {
         initComponents();
+        DaoPermissao.definirPermissaoBotoes(this);
         this.dlgCalculo = dlgCalculo;
         DaoProjeto.listarProjeto(tblProjeto);
         PROJETO = new Projeto();
+        arduino = new ArduinoSerial("COM3");
     }
 
     /**
@@ -211,6 +218,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         });
 
         btnEditarProjeto.setText("Editar");
+        btnEditarProjeto.setName("btnEditarProjeto"); // NOI18N
         btnEditarProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarProjetoActionPerformed(evt);
@@ -218,6 +226,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         });
 
         btnSalvarProjeto.setText("Salvar");
+        btnSalvarProjeto.setName("btnSalvarProjeto"); // NOI18N
         btnSalvarProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarProjetoActionPerformed(evt);
@@ -225,6 +234,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         });
 
         btnExcluirProjeto.setText("Excluir");
+        btnExcluirProjeto.setName("btnExcluirProjeto"); // NOI18N
         btnExcluirProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirProjetoActionPerformed(evt);
@@ -232,6 +242,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         });
 
         btnCalcularFacesProjeto.setText("Calcular");
+        btnCalcularFacesProjeto.setName("btnCalcularFacesProjeto"); // NOI18N
         btnCalcularFacesProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalcularFacesProjetoActionPerformed(evt);
@@ -272,7 +283,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCalcularFacesProjeto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
                     .addComponent(btnEditarProjeto)
@@ -309,13 +320,13 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
                     DaoGenerico.saveOrUpdate(pro, codigoTabela);
                     DaoProjeto.criarAmbiente(tfdDescricao.getText(),Integer.parseInt(tfdQtdComodo.getText()), pro.getId(), codigoTabela, 0);
                     JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
-                    DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                    DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, pro.getId(), "INCLUIR");
                 } else {
                     pro.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(pro, idUpdate);
                     DaoProjeto.criarAmbiente(tfdDescricao.getText(),Integer.parseInt(tfdQtdComodo.getText()), pro.getId(), idUpdate, qnt);
                     JOptionPane.showMessageDialog(null, "Registro editado com sucesso!");
-                    DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, codigoTabela, "EDITAR");
+                    DaoAuditoria.saveAuditoria("Projeto", pro.subString(), Dados_OLD, pro.getId(), "EDITAR");
                 }
 
             } else {
@@ -342,7 +353,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
             tfdCodCidade.setText(String.valueOf(pro.getIdMunicipios().getCodigoIbge()));
             tfdDescricaoCidade.setText(pro.getIdMunicipios().getNome());
             tfdNomeCliente.setText(pro.getNomecliente());
-            tfdQtdComodo.setText(String.valueOf(pro.getQntComodo()));
+            tfdQtdComodo.setText("0");
             tfdEmail.setText(pro.getEmail());
             Dados_OLD = "%" + pro.getDescricao() + "%" + pro.getNomecliente() + "%" + pro.getEstado() + "%" + pro.getDatafinal() + "%" + pro.getDatainicio() + "%" + pro.getQntComodo() + "%";
         }

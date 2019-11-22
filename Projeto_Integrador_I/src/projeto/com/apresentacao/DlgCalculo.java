@@ -12,6 +12,7 @@ import projeto.com.dao.DaoCalculo;
 import projeto.com.dao.DaoGenerico;
 import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
+import projeto.com.dao.DaoPermissao;
 import projeto.com.dao.DaoProjeto;
 import projeto.com.negocio.Ambiente;
 import projeto.com.negocio.Calculo;
@@ -50,6 +51,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         CALCULO = new Calculo();
         this.latitude = latitude;
         redimencionarTabela();
+        DaoPermissao.definirPermissaoBotoesDlg(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -289,6 +291,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         }
 
         btnAdicionarCalculo.setText("+");
+        btnAdicionarCalculo.setName("btnAdicionarCalculo"); // NOI18N
         btnAdicionarCalculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarCalculoActionPerformed(evt);
@@ -296,6 +299,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         });
 
         btnExcluirCalculo.setText("-");
+        btnExcluirCalculo.setName("btnExcluirCalculo"); // NOI18N
         btnExcluirCalculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirCalculoActionPerformed(evt);
@@ -305,6 +309,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         cmbTipoCalculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Fech. Opaco", "Fech. Translúcido" }));
 
         btnCalcularCargaTermica.setText("Calcular");
+        btnCalcularCargaTermica.setName("btnCalcularCargaTermica"); // NOI18N
         btnCalcularCargaTermica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalcularCargaTermicaActionPerformed(evt);
@@ -423,6 +428,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         btnAdicionarMaterialidade.setText("+");
         btnAdicionarMaterialidade.setDoubleBuffered(true);
         btnAdicionarMaterialidade.setEnabled(false);
+        btnAdicionarMaterialidade.setName("btnAdicionarMaterialidade"); // NOI18N
         btnAdicionarMaterialidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarMaterialidadeActionPerformed(evt);
@@ -564,13 +570,14 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdTransmitancia.setEnabled(false);
 
         btnEfetuarCalculoMaterialidades.setText("Calcular");
+        btnEfetuarCalculoMaterialidades.setName("btnEfetuarCalculoMaterialidades"); // NOI18N
         btnEfetuarCalculoMaterialidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEfetuarCalculoMaterialidadesActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("qfo");
+        jLabel6.setText("q");
         jLabel6.setToolTipText("");
 
         tfdQfo.setToolTipText("Fluxo térmico pelo fechamento opaco");
@@ -587,6 +594,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdRadiacao.setEnabled(false);
 
         btnGravarCalculoMaterialidades.setText("Gravar");
+        btnGravarCalculoMaterialidades.setName("btnGravarCalculoMaterialidades"); // NOI18N
         btnGravarCalculoMaterialidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGravarCalculoMaterialidadesActionPerformed(evt);
@@ -594,6 +602,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         });
 
         btnRemoverMaterialidade.setText("-");
+        btnRemoverMaterialidade.setName("btnRemoverMaterialidade"); // NOI18N
         btnRemoverMaterialidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverMaterialidadeActionPerformed(evt);
@@ -735,6 +744,7 @@ public class DlgCalculo extends javax.swing.JDialog {
     private void btnAdicionarMaterialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarMaterialidadeActionPerformed
         Double rt = Double.parseDouble(tfdResistenciaExterna.getText()) + Double.parseDouble(tfdResistenciaInterna.getText());
         BigDecimal espessura = BigDecimal.valueOf(Double.parseDouble(tfdEspessuraMaterialidade.getText()));
+        System.out.println("-------"+espessura);
         try {
             ItemMaterial item = new ItemMaterial();
             Face face = new Face();
@@ -745,8 +755,10 @@ public class DlgCalculo extends javax.swing.JDialog {
 
             for (Object o : resultado) {
                 Material mat = (Material) o;
-                item.setResistencia(espessura.divide(mat.getCondutividade(), MathContext.DECIMAL128).setScale(2, RoundingMode.HALF_EVEN));
-            }
+                //BigDecimal z = x.divide(y , 2 , RoundingMode.HALF_EVEN);
+                //item.setResistencia(mat.getCondutividade().divide(espessura,4, RoundingMode.UNNECESSARY));
+                item.setResistencia(mat.getCondutividade().divide(espessura,4, RoundingMode.HALF_EVEN));
+            }   
 
             if (tfdDescricaoMaterial.getText().length() > 0 && tfdEspessuraMaterialidade.getText().length() > 0) {
                 face.setId(Integer.parseInt(tfdIdFace.getText()));
@@ -757,9 +769,8 @@ public class DlgCalculo extends javax.swing.JDialog {
                 item.setIdMaterial(material);
                 item.setEspessura(BigDecimal.valueOf(Double.valueOf(tfdEspessuraMaterialidade.getText())));
                 item.setIdCalculo(Integer.parseInt(tfdCodigoCalculo1.getText()));
-                
-                //item.setResistenciaTotal(BigDecimal.valueOf(Calcular.somarColuna(tblItemMaterialidade, 3, rt)));
 
+                //item.setResistenciaTotal(BigDecimal.valueOf(Calcular.somarColuna(tblItemMaterialidade, 3, rt)));
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(item, codigoTabela);
                     //DaoAuditoria.saveAuditoria("Item_Material", mat.subString(), Dados_OLD, codigoTabela, "INCLUIR");
@@ -847,7 +858,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(null, "Erro! Tipo de calculo inválido!");
         }
-          DaoProjeto.listarCalculo(jTable1, Integer.parseInt(tfdIdProjeto2.getText()), Integer.parseInt(tfdIdComodo2.getText()), Integer.parseInt(tfdIdFace.getText()));  //metodo atualiza tabela
+        DaoProjeto.listarCalculo(jTable1, Integer.parseInt(tfdIdProjeto2.getText()), Integer.parseInt(tfdIdComodo2.getText()), Integer.parseInt(tfdIdFace.getText()));  //metodo atualiza tabela
     }//GEN-LAST:event_btnEfetuarCalculoMaterialidadesActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -922,28 +933,48 @@ public class DlgCalculo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnExcluirCalculoActionPerformed
 
     private void btnGravarCalculoMaterialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarCalculoMaterialidadesActionPerformed
-
-        if (tfdArea.getText().length() > 0 && tfdAbsorvidade.getText().length() > 0) {
-            Calculo cal = new Calculo();
-            Projeto pro = new Projeto();
-            Ambiente amb = new Ambiente();
-            amb.setId(Integer.parseInt(tfdIdComodo2.getText()));
-            pro.setId(Integer.parseInt(tfdIdProjeto2.getText()));
-            cal.setIdAmbiente(amb);
-            cal.setId(Integer.parseInt(tfdCodigoCalculo1.getText()));
-            cal.setQfo(BigDecimal.valueOf(Double.parseDouble(tfdQfo.getText())));
-            cal.setQft(BigDecimal.valueOf(Double.parseDouble("0")));
-            cal.setTipo(DaoCalculo.getTipoCalculo(tfdCodigoCalculo1.getText()));
-            cal.setIdProjeto(pro);
-            cal.setIdFace(Integer.parseInt(tfdIdFace.getText()));
-            cal.setArea(BigDecimal.valueOf(Double.parseDouble(tfdArea.getText())));
-            DaoGenerico.saveOrUpdate(cal, 1);
-            JOptionPane.showMessageDialog(null, "Gravado!");
-            limparCampos();
+        if (DaoCalculo.verificarTipoCalculo(Integer.parseInt(tfdCodigoCalculo1.getText()))) {
+            if (tfdArea.getText().length() > 0 && tfdAbsorvidade.getText().length() > 0) {
+                Calculo cal = new Calculo();
+                Projeto pro = new Projeto();
+                Ambiente amb = new Ambiente();
+                amb.setId(Integer.parseInt(tfdIdComodo2.getText()));
+                pro.setId(Integer.parseInt(tfdIdProjeto2.getText()));
+                cal.setIdAmbiente(amb);
+                cal.setId(Integer.parseInt(tfdCodigoCalculo1.getText()));
+                cal.setQfo(BigDecimal.valueOf(Double.parseDouble(tfdQfo.getText())));
+                cal.setQft(BigDecimal.valueOf(Double.parseDouble("0")));
+                cal.setTipo(DaoCalculo.getTipoCalculo(tfdCodigoCalculo1.getText()));
+                cal.setIdProjeto(pro);
+                cal.setIdFace(Integer.parseInt(tfdIdFace.getText()));
+                cal.setArea(BigDecimal.valueOf(Double.parseDouble(tfdArea.getText())));
+                DaoGenerico.saveOrMerge(cal, 2);          
+                JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
+                //limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro, ao gravar!");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Erro ao Gravar!");
+            if (tfdArea.getText().length() > 0) {
+                Calculo cal = new Calculo();
+                Projeto pro = new Projeto();
+                Ambiente amb = new Ambiente();
+                amb.setId(Integer.parseInt(tfdIdComodo2.getText()));
+                pro.setId(Integer.parseInt(tfdIdProjeto2.getText()));
+                cal.setIdAmbiente(amb);
+                cal.setId(Integer.parseInt(tfdCodigoCalculo1.getText()));
+                cal.setQft(BigDecimal.valueOf(Double.parseDouble(tfdQFT.getText())));
+                cal.setQfo(BigDecimal.valueOf(Double.parseDouble("0")));
+                cal.setTipo(DaoCalculo.getTipoCalculo(tfdCodigoCalculo1.getText()));
+                cal.setIdProjeto(pro);
+                cal.setIdFace(Integer.parseInt(tfdIdFace.getText()));
+                cal.setArea(BigDecimal.valueOf(Double.parseDouble(tfdArea.getText())));
+                DaoGenerico.saveOrMerge(cal, 2);
+                JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
+                //limparCampos();
+            }
         }
-
+        DaoProjeto.listarCalculo(jTable1, Integer.parseInt(tfdIdProjeto2.getText()), Integer.parseInt(tfdIdComodo2.getText()), Integer.parseInt(tfdIdFace.getText()));  //metodo atualiza tabela
     }//GEN-LAST:event_btnGravarCalculoMaterialidadesActionPerformed
 
     private void btnRemoverMaterialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverMaterialidadeActionPerformed
@@ -970,8 +1001,8 @@ public class DlgCalculo extends javax.swing.JDialog {
         double btu = 3.412;
         double somaQfo = Calcular.somarColuna(jTable1, 4, 0);
         double somaQft = Calcular.somarColuna(jTable1, 5, 0);
-        tfdCargaTermica.setText(String.valueOf(Calcular.arredondar((somaQfo+somaQft),4,1)));
-        tfdBtu.setText(String.valueOf(Calcular.arredondar((somaQfo+somaQft) * btu,4,1)));
+        tfdCargaTermica.setText(String.valueOf(Calcular.arredondar((somaQfo + somaQft), 4, 1)));
+        tfdBtu.setText(String.valueOf(Calcular.arredondar((somaQfo + somaQft) * btu, 4, 1)));
     }//GEN-LAST:event_btnCalcularCargaTermicaActionPerformed
 
     public void definirValorMaterial(String id, String descricao) {

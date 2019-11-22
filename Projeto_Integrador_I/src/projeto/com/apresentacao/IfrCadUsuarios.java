@@ -353,13 +353,13 @@ public class IfrCadUsuarios extends javax.swing.JInternalFrame {
                     DaoGenerico.saveOrUpdate(login, codigoTabela);
                     Login log = DaoLogin.ultimoLogin();
                     DaoPermissao.inserirPermissaoFull(log , cmbTipoUsuario.getSelectedItem().toString());
-                    DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                    DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, login.getId(), "INCLUIR");
                     JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
                     request();
                 } else {
                     login.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(login, idUpdate);
-                    DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, codigoTabela, "EDITAR");
+                    DaoAuditoria.saveAuditoria("Usuario", login.subString(), Dados_OLD, login.getId(), "EDITAR");
                     JOptionPane.showMessageDialog(null, "Registro editado com sucesso!");
                     request();
                 }

@@ -38,7 +38,30 @@ public class DaoGenerico{
         }
         return retorno;
     }
+    
+    public static boolean saveOrMerge(Object obj, int id) {
+        boolean retorno = true;
+        Session sessao = null;
 
+        try {
+            sessao = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = sessao.beginTransaction();
+
+            if (id == 0) {
+                sessao.save(obj);
+            } else {
+                sessao.merge(obj);
+            }
+            t.commit();
+
+        } catch (Exception ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro " + ex + " no objeto " + obj.getClass() + "!"), 0);
+            retorno = false;
+        } finally {
+            sessao.close();
+        }
+        return retorno;
+    }
     public static boolean delete(Object obj) {
         boolean retorno = true;
         Session sessao = null;

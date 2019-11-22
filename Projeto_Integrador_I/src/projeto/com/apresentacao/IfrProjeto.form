@@ -59,7 +59,7 @@
               <Component id="jScrollPane1" min="-2" pref="115" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnCalcularFacesProjeto" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace pref="39" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSair" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEditarProjeto" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -292,6 +292,7 @@
     <Component class="javax.swing.JButton" name="btnEditarProjeto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Editar"/>
+        <Property name="name" type="java.lang.String" value="btnEditarProjeto" noResource="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarProjetoActionPerformed"/>
@@ -300,6 +301,7 @@
     <Component class="javax.swing.JButton" name="btnSalvarProjeto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
+        <Property name="name" type="java.lang.String" value="btnSalvarProjeto" noResource="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarProjetoActionPerformed"/>
@@ -308,6 +310,7 @@
     <Component class="javax.swing.JButton" name="btnExcluirProjeto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
+        <Property name="name" type="java.lang.String" value="btnExcluirProjeto" noResource="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirProjetoActionPerformed"/>
@@ -316,6 +319,7 @@
     <Component class="javax.swing.JButton" name="btnCalcularFacesProjeto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Calcular"/>
+        <Property name="name" type="java.lang.String" value="btnCalcularFacesProjeto" noResource="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalcularFacesProjetoActionPerformed"/>

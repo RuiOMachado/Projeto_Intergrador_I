@@ -323,11 +323,11 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(mat, codigoTabela);
-                    DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                    DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, mat.getId(), "INCLUIR");
                 } else {
                     mat.setId(idUpdate);
                     DaoGenerico.saveOrUpdate(mat, idUpdate);
-                    DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, codigoTabela, "EDITAR");
+                    DaoAuditoria.saveAuditoria("Material", mat.subString(), Dados_OLD, mat.getId(), "EDITAR");
                 }
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
             } else {

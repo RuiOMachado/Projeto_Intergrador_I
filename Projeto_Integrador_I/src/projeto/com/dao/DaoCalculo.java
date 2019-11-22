@@ -28,7 +28,7 @@ public class DaoCalculo {
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
-            org.hibernate.Query q = sessao.createQuery("from ItemMaterial where idFace = " + idFace + " AND idCalculo = " + idCalculo +"");
+            org.hibernate.Query q = sessao.createQuery("from ItemMaterial where idFace = " + idFace + " AND idCalculo = " + idCalculo +" order by id");
             resultado = q.list();
 
             for (Object o : resultado) {

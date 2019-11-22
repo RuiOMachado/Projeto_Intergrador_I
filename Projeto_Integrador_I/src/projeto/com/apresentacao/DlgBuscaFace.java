@@ -18,7 +18,7 @@ public class DlgBuscaFace extends javax.swing.JDialog {
     DlgCalculo dlgCalculo;
     int codigoTabela = 0;
     int idUpdate = 0;
-    float latitude; 
+    float latitude;
     String Dados_OLD = "";
     public static Face FACE = null;
 
@@ -26,12 +26,12 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
+
     public DlgBuscaFace(java.awt.Frame parent, boolean modal, DlgCalculo dlgCalculo, float latitude) {
         super(parent, modal);
         initComponents();
         this.dlgCalculo = dlgCalculo;
-        DaoProjeto.listarFace(jTable1,DlgCalculo.AMBIENTE.getId());
+        DaoProjeto.listarFace(jTable1, DlgCalculo.AMBIENTE.getId());
         FACE = new Face();
         this.latitude = latitude;
     }
@@ -110,6 +110,11 @@ public class DlgBuscaFace extends javax.swing.JDialog {
         });
 
         btnRemoverFace.setText("-");
+        btnRemoverFace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverFaceActionPerformed(evt);
+            }
+        });
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Parede", "Cobertura", "Piso" }));
         cmbTipo.setToolTipText("Tipo de face");
@@ -198,32 +203,34 @@ public class DlgBuscaFace extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) {
+            List resultado = null;
+            Face face = new Face();
+            String idString = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+            int codigoTabela = Integer.parseInt(idString);
 
-        List resultado = null;
-        Face face = new Face();
-        String idString = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
-        int codigoTabela = Integer.parseInt(idString);
+            resultado = DaoGenerico.buscaId(codigoTabela, "Face");
 
-        resultado = DaoGenerico.buscaId(codigoTabela, "Face");
-
-        for (Object o : resultado) {
-            Face fac = (Face) o;
-            face.setNome(fac.getNome());
-            face.setTipo(fac.getTipo());
-            face.setId_ambiente(fac.getId_ambiente());
-            FACE.setId(fac.getId());
-            FACE.setTipo(fac.getTipo());
-            FACE.setRegiaoSolar(fac.getRegiaoSolar());
-            FACE.setEstacao(fac.getEstacao());
+            for (Object o : resultado) {
+                Face fac = (Face) o;
+                face.setNome(fac.getNome());
+                face.setTipo(fac.getTipo());
+                face.setId_ambiente(fac.getId_ambiente());
+                FACE.setId(fac.getId());
+                FACE.setTipo(fac.getTipo());
+                FACE.setRegiaoSolar(fac.getRegiaoSolar());
+                FACE.setEstacao(fac.getEstacao());
+            }
+            dlgCalculo.definirValorResistencias(FACE.getTipo());
+            dlgCalculo.definirValorFace(String.valueOf(codigoTabela), face.getNome());
+            dlgCalculo.definirValorEstacoes(FACE.getEstacao());
+            dlgCalculo.definirValorRaidacao(latitude, FACE.getRegiaoSolar());
+            dispose();
         }
-        dlgCalculo.definirValorResistencias(FACE.getTipo());
-        dlgCalculo.definirValorFace(String.valueOf(codigoTabela), face.getNome());
-        dlgCalculo.definirValorEstacoes(FACE.getEstacao());
-        dlgCalculo.definirValorRaidacao(latitude,FACE.getRegiaoSolar());
-        dispose();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnAdicionarFaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarFaceActionPerformed
+        int idFace = 0;
         try {
             Face face = new Face();
 
@@ -233,29 +240,50 @@ public class DlgBuscaFace extends javax.swing.JDialog {
                 face.setId_ambiente(DlgCalculo.AMBIENTE.getId());
                 face.setRegiaoSolar(cmbPosicaoRadiacao.getSelectedItem().toString());
                 face.setEstacao(cmbEstacao.getSelectedItem().toString());
-                
+
                 if (codigoTabela == 0) {
-                    DaoGenerico.saveOrUpdate(face, codigoTabela);
-                    DaoAuditoria.saveAuditoria("Face", face.subString(), Dados_OLD, codigoTabela, "INCLUIR");
-                } else {
-                    face.setId(idUpdate);
-                    DaoGenerico.saveOrUpdate(face, idUpdate);
-                    DaoAuditoria.saveAuditoria("Face", face.subString(), Dados_OLD, codigoTabela, "EDITAR");
-                }
+                    DaoGenerico.saveOrUpdate(face, codigoTabela);     
+                } 
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
+                
+                System.out.println("id face--"+face.getId());
             } else {
                 JOptionPane.showMessageDialog(null, "Erro ao inserir Registro!");
             }
             tfdDescricao.setText("");
             cmbTipo.setSelectedIndex(0);
-            DaoProjeto.listarFace(jTable1,DlgCalculo.AMBIENTE.getId());  //metodo atualiza tabela
+            DaoAuditoria.saveAuditoria("Face", face.subString(), Dados_OLD, 10, "INCLUIR");
+            DaoProjeto.listarFace(jTable1, DlgCalculo.AMBIENTE.getId());  //metodo atualiza tabela
 
         } catch (Exception ex) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
         }
     }//GEN-LAST:event_btnAdicionarFaceActionPerformed
 
-    
+    private void btnRemoverFaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverFaceActionPerformed
+        Face face = new Face();
+        List resultado = null;
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?") == JOptionPane.YES_OPTION) {
+
+            String idString = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+
+            resultado = DaoGenerico.buscaId(Integer.parseInt(idString), "Face");
+
+            for (Object o : resultado) {
+                face = (Face) o;
+            }
+
+            DaoGenerico.delete(face);
+            DaoAuditoria.saveAuditoria("Face", face.subString(), Dados_OLD, face.getId(), "DELETAR");
+            
+            JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
+            DaoProjeto.listarFace(jTable1, DlgCalculo.AMBIENTE.getId());  //metodo atualiza tabela
+
+
+        }
+    }//GEN-LAST:event_btnRemoverFaceActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarFace;
     private javax.swing.JButton btnRemoverFace;

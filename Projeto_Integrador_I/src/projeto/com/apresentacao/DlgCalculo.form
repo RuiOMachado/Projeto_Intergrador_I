@@ -397,6 +397,7 @@
             <Component class="javax.swing.JButton" name="btnAdicionarCalculo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="+"/>
+                <Property name="name" type="java.lang.String" value="btnAdicionarCalculo" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarCalculoActionPerformed"/>
@@ -405,6 +406,7 @@
             <Component class="javax.swing.JButton" name="btnExcluirCalculo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
+                <Property name="name" type="java.lang.String" value="btnExcluirCalculo" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirCalculoActionPerformed"/>
@@ -427,6 +429,7 @@
             <Component class="javax.swing.JButton" name="btnCalcularCargaTermica">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Calcular"/>
+                <Property name="name" type="java.lang.String" value="btnCalcularCargaTermica" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalcularCargaTermicaActionPerformed"/>
@@ -649,6 +652,7 @@
                 <Property name="text" type="java.lang.String" value="+"/>
                 <Property name="doubleBuffered" type="boolean" value="true"/>
                 <Property name="enabled" type="boolean" value="false"/>
+                <Property name="name" type="java.lang.String" value="btnAdicionarMaterialidade" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarMaterialidadeActionPerformed"/>
@@ -883,6 +887,7 @@
             <Component class="javax.swing.JButton" name="btnEfetuarCalculoMaterialidades">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Calcular"/>
+                <Property name="name" type="java.lang.String" value="btnEfetuarCalculoMaterialidades" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEfetuarCalculoMaterialidadesActionPerformed"/>
@@ -890,7 +895,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="qfo"/>
+                <Property name="text" type="java.lang.String" value="q"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
@@ -925,6 +930,7 @@
             <Component class="javax.swing.JButton" name="btnGravarCalculoMaterialidades">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gravar"/>
+                <Property name="name" type="java.lang.String" value="btnGravarCalculoMaterialidades" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGravarCalculoMaterialidadesActionPerformed"/>
@@ -933,6 +939,7 @@
             <Component class="javax.swing.JButton" name="btnRemoverMaterialidade">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
+                <Property name="name" type="java.lang.String" value="btnRemoverMaterialidade" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverMaterialidadeActionPerformed"/>
