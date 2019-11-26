@@ -178,7 +178,6 @@ public class DaoPermissao {
                         Permissao per = (Permissao) o;
                         if (per.getIdComponente().getNome_componente().equals(botao.getName()) && per.getEstado()) {
                             botao.setEnabled(true);
-                            System.out.println("nome botao ----"+ botao.getName());
                         }
                     }
                 }
@@ -207,7 +206,6 @@ public class DaoPermissao {
                         Permissao per = (Permissao) o;
                         if (per.getIdComponente().getNome_componente().equals(botao.getName()) && per.getEstado()) {
                             botao.setEnabled(true);
-                            System.out.println("nome botao----"+ botao.getName());
                         }
                     }
                 }

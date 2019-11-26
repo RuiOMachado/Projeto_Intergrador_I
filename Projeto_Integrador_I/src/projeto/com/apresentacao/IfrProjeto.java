@@ -218,6 +218,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         });
 
         btnEditarProjeto.setText("Editar");
+        btnEditarProjeto.setEnabled(false);
         btnEditarProjeto.setName("btnEditarProjeto"); // NOI18N
         btnEditarProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,6 +227,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         });
 
         btnSalvarProjeto.setText("Salvar");
+        btnSalvarProjeto.setEnabled(false);
         btnSalvarProjeto.setName("btnSalvarProjeto"); // NOI18N
         btnSalvarProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,6 +236,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         });
 
         btnExcluirProjeto.setText("Excluir");
+        btnExcluirProjeto.setEnabled(false);
         btnExcluirProjeto.setName("btnExcluirProjeto"); // NOI18N
         btnExcluirProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,6 +245,7 @@ public class IfrProjeto extends javax.swing.JInternalFrame {
         });
 
         btnCalcularFacesProjeto.setText("Calcular");
+        btnCalcularFacesProjeto.setEnabled(false);
         btnCalcularFacesProjeto.setName("btnCalcularFacesProjeto"); // NOI18N
         btnCalcularFacesProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

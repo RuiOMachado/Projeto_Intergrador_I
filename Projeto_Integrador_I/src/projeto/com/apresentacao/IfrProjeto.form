@@ -292,6 +292,7 @@
     <Component class="javax.swing.JButton" name="btnEditarProjeto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Editar"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnEditarProjeto" noResource="true"/>
       </Properties>
       <Events>
@@ -301,6 +302,7 @@
     <Component class="javax.swing.JButton" name="btnSalvarProjeto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnSalvarProjeto" noResource="true"/>
       </Properties>
       <Events>
@@ -310,6 +312,7 @@
     <Component class="javax.swing.JButton" name="btnExcluirProjeto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnExcluirProjeto" noResource="true"/>
       </Properties>
       <Events>
@@ -319,6 +322,7 @@
     <Component class="javax.swing.JButton" name="btnCalcularFacesProjeto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Calcular"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnCalcularFacesProjeto" noResource="true"/>
       </Properties>
       <Events>

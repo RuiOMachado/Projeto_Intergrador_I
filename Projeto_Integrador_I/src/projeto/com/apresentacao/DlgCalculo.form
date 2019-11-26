@@ -651,7 +651,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="+"/>
                 <Property name="doubleBuffered" type="boolean" value="true"/>
-                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="btnAdicionarMaterialidade" noResource="true"/>
               </Properties>
               <Events>
@@ -756,6 +755,8 @@
                 <Component class="javax.swing.JButton" name="btnPesquisarMaterial">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="..."/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="btnPesquisarMaterial" noResource="true"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarMaterialActionPerformed"/>

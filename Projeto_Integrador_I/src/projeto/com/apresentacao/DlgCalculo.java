@@ -2,7 +2,6 @@ package projeto.com.apresentacao;
 
 import java.awt.Color;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -40,18 +39,20 @@ public class DlgCalculo extends javax.swing.JDialog {
     public DlgCalculo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        DaoPermissao.definirPermissaoBotoesDlg(this);
     }
 
     public DlgCalculo(java.awt.Frame parent, boolean modal, IfrProjeto ifrProjeto, float latitude) {
         super(parent, modal);
         initComponents();
+        DaoPermissao.definirPermissaoBotoesDlg(this);
         this.ifrProjeto = ifrProjeto;
         definirValorProjeto();
         AMBIENTE = new Ambiente();
         CALCULO = new Calculo();
         this.latitude = latitude;
         redimencionarTabela();
-        DaoPermissao.definirPermissaoBotoesDlg(this);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -427,7 +428,6 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         btnAdicionarMaterialidade.setText("+");
         btnAdicionarMaterialidade.setDoubleBuffered(true);
-        btnAdicionarMaterialidade.setEnabled(false);
         btnAdicionarMaterialidade.setName("btnAdicionarMaterialidade"); // NOI18N
         btnAdicionarMaterialidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,6 +438,8 @@ public class DlgCalculo extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnPesquisarMaterial.setText("...");
+        btnPesquisarMaterial.setEnabled(false);
+        btnPesquisarMaterial.setName("btnPesquisarMaterial"); // NOI18N
         btnPesquisarMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarMaterialActionPerformed(evt);
@@ -744,7 +746,6 @@ public class DlgCalculo extends javax.swing.JDialog {
     private void btnAdicionarMaterialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarMaterialidadeActionPerformed
         Double rt = Double.parseDouble(tfdResistenciaExterna.getText()) + Double.parseDouble(tfdResistenciaInterna.getText());
         BigDecimal espessura = BigDecimal.valueOf(Double.parseDouble(tfdEspessuraMaterialidade.getText()));
-        System.out.println("-------"+espessura);
         try {
             ItemMaterial item = new ItemMaterial();
             Face face = new Face();
