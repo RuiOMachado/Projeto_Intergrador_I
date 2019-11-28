@@ -24,7 +24,7 @@ public class IfrDashboards extends javax.swing.JInternalFrame {
         DaoDashboard dash = new DaoDashboard();
         
         
-        JFreeChart barchart = ChartFactory.createBarChart("Projetos e valor do Qfo total dos cômodos", "Cômodos","Valor do QFO", dash.buscaProjeto(projeto), PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart barchart = ChartFactory.createBarChart("Projetos e valor do Qfo total dos cômodos.", "Cômodos","Valor do QFO", dash.buscaProjeto(projeto), PlotOrientation.VERTICAL, true, true, false);
         ChartPanel cp = new ChartPanel(barchart);
 
         JInternalFrame jif = new JInternalFrame(
