@@ -131,12 +131,13 @@ public class DaoMaterial {
     }
 
     public static List pesquisaRelatorioMaterial(String material, String cor) {
+        
         List resultado = null;
         try {
             Session sessao = HibernateUtil.getSessionFactory().openSession();
             sessao.beginTransaction();
 
-            org.hibernate.Query q = sessao.createQuery("from Material where upper(descricao) LIKE upper('%" + material + "%') Order by descricao");  //AND upper (cor) LIKE upper('" + cor + "') 
+            org.hibernate.Query q = sessao.createQuery("Select * FROM rel_material(:"+material+")");  //from Material where upper(descricao) LIKE upper('%" + material + "%') Order by descricao
             resultado = q.list();
 
         } catch (HibernateException he) {
@@ -175,9 +176,11 @@ public class DaoMaterial {
             // Exibe resultado em video
             JasperViewer.viewReport(impressao, false);
           
-            DlgEmail de = new DlgEmail(null, true, email + ",", "relatorio/RelatorioDeMateriais.pdf");
-            de.setLocationRelativeTo(null);
-            de.setVisible(true);
+            Config.loadConfig(); 
+            DaoEnviaEmail.EnviaEmail(email, "Relatório de Materiais", "Segue em anexo o relatório:", "relatorio/RelatorioDeMateriais.pdf");
+//            DlgEmail de = new DlgEmail(null, true, email + ",", "relatorio/RelatorioDeMateriais.pdf");
+//            de.setLocationRelativeTo(null);
+//            de.setVisible(true);
         } catch (Exception e) {
             DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + e), 0);
         }

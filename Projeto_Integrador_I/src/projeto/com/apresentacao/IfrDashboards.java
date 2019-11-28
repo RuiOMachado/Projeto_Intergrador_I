@@ -24,7 +24,7 @@ public class IfrDashboards extends javax.swing.JInternalFrame {
         DaoDashboard dash = new DaoDashboard();
         
         
-        JFreeChart barchart = ChartFactory.createBarChart("Projetos e valor do Qfo total dos comodos", "Comodos","Valor do QFO", dash.buscaProjeto(projeto), PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart barchart = ChartFactory.createBarChart("Projetos e valor do Qfo total dos cômodos", "Cômodos","Valor do QFO", dash.buscaProjeto(projeto), PlotOrientation.VERTICAL, true, true, false);
         ChartPanel cp = new ChartPanel(barchart);
 
         JInternalFrame jif = new JInternalFrame(
@@ -37,7 +37,7 @@ public class IfrDashboards extends javax.swing.JInternalFrame {
         jif.setVisible(true);
         
                       
-        JFreeChart chart2 = ChartFactory.createBarChart("Quatidade de face dos comodos", "Comodos", "Face", dash.buscaFace(projeto), PlotOrientation.VERTICAL, true, true, false);
+        JFreeChart chart2 = ChartFactory.createBarChart("Quatidade de face dos cômodos", "Cômodos", "Face", dash.buscaFace(projeto), PlotOrientation.VERTICAL, true, true, false);
         ChartPanel cp2 = new ChartPanel(chart2);
 
         JInternalFrame jif2 = new JInternalFrame(
@@ -51,11 +51,11 @@ public class IfrDashboards extends javax.swing.JInternalFrame {
         
         DaoDashboard dash2 = new DaoDashboard();
 
-        JFreeChart chart3 = ChartFactory.createPieChart3D("Quantidade de comodos do projeto", dash2.buscaProQuant(projeto), true, true, true);
+        JFreeChart chart3 = ChartFactory.createPieChart3D("Quantidade de cômodos do projeto", dash2.buscaProQuant(projeto), true, true, true);
         ChartPanel cp3 = new ChartPanel(chart3);
 
         JInternalFrame jif3 = new JInternalFrame(
-            "Comodos do projeto", true, true, true, true);
+            "Cômodos do projeto", true, true, true, true);
         
         jif3.add(cp3);
         jif3.pack();

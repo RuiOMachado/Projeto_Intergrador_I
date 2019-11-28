@@ -1,12 +1,16 @@
 package projeto.com.negocio;
 
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 /**
@@ -14,6 +18,14 @@ import javax.persistence.Table;
  * @author Douglas
  */
 @Entity
+@NamedStoredProcedureQuery(
+    name = "rel_material", 
+    procedureName = "rel_material", 
+    parameters = {
+            @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "mat"), 
+            @StoredProcedureParameter(mode = ParameterMode.OUT, type = List.class)
+    }
+)
 @Table(name = "material",
          schema = "public")
 

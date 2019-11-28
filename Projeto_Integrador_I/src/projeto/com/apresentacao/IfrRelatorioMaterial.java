@@ -2,6 +2,8 @@ package projeto.com.apresentacao;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import projeto.com.apoio.Config;
+import projeto.com.dao.DaoEnviaEmail;
 import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
 import projeto.com.dao.DaoProjeto;
@@ -152,7 +154,7 @@ public class IfrRelatorioMaterial extends javax.swing.JInternalFrame {
         } else {
             DaoMaterial dm = new DaoMaterial();
             try {
-                dm.geraRelatorio(jTMaterial.getText(), jCCor.getSelectedItem().toString(), jCProjeto.getSelectedItem().toString());
+                dm.geraRelatorio(jTMaterial.getText(), jCCor.getSelectedItem().toString(), jCProjeto.getSelectedItem().toString());  
             } catch (Exception ex) {
                 DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
             }
