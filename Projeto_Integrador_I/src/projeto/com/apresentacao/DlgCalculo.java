@@ -35,7 +35,6 @@ public class DlgCalculo extends javax.swing.JDialog {
 
     int codigoTabela = 0;
     int idUpdate = 0;
-    double rt = 0;
     float latitude;
     IfrProjeto ifrProjeto;
     public static Ambiente AMBIENTE = null;
@@ -866,7 +865,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         Calculo cal = DaoCalculo.getCalculoObj(tfdCodigoCalculo1.getText());
 
         if ("Fech. Opaco".equals(cal.getTipo())) {
-            double rst = Calcular.somarColuna(tblItemMaterialidade, 3, rt);
+            double rst = Calcular.somarColuna(tblItemMaterialidade, 3);
             double rse = Double.parseDouble(tfdResistenciaExterna.getText());
             double u = 1 / rst;
             double deltaT = Double.parseDouble(tfdTe.getText()) - Double.parseDouble(tfdTi.getText());
@@ -879,12 +878,12 @@ public class DlgCalculo extends javax.swing.JDialog {
             double qfo = areaM * Q;
             tfdQFO.setText(String.valueOf(Calcular.arredondar(qfo, 4, 1)));
         } else if ("Fech. Translúcido".equals(cal.getTipo())) {
-            double rst = Calcular.somarColuna(tblItemMaterialidade, 3, rt);
+            double rst = Calcular.somarColuna(tblItemMaterialidade, 3);
             double u = 1 / rst;
             double deltaT = Double.parseDouble(tfdTe.getText()) - Double.parseDouble(tfdTi.getText());
             double qft = u * deltaT;
             double i = Double.parseDouble(tfdRadiacao.getText());
-            double qfs = Calcular.somarColuna(jTable1, 4, 0) * i;
+            double qfs = Calcular.somarColuna(jTable1, 4) * i;
             double areaM = Double.parseDouble(tfdArea.getText());
             double Qft = (qft + qfs) * areaM;
             tfdQFT.setText(String.valueOf(Calcular.arredondar(Qft, 4, 1)));
@@ -1026,8 +1025,8 @@ public class DlgCalculo extends javax.swing.JDialog {
 
     private void btnCalcularCargaTermicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularCargaTermicaActionPerformed
         double btu = 3.412;
-        double somaQfo = Calcular.somarColuna(jTable1, 4, 0);
-        double somaQft = Calcular.somarColuna(jTable1, 5, 0);
+        double somaQfo = Calcular.somarColuna(jTable1, 4);
+        double somaQft = Calcular.somarColuna(jTable1, 5);
         tfdCargaTermica.setText(String.valueOf(Calcular.arredondar((somaQfo + somaQft), 4, 1)));
         tfdBtu.setText(String.valueOf(Calcular.arredondar((somaQfo + somaQft) * btu, 4, 1)));
     }//GEN-LAST:event_btnCalcularCargaTermicaActionPerformed
@@ -1159,8 +1158,9 @@ public class DlgCalculo extends javax.swing.JDialog {
     }
 
     public void atualizarResultados() {
-        tfdRt.setText(String.valueOf(Calcular.arredondar(Calcular.somarColuna(tblItemMaterialidade, 3, rt), 4, 1)));
-        tfdTransmitancia.setText(String.valueOf(Calcular.arredondar(1 / Calcular.somarColuna(tblItemMaterialidade, 3, rt), 4, 1)));
+        tfdRt.setText(String.valueOf(Calcular.arredondar(Calcular.somarColuna(tblItemMaterialidade, 3), 4, 1)));
+        double transmitancia = 1 / Calcular.somarColuna(tblItemMaterialidade, 3);
+        tfdTransmitancia.setText(String.valueOf(Calcular.arredondar(transmitancia, 4, 1)));
 
     }
 
