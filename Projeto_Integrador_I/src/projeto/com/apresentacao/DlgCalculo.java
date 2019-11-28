@@ -1,9 +1,12 @@
 package projeto.com.apresentacao;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import projeto.com.apoio.Calcular;
 import projeto.com.dao.DaoAuditoria;
@@ -13,13 +16,16 @@ import projeto.com.dao.DaoLog;
 import projeto.com.dao.DaoMaterial;
 import projeto.com.dao.DaoPermissao;
 import projeto.com.dao.DaoProjeto;
+import projeto.com.dao.DaoResultado;
 import projeto.com.negocio.Ambiente;
 import projeto.com.negocio.Calculo;
 import projeto.com.negocio.Face;
 import projeto.com.negocio.ItemMaterial;
 import projeto.com.negocio.Log;
 import projeto.com.negocio.Material;
+import projeto.com.negocio.Municipios;
 import projeto.com.negocio.Projeto;
+import projeto.com.negocio.Resultado;
 
 /**
  *
@@ -52,7 +58,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         CALCULO = new Calculo();
         this.latitude = latitude;
         redimencionarTabela();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -91,6 +97,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdCargaTermica = new javax.swing.JTextField();
         tfdBtu = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
+        btnGravarCargaTermica = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItemMaterialidade = new javax.swing.JTable();
@@ -130,6 +137,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         btnRemoverMaterialidade = new javax.swing.JButton();
         tfdQFT = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        btnFinalizarProjeto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -325,6 +333,13 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jLabel23.setText("BTU/H");
 
+        btnGravarCargaTermica.setText("Gravar");
+        btnGravarCargaTermica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravarCargaTermicaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -350,7 +365,10 @@ public class DlgCalculo extends javax.swing.JDialog {
                             .addComponent(cmbTipoCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnCalcularCargaTermica)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(btnGravarCargaTermica)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnCalcularCargaTermica))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel22)
@@ -385,7 +403,9 @@ public class DlgCalculo extends javax.swing.JDialog {
                         .addComponent(tfdBtu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel23))
                 .addGap(14, 14, 14)
-                .addComponent(btnCalcularCargaTermica)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCalcularCargaTermica)
+                    .addComponent(btnGravarCargaTermica))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -403,7 +423,7 @@ public class DlgCalculo extends javax.swing.JDialog {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -438,7 +458,6 @@ public class DlgCalculo extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnPesquisarMaterial.setText("...");
-        btnPesquisarMaterial.setEnabled(false);
         btnPesquisarMaterial.setName("btnPesquisarMaterial"); // NOI18N
         btnPesquisarMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -716,6 +735,13 @@ public class DlgCalculo extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Materialidades", jPanel3);
 
+        btnFinalizarProjeto.setText("Finalizar");
+        btnFinalizarProjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarProjetoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -725,7 +751,10 @@ public class DlgCalculo extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1)
-                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnFinalizarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -736,7 +765,9 @@ public class DlgCalculo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(btnSair)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSair)
+                    .addComponent(btnFinalizarProjeto))
                 .addContainerGap())
         );
 
@@ -758,8 +789,8 @@ public class DlgCalculo extends javax.swing.JDialog {
                 Material mat = (Material) o;
                 //BigDecimal z = x.divide(y , 2 , RoundingMode.HALF_EVEN);
                 //item.setResistencia(mat.getCondutividade().divide(espessura,4, RoundingMode.UNNECESSARY));
-                item.setResistencia(mat.getCondutividade().divide(espessura,4, RoundingMode.HALF_EVEN));
-            }   
+                item.setResistencia(mat.getCondutividade().divide(espessura, 4, RoundingMode.HALF_EVEN));
+            }
 
             if (tfdDescricaoMaterial.getText().length() > 0 && tfdEspessuraMaterialidade.getText().length() > 0) {
                 face.setId(Integer.parseInt(tfdIdFace.getText()));
@@ -816,6 +847,7 @@ public class DlgCalculo extends javax.swing.JDialog {
         busca.setVisible(true);
         AMBIENTE.setId(Integer.parseInt(tfdIdComodo2.getText()));
         btnProcurarFace.setEnabled(true);
+        atualizarResultado(tfdIdComodo2.getText());
     }//GEN-LAST:event_btnProcurarComodoActionPerformed
 
     private void tfdResistenciaExternaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdResistenciaExternaActionPerformed
@@ -894,15 +926,9 @@ public class DlgCalculo extends javax.swing.JDialog {
 
                 if (codigoTabela == 0) {
                     DaoGenerico.saveOrUpdate(cal, codigoTabela);
-                    //DaoAuditoria.saveAuditoria("Face", face.subString(), Dados_OLD, codigoTabela, "INCLUIR");
+                    DaoAuditoria.saveAuditoria("Calculo", cal.subString(), Dados_OLD, cal.getId(), "INCLUIR");
                     tfdCodigoCalculo.setText(String.valueOf(cal.getId()));
                     tfdDescricaoCalculo.setText("Calculo - " + cal.getId());
-                } else {
-                    cal.setId(idUpdate);
-                    DaoGenerico.saveOrUpdate(cal, idUpdate);
-                    tfdCodigoCalculo.setText(String.valueOf(cal.getId()));
-                    tfdDescricaoCalculo.setText("Calculo - " + cal.getId());
-                    //DaoAuditoria.saveAuditoria("Face", face.subString(), Dados_OLD, codigoTabela, "EDITAR");
                 }
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
             } else {
@@ -926,7 +952,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                 cal = (Calculo) o;
             }
             DaoGenerico.delete(cal);
-            //DaoAuditoria.saveAuditoria("Calculo", cal.subString(), Dados_OLD, Integer.valueOf(idString), "DELETAR");
+            DaoAuditoria.saveAuditoria("Calculo", cal.subString(), Dados_OLD, cal.getId(), "DELETAR");
             JOptionPane.showMessageDialog(null, "Registro deletado com sucesso!");
             DaoProjeto.listarCalculo(jTable1, Integer.parseInt(tfdIdProjeto2.getText()), Integer.parseInt(tfdIdComodo2.getText()), Integer.parseInt(tfdIdFace.getText()));  //metodo atualiza tabela
 
@@ -949,7 +975,7 @@ public class DlgCalculo extends javax.swing.JDialog {
                 cal.setIdProjeto(pro);
                 cal.setIdFace(Integer.parseInt(tfdIdFace.getText()));
                 cal.setArea(BigDecimal.valueOf(Double.parseDouble(tfdArea.getText())));
-                DaoGenerico.saveOrMerge(cal, 2);          
+                DaoGenerico.saveOrMerge(cal, 2);
                 JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
                 //limparCampos();
             } else {
@@ -1005,6 +1031,76 @@ public class DlgCalculo extends javax.swing.JDialog {
         tfdCargaTermica.setText(String.valueOf(Calcular.arredondar((somaQfo + somaQft), 4, 1)));
         tfdBtu.setText(String.valueOf(Calcular.arredondar((somaQfo + somaQft) * btu, 4, 1)));
     }//GEN-LAST:event_btnCalcularCargaTermicaActionPerformed
+
+    private void btnGravarCargaTermicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarCargaTermicaActionPerformed
+        if (tfdCargaTermica.getText().length() > 0 && tfdBtu.getText().length() > 0) {
+            Ambiente amb = new Ambiente();
+            Resultado r = new Resultado();
+            amb.setId(Integer.parseInt(tfdIdComodo2.getText()));
+            r.setBtu(BigDecimal.valueOf(Double.parseDouble(tfdBtu.getText())));
+            r.setCarga(BigDecimal.valueOf(Double.parseDouble(tfdCargaTermica.getText())));
+            r.setIdAmbiente(amb.getId());
+
+            if (!DaoResultado.buscarIdAmbiente(String.valueOf(amb.getId()))) {
+                    DaoGenerico.saveOrMerge(r, 0);
+                    JOptionPane.showMessageDialog(null, "Registro salvo com sucesso!");
+                    tfdBtu.setText("");
+                    tfdCargaTermica.setText("");
+                }else{
+                    Resultado re = DaoResultado.buscarResultado(String.valueOf(amb.getId()));
+                    r.setId(re.getId());
+                    DaoGenerico.saveOrMerge(r, 2);
+                    JOptionPane.showMessageDialog(null, "Registro editado com sucesso!");
+                    tfdBtu.setText("");
+                    tfdCargaTermica.setText("");
+                }
+            }else{
+            JOptionPane.showMessageDialog(null, "Erro! Campos inválidos");
+        }
+        
+        
+    }//GEN-LAST:event_btnGravarCargaTermicaActionPerformed
+
+    private void btnFinalizarProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarProjetoActionPerformed
+        Municipios m = new Municipios();
+        Projeto pro = DaoProjeto.buscarProjeto(tfdIdProjeto2.getText()); //projeto em andamento
+        Projeto projeto = new Projeto(); // projeto novo para receber os dados do antigo e fazer update
+        m.setCodigoIbge(pro.getIdMunicipios().getCodigoIbge());
+        projeto.setId(pro.getId());
+        projeto.setDatainicio(pro.getDatainicio());
+        projeto.setDatafinal(new Date());//busca data de hoje
+        projeto.setEstado("Finalizado");
+        projeto.setEmail(pro.getEmail());
+        projeto.setDatainicio(pro.getDatainicio());
+        projeto.setDescricao(pro.getDescricao());
+        projeto.setQntComodo(pro.getQntComodo());
+        projeto.setNomecliente(pro.getNomecliente());
+        projeto.setIdMunicipios(m);
+     
+        
+        if (tfdCargaTermica.getText().length() > 0 && tfdBtu.getText().length() > 0) {
+            if(DaoGenerico.saveOrMerge(projeto, 2)){
+                JOptionPane.showMessageDialog(null, "Projeto Finalizado com sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao Finalizar projeto!");
+            }
+        }else if(JOptionPane.showConfirmDialog(null, "Projeto está em aberto, deseja finalizar ?") == JOptionPane.YES_OPTION) {
+            if(DaoGenerico.saveOrMerge(projeto, 2)){
+                JOptionPane.showMessageDialog(null, "Projeto Finalizado com sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao Finalizar projeto!");
+            }
+        }
+    }//GEN-LAST:event_btnFinalizarProjetoActionPerformed
+
+    public void atualizarResultado(String idAmbiente) {
+        Resultado resultado = DaoResultado.buscarResultado(idAmbiente);
+        if (resultado != null) {
+            tfdCargaTermica.setText(String.valueOf(resultado.getCarga()));
+            tfdBtu.setText(String.valueOf(resultado.getBtu()));
+        }
+        System.out.println("não tem resultados para carregar");
+    }
 
     public void definirValorMaterial(String id, String descricao) {
         tfdIdMaterial.setText(id);
@@ -1109,7 +1205,9 @@ public class DlgCalculo extends javax.swing.JDialog {
     private javax.swing.JButton btnCalcularCargaTermica;
     private javax.swing.JButton btnEfetuarCalculoMaterialidades;
     private javax.swing.JButton btnExcluirCalculo;
+    private javax.swing.JButton btnFinalizarProjeto;
     private javax.swing.JButton btnGravarCalculoMaterialidades;
+    private javax.swing.JButton btnGravarCargaTermica;
     private javax.swing.JButton btnPesquisarMaterial;
     private javax.swing.JButton btnProcurarComodo;
     private javax.swing.JButton btnProcurarFace;

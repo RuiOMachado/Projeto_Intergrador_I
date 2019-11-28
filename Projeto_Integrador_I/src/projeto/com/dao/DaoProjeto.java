@@ -198,5 +198,36 @@ public class DaoProjeto {
         
         return email;
     }
+    
+    public static Projeto buscarProjeto(String idProjeto) {
+        List resultado = null;
+        Projeto p = new Projeto();
+        int id = Integer.parseInt(idProjeto);
+        
+        try {
+            Session sessao = HibernateUtil.getSessionFactory().openSession();
+            sessao.beginTransaction();
+
+            org.hibernate.Query q = sessao.createQuery("from Projeto where id = "+id+"");
+            resultado = q.list();
+            
+            for (Object o : resultado) {
+                p = (Projeto) o;
+                p.getId();
+                p.getDatainicio();
+                p.getDescricao();
+                p.getEmail();
+                p.getIdMunicipios();
+                p.getQntComodo();
+                p.getNomecliente();
+                p.getEstado();
+            }
+            sessao.close();
+
+        } catch (Exception ex) {
+            DaoLog.saveLog(new Log(NewLogin.usuarioLogado.getNome(), "Erro :" + ex), 0);
+        }
+        return p ;
+    }
 
 }

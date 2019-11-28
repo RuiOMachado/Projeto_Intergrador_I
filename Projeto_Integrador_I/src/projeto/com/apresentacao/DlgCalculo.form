@@ -28,7 +28,11 @@
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="jPanel5" alignment="0" max="32767" attributes="0"/>
                   <Component id="jTabbedPane1" max="32767" attributes="0"/>
-                  <Component id="btnSair" min="-2" pref="83" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="btnFinalizarProjeto" min="-2" pref="92" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnSair" min="-2" pref="83" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="49" max="32767" attributes="0"/>
           </Group>
@@ -42,7 +46,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTabbedPane1" min="-2" pref="375" max="-2" attributes="0"/>
               <EmptySpace pref="45" max="32767" attributes="0"/>
-              <Component id="btnSair" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSair" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFinalizarProjeto" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -258,7 +265,11 @@
                               <Component id="jScrollPane2" min="-2" pref="774" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="btnCalcularCargaTermica" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="btnGravarCargaTermica" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="btnCalcularCargaTermica" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
@@ -304,7 +315,10 @@
                           <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="btnCalcularCargaTermica" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnCalcularCargaTermica" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGravarCargaTermica" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace pref="50" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -454,6 +468,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="BTU/H"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnGravarCargaTermica">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gravar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGravarCargaTermicaActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -607,7 +629,7 @@
                         <Column editable="false" title="#" type="java.lang.Integer"/>
                         <Column editable="false" title="C&#xf3;digo Material" type="java.lang.Integer"/>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.String"/>
-                        <Column editable="false" title="Resist&#xea;ncia" type="java.lang.Double"/>
+                        <Column editable="false" title="Resist&#xea;ncia" type="java.lang.String"/>
                         <Column editable="false" title="FatorSolar" type="java.lang.Double"/>
                       </Table>
                     </Property>
@@ -755,7 +777,6 @@
                 <Component class="javax.swing.JButton" name="btnPesquisarMaterial">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="..."/>
-                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="name" type="java.lang.String" value="btnPesquisarMaterial" noResource="true"/>
                   </Properties>
                   <Events>
@@ -960,5 +981,13 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnFinalizarProjeto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Finalizar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFinalizarProjetoActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

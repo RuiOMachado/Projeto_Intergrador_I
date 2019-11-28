@@ -338,6 +338,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
             tfdCondutividadeMaterial.setText("");
             tfdDesnsidadeMaterial.setText("");
             tfdFatorSolarMaterial.setText("");
+            tfdCalorMaterial.setText("");
             jmConsultaMaterial.setSelectedIndex(1);
             DaoMaterial.listarMaterial(jTabela);  //metodo atualiza tabela
 
@@ -385,17 +386,7 @@ public class IfrCadMateriais extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarMaterialActionPerformed
 
     private void jmConsultaMaterialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jmConsultaMaterialFocusLost
-        if (jmConsultaMaterial.getSelectedIndex() == 1) {
-            //btnEditarMaterial.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2, true));
-            //btnExcluirMaterial.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3, true));
-            //btnSalvarMaterial.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1, false));
-            jBPesquisa.requestFocus();
-            
-        } else {
-            //btnEditarMaterial.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 2, false));
-            //btnExcluirMaterial.setEnabled(DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 3, false));
-            //btnSalvarMaterial.setEnabled (DaoPermissao.inserirPermissaoComponente(NewLogin.usuarioLogado, 1, true));
-        }
+   
     }//GEN-LAST:event_jmConsultaMaterialFocusLost
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

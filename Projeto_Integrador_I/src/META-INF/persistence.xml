@@ -21,6 +21,7 @@
     <class>projeto.com.negocio.Estados</class>
     <class>projeto.com.negocio.Municipios</class>
     <class>projeto.com.negocio.Radiacao</class>
+    <class>projeto.com.negocio.Resultado</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Projeto_Integrador_1"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

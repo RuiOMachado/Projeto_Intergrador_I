@@ -74,7 +74,6 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
         rdd = new javax.swing.JRadioButton();
         rda = new javax.swing.JRadioButton();
         btn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setTitle("Consultas registro de Auditorias");
 
@@ -241,13 +240,6 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("gerar relatorio");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,8 +256,6 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56)
-                                .addComponent(jButton1)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -282,16 +272,14 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1)))
+                    .addComponent(btn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jBFiltrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                 .addGap(26, 26, 26)
                 .addComponent(bntSair)
                 .addContainerGap())
@@ -352,27 +340,6 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBFiltrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-                // Compila o relatorio
-                JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("/projeto.com.relatorio/rel_audit_geral.jrxml"));
-
-                // Mapeia campos de parametros para o relatorio, mesmo que nao existam
-                Map parametros = new HashMap();
-
-                // adiciona parametros
-                //parametros.put("stc", param_estado);
-
-                // Executa relatoio
-                //JasperPrint impressao = JasperFillManager.fillReport(relatorio, parametros, );
-
-                // Exibe resultado em video
-               // JasperViewer.viewReport(impressao, false);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro ao gerar relatório: " + e);
-            }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private static void popularCombo(JComboBox combo) {
 
         combo.removeAllItems();
@@ -386,7 +353,6 @@ public class IfrConsulAuditoria extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBFiltrar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCClasse;
     private com.toedter.calendar.JDateChooser jDFinal;
     private com.toedter.calendar.JDateChooser jDInicial;
